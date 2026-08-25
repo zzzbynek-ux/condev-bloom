@@ -33,7 +33,7 @@ function Hero() {
     return () => clearInterval(t);
   }, []);
 
-  const slide = SLIDES[i];
+  const slide = SLIDES[i] ?? SLIDES[0]!;
 
   return (
     <section className="relative overflow-hidden">
