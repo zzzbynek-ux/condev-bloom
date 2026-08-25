@@ -10,33 +10,73 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ClankyRouteImport } from './routes/clanky'
+import { Route as ONasRouteImport } from './routes/o-nas'
+import { Route as TemataRouteImport } from './routes/temata'
+import { Route as ZapojteSeRouteImport } from './routes/zapojte-se'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ClankyRoute = ClankyRouteImport.update({
+  id: '/clanky',
+  path: '/clanky',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ONasRoute = ONasRouteImport.update({
+  id: '/o-nas',
+  path: '/o-nas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TemataRoute = TemataRouteImport.update({
+  id: '/temata',
+  path: '/temata',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ZapojteSeRoute = ZapojteSeRouteImport.update({
+  id: '/zapojte-se',
+  path: '/zapojte-se',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/clanky': typeof ClankyRoute
+  '/o-nas': typeof ONasRoute
+  '/temata': typeof TemataRoute
+  '/zapojte-se': typeof ZapojteSeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/clanky': typeof ClankyRoute
+  '/o-nas': typeof ONasRoute
+  '/temata': typeof TemataRoute
+  '/zapojte-se': typeof ZapojteSeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/clanky': typeof ClankyRoute
+  '/o-nas': typeof ONasRoute
+  '/temata': typeof TemataRoute
+  '/zapojte-se': typeof ZapojteSeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/clanky' | '/o-nas' | '/temata' | '/zapojte-se'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/clanky' | '/o-nas' | '/temata' | '/zapojte-se'
+  id: '__root__' | '/' | '/clanky' | '/o-nas' | '/temata' | '/zapojte-se'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ClankyRoute: typeof ClankyRoute
+  ONasRoute: typeof ONasRoute
+  TemataRoute: typeof TemataRoute
+  ZapojteSeRoute: typeof ZapojteSeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +88,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/clanky': {
+      id: '/clanky'
+      path: '/clanky'
+      fullPath: '/clanky'
+      preLoaderRoute: typeof ClankyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/o-nas': {
+      id: '/o-nas'
+      path: '/o-nas'
+      fullPath: '/o-nas'
+      preLoaderRoute: typeof ONasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/temata': {
+      id: '/temata'
+      path: '/temata'
+      fullPath: '/temata'
+      preLoaderRoute: typeof TemataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/zapojte-se': {
+      id: '/zapojte-se'
+      path: '/zapojte-se'
+      fullPath: '/zapojte-se'
+      preLoaderRoute: typeof ZapojteSeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ClankyRoute: ClankyRoute,
+  ONasRoute: ONasRoute,
+  TemataRoute: TemataRoute,
+  ZapojteSeRoute: ZapojteSeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
