@@ -113,18 +113,63 @@ export function SiteHeader() {
             </Link>
           ) : null}
 
-          <nav className="flex items-stretch gap-8">
-            {NAV.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className="flex items-center border-b-2 border-transparent py-4 text-base font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
-                activeProps={{ className: "border-primary text-primary" }}
-              >
-                {item.label}
-              </Link>
-            ))}
+          <nav className="flex items-stretch gap-7">
+            {NAV.map((item) =>
+              item.children ? (
+                <div
+                  key={item.label}
+                  className="group relative flex items-stretch"
+                  onMouseEnter={() => setMenu(item.label)}
+                  onMouseLeave={() => setMenu(null)}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setMenu((m) => (m === item.label ? null : item.label))}
+                    aria-expanded={menu === item.label}
+                    className="flex items-center gap-1.5 border-b-2 border-transparent py-4 text-base font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
+                  >
+                    {item.label}
+                    <ChevronDown
+                      className={`size-4 transition-transform ${menu === item.label ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {menu === item.label ? (
+                    <div className="absolute left-0 top-full z-50 w-64 rounded-b-xl border border-t-0 border-border bg-background py-2 shadow-lg">
+                      {item.children.map((c) =>
+                        c.to ? (
+                          <Link
+                            key={c.label}
+                            to={c.to}
+                            onClick={() => setMenu(null)}
+                            className="block px-4 py-2 text-sm text-foreground transition-colors hover:bg-muted hover:text-primary"
+                          >
+                            {c.label}
+                          </Link>
+                        ) : (
+                          <span
+                            key={c.label}
+                            className="block cursor-default px-4 py-2 text-sm text-muted-foreground"
+                          >
+                            {c.label}
+                          </span>
+                        ),
+                      )}
+                    </div>
+                  ) : null}
+                </div>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={item.to}
+                  className="flex items-center border-b-2 border-transparent py-4 text-base font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
+                  activeProps={{ className: "border-primary text-primary" }}
+                >
+                  {item.label}
+                </Link>
+              ),
+            )}
           </nav>
+
 
 
           <div className="ml-auto flex items-center gap-4">
