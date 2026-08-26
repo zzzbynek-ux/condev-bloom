@@ -285,31 +285,8 @@ function Index() {
       <main>
         <Hero />
 
-        {/* témata – tenká redakční lišta pod hero */}
-        <section className="border-b border-border bg-muted/40">
-          <div className="mx-auto flex max-w-[88rem] flex-wrap items-center gap-x-6 gap-y-2 px-5 py-3 md:px-6">
-            <span className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-primary-foreground">
-              Témata
-            </span>
-            <nav className="flex flex-1 flex-wrap items-center gap-x-5 gap-y-1">
-              {TOPICS.slice(0, 5).map((t) => (
-                <Link
-                  key={t.slug}
-                  to="/temata"
-                  className="text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
-                >
-                  {t.title}
-                </Link>
-              ))}
-            </nav>
-            <Link
-              to="/temata"
-              className="text-[11px] font-bold uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-primary"
-            >
-              Všechna témata →
-            </Link>
-          </div>
-        </section>
+
+
 
 
 
