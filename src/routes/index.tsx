@@ -305,7 +305,7 @@ function Index() {
               Do debaty o Izraeli vracíme fakta,{" "}
               <span className="text-primary">kontext a klidný tón.</span>
             </h1>
-            <p className="mx-auto mt-3 max-w-[42rem] text-pretty text-sm text-muted-foreground md:text-base">
+            <p className="mt-3 max-w-[36rem] text-pretty text-sm text-muted-foreground md:ml-16 md:text-base">
               Píšeme analýzy, ověřujeme tvrzení a pomáháme lidem reagovat tam, kde se
               rozhoduje o veřejném mínění.
             </p>
