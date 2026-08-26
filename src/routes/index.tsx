@@ -106,25 +106,26 @@ function Hero() {
         type="button"
         aria-label="Předchozí"
         onClick={() => go(-1)}
-        className="absolute left-3 top-1/2 hidden size-8 -translate-y-1/2 place-items-center rounded-full bg-primary text-white shadow-md transition-transform hover:scale-105 md:grid md:left-5"
+        className="absolute left-4 top-1/2 hidden size-9 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/55 md:grid"
       >
-        <ChevronLeft className="size-4" />
+        <ChevronLeft className="size-4" strokeWidth={1.75} />
       </button>
       <button
         type="button"
         aria-label="Další"
         onClick={() => go(1)}
-        className="absolute right-3 top-1/2 hidden size-8 -translate-y-1/2 place-items-center rounded-full bg-primary text-white shadow-md transition-transform hover:scale-105 md:grid md:right-5"
+        className="absolute right-4 top-1/2 hidden size-9 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/55 md:grid"
       >
-        <ChevronRight className="size-4" />
+        <ChevronRight className="size-4" strokeWidth={1.75} />
       </button>
+
 
       <div className="relative flex items-center justify-center gap-3 pb-6">
         <button
           type="button"
           aria-label="Předchozí"
           onClick={() => go(-1)}
-          className="grid size-8 place-items-center rounded-full bg-primary text-white shadow-md md:hidden"
+          className="grid size-9 place-items-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/55 md:hidden"
         >
           <ChevronLeft className="size-4" />
         </button>
@@ -146,7 +147,7 @@ function Hero() {
           type="button"
           aria-label="Další"
           onClick={() => go(1)}
-          className="grid size-8 place-items-center rounded-full bg-primary text-white shadow-md md:hidden"
+          className="grid size-9 place-items-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/55 md:hidden"
         >
           <ChevronRight className="size-4" />
         </button>
