@@ -268,25 +268,30 @@ function Index() {
         </section>
 
         {/* rubriky s výpisy článků */}
-        <section className="mx-auto max-w-[88rem] px-5 pb-16 md:px-6">
-          {FEED.map((group) => (
-            <div key={group.id} className="mt-12 first:mt-4">
-              <div className="flex items-end justify-between gap-4 border-b border-border pb-2">
-                <h2 className="text-[13px] font-bold uppercase tracking-[0.16em] text-primary">
+        {FEED.map((group, gi) => (
+          <section
+            key={group.id}
+            className={
+              gi % 2 === 1
+                ? "border-y border-border bg-secondary/50"
+                : "bg-background"
+            }
+          >
+            <div className="mx-auto max-w-[88rem] px-5 py-12 md:px-6 md:py-14">
+              <div className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-primary pb-3">
+                <h2 className="font-display text-2xl font-bold uppercase tracking-[0.04em] text-primary md:text-3xl">
                   {group.label}
                 </h2>
-                {group.showAll ? (
-                  <Link
-                    to="/clanky"
-                    className="text-[11px] font-bold uppercase tracking-[0.14em] text-primary hover:underline"
-                  >
-                    Zobrazit vše
-                  </Link>
-                ) : null}
+                <Link
+                  to="/clanky"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
+                >
+                  Zobrazit vše <ArrowRight className="size-4" />
+                </Link>
               </div>
 
-              <div className="mt-5 grid gap-x-8 gap-y-9 md:grid-cols-2 lg:grid-cols-3">
-                {group.items.map((item, idx) => (
+              <div className="mt-7 grid gap-x-8 gap-y-9 md:grid-cols-2 lg:grid-cols-3">
+                {group.items.slice(0, 3).map((item, idx) => (
                   <article key={`${group.id}-${item.slug}-${idx}`} className="group">
                     <div className="flex items-center justify-between gap-3">
                       <span className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground">
@@ -320,8 +325,9 @@ function Index() {
                 ))}
               </div>
             </div>
-          ))}
-        </section>
+          </section>
+        ))}
+
 
 
         {/* témata */}
