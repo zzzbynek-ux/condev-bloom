@@ -78,11 +78,6 @@ export function SiteHeader() {
 
 
 
-            <div className="hidden items-center gap-3 lg:flex">
-              <a href="https://x.com" aria-label="X" className="opacity-80 transition-opacity hover:opacity-100">
-                <XIcon className="size-[17px]" />
-              </a>
-            </div>
 
             <Link to="/hledat" aria-label="Hledat" className="rounded-md p-2 lg:hidden">
               <Search className="size-5" />
