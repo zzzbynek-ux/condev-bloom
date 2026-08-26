@@ -48,6 +48,7 @@ function XIcon({ className }: { className?: string }) {
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [compact, setCompact] = useState(false);
+  const [menu, setMenu] = useState<string | null>(null);
   const [q, setQ] = useState("");
   const navigate = useNavigate();
 
