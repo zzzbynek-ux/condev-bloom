@@ -10,7 +10,6 @@ type NavItem =
   | { label: string; to?: undefined; children: NavChild[] };
 
 const NAV: NavItem[] = [
-  { label: "O nás", to: "/o-nas" },
   {
     label: "Články",
     children: [
@@ -41,6 +40,7 @@ const NAV: NavItem[] = [
       { label: "Ptejte se AI", to: "/ptejte-se-ai" },
     ],
   },
+  { label: "O nás", to: "/o-nas" },
 ];
 
 
