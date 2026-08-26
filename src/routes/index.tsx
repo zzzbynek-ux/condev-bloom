@@ -111,7 +111,7 @@ function Hero() {
       </button>
 
       <div className="relative flex items-center justify-center gap-2 pb-6">
-        {HERO_SLIDES.map((s, idx) => (
+        {HERO.map((s, idx) => (
           <button
             key={s.title}
             type="button"
