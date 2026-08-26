@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import type * as React from "react";
 import { useEffect, useState } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight, Flag, HelpCircle, Info, Users } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, HelpCircle, Info, Users } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -184,13 +184,6 @@ const ACTIONS: {
     text: "Přidejte se k nám a staňte se součástí řešení.",
     tone: "bg-primary",
     to: "/zapojte-se",
-  },
-  {
-    icon: Flag,
-    title: "Nahlásit incident",
-    text: "Pomozte nám monitorovat a reagovat.",
-    tone: "bg-destructive",
-    to: "/nahlasit-incident",
   },
 
 ];
