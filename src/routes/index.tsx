@@ -4,7 +4,7 @@ import { ArrowRight, ChevronLeft, ChevronRight, Flag, HelpCircle, Users } from "
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { FEATURED, LATEST, SLIDES, TOPICS } from "@/lib/content";
+import { FEATURED, SLIDES, TOPICS } from "@/lib/content";
 import heroImg from "@/assets/hero-blindfold.jpg";
 import flagsImg from "@/assets/news-flags.jpg";
 import mediaImg from "@/assets/news-media.jpg";
