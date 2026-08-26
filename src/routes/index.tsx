@@ -165,6 +165,13 @@ const ACTIONS: {
   to: string;
 }[] = [
   {
+    icon: Info,
+    title: "O nás",
+    text: "Kdo jsme a proč vracíme do debaty fakta.",
+    tone: "bg-primary",
+    to: "/o-nas",
+  },
+  {
     icon: HelpCircle,
     title: "Ptejte se AI",
     text: "Zeptejte se naší AI na dezinformace a fakta.",
