@@ -46,39 +46,7 @@ export function SiteHeader() {
             </span>
           </Link>
 
-          <nav className="hidden flex-1 items-center justify-center gap-0 lg:flex">
-            {NAV.map((item, i) => (
-              <span key={item.to} className="flex items-center">
-                {i > 0 ? <span className="mx-4 h-4 w-px bg-primary-foreground/35" /> : null}
-                <Link
-                  to={item.to}
-                  className="text-[15px] text-primary-foreground/90 transition-colors hover:text-white"
-                  activeProps={{ className: "text-white font-semibold" }}
-                >
-                  {item.label}
-                </Link>
-              </span>
-            ))}
-          </nav>
-
-          <div className="ml-auto flex items-center gap-4 lg:ml-0">
-            <div className="hidden items-center gap-3 md:flex">
-              <a href="https://x.com" aria-label="X" className="opacity-90 hover:opacity-100">
-                <XIcon className="size-[18px]" />
-              </a>
-              <a href="https://facebook.com" aria-label="Facebook" className="opacity-90 hover:opacity-100">
-                <Facebook className="size-[19px]" />
-              </a>
-              <a href="https://instagram.com" aria-label="Instagram" className="opacity-90 hover:opacity-100">
-                <Instagram className="size-[19px]" />
-              </a>
-            </div>
-            <Link
-              to="/zapojte-se"
-              className="hidden rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-primary transition-transform hover:-translate-y-0.5 sm:block"
-            >
-              Podpořte nás
-            </Link>
+          <div className="ml-auto flex items-center">
             <button
               type="button"
               aria-label="Otevřít menu"
@@ -90,6 +58,47 @@ export function SiteHeader() {
           </div>
         </div>
       </div>
+
+      {/* bílá lišta s navigací */}
+      <div className="hidden border-b border-border bg-background lg:block">
+        <div className="mx-auto flex max-w-[88rem] items-center px-4 py-2.5 md:px-6">
+          <nav className="flex items-center">
+            {NAV.map((item, i) => (
+              <span key={item.to} className="flex items-center">
+                {i > 0 ? <span className="mx-4 h-4 w-px bg-border" /> : null}
+                <Link
+                  to={item.to}
+                  className="text-[15px] font-medium text-foreground transition-colors hover:text-primary"
+                  activeProps={{ className: "text-primary font-semibold" }}
+                >
+                  {item.label}
+                </Link>
+              </span>
+            ))}
+          </nav>
+
+          <div className="ml-auto flex items-center gap-4">
+            <div className="flex items-center gap-3 text-foreground">
+              <a href="https://x.com" aria-label="X" className="opacity-80 hover:opacity-100">
+                <XIcon className="size-[18px]" />
+              </a>
+              <a href="https://facebook.com" aria-label="Facebook" className="opacity-80 hover:opacity-100">
+                <Facebook className="size-[19px]" />
+              </a>
+              <a href="https://instagram.com" aria-label="Instagram" className="opacity-80 hover:opacity-100">
+                <Instagram className="size-[19px]" />
+              </a>
+            </div>
+            <Link
+              to="/zapojte-se"
+              className="rounded-full bg-primary px-6 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+            >
+              Podpořte nás
+            </Link>
+          </div>
+        </div>
+      </div>
+
 
 
 
