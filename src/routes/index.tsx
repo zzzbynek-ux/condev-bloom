@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight, Flag, HelpCircle, Users } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, HelpCircle, Users, type LucideIcon } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -9,6 +9,8 @@ import heroImg from "@/assets/hero-blindfold.jpg";
 import flagsImg from "@/assets/news-flags.jpg";
 import mediaImg from "@/assets/news-media.jpg";
 import politicsImg from "@/assets/news-politics.jpg";
+import incidentIcon from "@/assets/nahlasit-incident.png.asset.json";
+
 
 const IMAGES = { flags: flagsImg, media: mediaImg, politics: politicsImg };
 
@@ -120,7 +122,13 @@ function Hero() {
   );
 }
 
-const ACTIONS = [
+const ACTIONS: {
+  icon?: LucideIcon;
+  image?: string;
+  title: string;
+  text: string;
+  tone: string;
+}[] = [
   {
     icon: Users,
     title: "Zapojte se",
@@ -134,12 +142,13 @@ const ACTIONS = [
     tone: "bg-primary",
   },
   {
-    icon: Flag,
+    image: incidentIcon.url,
     title: "Nahlásit incident",
     text: "Pomozte nám monitorovat a reagovat.",
     tone: "bg-destructive",
   },
 ];
+
 
 function FeaturedArt({ tone }: { tone: (typeof FEATURED)[number]["tone"] }) {
   if (tone === "flag") {
@@ -210,9 +219,18 @@ function Index() {
                 to="/zapojte-se"
                 className="flex items-center gap-5 rounded-xl border border-border bg-card p-6 shadow-sm transition-shadow hover:shadow-md"
               >
-                <span className={`grid size-14 shrink-0 place-items-center rounded-full ${a.tone}`}>
-                  <a.icon className="size-7 text-white" />
-                </span>
+                {"image" in a && a.image ? (
+                  <img
+                    src={a.image}
+                    alt=""
+                    className="size-14 shrink-0 rounded-full object-cover"
+                  />
+                ) : (
+                  <span className={`grid size-14 shrink-0 place-items-center rounded-full ${a.tone}`}>
+                    {a.icon ? <a.icon className="size-7 text-white" /> : null}
+                  </span>
+                )}
+
                 <span className="min-w-0">
                   <span className="block font-display text-lg font-bold text-foreground">{a.title}</span>
                   <span className="mt-1 block text-sm leading-snug text-muted-foreground">{a.text}</span>
