@@ -61,7 +61,7 @@ function Hero() {
           </p>
           <p key={slide.title} className="animate-rise mt-3 font-display text-3xl font-bold text-white md:text-5xl">
             {slide.title}
-          </h1>
+          </p>
           <p
             key={slide.text}
             className="animate-rise mt-4 text-sm leading-relaxed text-white/85 md:text-[17px]"
