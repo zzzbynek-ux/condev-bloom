@@ -2,7 +2,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { ChevronDown, Facebook, Flag, Instagram, Menu, Search, X } from "lucide-react";
 import { TOPICS } from "@/lib/content";
-import logoAsset from "@/assets/logo-jednim-hlasem.png.asset.json";
+import logoWhite from "@/assets/logo-white.png.asset.json";
 
 type NavTo = "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" | "/manifest" | "/nahlasit-incident" | "/ptejte-se-ai";
 type NavChild = { label: string; to?: NavTo };
@@ -71,14 +71,15 @@ export function SiteHeader() {
             className="flex shrink-0 flex-col justify-center py-3 pl-4 md:pl-6"
           >
             <img
-              src={logoAsset.url}
+              src={logoWhite.url}
               alt="Jedním Hlasem"
-              className="h-11 w-auto brightness-0 invert md:h-13"
+              className="h-11 w-auto md:h-14"
             />
             <span className="mt-1 block text-[9px] font-semibold uppercase tracking-[0.12em] text-primary-foreground/80 md:text-[10px]">
               Fakta proti dezinformacím
             </span>
           </Link>
+
 
 
           <div className="ml-auto flex items-center gap-4">
