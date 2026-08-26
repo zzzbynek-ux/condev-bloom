@@ -345,7 +345,8 @@ function Index() {
 
         {/* vybrané texty – karty */}
         <section className="bg-background">
-          <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+          <div className="mx-auto max-w-[88rem] px-5 pb-14 md:px-6 md:pb-16">
+
             <SectionHeader
               kicker=""
               title="Vybrané texty"
