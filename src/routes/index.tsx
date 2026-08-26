@@ -389,34 +389,6 @@ function Index() {
           </section>
         ))}
 
-        {/* vybrané texty – mřížka */}
-        <section className="border-t border-border bg-muted/30">
-          <div className="mx-auto max-w-[88rem] px-5 py-10 md:px-6">
-            <div className="mb-6 flex items-end justify-between gap-4 border-b border-border pb-3">
-              <h2 className="text-xs font-bold uppercase tracking-[0.22em] text-primary">
-                Vybrané texty
-              </h2>
-              <Link
-                to="/clanky"
-                className="text-[11px] font-bold uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-primary"
-              >
-                Všechny články →
-              </Link>
-            </div>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {TOPICS.slice(0, 3).map((t, idx) => (
-                <ArticleCard
-                  key={t.slug}
-                  image={[mediaImg, politicsImg, flagsImg][idx % 3]!}
-                  tag={t.kicker}
-                  date="Vybrané"
-                  title={t.title}
-                  perex={t.perex}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
 
 
 
