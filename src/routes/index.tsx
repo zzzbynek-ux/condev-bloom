@@ -229,11 +229,12 @@ function Index() {
 
         {/* rychlé akce */}
         <section className="mx-auto max-w-[88rem] px-5 pt-10 md:px-6">
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {ACTIONS.map((a) => (
               <Link
                 key={a.title}
-                to="/zapojte-se"
+                to={a.to}
+
                 className="flex items-center gap-5 rounded-xl border border-border bg-card p-6 shadow-sm transition-shadow hover:shadow-md"
               >
                 {"image" in a && a.image ? (
