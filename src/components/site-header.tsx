@@ -40,7 +40,9 @@ const NAV: NavItem[] = [
       { label: "Ptejte se AI", to: "/ptejte-se-ai" },
     ],
   },
+  { label: "O nás", to: "/o-nas" },
 ];
+
 
 
 function XIcon({ className }: { className?: string }) {
@@ -123,7 +125,8 @@ export function SiteHeader() {
       {/* bílá lišta: hlavní navigace + hledání + CTA */}
       <div className="hidden border-b border-border bg-background lg:block">
         <div className="mx-auto flex max-w-[88rem] items-stretch gap-7 px-4 md:px-6">
-          <nav className="flex flex-1 items-stretch justify-center gap-7">
+          <nav className="flex flex-1 items-stretch gap-7">
+
 
 
             {NAV.map((item) =>
@@ -186,20 +189,13 @@ export function SiteHeader() {
             href="https://x.com"
             target="_blank"
             rel="noreferrer"
-            className="my-auto flex shrink-0 items-center gap-2 rounded-full border border-border px-3 py-1.5 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
+            aria-label="Sledujte nás na X"
+            title="Sledujte nás na X"
+            className="my-auto flex size-9 shrink-0 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
           >
-            JEDNÍM HLASEM na
             <XIcon className="size-4" />
           </a>
 
-          <Link
-
-            to="/o-nas"
-            className="my-auto flex shrink-0 items-center gap-2 rounded-full border border-border px-3 py-1.5 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
-            activeProps={{ className: "border-primary text-primary" }}
-          >
-            O nás
-          </Link>
 
 
         </div>
