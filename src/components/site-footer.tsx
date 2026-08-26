@@ -39,8 +39,11 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-primary-foreground/20">
-        <div className="mx-auto max-w-[88rem] px-5 py-4 text-xs text-primary-foreground/70 md:px-6">
-          © {new Date().getFullYear()} Jedním Hlasem — komunitní projekt.
+        <div className="mx-auto flex max-w-[88rem] items-center justify-between gap-4 px-5 py-4 text-xs text-primary-foreground/85 md:px-6">
+          <span>© {new Date().getFullYear()} JednímHlasem</span>
+          <Link to="/ochrana-osobnich-udaju" className="hover:text-white">
+            Ochrana osobních údajů
+          </Link>
         </div>
       </div>
     </footer>
