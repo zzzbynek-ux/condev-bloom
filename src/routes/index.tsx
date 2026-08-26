@@ -273,8 +273,6 @@ function Index() {
                   </span>
                 </Link>
               ))}
-                </Link>
-              ))}
             </div>
           </div>
         </section>
