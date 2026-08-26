@@ -190,6 +190,15 @@ export function SiteHeader() {
             )}
           </nav>
 
+          <Link
+            to="/o-nas"
+            className="my-auto ml-auto flex shrink-0 items-center rounded-full border border-primary px-5 py-1.5 text-sm font-semibold uppercase tracking-wide text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+            activeProps={{ className: "bg-primary text-primary-foreground" }}
+          >
+            O nás
+          </Link>
+
+
         </div>
       </div>
 
