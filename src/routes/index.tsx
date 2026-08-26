@@ -190,10 +190,8 @@ function Index() {
     <div className="min-h-screen bg-background">
       <SiteHeader />
       <main>
-        <Hero />
-
         {/* úvodní claim */}
-        <section className="mx-auto max-w-[88rem] px-5 pt-10 md:px-6">
+        <section className="mx-auto max-w-[88rem] px-5 py-8 md:px-6 md:py-10">
           <h1 className="max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-tight text-[#0b1a3a] md:text-4xl">
             Do debaty o Izraeli vracíme fakta,{" "}
             <span className="text-primary">kontext a klidný tón.</span>
@@ -203,6 +201,8 @@ function Index() {
             veřejném mínění — v komentářích, v médiích i ve školách.
           </p>
         </section>
+
+        <Hero />
 
         {/* rychlé akce */}
         <section className="mx-auto max-w-[88rem] px-5 pt-10 md:px-6">
