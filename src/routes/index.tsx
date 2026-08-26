@@ -190,18 +190,55 @@ const FEATURED_IMAGES: Record<string, string> = {
   red: featuredSlogansImg,
 };
 
-function FeaturedArt({ tone, alt }: { tone: (typeof FEATURED)[number]["tone"]; alt: string }) {
+function ArticleCard({
+  image,
+  tag,
+  date,
+  title,
+  perex,
+}: {
+  image: string;
+  tag: string;
+  date: string;
+  title: string;
+  perex: string;
+}) {
   return (
-    <img
-      src={FEATURED_IMAGES[tone] ?? featuredAlgorithmImg}
-      alt={alt}
-      loading="lazy"
-      width={1280}
-      height={720}
-      className="aspect-video w-full object-cover"
-    />
+    <article className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
+      <img
+        src={image}
+        alt={title}
+        loading="lazy"
+        width={1280}
+        height={720}
+        className="aspect-video w-full object-cover"
+      />
+      <div className="flex flex-1 flex-col p-6">
+        <div className="flex items-center justify-between gap-3">
+          <span className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground">
+            {tag}
+          </span>
+          <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
+            {date}
+          </span>
+        </div>
+        <h3 className="mt-3 font-display text-xl font-bold leading-snug text-primary">
+          <Link to="/clanky" className="group-hover:underline">
+            {title}
+          </Link>
+        </h3>
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{perex}</p>
+        <Link
+          to="/clanky"
+          className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-primary hover:underline"
+        >
+          Číst dál <ArrowRight className="size-4" />
+        </Link>
+      </div>
+    </article>
   );
 }
+
 
 
 function SectionHeader({
@@ -313,49 +350,26 @@ function Index() {
         {/* zvýrazněné karty */}
         <section className="border-y border-primary/15 bg-primary/[0.06]">
           <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
-          <SectionHeader
-            kicker="Výběr redakce"
-            title="Doporučujeme"
-            subtitle="Začněte tady"
-            to="/clanky"
-          />
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-
-            {FEATURED.map((f) => (
-              <article
-                key={f.title}
-                className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md"
-              >
-                <div className="flex items-center justify-between gap-3 px-6 pt-6">
-                  <span className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground">
-                    {f.tag}
-                  </span>
-                  <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
-                    {f.date}
-                  </span>
-                </div>
-                <h3 className="whitespace-pre-line px-6 pb-5 pt-3 font-display text-2xl font-bold leading-tight text-primary">
-                  <Link to="/clanky" className="group-hover:underline">
-                    {f.title}
-                  </Link>
-                </h3>
-                <FeaturedArt tone={f.tone} alt={f.title.replace("\n", " ")} />
-                <div className="flex flex-1 flex-col px-6 pb-6 pt-5">
-                  <p className="text-sm leading-relaxed text-muted-foreground">{f.text}</p>
-                  <Link
-                    to="/clanky"
-                    className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-primary hover:underline"
-                  >
-                    Číst dál <ArrowRight className="size-4" />
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
+            <SectionHeader
+              kicker="Výběr redakce"
+              title="Doporučujeme"
+              subtitle="Začněte tady"
+              to="/clanky"
+            />
+            <div className="mt-8 grid gap-6 md:grid-cols-3">
+              {FEATURED.map((f) => (
+                <ArticleCard
+                  key={f.title}
+                  image={FEATURED_IMAGES[f.tone] ?? featuredAlgorithmImg}
+                  tag={f.tag}
+                  date={f.date}
+                  title={f.title.replace("\n", " ")}
+                  perex={f.text}
+                />
+              ))}
+            </div>
           </div>
         </section>
-
-
 
         {/* rubriky s výpisy článků */}
         {FEED.map((group, gi) => (
@@ -370,52 +384,22 @@ function Index() {
             <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
               <SectionHeader kicker="Rubrika" title={group.label} to="/clanky" />
 
-              <div className="mt-8 grid gap-x-8 gap-y-9 md:grid-cols-2 lg:grid-cols-3">
-
+              <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {group.items.slice(0, 3).map((item, idx) => (
-                  <article key={`${group.id}-${item.slug}-${idx}`} className="group">
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground">
-                        {item.tag}
-                      </span>
-                      <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
-                        {item.date}
-                      </span>
-                    </div>
-
-                    <h3 className="mt-3 font-display text-xl font-bold leading-snug text-primary">
-                      <Link to="/clanky" className="group-hover:underline">
-                        {item.title}
-                      </Link>
-                    </h3>
-
-                    <div className="mt-3 flex gap-4">
-                      <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
-                        {item.perex}
-                      </p>
-                      <img
-                        src={IMAGES[item.image]}
-                        alt={item.title}
-                        loading="lazy"
-                        width={400}
-                        height={300}
-                        className="h-[86px] w-[112px] shrink-0 rounded-sm object-cover"
-                      />
-                    </div>
-
-                    <Link
-                      to="/clanky"
-                      className="mt-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-primary hover:underline"
-                    >
-                      Číst dál <ArrowRight className="size-4" />
-                    </Link>
-
-                  </article>
+                  <ArticleCard
+                    key={`${group.id}-${item.slug}-${idx}`}
+                    image={IMAGES[item.image]}
+                    tag={item.tag}
+                    date={item.date}
+                    title={item.title}
+                    perex={item.perex}
+                  />
                 ))}
               </div>
             </div>
           </section>
         ))}
+
 
 
 
