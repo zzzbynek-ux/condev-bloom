@@ -212,7 +212,12 @@ function Index() {
 
         {/* zvýrazněné karty */}
         <section className="mx-auto max-w-[88rem] px-5 pt-6 md:px-6">
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="border-b border-border pb-2">
+            <h2 className="text-[13px] font-bold uppercase tracking-[0.16em] text-primary">
+              Doporučujeme
+            </h2>
+          </div>
+          <div className="mt-5 grid gap-6 md:grid-cols-3">
             {FEATURED.map((f) => (
               <article
                 key={f.title}
