@@ -132,7 +132,7 @@ export function SiteHeader() {
             JEDNÍM HLASEM na
             <XIcon className="size-4" />
           </a>
-          <nav className="flex items-stretch gap-7">
+          <nav className="flex flex-1 items-stretch justify-center gap-7">
 
             {NAV.map((item) =>
               item.children ? (
