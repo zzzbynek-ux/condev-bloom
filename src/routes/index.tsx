@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import type * as React from "react";
 import { useEffect, useState } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight, Flag, HelpCircle, Users } from "lucide-react";
 
@@ -139,7 +140,7 @@ function StarOfDavidIcon({ className }: { className?: string }) {
 }
 
 const ACTIONS: {
-  icon?: (props: { className?: string }) => JSX.Element;
+  icon?: (props: { className?: string }) => React.ReactElement;
   image?: string;
   title: string;
   text: string;
