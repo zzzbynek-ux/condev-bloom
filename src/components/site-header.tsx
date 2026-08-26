@@ -123,7 +123,8 @@ export function SiteHeader() {
       {/* bílá lišta: hlavní navigace + hledání + CTA */}
       <div className="hidden border-b border-border bg-background lg:block">
         <div className="mx-auto flex max-w-[88rem] items-stretch gap-7 px-4 md:px-6">
-          <nav className="flex flex-1 items-stretch justify-center gap-7">
+          <nav className="flex flex-1 items-stretch gap-7">
+
 
 
             {NAV.map((item) =>
