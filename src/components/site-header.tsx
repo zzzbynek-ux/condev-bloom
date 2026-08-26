@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { ChevronDown, Facebook, Flag, Instagram, Menu, MessageSquare, Search, X } from "lucide-react";
+import { ChevronDown, Facebook, Flag, Instagram, Menu, Search, X } from "lucide-react";
 import { TOPICS } from "@/lib/content";
+import logoAsset from "@/assets/logo-jednim-hlasem.png.asset.json";
 
 type NavTo = "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" | "/manifest" | "/nahlasit-incident" | "/ptejte-se-ai";
 type NavChild = { label: string; to?: NavTo };
@@ -67,20 +68,15 @@ export function SiteHeader() {
           {/* logo blok s bílým „vlaječkovým" pozadím a zkosením */}
           <Link
             to="/"
-            className="relative flex shrink-0 items-center bg-white py-3 pl-4 pr-8 md:pl-8 md:pr-14 [clip-path:polygon(0_0,100%_0,calc(100%-1.75rem)_100%,0_100%)]"
+            className="relative flex shrink-0 flex-col justify-center bg-white py-3 pl-4 pr-8 md:pl-8 md:pr-14 [clip-path:polygon(0_0,100%_0,calc(100%-1.75rem)_100%,0_100%)]"
           >
-            <span className="mr-3 grid size-9 shrink-0 place-items-center rounded-md bg-primary md:size-11">
-              <MessageSquare className="size-5 text-white md:size-6" />
-            </span>
-            <span className="leading-none">
-              <span className="block font-display text-lg font-bold uppercase leading-[1.05] tracking-tight text-primary md:text-2xl">
-                Jedním
-                <br />
-                Hlasem
-              </span>
-              <span className="mt-1 block text-[9px] font-semibold uppercase tracking-[0.12em] text-primary/70 md:text-[10px]">
-                Fakta proti dezinformacím
-              </span>
+            <img
+              src={logoAsset.url}
+              alt="Jedním Hlasem"
+              className="h-12 w-auto md:h-14"
+            />
+            <span className="mt-1 block text-[9px] font-semibold uppercase tracking-[0.12em] text-primary/70 md:text-[10px]">
+              Fakta proti dezinformacím
             </span>
           </Link>
 
