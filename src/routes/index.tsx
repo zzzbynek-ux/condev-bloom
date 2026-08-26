@@ -35,14 +35,14 @@ export const Route = createFileRoute("/")({
 
 function Hero() {
   const [i, setI] = useState(0);
-  const go = (d: number) => setI((v) => (v + d + SLIDES.length) % SLIDES.length);
+  const go = (d: number) => setI((v) => (v + d + HERO_SLIDES.length) % HERO_SLIDES.length);
 
   useEffect(() => {
-    const t = setInterval(() => setI((v) => (v + 1) % SLIDES.length), 8000);
+    const t = setInterval(() => setI((v) => (v + 1) % HERO_SLIDES.length), 8000);
     return () => clearInterval(t);
   }, []);
 
-  const slide = SLIDES[i] ?? SLIDES[0]!;
+  const slide = HERO_SLIDES[i] ?? HERO_SLIDES[0]!;
 
   return (
     <section className="relative isolate overflow-hidden bg-[#0b1a3a]">
@@ -70,6 +70,12 @@ function Hero() {
           >
             {slide.text}
           </p>
+          <Link
+            to="/manifest"
+            className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-white/85 hover:text-white"
+          >
+            Číst celý manifest <ArrowRight className="size-4" />
+          </Link>
         </div>
       </div>
 
@@ -90,37 +96,24 @@ function Hero() {
         <ChevronRight className="size-6" />
       </button>
 
-      <div className="relative flex flex-col items-center gap-3 pb-6">
-        <div className="flex items-center gap-2">
-          {SLIDES.map((s, idx) => (
-            <button
-              key={s.title}
-              type="button"
-              aria-label={`Zobrazit: ${s.title}`}
-              aria-current={idx === i}
-              onClick={() => setI(idx)}
-              className={`size-2.5 rounded-full transition-all ${
-                idx === i ? "scale-125 bg-primary" : "bg-white/45 hover:bg-white/70"
-              }`}
-            />
-          ))}
-        </div>
-        <div className="hidden flex-wrap justify-center gap-6 px-6 text-xs text-white/55 md:flex">
-          {SLIDES.map((s, idx) => (
-            <button
-              key={s.title}
-              type="button"
-              onClick={() => setI(idx)}
-              className={idx === i ? "text-white" : "hover:text-white/85"}
-            >
-              {s.title}
-            </button>
-          ))}
-        </div>
+      <div className="relative flex items-center justify-center gap-2 pb-6">
+        {HERO_SLIDES.map((s, idx) => (
+          <button
+            key={s.title}
+            type="button"
+            aria-label={`Zobrazit: ${s.title}`}
+            aria-current={idx === i}
+            onClick={() => setI(idx)}
+            className={`size-2.5 rounded-full transition-all ${
+              idx === i ? "scale-125 bg-primary" : "bg-white/45 hover:bg-white/70"
+            }`}
+          />
+        ))}
       </div>
     </section>
   );
 }
+
 
 const ACTIONS: {
   icon?: LucideIcon;
