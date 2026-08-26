@@ -210,7 +210,7 @@ const FEATURED_IMAGES: Record<string, string> = {
   red: featuredSlogansImg,
 };
 
-const TOPIC_IMAGES = [mediaImg, politicsImg, flagsImg];
+
 
 function ArticleCard({
   image,
