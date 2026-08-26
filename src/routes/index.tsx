@@ -173,13 +173,6 @@ const ACTIONS: {
   to: string;
 }[] = [
   {
-    icon: StarOfDavidIcon,
-    title: "Antisemitismus 2.0",
-    text: "Co je nový antisemitismus a jak ho poznat.",
-    tone: "bg-primary",
-    to: "/temata",
-  },
-  {
     icon: HelpCircle,
     title: "Ptejte se AI",
     text: "Zeptejte se naší AI na dezinformace a fakta.",
