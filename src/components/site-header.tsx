@@ -123,8 +123,18 @@ export function SiteHeader() {
 
       {/* bílá lišta: hlavní navigace + hledání + CTA */}
       <div className="hidden border-b border-border bg-background lg:block">
-        <div className="mx-auto flex max-w-[88rem] items-stretch px-4 md:px-6">
+        <div className="mx-auto flex max-w-[88rem] items-stretch gap-7 px-4 md:px-6">
+          <a
+            href="https://x.com"
+            target="_blank"
+            rel="noreferrer"
+            className="my-auto flex shrink-0 items-center gap-2 rounded-full border border-border px-3 py-1.5 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
+          >
+            JEDNÍM HLASEM na
+            <XIcon className="size-4" />
+          </a>
           <nav className="flex items-stretch gap-7">
+
             {NAV.map((item) =>
               item.children ? (
                 <div
@@ -181,17 +191,6 @@ export function SiteHeader() {
             )}
           </nav>
 
-          <div className="ml-auto flex items-center gap-4">
-            <a
-              href="https://x.com"
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-2 rounded-full border border-border px-3 py-1.5 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
-            >
-              JEDNÍM HLASEM na
-              <XIcon className="size-4" />
-            </a>
-          </div>
         </div>
       </div>
 
