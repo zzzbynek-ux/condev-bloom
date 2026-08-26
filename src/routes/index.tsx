@@ -210,7 +210,7 @@ function ArticleCard({
 }: {
   image: string;
   tag: string;
-  date: string;
+  date?: string;
   title: string;
   perex: string;
 }) {
@@ -229,10 +229,13 @@ function ArticleCard({
           <span className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground">
             {tag}
           </span>
-          <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
-            {date}
-          </span>
+          {date ? (
+            <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
+              {date}
+            </span>
+          ) : null}
         </div>
+
         <h3 className="mt-3 font-display text-xl font-bold leading-snug text-primary">
           <Link to="/clanky" className="group-hover:underline">
             {title}
@@ -339,8 +342,8 @@ function Index() {
           </div>
         </section>
 
-        {/* vybrané texty – mřížka */}
-        <section className="border-t border-border bg-muted/30">
+        {/* vybrané texty – karty */}
+        <section className="border-y border-border bg-secondary/50">
           <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
             <SectionHeader
               kicker=""
@@ -349,14 +352,14 @@ function Index() {
               to="/clanky"
               linkLabel="Všechny články"
             />
-            <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-8 grid gap-6 md:grid-cols-3">
+
 
               {TOPICS.slice(0, 3).map((t, idx) => (
                 <ArticleCard
                   key={t.slug}
                   image={[selMediaImg, selKatarImg, selRudozelenaImg][idx % 3]!}
                   tag={t.kicker}
-                  date="Vybrané"
                   title={t.title}
                   perex={t.perex}
                 />
