@@ -251,27 +251,44 @@ export function SiteHeader() {
             />
           </form>
           <div className="flex flex-col">
-            {[...NAV, { to: "/zapojte-se", label: "Zapojte se" } as const].map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                onClick={() => setOpen(false)}
-                className="border-b border-border py-3 text-sm font-medium text-foreground"
-              >
-                {item.label}
-              </Link>
-            ))}
-            {SECTIONS.map((s) => (
-              <Link
-                key={s}
-                to="/temata"
-                onClick={() => setOpen(false)}
-                className="border-b border-border py-3 text-sm text-muted-foreground"
-              >
-                {s}
-              </Link>
-            ))}
+            {NAV.map((item) =>
+              item.children ? (
+                <div key={item.label} className="border-b border-border py-2">
+                  <p className="py-1 text-sm font-semibold uppercase tracking-wide text-foreground">
+                    {item.label}
+                  </p>
+                  <div className="flex flex-col pl-3">
+                    {item.children.map((c) =>
+                      c.to ? (
+                        <Link
+                          key={c.label}
+                          to={c.to}
+                          onClick={() => setOpen(false)}
+                          className="py-2 text-sm text-foreground/80"
+                        >
+                          {c.label}
+                        </Link>
+                      ) : (
+                        <span key={c.label} className="py-2 text-sm text-muted-foreground">
+                          {c.label}
+                        </span>
+                      ),
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={item.to}
+                  onClick={() => setOpen(false)}
+                  className="border-b border-border py-3 text-sm font-semibold uppercase tracking-wide text-foreground"
+                >
+                  {item.label}
+                </Link>
+              ),
+            )}
           </div>
+
         </div>
       ) : null}
     </header>
