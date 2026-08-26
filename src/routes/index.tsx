@@ -13,6 +13,9 @@ import politicsImg from "@/assets/news-politics.jpg";
 import featuredAlgorithmImg from "@/assets/featured-algorithm.jpg";
 import featuredInnovationImg from "@/assets/featured-innovation.jpg";
 import featuredSlogansImg from "@/assets/featured-slogans.jpg";
+import selMediaImg from "@/assets/sel-media.jpg";
+import selKatarImg from "@/assets/sel-katar.jpg";
+import selRudozelenaImg from "@/assets/sel-rudozelena.jpg";
 
 
 
