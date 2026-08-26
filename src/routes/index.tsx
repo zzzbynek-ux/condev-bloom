@@ -210,7 +210,7 @@ function ArticleCard({
 }: {
   image: string;
   tag: string;
-  date: string;
+  date?: string;
   title: string;
   perex: string;
 }) {
@@ -229,10 +229,13 @@ function ArticleCard({
           <span className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground">
             {tag}
           </span>
-          <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
-            {date}
-          </span>
+          {date ? (
+            <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
+              {date}
+            </span>
+          ) : null}
         </div>
+
         <h3 className="mt-3 font-display text-xl font-bold leading-snug text-primary">
           <Link to="/clanky" className="group-hover:underline">
             {title}
