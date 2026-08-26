@@ -210,6 +210,8 @@ const FEATURED_IMAGES: Record<string, string> = {
   red: featuredSlogansImg,
 };
 
+const TOPIC_IMAGES = [mediaImg, politicsImg, flagsImg];
+
 function ArticleCard({
   image,
   tag,
@@ -415,17 +417,16 @@ function Index() {
                 Všechny články →
               </Link>
             </div>
-            <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg bg-border sm:grid-cols-2 lg:grid-cols-5">
-              {TOPICS.slice(0, 5).map((t) => (
-                <Link
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {TOPICS.slice(0, 3).map((t, idx) => (
+                <ArticleCard
                   key={t.slug}
-                  to="/clanky"
-                  className="group bg-background p-5 transition-colors hover:bg-primary/5"
-                >
-                  <span className="block text-sm font-semibold leading-snug text-foreground transition-colors group-hover:text-primary">
-                    {t.title}
-                  </span>
-                </Link>
+                  image={TOPIC_IMAGES[idx % TOPIC_IMAGES.length]!}
+                  tag={t.kicker}
+                  date="Vybrané"
+                  title={t.title}
+                  perex={t.perex}
+                />
               ))}
             </div>
           </div>
