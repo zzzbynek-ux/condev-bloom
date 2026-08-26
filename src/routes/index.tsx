@@ -59,7 +59,7 @@ function Hero() {
           <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/60">
             {slide.kicker}
           </p>
-          <h1 key={slide.title} className="animate-rise mt-3 text-3xl font-bold text-white md:text-5xl">
+          <p key={slide.title} className="animate-rise mt-3 font-display text-3xl font-bold text-white md:text-5xl">
             {slide.title}
           </h1>
           <p
