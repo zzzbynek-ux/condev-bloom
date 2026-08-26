@@ -186,20 +186,13 @@ export function SiteHeader() {
             href="https://x.com"
             target="_blank"
             rel="noreferrer"
-            className="my-auto flex shrink-0 items-center gap-2 rounded-full border border-border px-3 py-1.5 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
+            aria-label="Sledujte nás na X"
+            title="Sledujte nás na X"
+            className="my-auto flex size-9 shrink-0 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
           >
-            JEDNÍM HLASEM na
             <XIcon className="size-4" />
           </a>
 
-          <Link
-
-            to="/o-nas"
-            className="my-auto flex shrink-0 items-center gap-2 rounded-full border border-border px-3 py-1.5 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
-            activeProps={{ className: "border-primary text-primary" }}
-          >
-            O nás
-          </Link>
 
 
         </div>
