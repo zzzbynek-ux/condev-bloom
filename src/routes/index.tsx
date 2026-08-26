@@ -210,7 +210,7 @@ const FEATURED_IMAGES: Record<string, string> = {
   red: featuredSlogansImg,
 };
 
-const TOPIC_IMAGES = [mediaImg, politicsImg, flagsImg];
+
 
 function ArticleCard({
   image,
@@ -421,7 +421,7 @@ function Index() {
               {TOPICS.slice(0, 3).map((t, idx) => (
                 <ArticleCard
                   key={t.slug}
-                  image={TOPIC_IMAGES[idx % TOPIC_IMAGES.length]!}
+                  image={[mediaImg, politicsImg, flagsImg][idx % 3]!}
                   tag={t.kicker}
                   date="Vybrané"
                   title={t.title}
