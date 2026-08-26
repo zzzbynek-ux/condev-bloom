@@ -247,38 +247,32 @@ function Index() {
       <main>
         <Hero />
 
-        {/* témata – rozcestník hned pod hero */}
-        <section className="bg-primary text-primary-foreground">
-          <div className="mx-auto max-w-[88rem] px-5 py-10 md:px-6 md:py-12">
-            <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-              <div className="min-w-0">
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground/70">
-                  Rozcestník
-                </p>
-                <h2 className="mt-1 text-2xl font-black uppercase tracking-tight md:text-3xl">
-                  Témata
-                </h2>
-              </div>
-              <Link
-                to="/temata"
-                className="shrink-0 text-sm font-bold uppercase tracking-wide text-primary-foreground/80 underline-offset-4 transition-colors hover:text-primary-foreground hover:underline"
-              >
-                Všechna témata →
-              </Link>
-            </div>
-            <div className="mt-6 flex gap-2 overflow-x-auto pb-1 md:flex-wrap md:overflow-visible md:pb-0">
+        {/* témata – decentní rozcestník hned pod hero */}
+        <section className="border-y border-border bg-muted/40">
+          <div className="mx-auto flex max-w-[88rem] flex-col gap-3 px-5 py-4 md:flex-row md:items-center md:gap-6 md:px-6">
+            <p className="shrink-0 text-[11px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
+              Témata
+            </p>
+            <nav className="flex min-w-0 flex-1 items-center gap-x-6 gap-y-2 overflow-x-auto md:flex-wrap md:overflow-visible">
               {TOPICS.map((t) => (
                 <Link
                   key={t.slug}
                   to="/temata"
-                  className="shrink-0 rounded-full border border-primary-foreground/35 px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-foreground hover:text-primary"
+                  className="shrink-0 whitespace-nowrap text-sm font-semibold text-foreground/80 underline-offset-4 transition-colors hover:text-primary hover:underline"
                 >
                   {t.title}
                 </Link>
               ))}
-            </div>
+            </nav>
+            <Link
+              to="/temata"
+              className="shrink-0 text-sm font-semibold text-primary underline-offset-4 hover:underline"
+            >
+              Všechna témata →
+            </Link>
           </div>
         </section>
+
 
 
         {/* rychlé akce */}
