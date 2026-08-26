@@ -236,6 +236,62 @@ function Index() {
           </div>
         </section>
 
+        {/* rubriky s výpisy článků */}
+        <section className="mx-auto max-w-[88rem] px-5 pb-16 md:px-6">
+          {FEED.map((group) => (
+            <div key={group.id} className="mt-12 first:mt-4">
+              <div className="flex items-end justify-between gap-4 border-b border-border pb-2">
+                <h2 className="text-[13px] font-bold uppercase tracking-[0.16em] text-primary">
+                  {group.label}
+                </h2>
+                {group.showAll ? (
+                  <Link
+                    to="/clanky"
+                    className="text-[11px] font-bold uppercase tracking-[0.14em] text-primary hover:underline"
+                  >
+                    Zobrazit vše
+                  </Link>
+                ) : null}
+              </div>
+
+              <div className="mt-5 grid gap-x-8 gap-y-9 md:grid-cols-2 lg:grid-cols-3">
+                {group.items.map((item, idx) => (
+                  <article key={`${group.id}-${item.slug}-${idx}`} className="group">
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground">
+                        {item.tag}
+                      </span>
+                      <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
+                        {item.date}
+                      </span>
+                    </div>
+
+                    <h3 className="mt-3 font-display text-xl font-bold leading-snug text-primary">
+                      <Link to="/clanky" className="group-hover:underline">
+                        {item.title}
+                      </Link>
+                    </h3>
+
+                    <div className="mt-3 flex gap-4">
+                      <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
+                        {item.perex}
+                      </p>
+                      <img
+                        src={IMAGES[item.image]}
+                        alt={item.title}
+                        loading="lazy"
+                        width={400}
+                        height={300}
+                        className="h-[86px] w-[112px] shrink-0 rounded-sm object-cover"
+                      />
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          ))}
+        </section>
+
 
         {/* témata */}
         <section className="border-t border-border bg-secondary/50">
