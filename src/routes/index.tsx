@@ -154,14 +154,6 @@ function Hero() {
 }
 
 
-function StarOfDavidIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden className={className} fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinejoin="round">
-      <path d="M12 2.5 21 18H3L12 2.5Z" />
-      <path d="M12 21.5 3 6h18l-9 15.5Z" />
-    </svg>
-  );
-}
 
 const ACTIONS: {
   icon?: React.ComponentType<{ className?: string }>;
@@ -172,13 +164,6 @@ const ACTIONS: {
   tone: string;
   to: string;
 }[] = [
-  {
-    icon: StarOfDavidIcon,
-    title: "Antisemitismus 2.0",
-    text: "Co je nový antisemitismus a jak ho poznat.",
-    tone: "bg-primary",
-    to: "/temata",
-  },
   {
     icon: HelpCircle,
     title: "Ptejte se AI",
