@@ -89,8 +89,8 @@ export function SiteHeader() {
               <input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
-                placeholder="Hledat na webu…"
-                aria-label="Hledat na webu"
+                placeholder="Hledat články"
+                aria-label="Hledat články"
                 className="w-40 bg-transparent text-sm text-primary-foreground outline-none transition-all placeholder:text-primary-foreground/70 focus:w-64 focus:text-foreground focus:placeholder:text-muted-foreground"
               />
             </form>
@@ -219,8 +219,8 @@ export function SiteHeader() {
             <input
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Hledat na webu…"
-              aria-label="Hledat na webu"
+              placeholder="Hledat články"
+              aria-label="Hledat články"
               className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
             />
           </form>
