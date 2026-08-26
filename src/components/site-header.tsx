@@ -75,6 +75,13 @@ export function SiteHeader() {
           </Link>
 
           <div className="ml-auto flex items-center gap-4">
+            <Link
+              to="/zapojte-se"
+              className="hidden rounded-full bg-primary-foreground px-6 py-2 text-sm font-semibold text-primary transition-transform hover:-translate-y-0.5 lg:inline-flex"
+            >
+              Podpořte nás
+            </Link>
+
 
 
 
@@ -183,12 +190,6 @@ export function SiteHeader() {
                 className="w-32 bg-transparent text-sm outline-none transition-all placeholder:text-muted-foreground focus:w-48"
               />
             </form>
-            <Link
-              to="/zapojte-se"
-              className="rounded-full bg-primary px-6 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
-            >
-              Podpořte nás
-            </Link>
           </div>
         </div>
       </div>
