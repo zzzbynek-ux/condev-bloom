@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { SiteLogo } from "@/components/site-logo";
 
 const LINKS = [
   { to: "/o-nas", label: "O nás" },
