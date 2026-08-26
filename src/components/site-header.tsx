@@ -1,6 +1,6 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Facebook, Instagram, Menu, MessageSquare, X } from "lucide-react";
+import { Facebook, Instagram, Menu, MessageSquare, Search, X } from "lucide-react";
 
 import { SECTIONS } from "@/lib/content";
 
@@ -20,6 +20,8 @@ function XIcon({ className }: { className?: string }) {
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [q, setQ] = useState("");
+  const navigate = useNavigate();
 
   return (
     <header className="sticky top-0 z-50 shadow-sm">
@@ -48,6 +50,13 @@ export function SiteHeader() {
 
 
           <div className="ml-auto flex items-center">
+            <Link
+              to="/hledat"
+              aria-label="Hledat"
+              className="mr-1 rounded-md p-2 lg:hidden"
+            >
+              <Search className="size-5" />
+            </Link>
             <button
               type="button"
               aria-label="Otevřít menu"
@@ -125,6 +134,25 @@ export function SiteHeader() {
 
       {open ? (
         <div className="border-b border-border bg-background px-5 py-3 lg:hidden">
+          <form
+            role="search"
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (!q.trim()) return;
+              setOpen(false);
+              void navigate({ to: "/hledat", search: { q } });
+            }}
+            className="mb-3 flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2"
+          >
+            <Search className="size-4 text-muted-foreground" />
+            <input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Hledat na webu…"
+              aria-label="Hledat na webu"
+              className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+            />
+          </form>
           <div className="flex flex-col">
             {[...NAV, { to: "/zapojte-se", label: "Zapojte se" } as const].map((item) => (
               <Link
