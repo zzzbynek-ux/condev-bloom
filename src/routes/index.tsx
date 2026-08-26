@@ -125,7 +125,7 @@ function Hero() {
           type="button"
           aria-label="Předchozí"
           onClick={() => go(-1)}
-          className="grid size-8 place-items-center rounded-full bg-primary text-white shadow-md md:hidden"
+          className="grid size-9 place-items-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/55 md:hidden"
         >
           <ChevronLeft className="size-4" />
         </button>
@@ -147,7 +147,7 @@ function Hero() {
           type="button"
           aria-label="Další"
           onClick={() => go(1)}
-          className="grid size-8 place-items-center rounded-full bg-primary text-white shadow-md md:hidden"
+          className="grid size-9 place-items-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/55 md:hidden"
         >
           <ChevronRight className="size-4" />
         </button>
