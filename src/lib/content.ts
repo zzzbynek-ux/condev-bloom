@@ -50,6 +50,17 @@ export const TOPICS: Topic[] = [
   },
 ];
 
+/** Rubriky ve druhém navigačním pruhu */
+export const SECTIONS = [
+  "Izrael a Židé",
+  "Antisemitismus",
+  "Média a instituce",
+  "Bezpečnost a ideologie",
+  "Hlasy a příběhy",
+  "Reporty",
+] as const;
+
+/** Manifesty v hero slideru */
 export const SLIDES = [
   {
     kicker: "Proč to děláme",
@@ -62,8 +73,119 @@ export const SLIDES = [
     text: "Pod příspěvkem s tisíci lajky se objeví jediný věcný komentář a naruší sdílený obraz. Algoritmus je jednoduchý: čím víc reakcí, tím větší dosah.",
   },
   {
+    kicker: "Antisemitismus",
+    title: "Antisemitismus 2.0",
+    text: "Nový antisemitismus mluví jazykem solidarity a historické křivdy. Nacistickou pásku nahradila kefíja — ale posedlost Židy zůstala.",
+  },
+  {
     kicker: "Co doplňujeme",
     title: "Celý obraz. Bez ořezu.",
     text: "Když veřejný prostor ovládají silná slova a jednostranné příběhy, přinášíme témata, která zůstávají mimo pozornost. Spravedlnost není selektivní.",
+  },
+  {
+    kicker: "Ideologie",
+    title: "Rudo-zelená aliance",
+    text: "Útoky na Židy rostou z ideologického spojenectví progresivní levice a islamismu, jež pod pláštíkem lidských práv legitimizuje násilí.",
+  },
+  {
+    kicker: "Média",
+    title: "Média ve službách teroru",
+    text: "Západní média se prezentují jako objektivní strážci pravdy. Když ale přijde na Izrael, přebírají informace od teroristů bez váhání.",
+  },
+  {
+    kicker: "Vliv",
+    title: "Zaměřeno na Katar",
+    text: "Protesty na univerzitách, výkřiky v ulicích i virální příspěvky spojuje víc, než se zdá. Ukazujeme, jak hluboko sahá katarský vliv.",
+  },
+  {
+    kicker: "Blízký východ",
+    title: "Mír začíná s pravdou",
+    text: "Konflikt není jen o dvou stranách. Arabské státy a mezinárodní instituce ho nejen sledují — udržují ho při životě.",
+  },
+];
+
+/** Tři zvýrazněné karty pod rychlými akcemi */
+export const FEATURED = [
+  {
+    title: "Změň algoritmus\n— změníš realitu",
+    text: "Diskuze a komentáře na sociálních sítích ovlivňují naši realitu.",
+    tone: "sand",
+  },
+  {
+    title: "Malý stát.\nGlobální přínos.",
+    text: "Naše podpora a aktivity mají globální dosah.",
+    tone: "flag",
+  },
+  {
+    title: "Slogany živí\nemoce, ne mír",
+    text: "Přestaňme podléhat prázdným heslům a hledejme skutečné řešení.",
+    tone: "red",
+  },
+] as const;
+
+export type NewsItem = {
+  slug: string;
+  tag: string;
+  tagTone: "primary" | "dark";
+  title: string;
+  perex: string;
+  date: string;
+  image: "flags" | "media" | "politics";
+};
+
+export const LATEST: NewsItem[] = [
+  {
+    slug: "propustte-rukojmi",
+    tag: "Analýza",
+    tagTone: "primary",
+    title: "Propusťte rukojmí!",
+    perex: "Informace o zadržovaných izraelských rukojmích v Gaze.",
+    date: "5. 7. 2026",
+    image: "flags",
+  },
+  {
+    slug: "media-ve-sluzbach-teroru",
+    tag: "Média",
+    tagTone: "dark",
+    title: "Média ve službách teroru",
+    perex: "Jak západní média šíří dezinformace.",
+    date: "12. 6. 2026",
+    image: "media",
+  },
+  {
+    slug: "rudo-zelena-aliance",
+    tag: "Analýza",
+    tagTone: "primary",
+    title: "Rudo-zelená aliance",
+    perex: "Spojenectví progresivní levice a islámu.",
+    date: "28. 5. 2026",
+    image: "politics",
+  },
+  {
+    slug: "zamereno-na-katar",
+    tag: "Report",
+    tagTone: "dark",
+    title: "Zaměřeno na Katar",
+    perex: "Kdo financuje kampaně na univerzitách.",
+    date: "14. 5. 2026",
+    image: "politics",
+  },
+  {
+    slug: "wiki-jako-nastroj-vlivu",
+    tag: "Dezinformace",
+    tagTone: "primary",
+    title: "Wiki jako nástroj vlivu",
+    perex: "Systematické zkreslování otevřené encyklopedie.",
+    date: "30. 4. 2026",
+    image: "media",
+  },
+  {
+    slug: "mir-zacina-s-pravdou",
+    tag: "Analýza",
+    tagTone: "dark",
+    title: "Mír začíná s pravdou",
+    perex: "Mýty, které konflikt udržují při životě.",
+    date: "19. 4. 2026",
+    image: "flags",
   },
 ];

@@ -1,78 +1,137 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { ChevronRight, Facebook, Instagram, Menu, MessageSquare, X } from "lucide-react";
+
+import { SECTIONS } from "@/lib/content";
 
 const NAV = [
   { to: "/clanky", label: "Články" },
   { to: "/temata", label: "Témata" },
   { to: "/o-nas", label: "O nás" },
-  { to: "/zapojte-se", label: "Zapojte se" },
 ] as const;
+
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden className={className} fill="currentColor">
+      <path d="M18.9 2H22l-6.8 7.8L23 22h-6.4l-5-6.5L5.8 22H2.7l7.3-8.3L1.5 2H8l4.5 6 6.4-6Zm-1.1 18h1.7L7.3 3.8H5.5L17.8 20Z" />
+    </svg>
+  );
+}
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-primary-foreground/20 bg-primary text-primary-foreground shadow-sm">
-      <div className="mx-auto flex max-w-6xl items-center gap-6 px-5 py-3">
-        <Link to="/" className="group flex flex-col leading-none">
-          <span className="font-display text-lg font-semibold tracking-tight text-primary-foreground">
-            Jedním<span className="text-white">Hlasem</span>
-          </span>
-          <span className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-primary-foreground/80">
-            Fakta proti dezinformacím
-          </span>
-        </Link>
-
-        <nav className="ml-auto hidden items-center gap-1 md:flex">
-          {NAV.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="rounded-full px-3 py-2 text-sm text-primary-foreground/85 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground"
-              activeProps={{ className: "bg-primary-foreground/15 text-primary-foreground" }}
-            >
-              {item.label}
-            </Link>
-          ))}
+    <header className="sticky top-0 z-50 shadow-sm">
+      {/* horní modrý pruh */}
+      <div className="bg-primary text-primary-foreground">
+        <div className="mx-auto flex max-w-[88rem] items-stretch gap-4 pr-4 md:pr-6">
+          {/* logo blok s bílým „vlaječkovým" pozadím a zkosením */}
           <Link
-            to="/zapojte-se"
-            className="ml-2 rounded-full bg-primary-foreground px-4 py-2 text-sm font-medium text-primary transition-transform hover:-translate-y-0.5"
+            to="/"
+            className="relative flex shrink-0 items-center bg-white py-3 pl-4 pr-8 md:pl-8 md:pr-14 [clip-path:polygon(0_0,100%_0,calc(100%-1.75rem)_100%,0_100%)]"
           >
-            Podpořte nás
+            <span className="mr-3 grid size-9 shrink-0 place-items-center rounded-md bg-primary md:size-11">
+              <MessageSquare className="size-5 text-white md:size-6" />
+            </span>
+            <span className="leading-none">
+              <span className="block font-display text-lg font-bold uppercase leading-[1.05] tracking-tight text-primary md:text-2xl">
+                Jedním
+                <br />
+                Hlasem
+              </span>
+              <span className="mt-1 block text-[9px] font-semibold uppercase tracking-[0.12em] text-primary/70 md:text-[10px]">
+                Fakta proti dezinformacím
+              </span>
+            </span>
           </Link>
-        </nav>
 
-        <button
-          type="button"
-          aria-label="Otevřít menu"
-          onClick={() => setOpen((v) => !v)}
-          className="ml-auto rounded-full border border-primary-foreground/30 p-2 text-primary-foreground md:hidden"
-        >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
-        </button>
+          <nav className="hidden flex-1 items-center justify-center gap-0 lg:flex">
+            {NAV.map((item, i) => (
+              <span key={item.to} className="flex items-center">
+                {i > 0 ? <span className="mx-4 h-4 w-px bg-primary-foreground/35" /> : null}
+                <Link
+                  to={item.to}
+                  className="text-[15px] text-primary-foreground/90 transition-colors hover:text-white"
+                  activeProps={{ className: "text-white font-semibold" }}
+                >
+                  {item.label}
+                </Link>
+              </span>
+            ))}
+          </nav>
+
+          <div className="ml-auto flex items-center gap-4 lg:ml-0">
+            <div className="hidden items-center gap-3 md:flex">
+              <a href="https://x.com" aria-label="X" className="opacity-90 hover:opacity-100">
+                <XIcon className="size-[18px]" />
+              </a>
+              <a href="https://facebook.com" aria-label="Facebook" className="opacity-90 hover:opacity-100">
+                <Facebook className="size-[19px]" />
+              </a>
+              <a href="https://instagram.com" aria-label="Instagram" className="opacity-90 hover:opacity-100">
+                <Instagram className="size-[19px]" />
+              </a>
+            </div>
+            <Link
+              to="/zapojte-se"
+              className="hidden rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-primary transition-transform hover:-translate-y-0.5 sm:block"
+            >
+              Podpořte nás
+            </Link>
+            <button
+              type="button"
+              aria-label="Otevřít menu"
+              onClick={() => setOpen((v) => !v)}
+              className="rounded-md border border-primary-foreground/30 p-2 lg:hidden"
+            >
+              {open ? <X className="size-5" /> : <Menu className="size-5" />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* bílý pruh rubrik */}
+      <div className="hidden border-b border-border bg-background lg:block">
+        <div className="mx-auto flex max-w-[88rem] items-stretch px-4 md:px-6">
+          {SECTIONS.map((s, i) => (
+            <span key={s} className="flex items-center">
+              {i > 0 ? <span className="h-5 w-px bg-border" /> : null}
+              <Link
+                to="/temata"
+                className="group flex items-center gap-1.5 px-5 py-3 text-[15px] font-semibold text-foreground transition-colors hover:text-primary"
+              >
+                {s}
+                <ChevronRight className="size-4 text-primary transition-transform group-hover:translate-x-0.5" />
+              </Link>
+            </span>
+          ))}
+        </div>
       </div>
 
       {open ? (
-        <div className="border-t border-primary-foreground/20 bg-primary px-5 py-3 md:hidden">
+        <div className="border-b border-border bg-background px-5 py-3 lg:hidden">
           <div className="flex flex-col">
-            {NAV.map((item) => (
+            {[...NAV, { to: "/zapojte-se", label: "Zapojte se" } as const].map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 onClick={() => setOpen(false)}
-                className="border-b border-primary-foreground/15 py-3 text-sm text-primary-foreground"
+                className="border-b border-border py-3 text-sm font-medium text-foreground"
               >
                 {item.label}
               </Link>
             ))}
-            <Link
-              to="/zapojte-se"
-              onClick={() => setOpen(false)}
-              className="mt-4 rounded-full bg-primary-foreground px-4 py-2 text-center text-sm font-medium text-primary"
-            >
-              Podpořte nás
-            </Link>
+            {SECTIONS.map((s) => (
+              <Link
+                key={s}
+                to="/temata"
+                onClick={() => setOpen(false)}
+                className="border-b border-border py-3 text-sm text-muted-foreground"
+              >
+                {s}
+              </Link>
+            ))}
           </div>
         </div>
       ) : null}
