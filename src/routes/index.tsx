@@ -253,7 +253,7 @@ function Index() {
             <p className="shrink-0 text-[11px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
               Témata
             </p>
-            <nav className="flex min-w-0 flex-1 items-center gap-x-6 gap-y-2 overflow-x-auto md:flex-wrap md:overflow-visible">
+            <nav className="flex min-w-0 flex-1 flex-nowrap items-center gap-x-5 overflow-x-auto whitespace-nowrap lg:gap-x-6">
               {TOPICS.map((t) => (
                 <Link
                   key={t.slug}
