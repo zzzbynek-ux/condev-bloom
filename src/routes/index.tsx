@@ -221,6 +221,42 @@ function FeaturedArt({ tone }: { tone: (typeof FEATURED)[number]["tone"] }) {
   );
 }
 
+function SectionHeader({
+  kicker,
+  title,
+  subtitle,
+  to,
+  linkLabel = "Zobrazit vše",
+}: {
+  kicker: string;
+  title: string;
+  subtitle?: string;
+  to?: string;
+  linkLabel?: string;
+}) {
+  return (
+    <div className="border-t-2 border-primary pt-4">
+      <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">{kicker}</p>
+      <div className="mt-2 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">
+            {title}
+          </h2>
+          {subtitle ? <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p> : null}
+        </div>
+        {to ? (
+          <Link
+            to={to}
+            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
+          >
+            {linkLabel} <ArrowRight className="size-4" />
+          </Link>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
 function Index() {
   return (
     <div className="min-h-screen bg-background">
@@ -229,8 +265,10 @@ function Index() {
         <Hero />
 
         {/* rychlé akce */}
-        <section className="mx-auto max-w-[88rem] px-5 pt-10 md:px-6">
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <section className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+          <SectionHeader kicker="Rozcestník" title="Rychlé akce" />
+          <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+
             {ACTIONS.map((a) => (
               <Link
                 key={a.title}
