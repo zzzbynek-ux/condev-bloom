@@ -189,6 +189,18 @@ function Index() {
       <main>
         <Hero />
 
+        {/* úvodní claim */}
+        <section className="mx-auto max-w-[88rem] px-5 pt-10 md:px-6">
+          <h1 className="max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-tight text-[#0b1a3a] md:text-4xl">
+            Do debaty o Izraeli vracíme fakta,{" "}
+            <span className="text-primary">kontext a klidný tón.</span>
+          </h1>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Píšeme analýzy, ověřujeme tvrzení a pomáháme lidem reagovat tam, kde se rozhoduje o
+            veřejném mínění — v komentářích, v médiích i ve školách.
+          </p>
+        </section>
+
         {/* rychlé akce */}
         <section className="mx-auto max-w-[88rem] px-5 pt-10 md:px-6">
           <div className="grid gap-6 md:grid-cols-3">
