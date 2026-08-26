@@ -221,6 +221,42 @@ function FeaturedArt({ tone }: { tone: (typeof FEATURED)[number]["tone"] }) {
   );
 }
 
+function SectionHeader({
+  kicker,
+  title,
+  subtitle,
+  to,
+  linkLabel = "Zobrazit vše",
+}: {
+  kicker: string;
+  title: string;
+  subtitle?: string;
+  to?: string;
+  linkLabel?: string;
+}) {
+  return (
+    <div className="border-t-2 border-primary pt-4">
+      <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">{kicker}</p>
+      <div className="mt-2 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">
+            {title}
+          </h2>
+          {subtitle ? <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p> : null}
+        </div>
+        {to ? (
+          <Link
+            to={to}
+            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
+          >
+            {linkLabel} <ArrowRight className="size-4" />
+          </Link>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
 function Index() {
   return (
     <div className="min-h-screen bg-background">
@@ -229,8 +265,10 @@ function Index() {
         <Hero />
 
         {/* rychlé akce */}
-        <section className="mx-auto max-w-[88rem] px-5 pt-10 md:px-6">
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <section className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+          <SectionHeader kicker="Rozcestník" title="Rychlé akce" />
+          <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+
             {ACTIONS.map((a) => (
               <Link
                 key={a.title}
@@ -260,26 +298,16 @@ function Index() {
         </section>
 
         {/* zvýrazněné karty */}
-        <section className="mt-10 border-y border-primary/15 bg-primary/[0.06]">
-          <div className="mx-auto max-w-[88rem] px-5 py-12 md:px-6 md:py-14">
+        <section className="border-y border-primary/15 bg-primary/[0.06]">
+          <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+          <SectionHeader
+            kicker="Výběr redakce"
+            title="Doporučujeme"
+            subtitle="Začněte tady"
+            to="/clanky"
+          />
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
 
-          <div className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-primary pb-3">
-            <div>
-              <h2 className="font-display text-2xl font-bold uppercase tracking-[0.04em] text-primary md:text-3xl">
-                Doporučujeme
-              </h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Výběr redakce — začněte tady
-              </p>
-            </div>
-            <Link
-              to="/clanky"
-              className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
-            >
-              Zobrazit vše <ArrowRight className="size-4" />
-            </Link>
-          </div>
-          <div className="mt-7 grid gap-6 md:grid-cols-3">
             {FEATURED.map((f) => (
               <article
                 key={f.title}
@@ -326,20 +354,11 @@ function Index() {
                 : "bg-background"
             }
           >
-            <div className="mx-auto max-w-[88rem] px-5 py-12 md:px-6 md:py-14">
-              <div className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-primary pb-3">
-                <h2 className="font-display text-2xl font-bold uppercase tracking-[0.04em] text-primary md:text-3xl">
-                  {group.label}
-                </h2>
-                <Link
-                  to="/clanky"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
-                >
-                  Zobrazit vše <ArrowRight className="size-4" />
-                </Link>
-              </div>
+            <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+              <SectionHeader kicker="Rubrika" title={group.label} to="/clanky" />
 
-              <div className="mt-7 grid gap-x-8 gap-y-9 md:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-8 grid gap-x-8 gap-y-9 md:grid-cols-2 lg:grid-cols-3">
+
                 {group.items.slice(0, 3).map((item, idx) => (
                   <article key={`${group.id}-${item.slug}-${idx}`} className="group">
                     <div className="flex items-center justify-between gap-3">
@@ -388,13 +407,12 @@ function Index() {
 
 
         {/* témata – jednořádkový pás štítků */}
-        <section className="border-t border-border bg-secondary/50">
-          <div className="mx-auto max-w-[88rem] px-5 py-8 md:px-6">
-            <div className="flex flex-col gap-4 md:flex-row md:items-center">
-              <p className="shrink-0 text-[11px] font-bold uppercase tracking-[0.16em] text-primary">
-                Témata, která rozebíráme
-              </p>
+        <section className="border-t border-border bg-background">
+          <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+            <SectionHeader kicker="Rozcestník" title="Témata" to="/temata" linkLabel="Všechna témata" />
+            <div className="mt-8">
               <div className="flex gap-2 overflow-x-auto pb-1 md:flex-wrap md:overflow-visible md:pb-0">
+
                 {TOPICS.map((t) => (
                   <Link
                     key={t.slug}
@@ -404,12 +422,6 @@ function Index() {
                     {t.title}
                   </Link>
                 ))}
-                <Link
-                  to="/temata"
-                  className="shrink-0 rounded-full px-4 py-2 text-sm font-semibold text-muted-foreground underline-offset-4 hover:text-primary hover:underline"
-                >
-                  Všechna témata →
-                </Link>
               </div>
             </div>
           </div>
