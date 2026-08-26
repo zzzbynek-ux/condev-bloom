@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ClankyRouteImport } from './routes/clanky'
 import { Route as HledatRouteImport } from './routes/hledat'
 import { Route as ManifestRouteImport } from './routes/manifest'
+import { Route as NahlasitIncidentRouteImport } from './routes/nahlasit-incident'
 import { Route as ONasRouteImport } from './routes/o-nas'
 import { Route as TemataRouteImport } from './routes/temata'
 import { Route as ZapojteSeRouteImport } from './routes/zapojte-se'
@@ -37,6 +38,11 @@ const ManifestRoute = ManifestRouteImport.update({
   path: '/manifest',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NahlasitIncidentRoute = NahlasitIncidentRouteImport.update({
+  id: '/nahlasit-incident',
+  path: '/nahlasit-incident',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ONasRoute = ONasRouteImport.update({
   id: '/o-nas',
   path: '/o-nas',
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/clanky': typeof ClankyRoute
   '/hledat': typeof HledatRoute
   '/manifest': typeof ManifestRoute
+  '/nahlasit-incident': typeof NahlasitIncidentRoute
   '/o-nas': typeof ONasRoute
   '/temata': typeof TemataRoute
   '/zapojte-se': typeof ZapojteSeRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/clanky': typeof ClankyRoute
   '/hledat': typeof HledatRoute
   '/manifest': typeof ManifestRoute
+  '/nahlasit-incident': typeof NahlasitIncidentRoute
   '/o-nas': typeof ONasRoute
   '/temata': typeof TemataRoute
   '/zapojte-se': typeof ZapojteSeRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/clanky': typeof ClankyRoute
   '/hledat': typeof HledatRoute
   '/manifest': typeof ManifestRoute
+  '/nahlasit-incident': typeof NahlasitIncidentRoute
   '/o-nas': typeof ONasRoute
   '/temata': typeof TemataRoute
   '/zapojte-se': typeof ZapojteSeRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/clanky'
     | '/hledat'
     | '/manifest'
+    | '/nahlasit-incident'
     | '/o-nas'
     | '/temata'
     | '/zapojte-se'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/clanky'
     | '/hledat'
     | '/manifest'
+    | '/nahlasit-incident'
     | '/o-nas'
     | '/temata'
     | '/zapojte-se'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/clanky'
     | '/hledat'
     | '/manifest'
+    | '/nahlasit-incident'
     | '/o-nas'
     | '/temata'
     | '/zapojte-se'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   ClankyRoute: typeof ClankyRoute
   HledatRoute: typeof HledatRoute
   ManifestRoute: typeof ManifestRoute
+  NahlasitIncidentRoute: typeof NahlasitIncidentRoute
   ONasRoute: typeof ONasRoute
   TemataRoute: typeof TemataRoute
   ZapojteSeRoute: typeof ZapojteSeRoute
@@ -151,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ManifestRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/nahlasit-incident': {
+      id: '/nahlasit-incident'
+      path: '/nahlasit-incident'
+      fullPath: '/nahlasit-incident'
+      preLoaderRoute: typeof NahlasitIncidentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/o-nas': {
       id: '/o-nas'
       path: '/o-nas'
@@ -180,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   ClankyRoute: ClankyRoute,
   HledatRoute: HledatRoute,
   ManifestRoute: ManifestRoute,
+  NahlasitIncidentRoute: NahlasitIncidentRoute,
   ONasRoute: ONasRoute,
   TemataRoute: TemataRoute,
   ZapojteSeRoute: ZapojteSeRoute,
