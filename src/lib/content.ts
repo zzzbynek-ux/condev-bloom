@@ -114,18 +114,25 @@ export const FEATURED = [
     title: "Změň algoritmus\n— změníš realitu",
     text: "Diskuze a komentáře na sociálních sítích ovlivňují naši realitu.",
     tone: "sand",
+    tag: "Výběr redakce",
+    date: "05/07/25",
   },
   {
     title: "Malý stát.\nGlobální přínos.",
     text: "Naše podpora a aktivity mají globální dosah.",
     tone: "flag",
+    tag: "Výběr redakce",
+    date: "05/07/25",
   },
   {
     title: "Slogany živí\nemoce, ne mír",
     text: "Přestaňme podléhat prázdným heslům a hledejme skutečné řešení.",
     tone: "red",
+    tag: "Výběr redakce",
+    date: "05/07/25",
   },
 ] as const;
+
 
 export type NewsItem = {
   slug: string;

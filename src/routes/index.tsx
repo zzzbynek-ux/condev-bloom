@@ -237,27 +237,48 @@ function Index() {
         </section>
 
         {/* zvýrazněné karty */}
-        <section className="mx-auto max-w-[88rem] px-5 pt-6 md:px-6">
-          <div className="border-b border-border pb-2">
-            <h2 className="text-[13px] font-bold uppercase tracking-[0.16em] text-primary">
-              Doporučujeme
-            </h2>
+        <section className="mx-auto max-w-[88rem] px-5 pt-10 md:px-6">
+          <div className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-primary pb-3">
+            <div>
+              <h2 className="font-display text-2xl font-bold uppercase tracking-[0.04em] text-primary md:text-3xl">
+                Doporučujeme
+              </h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Výběr redakce — začněte tady
+              </p>
+            </div>
+            <Link
+              to="/clanky"
+              className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
+            >
+              Zobrazit vše <ArrowRight className="size-4" />
+            </Link>
           </div>
-          <div className="mt-5 grid gap-6 md:grid-cols-3">
+          <div className="mt-7 grid gap-6 md:grid-cols-3">
             {FEATURED.map((f) => (
               <article
                 key={f.title}
-                className="overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md"
+                className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md"
               >
-                <h2 className="whitespace-pre-line px-6 pb-5 pt-6 font-display text-2xl font-bold leading-tight text-primary">
-                  {f.title}
-                </h2>
+                <div className="flex items-center justify-between gap-3 px-6 pt-6">
+                  <span className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground">
+                    {f.tag}
+                  </span>
+                  <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
+                    {f.date}
+                  </span>
+                </div>
+                <h3 className="whitespace-pre-line px-6 pb-5 pt-3 font-display text-2xl font-bold leading-tight text-primary">
+                  <Link to="/clanky" className="group-hover:underline">
+                    {f.title}
+                  </Link>
+                </h3>
                 <FeaturedArt tone={f.tone} />
-                <div className="px-6 pb-6 pt-5">
-                  <p className="text-sm leading-relaxed text-foreground/80">{f.text}</p>
+                <div className="flex flex-1 flex-col px-6 pb-6 pt-5">
+                  <p className="text-sm leading-relaxed text-muted-foreground">{f.text}</p>
                   <Link
                     to="/clanky"
-                    className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-primary"
+                    className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-primary hover:underline"
                   >
                     Číst dál <ArrowRight className="size-4" />
                   </Link>
@@ -266,6 +287,7 @@ function Index() {
             ))}
           </div>
         </section>
+
 
         {/* rubriky s výpisy článků */}
         {FEED.map((group, gi) => (
@@ -321,6 +343,14 @@ function Index() {
                         className="h-[86px] w-[112px] shrink-0 rounded-sm object-cover"
                       />
                     </div>
+
+                    <Link
+                      to="/clanky"
+                      className="mt-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-primary hover:underline"
+                    >
+                      Číst dál <ArrowRight className="size-4" />
+                    </Link>
+
                   </article>
                 ))}
               </div>
