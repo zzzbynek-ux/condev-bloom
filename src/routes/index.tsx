@@ -91,10 +91,10 @@ function Hero() {
           </p>
 
           <Link
-            to="/manifest"
+            to={i === 0 ? "/manifest" : "/clanky"}
             className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-white/85 hover:text-white"
           >
-            Číst celý manifest <ArrowRight className="size-4" />
+            {i === 0 ? "Číst celý manifest" : "Číst článek"} <ArrowRight className="size-4" />
           </Link>
         </div>
       </div>
