@@ -65,20 +65,21 @@ export function SiteHeader() {
       <div className="bg-primary text-primary-foreground">
 
         <div className="mx-auto flex max-w-[88rem] items-stretch gap-4 pr-4 md:pr-6">
-          {/* logo blok s bílým „vlaječkovým" pozadím a zkosením */}
+          {/* logo přímo na modrém pruhu */}
           <Link
             to="/"
-            className="relative flex shrink-0 flex-col justify-center bg-white py-3 pl-4 pr-8 md:pl-8 md:pr-14 [clip-path:polygon(0_0,100%_0,calc(100%-1.75rem)_100%,0_100%)]"
+            className="flex shrink-0 flex-col justify-center py-3 pl-4 md:pl-6"
           >
             <img
               src={logoAsset.url}
               alt="Jedním Hlasem"
-              className="h-12 w-auto md:h-14"
+              className="h-11 w-auto brightness-0 invert md:h-13"
             />
-            <span className="mt-1 block text-[9px] font-semibold uppercase tracking-[0.12em] text-primary/70 md:text-[10px]">
+            <span className="mt-1 block text-[9px] font-semibold uppercase tracking-[0.12em] text-primary-foreground/80 md:text-[10px]">
               Fakta proti dezinformacím
             </span>
           </Link>
+
 
           <div className="ml-auto flex items-center gap-4">
             <Link
