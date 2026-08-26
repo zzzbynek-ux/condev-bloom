@@ -132,7 +132,7 @@ export function SiteHeader() {
             JEDNÍM HLASEM na
             <XIcon className="size-4" />
           </a>
-          <nav className="flex items-stretch gap-7">
+          <nav className="flex flex-1 items-stretch justify-center gap-7">
 
             {NAV.map((item) =>
               item.children ? (
@@ -192,7 +192,7 @@ export function SiteHeader() {
 
           <Link
             to="/o-nas"
-            className="my-auto ml-auto flex shrink-0 items-center gap-2 rounded-full border border-border px-3 py-1.5 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
+            className="my-auto flex shrink-0 items-center gap-2 rounded-full border border-border px-3 py-1.5 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
             activeProps={{ className: "border-primary text-primary" }}
           >
             O nás
