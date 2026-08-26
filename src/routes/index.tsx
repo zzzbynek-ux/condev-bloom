@@ -103,17 +103,18 @@ function Hero() {
         type="button"
         aria-label="Předchozí"
         onClick={() => go(-1)}
-        className="absolute left-3 top-1/2 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-primary text-white shadow-lg transition-transform hover:scale-105 md:left-5"
+        className="absolute left-3 top-1/2 grid size-8 -translate-y-1/2 place-items-center rounded-full bg-primary text-white shadow-md transition-transform hover:scale-105 md:left-5"
       >
-        <ChevronLeft className="size-6" />
+        <ChevronLeft className="size-4" />
       </button>
       <button
         type="button"
         aria-label="Další"
         onClick={() => go(1)}
-        className="absolute right-3 top-1/2 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-primary text-white shadow-lg transition-transform hover:scale-105 md:right-5"
+        className="absolute right-3 top-1/2 grid size-8 -translate-y-1/2 place-items-center rounded-full bg-primary text-white shadow-md transition-transform hover:scale-105 md:right-5"
       >
-        <ChevronRight className="size-6" />
+        <ChevronRight className="size-4" />
+
       </button>
 
       <div className="relative flex items-center justify-center gap-2 pb-6">
