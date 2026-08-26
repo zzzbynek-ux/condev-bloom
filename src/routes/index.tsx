@@ -343,7 +343,7 @@ function Index() {
         <section className="border-y border-border bg-secondary/50">
           <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
             <SectionHeader
-              kicker="Vybrané texty"
+              kicker=""
               title="Vybrané texty"
               subtitle="Klíčové texty komunity"
               to="/clanky"
