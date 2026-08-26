@@ -354,20 +354,11 @@ function Index() {
                 : "bg-background"
             }
           >
-            <div className="mx-auto max-w-[88rem] px-5 py-12 md:px-6 md:py-14">
-              <div className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-primary pb-3">
-                <h2 className="font-display text-2xl font-bold uppercase tracking-[0.04em] text-primary md:text-3xl">
-                  {group.label}
-                </h2>
-                <Link
-                  to="/clanky"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
-                >
-                  Zobrazit vše <ArrowRight className="size-4" />
-                </Link>
-              </div>
+            <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+              <SectionHeader kicker="Rubrika" title={group.label} to="/clanky" />
 
-              <div className="mt-7 grid gap-x-8 gap-y-9 md:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-8 grid gap-x-8 gap-y-9 md:grid-cols-2 lg:grid-cols-3">
+
                 {group.items.slice(0, 3).map((item, idx) => (
                   <article key={`${group.id}-${item.slug}-${idx}`} className="group">
                     <div className="flex items-center justify-between gap-3">
