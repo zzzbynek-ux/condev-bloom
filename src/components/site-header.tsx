@@ -33,7 +33,7 @@ const NAV: NavItem[] = [
     ],
   },
   {
-    label: "Chcete vědět víc?",
+    label: "Vysvětlujeme",
     children: [
       { label: "Manifest", to: "/manifest" },
       { label: "Co je antisemitismus?", to: "/temata" },
