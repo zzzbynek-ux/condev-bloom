@@ -15,6 +15,7 @@ import { Route as HledatRouteImport } from './routes/hledat'
 import { Route as ManifestRouteImport } from './routes/manifest'
 import { Route as NahlasitIncidentRouteImport } from './routes/nahlasit-incident'
 import { Route as ONasRouteImport } from './routes/o-nas'
+import { Route as OchranaOsobnichUdajuRouteImport } from './routes/ochrana-osobnich-udaju'
 import { Route as PtejteSeAiRouteImport } from './routes/ptejte-se-ai'
 import { Route as TemataRouteImport } from './routes/temata'
 import { Route as ZapojteSeRouteImport } from './routes/zapojte-se'
@@ -49,6 +50,11 @@ const ONasRoute = ONasRouteImport.update({
   path: '/o-nas',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OchranaOsobnichUdajuRoute = OchranaOsobnichUdajuRouteImport.update({
+  id: '/ochrana-osobnich-udaju',
+  path: '/ochrana-osobnich-udaju',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PtejteSeAiRoute = PtejteSeAiRouteImport.update({
   id: '/ptejte-se-ai',
   path: '/ptejte-se-ai',
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/manifest': typeof ManifestRoute
   '/nahlasit-incident': typeof NahlasitIncidentRoute
   '/o-nas': typeof ONasRoute
+  '/ochrana-osobnich-udaju': typeof OchranaOsobnichUdajuRoute
   '/ptejte-se-ai': typeof PtejteSeAiRoute
   '/temata': typeof TemataRoute
   '/zapojte-se': typeof ZapojteSeRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByTo {
   '/manifest': typeof ManifestRoute
   '/nahlasit-incident': typeof NahlasitIncidentRoute
   '/o-nas': typeof ONasRoute
+  '/ochrana-osobnich-udaju': typeof OchranaOsobnichUdajuRoute
   '/ptejte-se-ai': typeof PtejteSeAiRoute
   '/temata': typeof TemataRoute
   '/zapojte-se': typeof ZapojteSeRoute
@@ -95,6 +103,7 @@ export interface FileRoutesById {
   '/manifest': typeof ManifestRoute
   '/nahlasit-incident': typeof NahlasitIncidentRoute
   '/o-nas': typeof ONasRoute
+  '/ochrana-osobnich-udaju': typeof OchranaOsobnichUdajuRoute
   '/ptejte-se-ai': typeof PtejteSeAiRoute
   '/temata': typeof TemataRoute
   '/zapojte-se': typeof ZapojteSeRoute
@@ -108,6 +117,7 @@ export interface FileRouteTypes {
     | '/manifest'
     | '/nahlasit-incident'
     | '/o-nas'
+    | '/ochrana-osobnich-udaju'
     | '/ptejte-se-ai'
     | '/temata'
     | '/zapojte-se'
@@ -119,6 +129,7 @@ export interface FileRouteTypes {
     | '/manifest'
     | '/nahlasit-incident'
     | '/o-nas'
+    | '/ochrana-osobnich-udaju'
     | '/ptejte-se-ai'
     | '/temata'
     | '/zapojte-se'
@@ -130,6 +141,7 @@ export interface FileRouteTypes {
     | '/manifest'
     | '/nahlasit-incident'
     | '/o-nas'
+    | '/ochrana-osobnich-udaju'
     | '/ptejte-se-ai'
     | '/temata'
     | '/zapojte-se'
@@ -142,6 +154,7 @@ export interface RootRouteChildren {
   ManifestRoute: typeof ManifestRoute
   NahlasitIncidentRoute: typeof NahlasitIncidentRoute
   ONasRoute: typeof ONasRoute
+  OchranaOsobnichUdajuRoute: typeof OchranaOsobnichUdajuRoute
   PtejteSeAiRoute: typeof PtejteSeAiRoute
   TemataRoute: typeof TemataRoute
   ZapojteSeRoute: typeof ZapojteSeRoute
@@ -191,6 +204,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ONasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ochrana-osobnich-udaju': {
+      id: '/ochrana-osobnich-udaju'
+      path: '/ochrana-osobnich-udaju'
+      fullPath: '/ochrana-osobnich-udaju'
+      preLoaderRoute: typeof OchranaOsobnichUdajuRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ptejte-se-ai': {
       id: '/ptejte-se-ai'
       path: '/ptejte-se-ai'
@@ -222,6 +242,7 @@ const rootRouteChildren: RootRouteChildren = {
   ManifestRoute: ManifestRoute,
   NahlasitIncidentRoute: NahlasitIncidentRoute,
   ONasRoute: ONasRoute,
+  OchranaOsobnichUdajuRoute: OchranaOsobnichUdajuRoute,
   PtejteSeAiRoute: PtejteSeAiRoute,
   TemataRoute: TemataRoute,
   ZapojteSeRoute: ZapojteSeRoute,
