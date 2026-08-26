@@ -149,6 +149,26 @@ export function SiteHeader() {
             )}
           </nav>
 
+          <form
+            role="search"
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (!q.trim()) return;
+              void navigate({ to: "/hledat", search: { q } });
+            }}
+            className="my-auto flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 transition-colors focus-within:border-primary"
+          >
+            <Search className="size-4 text-muted-foreground" />
+            <input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Hledat články"
+              aria-label="Hledat články"
+              className="w-40 bg-transparent text-sm text-foreground outline-none transition-all placeholder:text-muted-foreground focus:w-56"
+            />
+          </form>
+
+
           <a
             href="https://x.com"
             target="_blank"
