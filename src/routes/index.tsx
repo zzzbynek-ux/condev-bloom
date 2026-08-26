@@ -247,6 +247,40 @@ function Index() {
       <main>
         <Hero />
 
+        {/* témata – rozcestník hned pod hero */}
+        <section className="bg-primary text-primary-foreground">
+          <div className="mx-auto max-w-[88rem] px-5 py-10 md:px-6 md:py-12">
+            <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+              <div className="min-w-0">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground/70">
+                  Rozcestník
+                </p>
+                <h2 className="mt-1 text-2xl font-black uppercase tracking-tight md:text-3xl">
+                  Témata
+                </h2>
+              </div>
+              <Link
+                to="/temata"
+                className="shrink-0 text-sm font-bold uppercase tracking-wide text-primary-foreground/80 underline-offset-4 transition-colors hover:text-primary-foreground hover:underline"
+              >
+                Všechna témata →
+              </Link>
+            </div>
+            <div className="mt-6 flex gap-2 overflow-x-auto pb-1 md:flex-wrap md:overflow-visible md:pb-0">
+              {TOPICS.map((t) => (
+                <Link
+                  key={t.slug}
+                  to="/temata"
+                  className="shrink-0 rounded-full border border-primary-foreground/35 px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-foreground hover:text-primary"
+                >
+                  {t.title}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+
         {/* rychlé akce */}
         <section className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
@@ -389,26 +423,8 @@ function Index() {
 
 
 
-        {/* témata – jednořádkový pás štítků */}
-        <section className="border-t border-border bg-background">
-          <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
-            <SectionHeader kicker="Rozcestník" title="Témata" to="/temata" linkLabel="Všechna témata" />
-            <div className="mt-8">
-              <div className="flex gap-2 overflow-x-auto pb-1 md:flex-wrap md:overflow-visible md:pb-0">
 
-                {TOPICS.map((t) => (
-                  <Link
-                    key={t.slug}
-                    to="/temata"
-                    className="shrink-0 rounded-full border border-primary/25 bg-card px-4 py-2 text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
-                  >
-                    {t.title}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+
 
       </main>
       <SiteFooter />
