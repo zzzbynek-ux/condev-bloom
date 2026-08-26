@@ -134,11 +134,12 @@ const ACTIONS = [
     tone: "bg-primary",
   },
   {
-    icon: Flag,
+    image: incidentIcon.url,
     title: "Nahlásit incident",
     text: "Pomozte nám monitorovat a reagovat.",
     tone: "bg-destructive",
   },
+
 ];
 
 function FeaturedArt({ tone }: { tone: (typeof FEATURED)[number]["tone"] }) {
@@ -210,9 +211,18 @@ function Index() {
                 to="/zapojte-se"
                 className="flex items-center gap-5 rounded-xl border border-border bg-card p-6 shadow-sm transition-shadow hover:shadow-md"
               >
-                <span className={`grid size-14 shrink-0 place-items-center rounded-full ${a.tone}`}>
-                  <a.icon className="size-7 text-white" />
-                </span>
+                {"image" in a && a.image ? (
+                  <img
+                    src={a.image}
+                    alt=""
+                    className="size-14 shrink-0 rounded-full object-cover"
+                  />
+                ) : (
+                  <span className={`grid size-14 shrink-0 place-items-center rounded-full ${a.tone}`}>
+                    {a.icon ? <a.icon className="size-7 text-white" /> : null}
+                  </span>
+                )}
+
                 <span className="min-w-0">
                   <span className="block font-display text-lg font-bold text-foreground">{a.title}</span>
                   <span className="mt-1 block text-sm leading-snug text-muted-foreground">{a.text}</span>
