@@ -389,26 +389,8 @@ function Index() {
 
 
 
-        {/* témata – jednořádkový pás štítků */}
-        <section className="border-t border-border bg-background">
-          <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
-            <SectionHeader kicker="Rozcestník" title="Témata" to="/temata" linkLabel="Všechna témata" />
-            <div className="mt-8">
-              <div className="flex gap-2 overflow-x-auto pb-1 md:flex-wrap md:overflow-visible md:pb-0">
 
-                {TOPICS.map((t) => (
-                  <Link
-                    key={t.slug}
-                    to="/temata"
-                    className="shrink-0 rounded-full border border-primary/25 bg-card px-4 py-2 text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
-                  >
-                    {t.title}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+
 
       </main>
       <SiteFooter />
