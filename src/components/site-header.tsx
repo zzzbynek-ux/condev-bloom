@@ -1,12 +1,11 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Facebook, Flag, Instagram, Menu, MessageSquare, Search, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Facebook, Flag, Instagram, Menu, MessageSquare, Search, X } from "lucide-react";
 
 import { SECTIONS } from "@/lib/content";
 
 const NAV = [
   { to: "/clanky", label: "Články" },
-  { to: "/temata", label: "Témata" },
   { to: "/o-nas", label: "O nás" },
 ] as const;
 
@@ -20,11 +19,9 @@ function XIcon({ className }: { className?: string }) {
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
-  const [topicsOpen, setTopicsOpen] = useState(false);
   const [compact, setCompact] = useState(false);
   const [q, setQ] = useState("");
   const navigate = useNavigate();
-  const topicsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setCompact(window.scrollY > 80);
@@ -33,13 +30,6 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    const onClick = (e: MouseEvent) => {
-      if (topicsRef.current && !topicsRef.current.contains(e.target as Node)) setTopicsOpen(false);
-    };
-    document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
-  }, []);
 
   return (
     <header className="sticky top-0 z-50 shadow-sm">
@@ -124,45 +114,18 @@ export function SiteHeader() {
           ) : null}
 
           <nav className="flex items-stretch gap-8">
-            {NAV.map((item) =>
-              item.to === "/temata" ? (
-                <div key={item.to} ref={topicsRef} className="relative flex items-stretch">
-                  <button
-                    type="button"
-                    onClick={() => setTopicsOpen((v) => !v)}
-                    aria-expanded={topicsOpen}
-                    className="flex items-center gap-1.5 border-b-2 border-transparent py-4 text-base font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
-                  >
-                    {item.label}
-                    <ChevronDown className={`size-4 transition-transform ${topicsOpen ? "rotate-180" : ""}`} />
-                  </button>
-                  {topicsOpen ? (
-                    <div className="absolute left-0 top-full z-50 w-64 rounded-b-xl border border-t-0 border-border bg-background py-2 shadow-lg">
-                      {SECTIONS.map((s) => (
-                        <Link
-                          key={s}
-                          to="/temata"
-                          onClick={() => setTopicsOpen(false)}
-                          className="block px-4 py-2 text-sm text-foreground transition-colors hover:bg-muted hover:text-primary"
-                        >
-                          {s}
-                        </Link>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
-              ) : (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className="flex items-center border-b-2 border-transparent py-4 text-base font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
-                  activeProps={{ className: "border-primary text-primary" }}
-                >
-                  {item.label}
-                </Link>
-              ),
-            )}
+            {NAV.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="flex items-center border-b-2 border-transparent py-4 text-base font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
+                activeProps={{ className: "border-primary text-primary" }}
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
+
 
           <div className="ml-auto flex items-center gap-4">
             <form
