@@ -60,54 +60,70 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 shadow-sm">
-      {/* tenká utility lišta */}
-      <div className="hidden bg-primary text-primary-foreground lg:block">
-        <div className="mx-auto flex h-9 max-w-[88rem] items-center gap-4 px-4 md:px-6">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-primary-foreground/80">
-            Fakta proti dezinformacím
-          </span>
-          <div className="ml-auto flex items-center gap-4">
-            <Link
-              to="/nahlasit-incident"
-              className="flex items-center gap-1.5 text-[12px] font-semibold text-primary-foreground/90 transition-colors hover:text-primary-foreground"
-            >
-              <Flag className="size-3.5" />
-              Nahlásit incident
-            </Link>
-            <span className="h-4 w-px bg-primary-foreground/25" />
-            <div className="flex items-center gap-3">
-              <a href="https://x.com" aria-label="X" className="opacity-80 transition-opacity hover:opacity-100">
-                <XIcon className="size-[15px]" />
-              </a>
-              <a href="https://facebook.com" aria-label="Facebook" className="opacity-80 transition-opacity hover:opacity-100">
-                <Facebook className="size-4" />
-              </a>
-              <a href="https://instagram.com" aria-label="Instagram" className="opacity-80 transition-opacity hover:opacity-100">
-                <Instagram className="size-4" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* horní modrý pruh: identita + rychlé kontakty */}
+      <div className="bg-primary text-primary-foreground">
 
-      {/* hlavní bílá lišta: logo + navigace + hledání + CTA */}
-      <div className="border-b border-border bg-background">
-        <div className="mx-auto flex max-w-[88rem] items-stretch gap-6 px-4 md:px-6">
-          <Link to="/" className="flex shrink-0 items-center gap-3 py-3">
-            <span className="grid size-10 shrink-0 place-items-center rounded-md bg-primary">
-              <MessageSquare className="size-5 text-primary-foreground" />
+        <div className="mx-auto flex max-w-[88rem] items-stretch gap-4 pr-4 md:pr-6">
+          {/* logo blok s bílým „vlaječkovým" pozadím a zkosením */}
+          <Link
+            to="/"
+            className="relative flex shrink-0 items-center bg-white py-3 pl-4 pr-8 md:pl-8 md:pr-14 [clip-path:polygon(0_0,100%_0,calc(100%-1.75rem)_100%,0_100%)]"
+          >
+            <span className="mr-3 grid size-9 shrink-0 place-items-center rounded-md bg-primary md:size-11">
+              <MessageSquare className="size-5 text-white md:size-6" />
             </span>
             <span className="leading-none">
-              <span className="block font-display text-lg font-bold uppercase leading-[1.05] tracking-tight text-primary">
-                Jedním Hlasem
+              <span className="block font-display text-lg font-bold uppercase leading-[1.05] tracking-tight text-primary md:text-2xl">
+                Jedním
+                <br />
+                Hlasem
               </span>
-              <span className="mt-1 block text-[9px] font-semibold uppercase tracking-[0.12em] text-primary/70">
+              <span className="mt-1 block text-[9px] font-semibold uppercase tracking-[0.12em] text-primary/70 md:text-[10px]">
                 Fakta proti dezinformacím
               </span>
             </span>
           </Link>
 
-          <nav className="hidden items-stretch gap-6 lg:flex">
+          <div className="ml-auto flex items-center gap-4">
+            <Link
+              to="/nahlasit-incident"
+              className="hidden items-center gap-2 text-sm font-semibold text-primary-foreground/90 transition-colors hover:text-primary-foreground lg:flex"
+            >
+              <Flag className="size-4" />
+              Nahlásit incident
+            </Link>
+            <span className="hidden h-5 w-px bg-primary-foreground/25 lg:block" />
+            <div className="hidden items-center gap-3 lg:flex">
+              <a href="https://x.com" aria-label="X" className="opacity-80 transition-opacity hover:opacity-100">
+                <XIcon className="size-[17px]" />
+              </a>
+              <a href="https://facebook.com" aria-label="Facebook" className="opacity-80 transition-opacity hover:opacity-100">
+                <Facebook className="size-[18px]" />
+              </a>
+              <a href="https://instagram.com" aria-label="Instagram" className="opacity-80 transition-opacity hover:opacity-100">
+                <Instagram className="size-[18px]" />
+              </a>
+            </div>
+
+            <Link to="/hledat" aria-label="Hledat" className="rounded-md p-2 lg:hidden">
+              <Search className="size-5" />
+            </Link>
+            <button
+              type="button"
+              aria-label="Otevřít menu"
+              onClick={() => setOpen((v) => !v)}
+              className="rounded-md border border-primary-foreground/30 p-2 lg:hidden"
+            >
+              {open ? <X className="size-5" /> : <Menu className="size-5" />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* bílá lišta: hlavní navigace + hledání + CTA */}
+      <div className="hidden border-b border-border bg-background lg:block">
+        <div className="mx-auto flex max-w-[88rem] items-stretch px-4 md:px-6">
+          <nav className="flex items-stretch gap-7">
             {NAV.map((item) =>
               item.children ? (
                 <div
@@ -120,11 +136,11 @@ export function SiteHeader() {
                     type="button"
                     onClick={() => setMenu((m) => (m === item.label ? null : item.label))}
                     aria-expanded={menu === item.label}
-                    className="flex items-center gap-1.5 border-b-2 border-transparent py-4 text-[13px] font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
+                    className="flex items-center gap-1.5 border-b-2 border-transparent py-4 text-base font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
                   >
                     {item.label}
                     <ChevronDown
-                      className={`size-3.5 transition-transform ${menu === item.label ? "rotate-180" : ""}`}
+                      className={`size-4 transition-transform ${menu === item.label ? "rotate-180" : ""}`}
                     />
                   </button>
                   {menu === item.label ? (
@@ -155,7 +171,7 @@ export function SiteHeader() {
                 <Link
                   key={item.label}
                   to={item.to}
-                  className="flex items-center border-b-2 border-transparent py-4 text-[13px] font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
+                  className="flex items-center border-b-2 border-transparent py-4 text-base font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
                   activeProps={{ className: "border-primary text-primary" }}
                 >
                   {item.label}
@@ -164,7 +180,7 @@ export function SiteHeader() {
             )}
           </nav>
 
-          <div className="ml-auto flex items-center gap-3">
+          <div className="ml-auto flex items-center gap-4">
             <form
               role="search"
               onSubmit={(e) => {
@@ -172,7 +188,7 @@ export function SiteHeader() {
                 if (!q.trim()) return;
                 void navigate({ to: "/hledat", search: { q } });
               }}
-              className="hidden items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 focus-within:border-primary lg:flex"
+              className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 focus-within:border-primary"
             >
               <Search className="size-4 text-muted-foreground" />
               <input
@@ -180,30 +196,19 @@ export function SiteHeader() {
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Hledat…"
                 aria-label="Hledat na webu"
-                className="w-32 bg-transparent text-sm outline-none transition-all placeholder:text-muted-foreground focus:w-44"
+                className="w-32 bg-transparent text-sm outline-none transition-all placeholder:text-muted-foreground focus:w-48"
               />
             </form>
             <Link
               to="/zapojte-se"
-              className="hidden rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 lg:block"
+              className="rounded-full bg-primary px-6 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
             >
               Podpořte nás
             </Link>
-
-            <Link to="/hledat" aria-label="Hledat" className="rounded-md p-2 text-foreground lg:hidden">
-              <Search className="size-5" />
-            </Link>
-            <button
-              type="button"
-              aria-label="Otevřít menu"
-              onClick={() => setOpen((v) => !v)}
-              className="rounded-md border border-border p-2 text-foreground lg:hidden"
-            >
-              {open ? <X className="size-5" /> : <Menu className="size-5" />}
-            </button>
           </div>
         </div>
       </div>
+
 
 
       {open ? (
