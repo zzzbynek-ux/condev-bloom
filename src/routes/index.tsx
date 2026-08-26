@@ -300,8 +300,8 @@ function Index() {
       <main>
         {/* intro nad hero */}
         <section className="border-b border-border bg-secondary/40">
-          <div className="mx-auto max-w-[48rem] px-5 py-8 text-left md:px-6 md:py-10">
-            <h1 className="font-display text-xl font-extrabold leading-snug text-balance text-foreground md:text-3xl">
+          <div className="mx-auto max-w-[64rem] px-5 py-8 text-left md:px-6 md:py-10">
+            <h1 className="font-display text-lg font-extrabold leading-snug text-foreground md:whitespace-nowrap md:text-[1.75rem]">
               Do debaty o Izraeli vracíme fakta,{" "}
               <span className="text-primary">kontext a klidný tón.</span>
             </h1>
