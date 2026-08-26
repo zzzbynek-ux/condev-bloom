@@ -70,9 +70,8 @@ export function SiteHeader() {
             </span>
           </Link>
 
-          <p className="hidden items-center text-sm font-medium tracking-wide text-primary-foreground/85 xl:flex">
-            Občanská komunita, která vrací do debaty o Izraeli fakta, kontext a klidný tón.
-          </p>
+
+
 
           <div className="ml-auto flex items-center gap-4">
             <Link
