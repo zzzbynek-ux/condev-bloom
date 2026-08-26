@@ -364,29 +364,34 @@ function Index() {
 
 
 
-        {/* témata */}
+        {/* témata – jednořádkový pás štítků */}
         <section className="border-t border-border bg-secondary/50">
-          <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6">
-            <h2 className="font-display text-3xl font-bold text-primary">Témata, která rozebíráme</h2>
-            <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {TOPICS.map((t) => (
-                <article
-                  key={t.slug}
-                  className="flex flex-col rounded-xl border border-border bg-card p-6 transition-colors hover:border-primary/50"
-                >
-                  <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-primary">
-                    {t.kicker}
-                  </p>
-                  <h3 className="mt-2 font-display text-xl font-bold">{t.title}</h3>
-                  <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{t.perex}</p>
-                  <Link to="/clanky" className="mt-5 text-sm font-semibold text-primary">
-                    Číst více →
+          <div className="mx-auto max-w-[88rem] px-5 py-8 md:px-6">
+            <div className="flex flex-col gap-4 md:flex-row md:items-center">
+              <p className="shrink-0 text-[11px] font-bold uppercase tracking-[0.16em] text-primary">
+                Témata, která rozebíráme
+              </p>
+              <div className="flex gap-2 overflow-x-auto pb-1 md:flex-wrap md:overflow-visible md:pb-0">
+                {TOPICS.map((t) => (
+                  <Link
+                    key={t.slug}
+                    to="/temata"
+                    className="shrink-0 rounded-full border border-primary/25 bg-card px-4 py-2 text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+                  >
+                    {t.title}
                   </Link>
-                </article>
-              ))}
+                ))}
+                <Link
+                  to="/temata"
+                  className="shrink-0 rounded-full px-4 py-2 text-sm font-semibold text-muted-foreground underline-offset-4 hover:text-primary hover:underline"
+                >
+                  Všechna témata →
+                </Link>
+              </div>
             </div>
           </div>
         </section>
+
       </main>
       <SiteFooter />
     </div>
