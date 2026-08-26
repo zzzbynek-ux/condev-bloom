@@ -7,13 +7,6 @@ export type Topic = {
 
 export const TOPICS: Topic[] = [
   {
-    slug: "antisemitismus-2-0",
-    kicker: "Antisemitismus",
-    title: "Antisemitismus 2.0",
-    perex:
-      "Nový antisemitismus se tváří jako morální apel. Pod pláštíkem vznešených slov ale jde o démonizaci a delegitimizaci židovského státu.",
-  },
-  {
     slug: "media-ve-sluzbach-teroru",
     kicker: "Média",
     title: "Média ve službách teroru",
