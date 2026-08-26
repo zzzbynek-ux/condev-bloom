@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { ChevronDown, Facebook, Flag, Instagram, Menu, Search, X } from "lucide-react";
+import { ChevronDown, Facebook, Instagram, Menu, Search, X } from "lucide-react";
 import { TOPICS } from "@/lib/content";
 
 type NavTo = "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" | "/manifest" | "/nahlasit-incident" | "/ptejte-se-ai";
@@ -79,14 +79,7 @@ export function SiteHeader() {
 
 
           <div className="ml-auto flex items-center gap-4">
-            <Link
-              to="/nahlasit-incident"
-              className="hidden items-center gap-2 text-sm font-semibold text-primary-foreground/90 transition-colors hover:text-primary-foreground lg:flex"
-            >
-              <Flag className="size-4" />
-              Nahlásit incident
-            </Link>
-            <span className="hidden h-5 w-px bg-primary-foreground/25 lg:block" />
+
             <div className="hidden items-center gap-3 lg:flex">
               <a href="https://x.com" aria-label="X" className="opacity-80 transition-opacity hover:opacity-100">
                 <XIcon className="size-[17px]" />
