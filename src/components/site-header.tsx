@@ -1,12 +1,11 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Facebook, Flag, Instagram, Menu, MessageSquare, Search, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Facebook, Flag, Instagram, Menu, MessageSquare, Search, X } from "lucide-react";
 
 import { SECTIONS } from "@/lib/content";
 
 const NAV = [
   { to: "/clanky", label: "Články" },
-  { to: "/temata", label: "Témata" },
   { to: "/o-nas", label: "O nás" },
 ] as const;
 
@@ -20,11 +19,9 @@ function XIcon({ className }: { className?: string }) {
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
-  const [topicsOpen, setTopicsOpen] = useState(false);
   const [compact, setCompact] = useState(false);
   const [q, setQ] = useState("");
   const navigate = useNavigate();
-  const topicsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setCompact(window.scrollY > 80);
@@ -33,13 +30,6 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    const onClick = (e: MouseEvent) => {
-      if (topicsRef.current && !topicsRef.current.contains(e.target as Node)) setTopicsOpen(false);
-    };
-    document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
-  }, []);
 
   return (
     <header className="sticky top-0 z-50 shadow-sm">
