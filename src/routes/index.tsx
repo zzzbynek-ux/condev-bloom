@@ -304,6 +304,34 @@ function Index() {
     <div className="min-h-screen bg-background">
       <SiteHeader />
       <main>
+        {/* intro nad hero */}
+        <section className="border-b border-border bg-secondary/40">
+          <div className="mx-auto max-w-[88rem] px-5 py-12 md:px-6 md:py-16">
+            <h1 className="max-w-4xl font-display text-3xl font-extrabold leading-tight text-balance text-foreground md:text-5xl">
+              Do debaty o Izraeli vracíme fakta,{" "}
+              <span className="text-primary">kontext a klidný tón.</span>
+            </h1>
+            <p className="mt-5 max-w-3xl text-pretty text-base text-muted-foreground md:text-lg">
+              Píšeme analýzy, ověřujeme tvrzení a pomáháme lidem reagovat tam, kde se
+              rozhoduje o veřejném mínění — v komentářích, v médiích i ve školách.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link
+                to="/clanky"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
+              >
+                Začněte číst <ArrowRight className="size-4" />
+              </Link>
+              <Link
+                to="/zapojte-se"
+                className="inline-flex items-center rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+              >
+                Zapojte se
+              </Link>
+            </div>
+          </div>
+        </section>
+
         <Hero />
 
 
