@@ -139,7 +139,7 @@ function StarOfDavidIcon({ className }: { className?: string }) {
   );
 }
 
-const ACTIONS: {
+  icon?: React.ComponentType<{ className?: string }>;
   icon?: (props: { className?: string }) => React.ReactElement;
   image?: string;
   title: string;
