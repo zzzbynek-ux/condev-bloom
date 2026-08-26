@@ -6,7 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { searchSite } from "@/lib/search";
 
-type SearchParams = { q?: string };
+type SearchParams = { q?: string | undefined };
 
 export const Route = createFileRoute("/hledat")({
   validateSearch: (search: Record<string, unknown>): SearchParams => ({
