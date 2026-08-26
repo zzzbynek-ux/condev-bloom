@@ -160,6 +160,16 @@ export function SiteHeader() {
           </nav>
 
           <div className="ml-auto flex items-center gap-4">
+            <a
+              href="https://x.com"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-2 rounded-full border border-border px-3 py-1.5 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
+            >
+              <XIcon className="size-4" />
+              Dnes na X
+            </a>
+
             <form
               role="search"
               onSubmit={(e) => {
