@@ -121,16 +121,8 @@ export function SiteHeader() {
       {/* bílá lišta: hlavní navigace + hledání + CTA */}
       <div className="hidden border-b border-border bg-background lg:block">
         <div className="mx-auto flex max-w-[88rem] items-stretch px-4 md:px-6">
-          {compact ? (
-            <Link to="/" className="mr-8 flex items-center gap-2 self-center" aria-label="Jedním Hlasem">
-              <span className="grid size-8 place-items-center rounded-md bg-primary">
-                <MessageSquare className="size-4 text-white" />
-              </span>
-              <span className="font-display text-base font-bold uppercase tracking-tight text-primary">
-                Jedním Hlasem
-              </span>
-            </Link>
-          ) : null}
+
+
 
           <nav className="flex items-stretch gap-7">
             {NAV.map((item) =>
