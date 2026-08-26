@@ -401,25 +401,25 @@ function Index() {
           </section>
         ))}
 
-        {/* témata – mřížka */}
+        {/* vybrané texty – mřížka */}
         <section className="border-t border-border bg-muted/30">
           <div className="mx-auto max-w-[88rem] px-5 py-10 md:px-6">
             <div className="mb-6 flex items-end justify-between gap-4 border-b border-border pb-3">
               <h2 className="text-xs font-bold uppercase tracking-[0.22em] text-primary">
-                Témata
+                Vybrané texty
               </h2>
               <Link
-                to="/temata"
+                to="/clanky"
                 className="text-[11px] font-bold uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-primary"
               >
-                Všechna témata →
+                Všechny články →
               </Link>
             </div>
             <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg bg-border sm:grid-cols-2 lg:grid-cols-5">
               {TOPICS.slice(0, 5).map((t) => (
                 <Link
                   key={t.slug}
-                  to="/temata"
+                  to="/clanky"
                   className="group bg-background p-5 transition-colors hover:bg-primary/5"
                 >
                   <span className="block text-sm font-semibold leading-snug text-foreground transition-colors group-hover:text-primary">
@@ -428,6 +428,9 @@ function Index() {
                 </Link>
               ))}
             </div>
+          </div>
+        </section>
+
           </div>
         </section>
 
