@@ -237,7 +237,9 @@ function Index() {
         </section>
 
         {/* zvýrazněné karty */}
-        <section className="mx-auto max-w-[88rem] px-5 pt-10 md:px-6">
+        <section className="mt-10 border-y border-primary/15 bg-primary/[0.06]">
+          <div className="mx-auto max-w-[88rem] px-5 py-12 md:px-6 md:py-14">
+
           <div className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-primary pb-3">
             <div>
               <h2 className="font-display text-2xl font-bold uppercase tracking-[0.04em] text-primary md:text-3xl">
@@ -286,7 +288,9 @@ function Index() {
               </article>
             ))}
           </div>
+          </div>
         </section>
+
 
 
         {/* rubriky s výpisy článků */}
