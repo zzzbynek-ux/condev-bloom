@@ -59,9 +59,9 @@ function Hero() {
           <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/60">
             {slide.kicker}
           </p>
-          <h1 key={slide.title} className="animate-rise mt-3 text-3xl font-bold text-white md:text-5xl">
+          <p key={slide.title} className="animate-rise mt-3 font-display text-3xl font-bold text-white md:text-5xl">
             {slide.title}
-          </h1>
+          </p>
           <p
             key={slide.text}
             className="animate-rise mt-4 text-sm leading-relaxed text-white/85 md:text-[17px]"
@@ -188,6 +188,18 @@ function Index() {
       <SiteHeader />
       <main>
         <Hero />
+
+        {/* úvodní claim */}
+        <section className="mx-auto max-w-[88rem] px-5 pt-10 md:px-6">
+          <h1 className="max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-tight text-[#0b1a3a] md:text-4xl">
+            Do debaty o Izraeli vracíme fakta,{" "}
+            <span className="text-primary">kontext a klidný tón.</span>
+          </h1>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Píšeme analýzy, ověřujeme tvrzení a pomáháme lidem reagovat tam, kde se rozhoduje o
+            veřejném mínění — v komentářích, v médiích i ve školách.
+          </p>
+        </section>
 
         {/* rychlé akce */}
         <section className="mx-auto max-w-[88rem] px-5 pt-10 md:px-6">
