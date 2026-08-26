@@ -21,6 +21,10 @@ const NAV: NavItem[] = [
     ],
   },
   {
+    label: "Témata",
+    children: TOPICS.map((t) => ({ label: t.title, to: "/temata" as NavTo })),
+  },
+  {
     label: "Chcete vědět víc?",
     children: [
       { label: "Manifest", to: "/manifest" },
