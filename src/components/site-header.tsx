@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ChevronRight, Facebook, Instagram, Menu, MessageSquare, X } from "lucide-react";
+import { Facebook, Instagram, Menu, MessageSquare, X } from "lucide-react";
 
 import { SECTIONS } from "@/lib/content";
 
