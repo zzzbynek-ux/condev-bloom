@@ -149,6 +149,13 @@ const ACTIONS: {
   to: string;
 }[] = [
   {
+    icon: StarOfDavidIcon,
+    title: "Antisemitismus",
+    text: "Co je nový antisemitismus a jak ho poznat.",
+    tone: "bg-primary",
+    to: "/temata",
+  },
+  {
     icon: Users,
     title: "Zapojte se",
     text: "Přidejte se k nám a staňte se součástí řešení.",
@@ -169,13 +176,6 @@ const ACTIONS: {
     text: "Pomozte nám monitorovat a reagovat.",
     tone: "bg-destructive",
     to: "/zapojte-se",
-  },
-  {
-    icon: StarOfDavidIcon,
-    title: "Antisemitismus",
-    text: "Co je nový antisemitismus a jak ho poznat.",
-    tone: "bg-primary",
-    to: "/temata",
   },
 ];
 
