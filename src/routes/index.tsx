@@ -360,7 +360,6 @@ function Index() {
                   key={t.slug}
                   image={[selMediaImg, selKatarImg, selRudozelenaImg][idx % 3]!}
                   tag={t.kicker}
-                  date="Vybrané"
                   title={t.title}
                   perex={t.perex}
                 />
