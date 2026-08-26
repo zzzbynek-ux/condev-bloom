@@ -79,7 +79,26 @@ export function SiteHeader() {
           </nav>
 
           <div className="ml-auto flex items-center gap-4">
+            <form
+              role="search"
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!q.trim()) return;
+                void navigate({ to: "/hledat", search: { q } });
+              }}
+              className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 focus-within:border-primary"
+            >
+              <Search className="size-4 text-muted-foreground" />
+              <input
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                placeholder="Hledat…"
+                aria-label="Hledat na webu"
+                className="w-32 bg-transparent text-sm outline-none placeholder:text-muted-foreground focus:w-48 transition-all"
+              />
+            </form>
             <div className="flex items-center gap-3 text-foreground">
+
               <a href="https://x.com" aria-label="X" className="opacity-80 hover:opacity-100">
                 <XIcon className="size-[18px]" />
               </a>
