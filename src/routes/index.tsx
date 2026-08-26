@@ -168,7 +168,7 @@ const ACTIONS: {
     icon: HelpCircle,
     title: "Ptejte se AI",
     text: "Zeptejte se naší AI na dezinformace a fakta.",
-    tone: "bg-destructive",
+    tone: "bg-primary",
 
     to: "/ptejte-se-ai",
   },
