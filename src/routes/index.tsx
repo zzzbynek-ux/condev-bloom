@@ -68,9 +68,9 @@ function Hero() {
       />
       <div aria-hidden className="absolute inset-0 bg-linear-to-r from-[#0b1a3a]/40 via-[#0b1a3a]/40 to-[#0b1a3a]/80" />
 
-      <div className="relative mx-auto grid max-w-[88rem] grid-cols-1 items-center gap-6 px-12 py-12 md:grid-cols-2 md:px-16 md:py-20">
+      <div className="relative mx-auto grid max-w-[88rem] grid-cols-1 items-center gap-6 px-5 py-10 md:grid-cols-2 md:px-16 md:py-20">
         <div className="hidden md:block" />
-        <div className="flex min-h-[19rem] flex-col justify-center rounded-2xl bg-[#0a1730]/85 p-6 backdrop-blur-sm md:min-h-[22rem] md:p-9">
+        <div className="flex flex-col justify-center rounded-2xl bg-[#0a1730]/85 p-6 backdrop-blur-sm md:min-h-[22rem] md:p-9">
           <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/60">
             {slide.kicker}
           </p>
@@ -103,7 +103,7 @@ function Hero() {
         type="button"
         aria-label="Předchozí"
         onClick={() => go(-1)}
-        className="absolute left-3 top-1/2 grid size-8 -translate-y-1/2 place-items-center rounded-full bg-primary text-white shadow-md transition-transform hover:scale-105 md:left-5"
+        className="absolute left-3 top-1/2 hidden size-8 -translate-y-1/2 place-items-center rounded-full bg-primary text-white shadow-md transition-transform hover:scale-105 md:grid md:left-5"
       >
         <ChevronLeft className="size-4" />
       </button>
@@ -111,26 +111,44 @@ function Hero() {
         type="button"
         aria-label="Další"
         onClick={() => go(1)}
-        className="absolute right-3 top-1/2 grid size-8 -translate-y-1/2 place-items-center rounded-full bg-primary text-white shadow-md transition-transform hover:scale-105 md:right-5"
+        className="absolute right-3 top-1/2 hidden size-8 -translate-y-1/2 place-items-center rounded-full bg-primary text-white shadow-md transition-transform hover:scale-105 md:grid md:right-5"
       >
         <ChevronRight className="size-4" />
-
       </button>
 
-      <div className="relative flex items-center justify-center gap-2 pb-6">
-        {HERO.map((s, idx) => (
-          <button
-            key={s.title}
-            type="button"
-            aria-label={`Zobrazit: ${s.title}`}
-            aria-current={idx === i}
-            onClick={() => setI(idx)}
-            className={`size-2.5 rounded-full transition-all ${
-              idx === i ? "scale-125 bg-primary" : "bg-white/45 hover:bg-white/70"
-            }`}
-          />
-        ))}
+      <div className="relative flex items-center justify-center gap-3 pb-6">
+        <button
+          type="button"
+          aria-label="Předchozí"
+          onClick={() => go(-1)}
+          className="grid size-8 place-items-center rounded-full bg-primary text-white shadow-md md:hidden"
+        >
+          <ChevronLeft className="size-4" />
+        </button>
+        <div className="flex items-center gap-2">
+          {HERO.map((s, idx) => (
+            <button
+              key={s.title}
+              type="button"
+              aria-label={`Zobrazit: ${s.title}`}
+              aria-current={idx === i}
+              onClick={() => setI(idx)}
+              className={`size-2.5 rounded-full transition-all ${
+                idx === i ? "scale-125 bg-primary" : "bg-white/45 hover:bg-white/70"
+              }`}
+            />
+          ))}
+        </div>
+        <button
+          type="button"
+          aria-label="Další"
+          onClick={() => go(1)}
+          className="grid size-8 place-items-center rounded-full bg-primary text-white shadow-md md:hidden"
+        >
+          <ChevronRight className="size-4" />
+        </button>
       </div>
+
     </section>
   );
 }
