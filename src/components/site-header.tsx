@@ -17,13 +17,11 @@ const NAV: NavItem[] = [
       { label: "Doporučujeme", to: "/clanky" },
       { label: "Studie a analýzy", to: "/clanky" },
       { label: "České příběhy", to: "/clanky" },
+      ...TOPICS.map((t) => ({ label: t.title, to: "/clanky" as NavTo })),
       { label: "Všechny texty", to: "/clanky" },
     ],
   },
-  {
-    label: "Témata",
-    children: TOPICS.map((t) => ({ label: t.title, to: "/temata" as NavTo })),
-  },
+
   {
     label: "Vysvětlujeme",
     children: [
