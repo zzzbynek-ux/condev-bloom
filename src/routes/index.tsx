@@ -288,7 +288,9 @@ function Index() {
               </article>
             ))}
           </div>
+          </div>
         </section>
+
 
 
         {/* rubriky s výpisy článků */}
