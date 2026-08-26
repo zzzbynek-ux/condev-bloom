@@ -267,7 +267,7 @@ function SectionHeader({
 }) {
   return (
     <div className="border-t-2 border-primary pt-4">
-      <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">{kicker}</p>
+      {kicker ? <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">{kicker}</p> : null}
       <div className="mt-2 flex flex-wrap items-end justify-between gap-4">
         <div>
           <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">
