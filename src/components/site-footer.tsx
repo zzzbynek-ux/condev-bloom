@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 
 const LINKS = [
   { to: "/o-nas", label: "O nás" },
-  { to: "/zapojte-se", label: "Zapojte se" },
+  
   { to: "/zapojte-se", label: "Podpořte nás" },
 ] as const;
 
