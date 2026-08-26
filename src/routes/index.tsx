@@ -122,7 +122,13 @@ function Hero() {
   );
 }
 
-const ACTIONS = [
+const ACTIONS: {
+  icon?: LucideIcon;
+  image?: string;
+  title: string;
+  text: string;
+  tone: string;
+}[] = [
   {
     icon: Users,
     title: "Zapojte se",
@@ -141,8 +147,8 @@ const ACTIONS = [
     text: "Pomozte nám monitorovat a reagovat.",
     tone: "bg-destructive",
   },
-
 ];
+
 
 function FeaturedArt({ tone }: { tone: (typeof FEATURED)[number]["tone"] }) {
   if (tone === "flag") {
