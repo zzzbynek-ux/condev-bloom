@@ -341,19 +341,16 @@ function Index() {
 
         {/* vybrané texty – mřížka */}
         <section className="border-t border-border bg-muted/30">
-          <div className="mx-auto max-w-[88rem] px-5 py-10 md:px-6">
-            <div className="mb-6 flex items-end justify-between gap-4 border-b border-border pb-3">
-              <h2 className="text-xs font-bold uppercase tracking-[0.22em] text-primary">
-                Vybrané texty
-              </h2>
-              <Link
-                to="/clanky"
-                className="text-[11px] font-bold uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-primary"
-              >
-                Všechny články →
-              </Link>
-            </div>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+            <SectionHeader
+              kicker="Výběr"
+              title="Vybrané texty"
+              subtitle="Klíčové texty komunity"
+              to="/clanky"
+              linkLabel="Všechny články"
+            />
+            <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
               {TOPICS.slice(0, 3).map((t, idx) => (
                 <ArticleCard
                   key={t.slug}
