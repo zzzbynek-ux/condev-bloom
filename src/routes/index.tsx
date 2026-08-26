@@ -298,26 +298,16 @@ function Index() {
         </section>
 
         {/* zvýrazněné karty */}
-        <section className="mt-10 border-y border-primary/15 bg-primary/[0.06]">
-          <div className="mx-auto max-w-[88rem] px-5 py-12 md:px-6 md:py-14">
+        <section className="border-y border-primary/15 bg-primary/[0.06]">
+          <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+          <SectionHeader
+            kicker="Výběr redakce"
+            title="Doporučujeme"
+            subtitle="Začněte tady"
+            to="/clanky"
+          />
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
 
-          <div className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-primary pb-3">
-            <div>
-              <h2 className="font-display text-2xl font-bold uppercase tracking-[0.04em] text-primary md:text-3xl">
-                Doporučujeme
-              </h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Výběr redakce — začněte tady
-              </p>
-            </div>
-            <Link
-              to="/clanky"
-              className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
-            >
-              Zobrazit vše <ArrowRight className="size-4" />
-            </Link>
-          </div>
-          <div className="mt-7 grid gap-6 md:grid-cols-3">
             {FEATURED.map((f) => (
               <article
                 key={f.title}
