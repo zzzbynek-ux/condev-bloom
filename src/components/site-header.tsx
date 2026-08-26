@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
-import { Facebook, Instagram, Menu, MessageSquare, Search, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronDown, Facebook, Flag, Instagram, Menu, MessageSquare, Search, X } from "lucide-react";
 
 import { SECTIONS } from "@/lib/content";
 
@@ -20,13 +20,35 @@ function XIcon({ className }: { className?: string }) {
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [topicsOpen, setTopicsOpen] = useState(false);
+  const [compact, setCompact] = useState(false);
   const [q, setQ] = useState("");
   const navigate = useNavigate();
+  const topicsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onScroll = () => setCompact(window.scrollY > 80);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (topicsRef.current && !topicsRef.current.contains(e.target as Node)) setTopicsOpen(false);
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 shadow-sm">
-      {/* horní modrý pruh */}
-      <div className="bg-primary text-primary-foreground">
+      {/* horní modrý pruh: identita + rychlé kontakty */}
+      <div
+        className={`overflow-hidden bg-primary text-primary-foreground transition-all duration-300 ${
+          compact ? "lg:max-h-0 lg:opacity-0" : "lg:max-h-32 lg:opacity-100"
+        }`}
+      >
         <div className="mx-auto flex max-w-[88rem] items-stretch gap-4 pr-4 md:pr-6">
           {/* logo blok s bílým „vlaječkovým" pozadím a zkosením */}
           <Link
@@ -48,13 +70,32 @@ export function SiteHeader() {
             </span>
           </Link>
 
+          <p className="hidden items-center text-sm font-medium tracking-wide text-primary-foreground/85 xl:flex">
+            Občanská komunita, která vrací do debaty o Izraeli fakta, kontext a klidný tón.
+          </p>
 
-          <div className="ml-auto flex items-center">
+          <div className="ml-auto flex items-center gap-4">
             <Link
-              to="/hledat"
-              aria-label="Hledat"
-              className="mr-1 rounded-md p-2 lg:hidden"
+              to="/zapojte-se"
+              className="hidden items-center gap-2 text-sm font-semibold text-primary-foreground/90 transition-colors hover:text-primary-foreground lg:flex"
             >
+              <Flag className="size-4" />
+              Nahlásit incident
+            </Link>
+            <span className="hidden h-5 w-px bg-primary-foreground/25 lg:block" />
+            <div className="hidden items-center gap-3 lg:flex">
+              <a href="https://x.com" aria-label="X" className="opacity-80 transition-opacity hover:opacity-100">
+                <XIcon className="size-[17px]" />
+              </a>
+              <a href="https://facebook.com" aria-label="Facebook" className="opacity-80 transition-opacity hover:opacity-100">
+                <Facebook className="size-[18px]" />
+              </a>
+              <a href="https://instagram.com" aria-label="Instagram" className="opacity-80 transition-opacity hover:opacity-100">
+                <Instagram className="size-[18px]" />
+              </a>
+            </div>
+
+            <Link to="/hledat" aria-label="Hledat" className="rounded-md p-2 lg:hidden">
               <Search className="size-5" />
             </Link>
             <button
@@ -69,22 +110,59 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {/* bílá lišta s navigací */}
+      {/* bílá lišta: hlavní navigace + hledání + CTA */}
       <div className="hidden border-b border-border bg-background lg:block">
-        <div className="mx-auto flex max-w-[88rem] items-center px-4 py-2.5 md:px-6">
-          <nav className="flex items-center">
-            {NAV.map((item, i) => (
-              <span key={item.to} className="flex items-center">
-                {i > 0 ? <span className="mx-4 h-4 w-px bg-border" /> : null}
+        <div className="mx-auto flex max-w-[88rem] items-stretch px-4 md:px-6">
+          {compact ? (
+            <Link to="/" className="mr-8 flex items-center gap-2 self-center" aria-label="Jedním Hlasem">
+              <span className="grid size-8 place-items-center rounded-md bg-primary">
+                <MessageSquare className="size-4 text-white" />
+              </span>
+              <span className="font-display text-base font-bold uppercase tracking-tight text-primary">
+                Jedním Hlasem
+              </span>
+            </Link>
+          ) : null}
+
+          <nav className="flex items-stretch gap-8">
+            {NAV.map((item) =>
+              item.to === "/temata" ? (
+                <div key={item.to} ref={topicsRef} className="relative flex items-stretch">
+                  <button
+                    type="button"
+                    onClick={() => setTopicsOpen((v) => !v)}
+                    aria-expanded={topicsOpen}
+                    className="flex items-center gap-1.5 border-b-2 border-transparent py-4 text-base font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
+                  >
+                    {item.label}
+                    <ChevronDown className={`size-4 transition-transform ${topicsOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  {topicsOpen ? (
+                    <div className="absolute left-0 top-full z-50 w-64 rounded-b-xl border border-t-0 border-border bg-background py-2 shadow-lg">
+                      {SECTIONS.map((s) => (
+                        <Link
+                          key={s}
+                          to="/temata"
+                          onClick={() => setTopicsOpen(false)}
+                          className="block px-4 py-2 text-sm text-foreground transition-colors hover:bg-muted hover:text-primary"
+                        >
+                          {s}
+                        </Link>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              ) : (
                 <Link
+                  key={item.to}
                   to={item.to}
-                  className="text-[15px] font-medium text-foreground transition-colors hover:text-primary"
-                  activeProps={{ className: "text-primary font-semibold" }}
+                  className="flex items-center border-b-2 border-transparent py-4 text-base font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
+                  activeProps={{ className: "border-primary text-primary" }}
                 >
                   {item.label}
                 </Link>
-              </span>
-            ))}
+              ),
+            )}
           </nav>
 
           <div className="ml-auto flex items-center gap-4">
@@ -103,21 +181,9 @@ export function SiteHeader() {
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Hledat…"
                 aria-label="Hledat na webu"
-                className="w-32 bg-transparent text-sm outline-none placeholder:text-muted-foreground focus:w-48 transition-all"
+                className="w-32 bg-transparent text-sm outline-none transition-all placeholder:text-muted-foreground focus:w-48"
               />
             </form>
-            <div className="flex items-center gap-3 text-foreground">
-
-              <a href="https://x.com" aria-label="X" className="opacity-80 hover:opacity-100">
-                <XIcon className="size-[18px]" />
-              </a>
-              <a href="https://facebook.com" aria-label="Facebook" className="opacity-80 hover:opacity-100">
-                <Facebook className="size-[19px]" />
-              </a>
-              <a href="https://instagram.com" aria-label="Instagram" className="opacity-80 hover:opacity-100">
-                <Instagram className="size-[19px]" />
-              </a>
-            </div>
             <Link
               to="/zapojte-se"
               className="rounded-full bg-primary px-6 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
@@ -127,10 +193,6 @@ export function SiteHeader() {
           </div>
         </div>
       </div>
-
-
-
-
 
       {open ? (
         <div className="border-b border-border bg-background px-5 py-3 lg:hidden">
