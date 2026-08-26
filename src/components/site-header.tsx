@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { ChevronDown, Facebook, Instagram, Menu, Search, X } from "lucide-react";
+import { ChevronDown, Menu, Search, X } from "lucide-react";
 import { TOPICS } from "@/lib/content";
 
 type NavTo = "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" | "/manifest" | "/nahlasit-incident" | "/ptejte-se-ai";
@@ -81,12 +81,6 @@ export function SiteHeader() {
             <div className="hidden items-center gap-3 lg:flex">
               <a href="https://x.com" aria-label="X" className="opacity-80 transition-opacity hover:opacity-100">
                 <XIcon className="size-[17px]" />
-              </a>
-              <a href="https://facebook.com" aria-label="Facebook" className="opacity-80 transition-opacity hover:opacity-100">
-                <Facebook className="size-[18px]" />
-              </a>
-              <a href="https://instagram.com" aria-label="Instagram" className="opacity-80 transition-opacity hover:opacity-100">
-                <Instagram className="size-[18px]" />
               </a>
             </div>
 
