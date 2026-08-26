@@ -70,25 +70,26 @@ function Hero() {
 
       <div className="relative mx-auto grid max-w-[88rem] grid-cols-1 items-center gap-6 px-12 py-12 md:grid-cols-2 md:px-16 md:py-20">
         <div className="hidden md:block" />
-        <div className="rounded-2xl bg-[#0a1730]/85 p-6 backdrop-blur-sm md:p-9">
+        <div className="flex min-h-[19rem] flex-col justify-center rounded-2xl bg-[#0a1730]/85 p-6 backdrop-blur-sm md:min-h-[22rem] md:p-9">
           <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/60">
             {slide.kicker}
           </p>
           {i === 0 ? (
-            <h1 key={slide.title} className="animate-rise mt-3 font-display text-3xl font-bold text-white md:text-5xl">
+            <h1 key={slide.title} className="animate-rise mt-3 text-balance font-display text-3xl font-bold text-white md:text-[2.75rem] md:leading-[1.1]">
               {slide.title}
             </h1>
           ) : (
-            <p key={slide.title} className="animate-rise mt-3 font-display text-3xl font-bold text-white md:text-5xl">
+            <p key={slide.title} className="animate-rise mt-3 text-balance font-display text-3xl font-bold text-white md:text-[2.75rem] md:leading-[1.1]">
               {slide.title}
             </p>
           )}
           <p
             key={slide.text}
-            className="animate-rise mt-4 text-sm leading-relaxed text-white/85 md:text-[17px]"
+            className="animate-rise mt-4 text-pretty text-sm leading-relaxed text-white/85 md:text-[17px]"
           >
             {slide.text}
           </p>
+
           <Link
             to="/manifest"
             className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-white/85 hover:text-white"
