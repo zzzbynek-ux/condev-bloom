@@ -49,27 +49,15 @@ function XIcon({ className }: { className?: string }) {
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
-  const [compact, setCompact] = useState(false);
   const [menu, setMenu] = useState<string | null>(null);
   const [q, setQ] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const onScroll = () => setCompact(window.scrollY > 80);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-
   return (
     <header className="sticky top-0 z-50 shadow-sm">
       {/* horní modrý pruh: identita + rychlé kontakty */}
-      <div
-        className={`overflow-hidden bg-primary text-primary-foreground transition-all duration-300 ${
-          compact ? "lg:max-h-0 lg:opacity-0" : "lg:max-h-32 lg:opacity-100"
-        }`}
-      >
+      <div className="bg-primary text-primary-foreground">
+
         <div className="mx-auto flex max-w-[88rem] items-stretch gap-4 pr-4 md:pr-6">
           {/* logo blok s bílým „vlaječkovým" pozadím a zkosením */}
           <Link
