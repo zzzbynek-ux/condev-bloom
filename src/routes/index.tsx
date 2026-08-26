@@ -236,46 +236,6 @@ function Index() {
           </div>
         </section>
 
-        {/* nejnovější */}
-        <section className="mx-auto max-w-[88rem] px-5 py-14 md:px-6">
-          <div className="flex flex-wrap items-end justify-between gap-3">
-            <h2 className="font-display text-3xl font-bold text-primary">Nejnovější</h2>
-            <Link to="/clanky" className="text-sm text-muted-foreground hover:text-primary">
-              Všechny články →
-            </Link>
-          </div>
-
-          <div className="mt-6 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-            {LATEST.map((n) => (
-              <article key={n.slug} className="group">
-                <Link to="/clanky" className="block">
-                  <div className="relative overflow-hidden rounded-md">
-                    <img
-                      src={IMAGES[n.image]}
-                      alt={n.title}
-                      loading="lazy"
-                      width={1200}
-                      height={700}
-                      className="aspect-[16/9] w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <span
-                      className={`absolute left-3 top-3 rounded-sm px-3 py-1 text-[11px] font-bold uppercase tracking-[0.1em] text-white ${
-                        n.tagTone === "primary" ? "bg-primary" : "bg-[#0b1a3a]"
-                      }`}
-                    >
-                      {n.tag}
-                    </span>
-                  </div>
-                  <h3 className="mt-3 font-display text-lg font-bold text-primary group-hover:underline">
-                    {n.title}
-                  </h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{n.perex}</p>
-                  <p className="mt-1 text-xs text-muted-foreground/80">{n.date}</p>
-                </Link>
-              </article>
-            ))}
-          </div>
-        </section>
 
         {/* témata */}
         <section className="border-t border-border bg-secondary/50">
