@@ -262,17 +262,17 @@ function Index() {
               </Link>
             </div>
             <div className="grid grid-cols-2 divide-x divide-border border-b border-border sm:grid-cols-3 lg:grid-cols-5 lg:divide-x">
-              {TOPICS.slice(0, 5).map((t, i) => (
+              {TOPICS.slice(0, 5).map((t) => (
                 <Link
                   key={t.slug}
                   to="/temata"
-                  className="group flex min-w-0 flex-col gap-2 px-4 py-5 transition-colors hover:bg-muted/60 first:pl-0 lg:px-5"
+                  className="group flex min-w-0 items-center px-4 py-5 transition-colors hover:bg-muted/60 first:pl-0 lg:px-5"
                 >
-                  <span className="text-sm font-bold leading-snug text-foreground transition-colors group-hover:text-primary">
-
                   <span className="text-sm font-bold leading-snug text-foreground transition-colors group-hover:text-primary">
                     {t.title}
                   </span>
+                </Link>
+              ))}
                 </Link>
               ))}
             </div>
