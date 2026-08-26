@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight, Flag, HelpCircle, Users } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, HelpCircle, Users, type LucideIcon } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -9,6 +9,8 @@ import heroImg from "@/assets/hero-blindfold.jpg";
 import flagsImg from "@/assets/news-flags.jpg";
 import mediaImg from "@/assets/news-media.jpg";
 import politicsImg from "@/assets/news-politics.jpg";
+import incidentIcon from "@/assets/nahlasit-incident.png.asset.json";
+
 
 const IMAGES = { flags: flagsImg, media: mediaImg, politics: politicsImg };
 
