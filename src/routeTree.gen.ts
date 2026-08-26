@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ClankyRouteImport } from './routes/clanky'
+import { Route as HledatRouteImport } from './routes/hledat'
 import { Route as ONasRouteImport } from './routes/o-nas'
 import { Route as TemataRouteImport } from './routes/temata'
 import { Route as ZapojteSeRouteImport } from './routes/zapojte-se'
@@ -23,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
 const ClankyRoute = ClankyRouteImport.update({
   id: '/clanky',
   path: '/clanky',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HledatRoute = HledatRouteImport.update({
+  id: '/hledat',
+  path: '/hledat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ONasRoute = ONasRouteImport.update({
@@ -44,6 +50,7 @@ const ZapojteSeRoute = ZapojteSeRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/clanky': typeof ClankyRoute
+  '/hledat': typeof HledatRoute
   '/o-nas': typeof ONasRoute
   '/temata': typeof TemataRoute
   '/zapojte-se': typeof ZapojteSeRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/clanky': typeof ClankyRoute
+  '/hledat': typeof HledatRoute
   '/o-nas': typeof ONasRoute
   '/temata': typeof TemataRoute
   '/zapojte-se': typeof ZapojteSeRoute
@@ -59,21 +67,30 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/clanky': typeof ClankyRoute
+  '/hledat': typeof HledatRoute
   '/o-nas': typeof ONasRoute
   '/temata': typeof TemataRoute
   '/zapojte-se': typeof ZapojteSeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/clanky' | '/o-nas' | '/temata' | '/zapojte-se'
+  fullPaths: '/' | '/clanky' | '/hledat' | '/o-nas' | '/temata' | '/zapojte-se'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/clanky' | '/o-nas' | '/temata' | '/zapojte-se'
-  id: '__root__' | '/' | '/clanky' | '/o-nas' | '/temata' | '/zapojte-se'
+  to: '/' | '/clanky' | '/hledat' | '/o-nas' | '/temata' | '/zapojte-se'
+  id:
+    | '__root__'
+    | '/'
+    | '/clanky'
+    | '/hledat'
+    | '/o-nas'
+    | '/temata'
+    | '/zapojte-se'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ClankyRoute: typeof ClankyRoute
+  HledatRoute: typeof HledatRoute
   ONasRoute: typeof ONasRoute
   TemataRoute: typeof TemataRoute
   ZapojteSeRoute: typeof ZapojteSeRoute
@@ -93,6 +110,13 @@ declare module '@tanstack/react-router' {
       path: '/clanky'
       fullPath: '/clanky'
       preLoaderRoute: typeof ClankyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hledat': {
+      id: '/hledat'
+      path: '/hledat'
+      fullPath: '/hledat'
+      preLoaderRoute: typeof HledatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/o-nas': {
@@ -122,6 +146,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ClankyRoute: ClankyRoute,
+  HledatRoute: HledatRoute,
   ONasRoute: ONasRoute,
   TemataRoute: TemataRoute,
   ZapojteSeRoute: ZapojteSeRoute,
