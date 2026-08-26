@@ -2,9 +2,10 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ChevronDown, Facebook, Flag, Instagram, Menu, MessageSquare, Search, X } from "lucide-react";
 
-type NavChild = { label: string; to?: "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" };
+type NavTo = "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" | "/manifest";
+type NavChild = { label: string; to?: NavTo };
 type NavItem =
-  | { label: string; to: "/clanky" | "/temata" | "/o-nas" | "/zapojte-se"; children?: undefined }
+  | { label: string; to: NavTo; children?: undefined }
   | { label: string; to?: undefined; children: NavChild[] };
 
 const NAV: NavItem[] = [
