@@ -160,14 +160,14 @@ const ACTIONS: {
     title: "Ptejte se AI",
     text: "Zeptejte se naší AI na dezinformace a fakta.",
     tone: "bg-primary",
-    to: "/zapojte-se",
+    to: "/ptejte-se-ai",
   },
   {
     icon: Flag,
     title: "Nahlásit incident",
     text: "Pomozte nám monitorovat a reagovat.",
     tone: "bg-destructive",
-    to: "/zapojte-se",
+    to: "/nahlasit-incident",
   },
   {
     icon: Users,

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ChevronDown, Facebook, Flag, Instagram, Menu, MessageSquare, Search, X } from "lucide-react";
 import { TOPICS } from "@/lib/content";
 
-type NavTo = "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" | "/manifest";
+type NavTo = "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" | "/manifest" | "/nahlasit-incident" | "/ptejte-se-ai";
 type NavChild = { label: string; to?: NavTo };
 type NavItem =
   | { label: string; to: NavTo; children?: undefined }
@@ -28,7 +28,7 @@ const NAV: NavItem[] = [
   {
     label: "Zapojte se",
     children: [
-      { label: "Nahlaste incident", to: "/zapojte-se" },
+      { label: "Nahlaste incident", to: "/nahlasit-incident" },
       { label: "JH Projekty (připravujeme)" },
       { label: "E-shop (připravujeme)" },
     ],
@@ -38,7 +38,7 @@ const NAV: NavItem[] = [
     children: [
       { label: "Manifest", to: "/manifest" },
       { label: "Co je antisemitismus?", to: "/temata" },
-      { label: "Ptejte se AI", to: "/temata" },
+      { label: "Ptejte se AI", to: "/ptejte-se-ai" },
     ],
   },
 ];
