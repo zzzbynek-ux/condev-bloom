@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ChevronRight, Facebook, Instagram, Menu, MessageSquare, X } from "lucide-react";
+import { Facebook, Instagram, Menu, MessageSquare, X } from "lucide-react";
 
 import { SECTIONS } from "@/lib/content";
 
@@ -91,23 +91,8 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {/* bílý pruh rubrik */}
-      <div className="hidden border-b border-border bg-background lg:block">
-        <div className="mx-auto flex max-w-[88rem] items-stretch px-4 md:px-6">
-          {SECTIONS.map((s, i) => (
-            <span key={s} className="flex items-center">
-              {i > 0 ? <span className="h-5 w-px bg-border" /> : null}
-              <Link
-                to="/temata"
-                className="group flex items-center gap-1.5 px-5 py-3 text-[15px] font-semibold text-foreground transition-colors hover:text-primary"
-              >
-                {s}
-                <ChevronRight className="size-4 text-primary transition-transform group-hover:translate-x-0.5" />
-              </Link>
-            </span>
-          ))}
-        </div>
-      </div>
+
+
 
       {open ? (
         <div className="border-b border-border bg-background px-5 py-3 lg:hidden">
