@@ -65,20 +65,11 @@ export function SiteHeader() {
       <div className="bg-primary text-primary-foreground">
 
         <div className="mx-auto flex max-w-[88rem] items-stretch gap-4 pr-4 md:pr-6">
-          {/* logo přímo na modrém pruhu */}
-          <Link
-            to="/"
-            className="flex shrink-0 flex-col justify-center py-3 pl-4 md:pl-6"
-          >
-            <img
-              src={logoWhite.url}
-              alt="Jedním Hlasem"
-              className="h-11 w-auto md:h-14"
-            />
-            <span className="mt-1 block text-[9px] font-semibold uppercase tracking-[0.12em] text-primary-foreground/80 md:text-[10px]">
-              Fakta proti dezinformacím
-            </span>
+          {/* čistá modrá plocha s odkazem na úvod */}
+          <Link to="/" className="flex shrink-0 items-center py-6 pl-4 md:pl-6">
+            <span className="sr-only">Jedním Hlasem — úvodní stránka</span>
           </Link>
+
 
 
 
