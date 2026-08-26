@@ -10,6 +10,10 @@ import heroImg from "@/assets/hero-blindfold.jpg";
 import flagsImg from "@/assets/news-flags.jpg";
 import mediaImg from "@/assets/news-media.jpg";
 import politicsImg from "@/assets/news-politics.jpg";
+import featuredAlgorithmImg from "@/assets/featured-algorithm.jpg";
+import featuredInnovationImg from "@/assets/featured-innovation.jpg";
+import featuredSlogansImg from "@/assets/featured-slogans.jpg";
+
 
 
 
@@ -180,46 +184,25 @@ const ACTIONS: {
 
 
 
-function FeaturedArt({ tone }: { tone: (typeof FEATURED)[number]["tone"] }) {
-  if (tone === "flag") {
-    return (
-      <div className="flex h-36 items-center justify-between gap-4 bg-linear-to-r from-white to-secondary px-6">
-        <p className="font-display text-xl font-bold leading-tight text-primary md:text-2xl">
-          JednimHlasem
-          <br />
-          pro Izrael
-        </p>
-        <svg viewBox="0 0 100 100" aria-hidden className="size-14 text-primary">
-          <path
-            fill="currentColor"
-            d="M50 8 61 27h22L72 46l11 19H61L50 84 39 65H17l11-19L17 27h22L50 8Zm0 14-7 12h14l-7-12Zm-18 19 7 12-7 12h14l7-12-7-12H32Zm36 0H54l7 12-7 12h14l7-12-7-12ZM50 78l7-12H43l7 12Z"
-          />
-        </svg>
-      </div>
-    );
-  }
-  if (tone === "red") {
-    return (
-      <div className="grid h-36 place-items-center bg-[#7d1420]">
-        <svg viewBox="0 0 120 60" aria-hidden className="h-20 w-40">
-          <path d="M10 34c10-10 22-10 32-2l8 6 10-8c10-8 22-8 32 2l18 16H0l10-14Z" fill="#f3d7c4" />
-          <path d="M2 46h116v14H2z" fill="#1b1b1b" />
-          <path d="M52 26l10 8 10-8-10-8-10 8Z" fill="#fff" opacity=".35" />
-        </svg>
-      </div>
-    );
-  }
+const FEATURED_IMAGES: Record<string, string> = {
+  sand: featuredAlgorithmImg,
+  flag: featuredInnovationImg,
+  red: featuredSlogansImg,
+};
+
+function FeaturedArt({ tone, alt }: { tone: (typeof FEATURED)[number]["tone"]; alt: string }) {
   return (
-    <div className="grid h-36 place-items-center bg-[#f2e3cd]">
-      <svg viewBox="0 0 120 70" aria-hidden className="h-24 w-40">
-        <circle cx="42" cy="38" r="20" fill="none" stroke="#1f3050" strokeWidth="9" />
-        <circle cx="42" cy="38" r="6" fill="#1f3050" />
-        <path d="M60 52 96 18" stroke="#c02626" strokeWidth="9" strokeLinecap="round" />
-        <path d="M78 16h20v20" fill="none" stroke="#c02626" strokeWidth="9" strokeLinecap="round" />
-      </svg>
-    </div>
+    <img
+      src={FEATURED_IMAGES[tone] ?? featuredAlgorithmImg}
+      alt={alt}
+      loading="lazy"
+      width={1280}
+      height={720}
+      className="aspect-video w-full object-cover"
+    />
   );
 }
+
 
 function SectionHeader({
   kicker,
