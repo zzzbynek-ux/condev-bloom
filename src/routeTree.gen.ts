@@ -13,7 +13,9 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ClankyRouteImport } from './routes/clanky'
 import { Route as HledatRouteImport } from './routes/hledat'
 import { Route as ManifestRouteImport } from './routes/manifest'
+import { Route as NahlasitIncidentRouteImport } from './routes/nahlasit-incident'
 import { Route as ONasRouteImport } from './routes/o-nas'
+import { Route as PtejteSeAiRouteImport } from './routes/ptejte-se-ai'
 import { Route as TemataRouteImport } from './routes/temata'
 import { Route as ZapojteSeRouteImport } from './routes/zapojte-se'
 
@@ -37,9 +39,19 @@ const ManifestRoute = ManifestRouteImport.update({
   path: '/manifest',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NahlasitIncidentRoute = NahlasitIncidentRouteImport.update({
+  id: '/nahlasit-incident',
+  path: '/nahlasit-incident',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ONasRoute = ONasRouteImport.update({
   id: '/o-nas',
   path: '/o-nas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PtejteSeAiRoute = PtejteSeAiRouteImport.update({
+  id: '/ptejte-se-ai',
+  path: '/ptejte-se-ai',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TemataRoute = TemataRouteImport.update({
@@ -58,7 +70,9 @@ export interface FileRoutesByFullPath {
   '/clanky': typeof ClankyRoute
   '/hledat': typeof HledatRoute
   '/manifest': typeof ManifestRoute
+  '/nahlasit-incident': typeof NahlasitIncidentRoute
   '/o-nas': typeof ONasRoute
+  '/ptejte-se-ai': typeof PtejteSeAiRoute
   '/temata': typeof TemataRoute
   '/zapojte-se': typeof ZapojteSeRoute
 }
@@ -67,7 +81,9 @@ export interface FileRoutesByTo {
   '/clanky': typeof ClankyRoute
   '/hledat': typeof HledatRoute
   '/manifest': typeof ManifestRoute
+  '/nahlasit-incident': typeof NahlasitIncidentRoute
   '/o-nas': typeof ONasRoute
+  '/ptejte-se-ai': typeof PtejteSeAiRoute
   '/temata': typeof TemataRoute
   '/zapojte-se': typeof ZapojteSeRoute
 }
@@ -77,7 +93,9 @@ export interface FileRoutesById {
   '/clanky': typeof ClankyRoute
   '/hledat': typeof HledatRoute
   '/manifest': typeof ManifestRoute
+  '/nahlasit-incident': typeof NahlasitIncidentRoute
   '/o-nas': typeof ONasRoute
+  '/ptejte-se-ai': typeof PtejteSeAiRoute
   '/temata': typeof TemataRoute
   '/zapojte-se': typeof ZapojteSeRoute
 }
@@ -88,7 +106,9 @@ export interface FileRouteTypes {
     | '/clanky'
     | '/hledat'
     | '/manifest'
+    | '/nahlasit-incident'
     | '/o-nas'
+    | '/ptejte-se-ai'
     | '/temata'
     | '/zapojte-se'
   fileRoutesByTo: FileRoutesByTo
@@ -97,7 +117,9 @@ export interface FileRouteTypes {
     | '/clanky'
     | '/hledat'
     | '/manifest'
+    | '/nahlasit-incident'
     | '/o-nas'
+    | '/ptejte-se-ai'
     | '/temata'
     | '/zapojte-se'
   id:
@@ -106,7 +128,9 @@ export interface FileRouteTypes {
     | '/clanky'
     | '/hledat'
     | '/manifest'
+    | '/nahlasit-incident'
     | '/o-nas'
+    | '/ptejte-se-ai'
     | '/temata'
     | '/zapojte-se'
   fileRoutesById: FileRoutesById
@@ -116,7 +140,9 @@ export interface RootRouteChildren {
   ClankyRoute: typeof ClankyRoute
   HledatRoute: typeof HledatRoute
   ManifestRoute: typeof ManifestRoute
+  NahlasitIncidentRoute: typeof NahlasitIncidentRoute
   ONasRoute: typeof ONasRoute
+  PtejteSeAiRoute: typeof PtejteSeAiRoute
   TemataRoute: typeof TemataRoute
   ZapojteSeRoute: typeof ZapojteSeRoute
 }
@@ -151,11 +177,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ManifestRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/nahlasit-incident': {
+      id: '/nahlasit-incident'
+      path: '/nahlasit-incident'
+      fullPath: '/nahlasit-incident'
+      preLoaderRoute: typeof NahlasitIncidentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/o-nas': {
       id: '/o-nas'
       path: '/o-nas'
       fullPath: '/o-nas'
       preLoaderRoute: typeof ONasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ptejte-se-ai': {
+      id: '/ptejte-se-ai'
+      path: '/ptejte-se-ai'
+      fullPath: '/ptejte-se-ai'
+      preLoaderRoute: typeof PtejteSeAiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/temata': {
@@ -180,7 +220,9 @@ const rootRouteChildren: RootRouteChildren = {
   ClankyRoute: ClankyRoute,
   HledatRoute: HledatRoute,
   ManifestRoute: ManifestRoute,
+  NahlasitIncidentRoute: NahlasitIncidentRoute,
   ONasRoute: ONasRoute,
+  PtejteSeAiRoute: PtejteSeAiRoute,
   TemataRoute: TemataRoute,
   ZapojteSeRoute: ZapojteSeRoute,
 }
