@@ -156,13 +156,6 @@ const ACTIONS: {
     to: "/temata",
   },
   {
-    icon: Users,
-    title: "Zapojte se",
-    text: "Přidejte se k nám a staňte se součástí řešení.",
-    tone: "bg-primary",
-    to: "/zapojte-se",
-  },
-  {
     icon: HelpCircle,
     title: "Ptejte se AI",
     text: "Zeptejte se naší AI na dezinformace a fakta.",
@@ -172,9 +165,15 @@ const ACTIONS: {
   {
     icon: Flag,
     title: "Nahlásit incident",
-
     text: "Pomozte nám monitorovat a reagovat.",
     tone: "bg-destructive",
+    to: "/zapojte-se",
+  },
+  {
+    icon: Users,
+    title: "Zapojte se",
+    text: "Přidejte se k nám a staňte se součástí řešení.",
+    tone: "bg-primary",
     to: "/zapojte-se",
   },
 ];
