@@ -339,17 +339,18 @@ function Index() {
           </div>
         </section>
 
-        {/* vybrané texty – mřížka */}
-        <section className="border-t border-border bg-muted/30">
+        {/* vybrané texty – karty */}
+        <section className="border-y border-border bg-secondary/50">
           <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
             <SectionHeader
-              kicker=""
+              kicker="Vybrané texty"
               title="Vybrané texty"
               subtitle="Klíčové texty komunity"
               to="/clanky"
               linkLabel="Všechny články"
             />
-            <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-8 grid gap-6 md:grid-cols-3">
+
 
               {TOPICS.slice(0, 3).map((t, idx) => (
                 <ArticleCard
