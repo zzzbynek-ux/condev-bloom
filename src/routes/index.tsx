@@ -1,10 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, MessageCircle, ShieldAlert, Sparkles } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Flag, HelpCircle, Users } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { SLIDES, TOPICS } from "@/lib/content";
+import { FEATURED, LATEST, SLIDES, TOPICS } from "@/lib/content";
+import heroImg from "@/assets/hero-blindfold.jpg";
+import flagsImg from "@/assets/news-flags.jpg";
+import mediaImg from "@/assets/news-media.jpg";
+import politicsImg from "@/assets/news-politics.jpg";
+
+const IMAGES = { flags: flagsImg, media: mediaImg, politics: politicsImg };
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,76 +33,87 @@ export const Route = createFileRoute("/")({
 
 function Hero() {
   const [i, setI] = useState(0);
+  const go = (d: number) => setI((v) => (v + d + SLIDES.length) % SLIDES.length);
 
   useEffect(() => {
-    const t = setInterval(() => setI((v) => (v + 1) % SLIDES.length), 7000);
+    const t = setInterval(() => setI((v) => (v + 1) % SLIDES.length), 8000);
     return () => clearInterval(t);
   }, []);
 
   const slide = SLIDES[i] ?? SLIDES[0]!;
 
   return (
-    <section className="relative overflow-hidden">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-40 left-1/2 size-[42rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl"
+    <section className="relative isolate overflow-hidden bg-[#0b1a3a]">
+      <img
+        src={heroImg}
+        alt=""
+        width={1600}
+        height={900}
+        className="absolute inset-0 size-full object-cover object-left opacity-90"
       />
-      <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-14 md:pt-24">
-        <p className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-          <Sparkles className="size-3.5 text-primary" />
-          Občanská komunita
-        </p>
+      <div aria-hidden className="absolute inset-0 bg-linear-to-r from-[#0b1a3a]/40 via-[#0b1a3a]/40 to-[#0b1a3a]/80" />
 
-        <h1 className="mt-6 max-w-3xl text-4xl font-semibold leading-[1.05] text-foreground md:text-6xl">
-          Do debaty o Izraeli vracíme fakta,
-          <span className="text-primary"> kontext a klidný tón.</span>
-        </h1>
-        <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-          Píšeme analýzy, ověřujeme tvrzení a pomáháme lidem reagovat tam, kde se rozhoduje
-          o veřejném mínění — v komentářích, v médiích i ve školách.
-        </p>
-
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link
-            to="/clanky"
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5"
-          >
-            Začněte číst <ArrowRight className="size-4" />
-          </Link>
-          <Link
-            to="/zapojte-se"
-            className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
-          >
-            Zapojte se
-          </Link>
-        </div>
-
-        {/* Slider: pomalý, s indikátory a možností přeskočit */}
-        <div className="mt-14 rounded-2xl border border-border bg-card p-6 md:p-8">
-          <p className="text-xs uppercase tracking-[0.18em] text-primary">{slide.kicker}</p>
-          <h2 key={slide.title} className="animate-rise mt-3 text-2xl font-semibold md:text-3xl">
+      <div className="relative mx-auto grid max-w-[88rem] grid-cols-1 items-center gap-6 px-12 py-12 md:grid-cols-2 md:px-16 md:py-20">
+        <div className="hidden md:block" />
+        <div className="rounded-2xl bg-[#0a1730]/85 p-6 backdrop-blur-sm md:p-9">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/60">
+            {slide.kicker}
+          </p>
+          <h1 key={slide.title} className="animate-rise mt-3 text-3xl font-bold text-white md:text-5xl">
             {slide.title}
-          </h2>
-          <p key={slide.text} className="animate-rise mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
+          </h1>
+          <p
+            key={slide.text}
+            className="animate-rise mt-4 text-sm leading-relaxed text-white/85 md:text-[17px]"
+          >
             {slide.text}
           </p>
-          <div className="mt-6 flex items-center gap-2">
-            {SLIDES.map((s, idx) => (
-              <button
-                key={s.title}
-                type="button"
-                aria-label={`Zobrazit: ${s.title}`}
-                aria-current={idx === i}
-                onClick={() => setI(idx)}
-                className={`h-1.5 rounded-full transition-all ${
-                  idx === i ? "w-10 bg-primary" : "w-4 bg-border hover:bg-muted-foreground"
-                }`}
-              />
-            ))}
-            <span className="ml-3 text-xs text-muted-foreground">
-              {i + 1} / {SLIDES.length}
-            </span>
-          </div>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        aria-label="Předchozí"
+        onClick={() => go(-1)}
+        className="absolute left-3 top-1/2 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-primary text-white shadow-lg transition-transform hover:scale-105 md:left-5"
+      >
+        <ChevronLeft className="size-6" />
+      </button>
+      <button
+        type="button"
+        aria-label="Další"
+        onClick={() => go(1)}
+        className="absolute right-3 top-1/2 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-primary text-white shadow-lg transition-transform hover:scale-105 md:right-5"
+      >
+        <ChevronRight className="size-6" />
+      </button>
+
+      <div className="relative flex flex-col items-center gap-3 pb-6">
+        <div className="flex items-center gap-2">
+          {SLIDES.map((s, idx) => (
+            <button
+              key={s.title}
+              type="button"
+              aria-label={`Zobrazit: ${s.title}`}
+              aria-current={idx === i}
+              onClick={() => setI(idx)}
+              className={`size-2.5 rounded-full transition-all ${
+                idx === i ? "scale-125 bg-primary" : "bg-white/45 hover:bg-white/70"
+              }`}
+            />
+          ))}
+        </div>
+        <div className="hidden flex-wrap justify-center gap-6 px-6 text-xs text-white/55 md:flex">
+          {SLIDES.map((s, idx) => (
+            <button
+              key={s.title}
+              type="button"
+              onClick={() => setI(idx)}
+              className={idx === i ? "text-white" : "hover:text-white/85"}
+            >
+              {s.title}
+            </button>
+          ))}
         </div>
       </div>
     </section>
@@ -105,21 +122,65 @@ function Hero() {
 
 const ACTIONS = [
   {
-    icon: MessageCircle,
-    title: "Přidej se na WhatsApp",
-    text: "Denní tipy, kde je potřeba jeden věcný komentář.",
+    icon: Users,
+    title: "Zapojte se",
+    text: "Přidejte se k nám a staňte se součástí řešení.",
+    tone: "bg-primary",
   },
   {
-    icon: ShieldAlert,
-    title: "Nahlaste incident",
-    text: "Zaznamenali jste antisemitský útok nebo výhrůžku? Dejte nám vědět.",
-  },
-  {
-    icon: Sparkles,
+    icon: HelpCircle,
     title: "Ptejte se AI",
-    text: "Ověřte si fakta a kontext dřív, než je sdílíte dál.",
+    text: "Zeptejte se naší AI na dezinformace a fakta.",
+    tone: "bg-primary",
+  },
+  {
+    icon: Flag,
+    title: "Nahlásit incident",
+    text: "Pomozte nám monitorovat a reagovat.",
+    tone: "bg-destructive",
   },
 ];
+
+function FeaturedArt({ tone }: { tone: (typeof FEATURED)[number]["tone"] }) {
+  if (tone === "flag") {
+    return (
+      <div className="flex h-36 items-center justify-between gap-4 bg-linear-to-r from-white to-secondary px-6">
+        <p className="font-display text-xl font-bold leading-tight text-primary md:text-2xl">
+          JednimHlasem
+          <br />
+          pro Izrael
+        </p>
+        <svg viewBox="0 0 100 100" aria-hidden className="size-14 text-primary">
+          <path
+            fill="currentColor"
+            d="M50 8 61 27h22L72 46l11 19H61L50 84 39 65H17l11-19L17 27h22L50 8Zm0 14-7 12h14l-7-12Zm-18 19 7 12-7 12h14l7-12-7-12H32Zm36 0H54l7 12-7 12h14l7-12-7-12ZM50 78l7-12H43l7 12Z"
+          />
+        </svg>
+      </div>
+    );
+  }
+  if (tone === "red") {
+    return (
+      <div className="grid h-36 place-items-center bg-[#7d1420]">
+        <svg viewBox="0 0 120 60" aria-hidden className="h-20 w-40">
+          <path d="M10 34c10-10 22-10 32-2l8 6 10-8c10-8 22-8 32 2l18 16H0l10-14Z" fill="#f3d7c4" />
+          <path d="M2 46h116v14H2z" fill="#1b1b1b" />
+          <path d="M52 26l10 8 10-8-10-8-10 8Z" fill="#fff" opacity=".35" />
+        </svg>
+      </div>
+    );
+  }
+  return (
+    <div className="grid h-36 place-items-center bg-[#f2e3cd]">
+      <svg viewBox="0 0 120 70" aria-hidden className="h-24 w-40">
+        <circle cx="42" cy="38" r="20" fill="none" stroke="#1f3050" strokeWidth="9" />
+        <circle cx="42" cy="38" r="6" fill="#1f3050" />
+        <path d="M60 52 96 18" stroke="#c02626" strokeWidth="9" strokeLinecap="round" />
+        <path d="M78 16h20v20" fill="none" stroke="#c02626" strokeWidth="9" strokeLinecap="round" />
+      </svg>
+    </div>
+  );
+}
 
 function Index() {
   return (
@@ -128,67 +189,115 @@ function Index() {
       <main>
         <Hero />
 
-        <section className="border-y border-border bg-card/40">
-          <div className="mx-auto grid max-w-6xl gap-6 px-5 py-14 md:grid-cols-3">
+        {/* rychlé akce */}
+        <section className="mx-auto max-w-[88rem] px-5 pt-10 md:px-6">
+          <div className="grid gap-6 md:grid-cols-3">
             {ACTIONS.map((a) => (
               <Link
                 key={a.title}
                 to="/zapojte-se"
-                className="group rounded-2xl border border-border bg-card p-6 transition-transform hover:-translate-y-1"
+                className="flex items-center gap-5 rounded-xl border border-border bg-card p-6 shadow-sm transition-shadow hover:shadow-md"
               >
-                <a.icon className="size-6 text-primary" />
-                <h3 className="mt-4 text-lg font-semibold">{a.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.text}</p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm text-primary">
-                  Pokračovat <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                <span className={`grid size-14 shrink-0 place-items-center rounded-full ${a.tone}`}>
+                  <a.icon className="size-7 text-white" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block font-display text-lg font-bold text-foreground">{a.title}</span>
+                  <span className="mt-1 block text-sm leading-snug text-muted-foreground">{a.text}</span>
                 </span>
               </Link>
             ))}
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-5 py-16">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="text-xs uppercase tracking-[0.18em] text-primary">Rubriky</p>
-              <h2 className="mt-2 text-3xl font-semibold md:text-4xl">Témata, která rozebíráme</h2>
-            </div>
-            <Link to="/temata" className="text-sm text-muted-foreground hover:text-primary">
-              Všechna témata →
+        {/* zvýrazněné karty */}
+        <section className="mx-auto max-w-[88rem] px-5 pt-6 md:px-6">
+          <div className="grid gap-6 md:grid-cols-3">
+            {FEATURED.map((f) => (
+              <article
+                key={f.title}
+                className="overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md"
+              >
+                <h2 className="whitespace-pre-line px-6 pb-5 pt-6 font-display text-2xl font-bold leading-tight text-primary">
+                  {f.title}
+                </h2>
+                <FeaturedArt tone={f.tone} />
+                <div className="px-6 pb-6 pt-5">
+                  <p className="text-sm leading-relaxed text-foreground/80">{f.text}</p>
+                  <Link
+                    to="/clanky"
+                    className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-primary"
+                  >
+                    Číst dál <ArrowRight className="size-4" />
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* nejnovější */}
+        <section className="mx-auto max-w-[88rem] px-5 py-14 md:px-6">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <h2 className="font-display text-3xl font-bold text-primary">Nejnovější</h2>
+            <Link to="/clanky" className="text-sm text-muted-foreground hover:text-primary">
+              Všechny články →
             </Link>
           </div>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {TOPICS.map((t) => (
-              <article
-                key={t.slug}
-                className="flex flex-col rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/50"
-              >
-                <p className="text-xs uppercase tracking-[0.16em] text-primary">{t.kicker}</p>
-                <h3 className="mt-3 text-xl font-semibold">{t.title}</h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{t.perex}</p>
-                <Link to="/clanky" className="mt-5 text-sm text-foreground hover:text-primary">
-                  Číst více →
+          <div className="mt-6 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+            {LATEST.map((n) => (
+              <article key={n.slug} className="group">
+                <Link to="/clanky" className="block">
+                  <div className="relative overflow-hidden rounded-md">
+                    <img
+                      src={IMAGES[n.image]}
+                      alt={n.title}
+                      loading="lazy"
+                      width={1200}
+                      height={700}
+                      className="aspect-[16/9] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <span
+                      className={`absolute left-3 top-3 rounded-sm px-3 py-1 text-[11px] font-bold uppercase tracking-[0.1em] text-white ${
+                        n.tagTone === "primary" ? "bg-primary" : "bg-[#0b1a3a]"
+                      }`}
+                    >
+                      {n.tag}
+                    </span>
+                  </div>
+                  <h3 className="mt-3 font-display text-lg font-bold text-primary group-hover:underline">
+                    {n.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{n.perex}</p>
+                  <p className="mt-1 text-xs text-muted-foreground/80">{n.date}</p>
                 </Link>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-5 pb-20">
-          <div className="rounded-3xl border border-border bg-gradient-to-br from-card to-secondary p-8 md:p-12">
-            <h2 className="max-w-2xl text-2xl font-semibold md:text-4xl">
-              Jeden hlas nic nezmění. Tisíc hlasů ano.
-            </h2>
-            <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
-              Přidejte se ke komunitě, která reaguje společně, věcně a bez nadávek.
-            </p>
-            <Link
-              to="/zapojte-se"
-              className="mt-7 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5"
-            >
-              Chci se zapojit <ArrowRight className="size-4" />
-            </Link>
+        {/* témata */}
+        <section className="border-t border-border bg-secondary/50">
+          <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6">
+            <h2 className="font-display text-3xl font-bold text-primary">Témata, která rozebíráme</h2>
+            <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {TOPICS.map((t) => (
+                <article
+                  key={t.slug}
+                  className="flex flex-col rounded-xl border border-border bg-card p-6 transition-colors hover:border-primary/50"
+                >
+                  <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-primary">
+                    {t.kicker}
+                  </p>
+                  <h3 className="mt-2 font-display text-xl font-bold">{t.title}</h3>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{t.perex}</p>
+                  <Link to="/clanky" className="mt-5 text-sm font-semibold text-primary">
+                    Číst více →
+                  </Link>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
       </main>
