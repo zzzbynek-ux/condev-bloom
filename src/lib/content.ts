@@ -242,40 +242,6 @@ export const FEED: FeedGroup[] = [
     ],
   },
   {
-    id: "doporucujeme",
-    label: "Doporučujeme",
-    showAll: true,
-    items: [
-      {
-        slug: "zmen-algoritmus",
-        tag: "Viverrae",
-        date: "24/06/25",
-        title: "Změň algoritmus — změníš realitu",
-        perex:
-          "Pod příspěvkem s tisíci lajky se objeví jediný věcný komentář — stručný a zdánlivě bezvýznamný. A přesto silnější než původní text.",
-        image: "media",
-      },
-      {
-        slug: "odlisni-virou",
-        tag: "Ullamcorper",
-        date: "05/07/25",
-        title: "Odlišní vírou, spojeni svědomím",
-        perex:
-          "V debatě o Izraeli často nejsilněji hlasy nejchybějí jen z Jeruzaléma. Křesťané a muslimové otevřeně vystupují proti nenávisti.",
-        image: "politics",
-      },
-      {
-        slug: "zamereno-na-katar",
-        tag: "Ullamcorper",
-        date: "24/06/25",
-        title: "Zaměřeno na Katar: peníze, moc, propaganda",
-        perex:
-          "Protesty na univerzitách, výkřiky v ulicích i virální příspěvky mají společného víc, než se zdá. Za atmosférou nenávisti stojí kampaň.",
-        image: "flags",
-      },
-    ],
-  },
-  {
     id: "cesi-a-izrael",
     label: "Češi a Izrael",
     showAll: true,
