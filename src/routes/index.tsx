@@ -154,7 +154,7 @@ const ACTIONS: {
 }[] = [
   {
     icon: StarOfDavidIcon,
-    title: "Antisemitismus",
+    title: "Antisemitismus 2.0",
     text: "Co je nový antisemitismus a jak ho poznat.",
     tone: "bg-primary",
     to: "/temata",
