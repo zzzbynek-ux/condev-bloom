@@ -311,12 +311,6 @@ function Index() {
                 rozhoduje o veřejném mínění — v komentářích, v médiích i ve školách.
               </p>
             </div>
-            <Link
-              to="/zapojte-se"
-              className="inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 md:self-auto"
-            >
-              Zapojte se <ArrowRight className="size-4" />
-            </Link>
           </div>
         </section>
 
