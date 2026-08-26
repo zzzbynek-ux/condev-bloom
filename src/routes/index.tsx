@@ -179,19 +179,20 @@ const ACTIONS: {
     to: "/ptejte-se-ai",
   },
   {
-    icon: Flag,
-    title: "Nahlásit incident",
-    text: "Pomozte nám monitorovat a reagovat.",
-    tone: "bg-destructive",
-    to: "/nahlasit-incident",
-  },
-  {
     icon: Users,
     title: "Zapojte se",
     text: "Přidejte se k nám a staňte se součástí řešení.",
     tone: "bg-primary",
     to: "/zapojte-se",
   },
+  {
+    icon: Flag,
+    title: "Nahlásit incident",
+    text: "Pomozte nám monitorovat a reagovat.",
+    tone: "bg-destructive",
+    to: "/nahlasit-incident",
+  },
+
 ];
 
 
