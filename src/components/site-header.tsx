@@ -2,7 +2,6 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { ChevronDown, Facebook, Flag, Instagram, Menu, Search, X } from "lucide-react";
 import { TOPICS } from "@/lib/content";
-import logoWhite from "@/assets/logo-white.png.asset.json";
 
 type NavTo = "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" | "/manifest" | "/nahlasit-incident" | "/ptejte-se-ai";
 type NavChild = { label: string; to?: NavTo };
