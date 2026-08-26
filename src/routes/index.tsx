@@ -300,17 +300,15 @@ function Index() {
       <main>
         {/* intro nad hero */}
         <section className="border-b border-border bg-secondary/40">
-          <div className="mx-auto flex max-w-[88rem] flex-col gap-4 px-5 py-6 md:flex-row md:items-center md:justify-between md:gap-8 md:px-6 md:py-8">
-            <div className="min-w-0">
-              <h1 className="font-display text-xl font-extrabold leading-snug text-balance text-foreground md:text-3xl">
-                Do debaty o Izraeli vracíme fakta,{" "}
-                <span className="text-primary">kontext a klidný tón.</span>
-              </h1>
-              <p className="mt-2 max-w-3xl text-pretty text-sm text-muted-foreground md:text-base">
-                Píšeme analýzy, ověřujeme tvrzení a pomáháme lidem reagovat tam, kde se
-                rozhoduje o veřejném mínění — v komentářích, v médiích i ve školách.
-              </p>
-            </div>
+          <div className="mx-auto max-w-[48rem] px-5 py-8 text-center md:px-6 md:py-10">
+            <h1 className="font-display text-xl font-extrabold leading-snug text-balance text-foreground md:text-3xl">
+              Do debaty o Izraeli vracíme fakta,{" "}
+              <span className="text-primary">kontext a klidný tón.</span>
+            </h1>
+            <p className="mx-auto mt-3 max-w-[42rem] text-pretty text-sm text-muted-foreground md:text-base">
+              Píšeme analýzy, ověřujeme tvrzení a pomáháme lidem reagovat tam, kde se
+              rozhoduje o veřejném mínění.
+            </p>
           </div>
         </section>
 
