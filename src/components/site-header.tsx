@@ -23,6 +23,7 @@ const NAV: NavItem[] = [
   {
     label: "Chcete vědět víc?",
     children: [
+      { label: "Manifest", to: "/manifest" },
       { label: "Co je antisemitismus?", to: "/temata" },
       { label: "Ptejte se AI", to: "/temata" },
     ],
