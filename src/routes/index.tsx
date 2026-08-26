@@ -304,15 +304,8 @@ function Index() {
       <main>
         <Hero />
 
-        {/* důvěryhodnost */}
-        <section className="border-b border-border bg-muted/30">
-          <div className="mx-auto max-w-[88rem] px-5 py-3 md:px-6">
-            <p className="text-center text-[12px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-              Nezávislá redakce · Ověřené zdroje · Aktualizováno{" "}
-              {new Date().toLocaleDateString("cs-CZ", { day: "numeric", month: "long", year: "numeric" })}
-            </p>
-          </div>
-        </section>
+
+
 
 
 
