@@ -63,9 +63,12 @@ export function SiteHeader() {
       {/* horní modrý pruh: identita + rychlé kontakty */}
       <div className="bg-primary text-primary-foreground">
 
-        <div className="mx-auto flex max-w-[88rem] items-stretch gap-4 pr-4 md:pr-6">
-          {/* textové logo na modré */}
-          <Link to="/" className="flex shrink-0 flex-col justify-center py-4 pl-4 md:pl-6">
+        <div className="relative mx-auto flex max-w-[88rem] items-stretch gap-4 px-4 md:px-6">
+          {/* textové logo na modré – vycentrované */}
+          <Link
+            to="/"
+            className="pointer-events-auto flex flex-1 flex-col items-center justify-center py-4 text-center lg:absolute lg:inset-y-0 lg:left-1/2 lg:flex-none lg:-translate-x-1/2"
+          >
             <span className="font-display text-xl font-extrabold uppercase leading-none tracking-[0.02em] text-primary-foreground md:text-2xl">
               Jedním Hlasem
             </span>
@@ -74,11 +77,8 @@ export function SiteHeader() {
             </span>
           </Link>
 
-
-
-
-
           <div className="ml-auto flex items-center gap-4">
+
 
             <div className="hidden items-center gap-3 lg:flex">
               <a href="https://x.com" aria-label="X" className="opacity-80 transition-opacity hover:opacity-100">
