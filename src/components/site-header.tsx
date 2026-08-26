@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Facebook, Instagram, Menu, MessageSquare, X } from "lucide-react";
+import { Facebook, Instagram, Menu, X } from "lucide-react";
 
+import { SiteLogo } from "@/components/site-logo";
 import { SECTIONS } from "@/lib/content";
 
 const NAV = [
