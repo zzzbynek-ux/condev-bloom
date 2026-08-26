@@ -38,7 +38,13 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const HERO = [...HERO_SLIDES];
+const CLAIM_SLIDE = {
+  kicker: "Jedním hlasem",
+  title: "Do debaty o Izraeli vracíme fakta, kontext a klidný tón.",
+  text: "Píšeme analýzy, ověřujeme tvrzení a pomáháme lidem reagovat tam, kde se rozhoduje o veřejném mínění.",
+};
+
+const HERO = [CLAIM_SLIDE, ...HERO_SLIDES];
 
 function Hero() {
   const [i, setI] = useState(0);
