@@ -104,6 +104,10 @@ export const SLIDES = [
   },
 ];
 
+/** Zkrácený výběr pro hero slider — zbytek žije na /manifest */
+export const HERO_SLIDES = SLIDES.slice(0, 4);
+
+
 /** Tři zvýrazněné karty pod rychlými akcemi */
 export const FEATURED = [
   {
