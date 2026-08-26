@@ -190,18 +190,55 @@ const FEATURED_IMAGES: Record<string, string> = {
   red: featuredSlogansImg,
 };
 
-function FeaturedArt({ tone, alt }: { tone: (typeof FEATURED)[number]["tone"]; alt: string }) {
+function ArticleCard({
+  image,
+  tag,
+  date,
+  title,
+  perex,
+}: {
+  image: string;
+  tag: string;
+  date: string;
+  title: string;
+  perex: string;
+}) {
   return (
-    <img
-      src={FEATURED_IMAGES[tone] ?? featuredAlgorithmImg}
-      alt={alt}
-      loading="lazy"
-      width={1280}
-      height={720}
-      className="aspect-video w-full object-cover"
-    />
+    <article className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
+      <img
+        src={image}
+        alt={title}
+        loading="lazy"
+        width={1280}
+        height={720}
+        className="aspect-video w-full object-cover"
+      />
+      <div className="flex flex-1 flex-col p-6">
+        <div className="flex items-center justify-between gap-3">
+          <span className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground">
+            {tag}
+          </span>
+          <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
+            {date}
+          </span>
+        </div>
+        <h3 className="mt-3 font-display text-xl font-bold leading-snug text-primary">
+          <Link to="/clanky" className="group-hover:underline">
+            {title}
+          </Link>
+        </h3>
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{perex}</p>
+        <Link
+          to="/clanky"
+          className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-primary hover:underline"
+        >
+          Číst dál <ArrowRight className="size-4" />
+        </Link>
+      </div>
+    </article>
   );
 }
+
 
 
 function SectionHeader({
