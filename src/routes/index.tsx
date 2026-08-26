@@ -309,7 +309,7 @@ function Index() {
                     {f.title}
                   </Link>
                 </h3>
-                <FeaturedArt tone={f.tone} />
+                <FeaturedArt tone={f.tone} alt={f.title.replace("\n", " ")} />
                 <div className="flex flex-1 flex-col px-6 pb-6 pt-5">
                   <p className="text-sm leading-relaxed text-muted-foreground">{f.text}</p>
                   <Link
