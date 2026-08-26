@@ -422,12 +422,6 @@ function Index() {
                     {t.title}
                   </Link>
                 ))}
-                <Link
-                  to="/temata"
-                  className="shrink-0 rounded-full px-4 py-2 text-sm font-semibold text-muted-foreground underline-offset-4 hover:text-primary hover:underline"
-                >
-                  Všechna témata →
-                </Link>
               </div>
             </div>
           </div>
