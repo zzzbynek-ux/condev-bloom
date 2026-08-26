@@ -71,14 +71,15 @@ export function SiteHeader() {
             className="flex shrink-0 flex-col justify-center py-3 pl-4 md:pl-6"
           >
             <img
-              src={logoAsset.url}
+              src={logoWhite.url}
               alt="Jedním Hlasem"
-              className="h-11 w-auto brightness-0 invert md:h-13"
+              className="h-11 w-auto md:h-14"
             />
             <span className="mt-1 block text-[9px] font-semibold uppercase tracking-[0.12em] text-primary-foreground/80 md:text-[10px]">
               Fakta proti dezinformacím
             </span>
           </Link>
+
 
 
           <div className="ml-auto flex items-center gap-4">
