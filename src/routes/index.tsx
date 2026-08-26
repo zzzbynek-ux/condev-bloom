@@ -268,9 +268,8 @@ function Index() {
                   to="/temata"
                   className="group flex min-w-0 flex-col gap-2 px-4 py-5 transition-colors hover:bg-muted/60 first:pl-0 lg:px-5"
                 >
-                  <span className="text-[11px] font-bold tabular-nums text-primary/50">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                  <span className="text-sm font-bold leading-snug text-foreground transition-colors group-hover:text-primary">
+
                   <span className="text-sm font-bold leading-snug text-foreground transition-colors group-hover:text-primary">
                     {t.title}
                   </span>
