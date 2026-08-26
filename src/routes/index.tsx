@@ -33,16 +33,24 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+const CLAIM_SLIDE = {
+  kicker: "JednímHlasem",
+  title: "Do debaty o Izraeli vracíme fakta, kontext a klidný tón.",
+  text: "Píšeme analýzy, ověřujeme tvrzení a pomáháme lidem reagovat tam, kde se rozhoduje o veřejném mínění — v komentářích, v médiích i ve školách.",
+};
+
+const HERO = [CLAIM_SLIDE, ...HERO_SLIDES];
+
 function Hero() {
   const [i, setI] = useState(0);
-  const go = (d: number) => setI((v) => (v + d + HERO_SLIDES.length) % HERO_SLIDES.length);
+  const go = (d: number) => setI((v) => (v + d + HERO.length) % HERO.length);
 
   useEffect(() => {
-    const t = setInterval(() => setI((v) => (v + 1) % HERO_SLIDES.length), 8000);
+    const t = setInterval(() => setI((v) => (v + 1) % HERO.length), 8000);
     return () => clearInterval(t);
   }, []);
 
-  const slide = HERO_SLIDES[i] ?? HERO_SLIDES[0]!;
+  const slide = HERO[i] ?? HERO[0]!;
 
   return (
     <section className="relative isolate overflow-hidden bg-[#0b1a3a]">
