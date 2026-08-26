@@ -40,7 +40,6 @@ const NAV: NavItem[] = [
       { label: "Ptejte se AI", to: "/ptejte-se-ai" },
     ],
   },
-  { label: "O nás", to: "/o-nas" },
 ];
 
 
