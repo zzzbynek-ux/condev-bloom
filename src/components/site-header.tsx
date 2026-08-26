@@ -1,13 +1,41 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Facebook, Flag, Instagram, Menu, MessageSquare, Search, X } from "lucide-react";
+import { ChevronDown, Facebook, Flag, Instagram, Menu, MessageSquare, Search, X } from "lucide-react";
 
-import { SECTIONS } from "@/lib/content";
+type NavChild = { label: string; to?: "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" };
+type NavItem =
+  | { label: string; to: "/clanky" | "/temata" | "/o-nas" | "/zapojte-se"; children?: undefined }
+  | { label: string; to?: undefined; children: NavChild[] };
 
-const NAV = [
-  { to: "/clanky", label: "Články" },
-  { to: "/o-nas", label: "O nás" },
-] as const;
+const NAV: NavItem[] = [
+  { label: "O nás", to: "/o-nas" },
+  {
+    label: "Články",
+    children: [
+      { label: "Nové", to: "/clanky" },
+      { label: "Doporučujeme", to: "/clanky" },
+      { label: "Studie a analýzy", to: "/clanky" },
+      { label: "České příběhy", to: "/clanky" },
+      { label: "Všechny texty", to: "/clanky" },
+    ],
+  },
+  {
+    label: "Chcete vědět víc?",
+    children: [
+      { label: "Co je antisemitismus?", to: "/temata" },
+      { label: "Ptejte se AI", to: "/temata" },
+    ],
+  },
+  {
+    label: "Zapojte se",
+    children: [
+      { label: "Nahlaste incident", to: "/zapojte-se" },
+      { label: "JH Projekty (připravujeme)" },
+      { label: "E-shop (připravujeme)" },
+    ],
+  },
+];
+
 
 function XIcon({ className }: { className?: string }) {
   return (
