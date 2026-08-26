@@ -28,7 +28,7 @@ const NAV: NavItem[] = [
   {
     label: "Zapojte se",
     children: [
-      { label: "Nahlaste incident", to: "/nahlasit-incident" },
+      { label: "Nahlásit incident", to: "/nahlasit-incident" },
       { label: "JH Projekty (připravujeme)" },
       { label: "E-shop (připravujeme)" },
     ],
