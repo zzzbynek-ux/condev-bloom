@@ -343,6 +343,14 @@ function Index() {
                         className="h-[86px] w-[112px] shrink-0 rounded-sm object-cover"
                       />
                     </div>
+
+                    <Link
+                      to="/clanky"
+                      className="mt-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-primary hover:underline"
+                    >
+                      Číst dál <ArrowRight className="size-4" />
+                    </Link>
+
                   </article>
                 ))}
               </div>
