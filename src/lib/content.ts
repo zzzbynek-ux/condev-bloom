@@ -189,3 +189,158 @@ export const LATEST: NewsItem[] = [
     image: "flags",
   },
 ];
+
+export type FeedItem = {
+  slug: string;
+  tag: string;
+  date: string;
+  title: string;
+  perex: string;
+  image: "flags" | "media" | "politics";
+};
+
+export type FeedGroup = {
+  id: string;
+  label: string;
+  showAll: boolean;
+  items: FeedItem[];
+};
+
+export const FEED: FeedGroup[] = [
+  {
+    id: "nove",
+    label: "Nové",
+    showAll: false,
+    items: [
+      {
+        slug: "propustte-rukojmi",
+        tag: "Ullamcorper",
+        date: "05/07/25",
+        title: "Propusťte rukojmí!",
+        perex:
+          "Izraelští rukojmí — někteří zavraždění, jiní stále ukrytí v tunelech Gazy. Svět zapomíná. My ne. Jejich příběhy musíme držet nad hladinou.",
+        image: "flags",
+      },
+      {
+        slug: "odlisni-virou",
+        tag: "Ullamcorper",
+        date: "05/07/25",
+        title: "Odlišní vírou, spojeni svědomím",
+        perex:
+          "V debatě o Izraeli často nejsilněji hlasy nejchybějí jen z Jeruzaléma. Křesťané a muslimové otevřeně vystupují proti nenávisti.",
+        image: "politics",
+      },
+      {
+        slug: "masinerie-lzi",
+        tag: "Ullamcorper",
+        date: "05/07/25",
+        title: "Mašinerie lží: když média mluví za Hamás",
+        perex:
+          "Západní média se tváří jako objektivní strážci pravdy. Ale když přijde na Izrael, často bez váhání přebírají informace od teroristů.",
+        image: "media",
+      },
+    ],
+  },
+  {
+    id: "doporucujeme",
+    label: "Doporučujeme",
+    showAll: true,
+    items: [
+      {
+        slug: "zmen-algoritmus",
+        tag: "Viverrae",
+        date: "24/06/25",
+        title: "Změň algoritmus — změníš realitu",
+        perex:
+          "Pod příspěvkem s tisíci lajky se objeví jediný věcný komentář — stručný a zdánlivě bezvýznamný. A přesto silnější než původní text.",
+        image: "media",
+      },
+      {
+        slug: "odlisni-virou",
+        tag: "Ullamcorper",
+        date: "05/07/25",
+        title: "Odlišní vírou, spojeni svědomím",
+        perex:
+          "V debatě o Izraeli často nejsilněji hlasy nejchybějí jen z Jeruzaléma. Křesťané a muslimové otevřeně vystupují proti nenávisti.",
+        image: "politics",
+      },
+      {
+        slug: "zamereno-na-katar",
+        tag: "Ullamcorper",
+        date: "24/06/25",
+        title: "Zaměřeno na Katar: peníze, moc, propaganda",
+        perex:
+          "Protesty na univerzitách, výkřiky v ulicích i virální příspěvky mají společného víc, než se zdá. Za atmosférou nenávisti stojí kampaň.",
+        image: "flags",
+      },
+    ],
+  },
+  {
+    id: "cesi-a-izrael",
+    label: "Češi a Izrael",
+    showAll: true,
+    items: [
+      {
+        slug: "maly-stat-globalni-prinos",
+        tag: "Viverrae",
+        date: "05/07/25",
+        title: "Malý stát. Globální přínos.",
+        perex:
+          "Izrael není jen spojencem Západu, je jeho součástí. A právě proto si zaslouží naši pozornost i podporu. Přináší světu víc, než by odpovídalo jeho velikosti.",
+        image: "flags",
+      },
+      {
+        slug: "masinerie-lzi",
+        tag: "Ullamcorper",
+        date: "05/07/25",
+        title: "Mašinerie lží: když média mluví za Hamás",
+        perex:
+          "Západní média se tváří jako objektivní strážci pravdy. Ale když přijde na Izrael, často bez váhání přebírají informace od teroristů.",
+        image: "media",
+      },
+      {
+        slug: "zamereno-na-katar",
+        tag: "Ullamcorper",
+        date: "24/06/25",
+        title: "Zaměřeno na Katar: peníze, moc, propaganda",
+        perex:
+          "Protesty na univerzitách, výkřiky v ulicích i virální příspěvky mají společného víc, než se zdá. Za atmosférou nenávisti stojí kampaň.",
+        image: "politics",
+      },
+    ],
+  },
+  {
+    id: "studie-a-analyzy",
+    label: "Studie a analýzy",
+    showAll: true,
+    items: [
+      {
+        slug: "propustte-rukojmi",
+        tag: "Ullamcorper",
+        date: "05/07/25",
+        title: "Propusťte rukojmí!",
+        perex:
+          "Izraelští rukojmí — někteří zavraždění, jiní stále ukrytí v tunelech Gazy. Svět zapomíná. My ne. Jejich příběhy musíme držet nad hladinou.",
+        image: "flags",
+      },
+      {
+        slug: "novy-antisemitismus",
+        tag: "Ullamcorper",
+        date: "02/07/25",
+        title: "Nový antisemitismus: o Palestinu tady vůbec nejde",
+        perex:
+          "Nový antisemitismus se tváří jako morální apel — mluví jazykem solidarity, obětí a historické křivdy. Ale pod pláštíkem vznešených slov nejde o Palestinu.",
+        image: "politics",
+      },
+      {
+        slug: "wiki-jako-nastroj-vlivu",
+        tag: "Ullamcorper",
+        date: "24/06/25",
+        title: "Když fakta nejsou fakta: Wiki jako nástroj vlivu",
+        perex:
+          "Wikipedia je symbolem otevřeného sdílení znalostí. Ale co když právě její otevřenost umožňuje i tiché přepisování reality?",
+        image: "media",
+      },
+    ],
+  },
+];
