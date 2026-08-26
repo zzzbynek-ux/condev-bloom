@@ -13,6 +13,9 @@ import politicsImg from "@/assets/news-politics.jpg";
 import featuredAlgorithmImg from "@/assets/featured-algorithm.jpg";
 import featuredInnovationImg from "@/assets/featured-innovation.jpg";
 import featuredSlogansImg from "@/assets/featured-slogans.jpg";
+import selMediaImg from "@/assets/sel-media.jpg";
+import selKatarImg from "@/assets/sel-katar.jpg";
+import selRudozelenaImg from "@/assets/sel-rudozelena.jpg";
 
 
 
@@ -354,7 +357,7 @@ function Index() {
               {TOPICS.slice(0, 3).map((t, idx) => (
                 <ArticleCard
                   key={t.slug}
-                  image={[mediaImg, politicsImg, flagsImg][idx % 3]!}
+                  image={[selMediaImg, selKatarImg, selRudozelenaImg][idx % 3]!}
                   tag={t.kicker}
                   date="Vybrané"
                   title={t.title}
