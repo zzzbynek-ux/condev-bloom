@@ -185,13 +185,6 @@ const ACTIONS: {
     tone: "bg-primary",
     to: "/zapojte-se",
   },
-  {
-    icon: Flag,
-    title: "Nahlásit incident",
-    text: "Pomozte nám monitorovat a reagovat.",
-    tone: "bg-destructive",
-    to: "/nahlasit-incident",
-  },
 
 ];
 
