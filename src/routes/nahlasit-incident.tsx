@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { ShieldAlert } from "lucide-react";
-import { toast } from "sonner";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -80,7 +79,6 @@ function NahlasitIncident() {
             onSubmit={(e) => {
               e.preventDefault();
               setSent(true);
-              toast.success("Hlášení odesláno");
             }}
           >
             <label className="grid gap-2">
