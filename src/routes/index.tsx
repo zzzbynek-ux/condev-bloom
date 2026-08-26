@@ -266,8 +266,8 @@ function Index() {
 
         {/* rychlé akce */}
         <section className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
-          <SectionHeader kicker="Rozcestník" title="Rychlé akce" />
-          <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+
 
             {ACTIONS.map((a) => (
               <Link
