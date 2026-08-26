@@ -82,12 +82,6 @@ export function SiteHeader() {
               <a href="https://x.com" aria-label="X" className="opacity-80 transition-opacity hover:opacity-100">
                 <XIcon className="size-[17px]" />
               </a>
-              <a href="https://facebook.com" aria-label="Facebook" className="opacity-80 transition-opacity hover:opacity-100">
-                <Facebook className="size-[18px]" />
-              </a>
-              <a href="https://instagram.com" aria-label="Instagram" className="opacity-80 transition-opacity hover:opacity-100">
-                <Instagram className="size-[18px]" />
-              </a>
             </div>
 
             <Link to="/hledat" aria-label="Hledat" className="rounded-md p-2 lg:hidden">
