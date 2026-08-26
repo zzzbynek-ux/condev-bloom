@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { ChevronDown, Facebook, Flag, Instagram, Menu, MessageSquare, Search, X } from "lucide-react";
+import { ChevronDown, Facebook, Flag, Instagram, Menu, Search, X } from "lucide-react";
 import { TOPICS } from "@/lib/content";
+import logoAsset from "@/assets/logo-jednim-hlasem.png.asset.json";
 
 type NavTo = "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" | "/manifest" | "/nahlasit-incident" | "/ptejte-se-ai";
 type NavChild = { label: string; to?: NavTo };
