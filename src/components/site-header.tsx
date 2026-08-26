@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Facebook, Instagram, Menu, MessageSquare, X } from "lucide-react";
+import { Facebook, Instagram, Menu, X } from "lucide-react";
 
+import { SiteLogo } from "@/components/site-logo";
 import { SECTIONS } from "@/lib/content";
 
 const NAV = [
@@ -31,20 +32,9 @@ export function SiteHeader() {
             to="/"
             className="relative flex shrink-0 items-center bg-white py-3 pl-4 pr-8 md:pl-8 md:pr-14 [clip-path:polygon(0_0,100%_0,calc(100%-1.75rem)_100%,0_100%)]"
           >
-            <span className="mr-3 grid size-9 shrink-0 place-items-center rounded-md bg-primary md:size-11">
-              <MessageSquare className="size-5 text-white md:size-6" />
-            </span>
-            <span className="leading-none">
-              <span className="block font-display text-lg font-bold uppercase leading-[1.05] tracking-tight text-primary md:text-2xl">
-                Jedním
-                <br />
-                Hlasem
-              </span>
-              <span className="mt-1 block text-[9px] font-semibold uppercase tracking-[0.12em] text-primary/70 md:text-[10px]">
-                Fakta proti dezinformacím
-              </span>
-            </span>
+            <SiteLogo />
           </Link>
+
 
           <div className="ml-auto flex items-center">
             <button

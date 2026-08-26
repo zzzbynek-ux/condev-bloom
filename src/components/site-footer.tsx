@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { SiteLogo } from "@/components/site-logo";
 
 const LINKS = [
   { to: "/o-nas", label: "O nás" },
@@ -11,11 +12,9 @@ export function SiteFooter() {
     <footer className="bg-primary text-primary-foreground">
       <div className="mx-auto grid max-w-[88rem] grid-cols-[minmax(0,1fr)_auto] items-center gap-6 px-5 py-8 md:grid-cols-3 md:px-6">
         <div className="min-w-0">
-          <p className="font-display text-xl font-bold text-white">JednímHlasem</p>
-          <p className="mt-1 text-xs text-primary-foreground/70">
-            Fakta, kontext a klidný tón do debaty o Izraeli.
-          </p>
+          <SiteLogo tone="white" className="[&_span]:leading-none" />
         </div>
+
 
         <nav className="col-span-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm md:col-span-1 md:justify-center">
           {LINKS.map((l, i) => (
