@@ -247,31 +247,39 @@ function Index() {
       <main>
         <Hero />
 
-        {/* témata – decentní rozcestník hned pod hero */}
-        <section className="border-y border-border bg-muted/40">
-          <div className="mx-auto flex max-w-[88rem] flex-col gap-3 px-5 py-4 md:flex-row md:items-center md:gap-6 md:px-6">
-            <p className="shrink-0 text-[11px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
-              Témata
-            </p>
-            <nav className="flex min-w-0 flex-1 flex-nowrap items-center gap-x-5 overflow-x-auto whitespace-nowrap lg:gap-x-6">
-              {TOPICS.map((t) => (
+        {/* témata – rozcestník hned pod hero */}
+        <section className="border-b border-border bg-background">
+          <div className="mx-auto max-w-[88rem] px-5 md:px-6">
+            <div className="flex items-baseline justify-between border-b border-border py-4">
+              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
+                Témata
+              </p>
+              <Link
+                to="/temata"
+                className="text-xs font-bold uppercase tracking-wide text-muted-foreground transition-colors hover:text-primary"
+              >
+                Všechna témata →
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 divide-x divide-border border-b border-border sm:grid-cols-3 lg:grid-cols-5 lg:divide-x">
+              {TOPICS.slice(0, 5).map((t, i) => (
                 <Link
                   key={t.slug}
                   to="/temata"
-                  className="shrink-0 whitespace-nowrap text-sm font-semibold text-foreground/80 underline-offset-4 transition-colors hover:text-primary hover:underline"
+                  className="group flex min-w-0 flex-col gap-2 px-4 py-5 transition-colors hover:bg-muted/60 first:pl-0 lg:px-5"
                 >
-                  {t.title}
+                  <span className="text-[11px] font-bold tabular-nums text-primary/50">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-sm font-bold leading-snug text-foreground transition-colors group-hover:text-primary">
+                    {t.title}
+                  </span>
                 </Link>
               ))}
-            </nav>
-            <Link
-              to="/temata"
-              className="shrink-0 text-sm font-semibold text-primary underline-offset-4 hover:underline"
-            >
-              Všechna témata →
-            </Link>
+            </div>
           </div>
         </section>
+
 
 
 
