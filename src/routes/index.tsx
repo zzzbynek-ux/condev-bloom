@@ -33,16 +33,24 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+const CLAIM_SLIDE = {
+  kicker: "JednímHlasem",
+  title: "Do debaty o Izraeli vracíme fakta, kontext a klidný tón.",
+  text: "Píšeme analýzy, ověřujeme tvrzení a pomáháme lidem reagovat tam, kde se rozhoduje o veřejném mínění — v komentářích, v médiích i ve školách.",
+};
+
+const HERO = [CLAIM_SLIDE, ...HERO_SLIDES];
+
 function Hero() {
   const [i, setI] = useState(0);
-  const go = (d: number) => setI((v) => (v + d + HERO_SLIDES.length) % HERO_SLIDES.length);
+  const go = (d: number) => setI((v) => (v + d + HERO.length) % HERO.length);
 
   useEffect(() => {
-    const t = setInterval(() => setI((v) => (v + 1) % HERO_SLIDES.length), 8000);
+    const t = setInterval(() => setI((v) => (v + 1) % HERO.length), 8000);
     return () => clearInterval(t);
   }, []);
 
-  const slide = HERO_SLIDES[i] ?? HERO_SLIDES[0]!;
+  const slide = HERO[i] ?? HERO[0]!;
 
   return (
     <section className="relative isolate overflow-hidden bg-[#0b1a3a]">
@@ -61,9 +69,15 @@ function Hero() {
           <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/60">
             {slide.kicker}
           </p>
-          <p key={slide.title} className="animate-rise mt-3 font-display text-3xl font-bold text-white md:text-5xl">
-            {slide.title}
-          </p>
+          {i === 0 ? (
+            <h1 key={slide.title} className="animate-rise mt-3 font-display text-3xl font-bold text-white md:text-5xl">
+              {slide.title}
+            </h1>
+          ) : (
+            <p key={slide.title} className="animate-rise mt-3 font-display text-3xl font-bold text-white md:text-5xl">
+              {slide.title}
+            </p>
+          )}
           <p
             key={slide.text}
             className="animate-rise mt-4 text-sm leading-relaxed text-white/85 md:text-[17px]"
@@ -97,7 +111,7 @@ function Hero() {
       </button>
 
       <div className="relative flex items-center justify-center gap-2 pb-6">
-        {HERO_SLIDES.map((s, idx) => (
+        {HERO.map((s, idx) => (
           <button
             key={s.title}
             type="button"
@@ -190,18 +204,6 @@ function Index() {
     <div className="min-h-screen bg-background">
       <SiteHeader />
       <main>
-        {/* úvodní claim */}
-        <section className="mx-auto max-w-[88rem] px-5 py-8 md:px-6 md:py-10">
-          <h1 className="max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-tight text-[#0b1a3a] md:text-4xl">
-            Do debaty o Izraeli vracíme fakta,{" "}
-            <span className="text-primary">kontext a klidný tón.</span>
-          </h1>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Píšeme analýzy, ověřujeme tvrzení a pomáháme lidem reagovat tam, kde se rozhoduje o
-            veřejném mínění — v komentářích, v médiích i ve školách.
-          </p>
-        </section>
-
         <Hero />
 
         {/* rychlé akce */}
