@@ -311,7 +311,7 @@ function Index() {
 
 
         {/* rychlé akce */}
-        <section className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+        <section className="mx-auto max-w-[88rem] px-5 pb-10 pt-14 md:px-6 md:pb-12 md:pt-16">
           <div className="mx-auto grid max-w-5xl justify-center gap-6 md:grid-cols-3">
 
 
@@ -344,8 +344,9 @@ function Index() {
         </section>
 
         {/* vybrané texty – karty */}
-        <section className="border-y border-border bg-secondary/50">
-          <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+        <section className="bg-background">
+          <div className="mx-auto max-w-[88rem] px-5 pb-14 md:px-6 md:pb-16">
+
             <SectionHeader
               kicker=""
               title="Vybrané texty"
