@@ -26,19 +26,19 @@ const NAV: NavItem[] = [
     children: TOPICS.map((t) => ({ label: t.title, to: "/temata" as NavTo })),
   },
   {
-    label: "Chcete vědět víc?",
-    children: [
-      { label: "Manifest", to: "/manifest" },
-      { label: "Co je antisemitismus?", to: "/temata" },
-      { label: "Ptejte se AI", to: "/temata" },
-    ],
-  },
-  {
     label: "Zapojte se",
     children: [
       { label: "Nahlaste incident", to: "/zapojte-se" },
       { label: "JH Projekty (připravujeme)" },
       { label: "E-shop (připravujeme)" },
+    ],
+  },
+  {
+    label: "Chcete vědět víc?",
+    children: [
+      { label: "Manifest", to: "/manifest" },
+      { label: "Co je antisemitismus?", to: "/temata" },
+      { label: "Ptejte se AI", to: "/temata" },
     ],
   },
 ];
