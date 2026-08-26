@@ -168,7 +168,8 @@ const ACTIONS: {
     icon: HelpCircle,
     title: "Ptejte se AI",
     text: "Zeptejte se naší AI na dezinformace a fakta.",
-    tone: "bg-primary",
+    tone: "bg-destructive",
+
     to: "/ptejte-se-ai",
   },
   {
@@ -304,7 +305,7 @@ function Index() {
 
         {/* rychlé akce */}
         <section className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mx-auto grid max-w-5xl justify-center gap-6 md:grid-cols-3">
 
 
             {ACTIONS.map((a) => (
