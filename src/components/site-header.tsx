@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ChevronDown, Facebook, Flag, Instagram, Menu, MessageSquare, Search, X } from "lucide-react";
 
 type NavTo = "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" | "/manifest";
