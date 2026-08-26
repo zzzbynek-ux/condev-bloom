@@ -1,13 +1,41 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Facebook, Flag, Instagram, Menu, MessageSquare, Search, X } from "lucide-react";
+import { ChevronDown, Facebook, Flag, Instagram, Menu, MessageSquare, Search, X } from "lucide-react";
 
-import { SECTIONS } from "@/lib/content";
+type NavChild = { label: string; to?: "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" };
+type NavItem =
+  | { label: string; to: "/clanky" | "/temata" | "/o-nas" | "/zapojte-se"; children?: undefined }
+  | { label: string; to?: undefined; children: NavChild[] };
 
-const NAV = [
-  { to: "/clanky", label: "Články" },
-  { to: "/o-nas", label: "O nás" },
-] as const;
+const NAV: NavItem[] = [
+  { label: "O nás", to: "/o-nas" },
+  {
+    label: "Články",
+    children: [
+      { label: "Nové", to: "/clanky" },
+      { label: "Doporučujeme", to: "/clanky" },
+      { label: "Studie a analýzy", to: "/clanky" },
+      { label: "České příběhy", to: "/clanky" },
+      { label: "Všechny texty", to: "/clanky" },
+    ],
+  },
+  {
+    label: "Chcete vědět víc?",
+    children: [
+      { label: "Co je antisemitismus?", to: "/temata" },
+      { label: "Ptejte se AI", to: "/temata" },
+    ],
+  },
+  {
+    label: "Zapojte se",
+    children: [
+      { label: "Nahlaste incident", to: "/zapojte-se" },
+      { label: "JH Projekty (připravujeme)" },
+      { label: "E-shop (připravujeme)" },
+    ],
+  },
+];
+
 
 function XIcon({ className }: { className?: string }) {
   return (
@@ -20,6 +48,7 @@ function XIcon({ className }: { className?: string }) {
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [compact, setCompact] = useState(false);
+  const [menu, setMenu] = useState<string | null>(null);
   const [q, setQ] = useState("");
   const navigate = useNavigate();
 
@@ -113,18 +142,63 @@ export function SiteHeader() {
             </Link>
           ) : null}
 
-          <nav className="flex items-stretch gap-8">
-            {NAV.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className="flex items-center border-b-2 border-transparent py-4 text-base font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
-                activeProps={{ className: "border-primary text-primary" }}
-              >
-                {item.label}
-              </Link>
-            ))}
+          <nav className="flex items-stretch gap-7">
+            {NAV.map((item) =>
+              item.children ? (
+                <div
+                  key={item.label}
+                  className="group relative flex items-stretch"
+                  onMouseEnter={() => setMenu(item.label)}
+                  onMouseLeave={() => setMenu(null)}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setMenu((m) => (m === item.label ? null : item.label))}
+                    aria-expanded={menu === item.label}
+                    className="flex items-center gap-1.5 border-b-2 border-transparent py-4 text-base font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
+                  >
+                    {item.label}
+                    <ChevronDown
+                      className={`size-4 transition-transform ${menu === item.label ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {menu === item.label ? (
+                    <div className="absolute left-0 top-full z-50 w-64 rounded-b-xl border border-t-0 border-border bg-background py-2 shadow-lg">
+                      {item.children.map((c) =>
+                        c.to ? (
+                          <Link
+                            key={c.label}
+                            to={c.to}
+                            onClick={() => setMenu(null)}
+                            className="block px-4 py-2 text-sm text-foreground transition-colors hover:bg-muted hover:text-primary"
+                          >
+                            {c.label}
+                          </Link>
+                        ) : (
+                          <span
+                            key={c.label}
+                            className="block cursor-default px-4 py-2 text-sm text-muted-foreground"
+                          >
+                            {c.label}
+                          </span>
+                        ),
+                      )}
+                    </div>
+                  ) : null}
+                </div>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={item.to}
+                  className="flex items-center border-b-2 border-transparent py-4 text-base font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
+                  activeProps={{ className: "border-primary text-primary" }}
+                >
+                  {item.label}
+                </Link>
+              ),
+            )}
           </nav>
+
 
 
           <div className="ml-auto flex items-center gap-4">
@@ -178,27 +252,44 @@ export function SiteHeader() {
             />
           </form>
           <div className="flex flex-col">
-            {[...NAV, { to: "/zapojte-se", label: "Zapojte se" } as const].map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                onClick={() => setOpen(false)}
-                className="border-b border-border py-3 text-sm font-medium text-foreground"
-              >
-                {item.label}
-              </Link>
-            ))}
-            {SECTIONS.map((s) => (
-              <Link
-                key={s}
-                to="/temata"
-                onClick={() => setOpen(false)}
-                className="border-b border-border py-3 text-sm text-muted-foreground"
-              >
-                {s}
-              </Link>
-            ))}
+            {NAV.map((item) =>
+              item.children ? (
+                <div key={item.label} className="border-b border-border py-2">
+                  <p className="py-1 text-sm font-semibold uppercase tracking-wide text-foreground">
+                    {item.label}
+                  </p>
+                  <div className="flex flex-col pl-3">
+                    {item.children.map((c) =>
+                      c.to ? (
+                        <Link
+                          key={c.label}
+                          to={c.to}
+                          onClick={() => setOpen(false)}
+                          className="py-2 text-sm text-foreground/80"
+                        >
+                          {c.label}
+                        </Link>
+                      ) : (
+                        <span key={c.label} className="py-2 text-sm text-muted-foreground">
+                          {c.label}
+                        </span>
+                      ),
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={item.to}
+                  onClick={() => setOpen(false)}
+                  className="border-b border-border py-3 text-sm font-semibold uppercase tracking-wide text-foreground"
+                >
+                  {item.label}
+                </Link>
+              ),
+            )}
           </div>
+
         </div>
       ) : null}
     </header>
