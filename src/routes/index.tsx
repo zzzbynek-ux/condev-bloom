@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import type * as React from "react";
 import { useEffect, useState } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight, Flag, HelpCircle, Users } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Flag, HelpCircle, Star, Users } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -168,6 +168,13 @@ const ACTIONS: {
   tone: string;
   to: string;
 }[] = [
+  {
+    icon: Star,
+    title: "Antisemitismus 2.0",
+    text: "Nová podoba starých předsudků — jak ji poznat.",
+    tone: "bg-primary",
+    to: "/clanky",
+  },
   {
     icon: HelpCircle,
     title: "Ptejte se AI",
