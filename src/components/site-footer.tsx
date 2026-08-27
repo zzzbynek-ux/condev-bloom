@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { Facebook, Instagram } from "lucide-react";
 
 const LINKS = [
   { to: "/o-nas", label: "O nás" },
@@ -29,13 +30,20 @@ export function SiteFooter() {
           ))}
         </nav>
 
-        <div className="flex justify-end">
-          <a href="https://x.com" aria-label="Jedním Hlasem na X" className="opacity-90 hover:opacity-100">
-            <svg viewBox="0 0 24 24" aria-hidden className="size-7" fill="currentColor">
+        <div className="flex items-center justify-end gap-3">
+          <a href="https://x.com" target="_blank" rel="noreferrer" aria-label="Jedním Hlasem na X" className="opacity-90 hover:opacity-100">
+            <svg viewBox="0 0 24 24" aria-hidden className="size-6" fill="currentColor">
               <path d="M18.9 2H22l-6.8 7.8L23 22h-6.4l-5-6.5L5.8 22H2.7l7.3-8.3L1.5 2H8l4.5 6 6.4-6Zm-1.1 18h1.7L7.3 3.8H5.5L17.8 20Z" />
             </svg>
           </a>
+          <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Jedním Hlasem na Facebooku" className="opacity-90 hover:opacity-100">
+            <Facebook className="size-6" />
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Jedním Hlasem na Instagramu" className="opacity-90 hover:opacity-100">
+            <Instagram className="size-6" />
+          </a>
         </div>
+
       </div>
 
       <div className="border-t border-primary-foreground/20">
