@@ -169,6 +169,13 @@ const ACTIONS: {
   to: string;
 }[] = [
   {
+    icon: Star,
+    title: "Antisemitismus 2.0",
+    text: "Nová podoba starých předsudků — jak ji poznat.",
+    tone: "bg-primary",
+    to: "/clanky",
+  },
+  {
     icon: HelpCircle,
     title: "Ptejte se AI",
     text: "Zeptejte se naší AI na dezinformace a fakta.",
