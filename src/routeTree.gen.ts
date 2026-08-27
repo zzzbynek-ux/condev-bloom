@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AntisemitismusRouteImport } from './routes/antisemitismus'
 import { Route as ClankyRouteImport } from './routes/clanky'
 import { Route as HledatRouteImport } from './routes/hledat'
 import { Route as ManifestRouteImport } from './routes/manifest'
@@ -23,6 +24,11 @@ import { Route as ZapojteSeRouteImport } from './routes/zapojte-se'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AntisemitismusRoute = AntisemitismusRouteImport.update({
+  id: '/antisemitismus',
+  path: '/antisemitismus',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ClankyRoute = ClankyRouteImport.update({
@@ -73,6 +79,7 @@ const ZapojteSeRoute = ZapojteSeRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/antisemitismus': typeof AntisemitismusRoute
   '/clanky': typeof ClankyRoute
   '/hledat': typeof HledatRoute
   '/manifest': typeof ManifestRoute
@@ -85,6 +92,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/antisemitismus': typeof AntisemitismusRoute
   '/clanky': typeof ClankyRoute
   '/hledat': typeof HledatRoute
   '/manifest': typeof ManifestRoute
@@ -98,6 +106,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/antisemitismus': typeof AntisemitismusRoute
   '/clanky': typeof ClankyRoute
   '/hledat': typeof HledatRoute
   '/manifest': typeof ManifestRoute
@@ -112,6 +121,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/antisemitismus'
     | '/clanky'
     | '/hledat'
     | '/manifest'
@@ -124,6 +134,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/antisemitismus'
     | '/clanky'
     | '/hledat'
     | '/manifest'
@@ -136,6 +147,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/antisemitismus'
     | '/clanky'
     | '/hledat'
     | '/manifest'
@@ -149,6 +161,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AntisemitismusRoute: typeof AntisemitismusRoute
   ClankyRoute: typeof ClankyRoute
   HledatRoute: typeof HledatRoute
   ManifestRoute: typeof ManifestRoute
@@ -167,6 +180,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/antisemitismus': {
+      id: '/antisemitismus'
+      path: '/antisemitismus'
+      fullPath: '/antisemitismus'
+      preLoaderRoute: typeof AntisemitismusRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/clanky': {
@@ -237,6 +257,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AntisemitismusRoute: AntisemitismusRoute,
   ClankyRoute: ClankyRoute,
   HledatRoute: HledatRoute,
   ManifestRoute: ManifestRoute,
