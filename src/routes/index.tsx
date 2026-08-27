@@ -170,7 +170,7 @@ const ACTIONS: {
 }[] = [
   {
     icon: Star,
-    title: "Antisemitismus 2.0",
+    title: "Antisemitismus",
     text: "Nová podoba starých předsudků — jak ji poznat.",
     tone: "bg-primary",
     to: "/clanky",
