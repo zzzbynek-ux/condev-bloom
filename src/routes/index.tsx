@@ -323,6 +323,36 @@ function Index() {
       <main>
         <Hero />
 
+        {/* Zvýrazněné téma: Antisemitismus */}
+        <section className="bg-primary text-primary-foreground">
+          <div className="mx-auto flex max-w-[88rem] flex-col items-start gap-6 px-5 py-10 md:flex-row md:items-center md:justify-between md:px-6 md:py-12">
+            <div className="flex items-start gap-4 md:items-center">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary-foreground/10 ring-1 ring-primary-foreground/25">
+                <StarOfDavid className="h-6 w-6" />
+              </span>
+              <div className="max-w-2xl">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-foreground/70">
+                  Klíčové téma
+                </p>
+                <h2 className="mt-1 text-2xl font-bold tracking-tight md:text-3xl">
+                  Antisemitismus
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-primary-foreground/85 md:text-base">
+                  Nová podoba starých předsudků — jak ji poznat, pojmenovat a věcně vyvracet.
+                  Sledujeme případy, kontext i data.
+                </p>
+              </div>
+            </div>
+            <Link
+              to="/clanky"
+              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-primary-foreground px-6 py-3 text-sm font-semibold text-primary transition hover:opacity-90"
+            >
+              Číst k tématu
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </section>
+
 
 
 
