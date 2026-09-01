@@ -186,26 +186,12 @@ const ACTIONS: {
   to: string;
 }[] = [
   {
-    icon: StarOfDavid,
-    title: "Antisemitismus",
-    text: "Nová podoba starých předsudků — jak ji poznat.",
-    tone: "bg-primary",
-    to: "/clanky",
-  },
-  {
     icon: HelpCircle,
     title: "Ptejte se AI",
     text: "Zeptejte se naší AI na dezinformace a fakta.",
     tone: "bg-primary",
 
     to: "/ptejte-se-ai",
-  },
-  {
-    icon: Users,
-    title: "Zapojte se",
-    text: "Přidejte se k nám a staňte se součástí řešení.",
-    tone: "bg-primary",
-    to: "/zapojte-se",
   },
   {
     icon: Flag,
