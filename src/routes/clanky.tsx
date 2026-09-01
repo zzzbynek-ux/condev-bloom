@@ -129,7 +129,7 @@ function Clanky() {
 
         {/* Mřížka článků */}
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {articles.map((a, idx) => (
+          {articles.slice(0, visible).map((a, idx) => (
             <article
               key={`${a.slug}-${idx}`}
               className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md"
@@ -169,6 +169,14 @@ function Clanky() {
         {articles.length === 0 ? (
           <p className="mt-10 text-muted-foreground">Pro tento filtr zatím žádné texty nemáme.</p>
         ) : null}
+
+        {/* Tlačítko pod mřížkou — přibere další články stejného filtru / tagu */}
+        {!hideMore && remaining > 0 && (
+          <MoreButton
+            label={moreLabel}
+            onClick={() => setVisible((v) => v + Math.min(9, remaining))}
+          />
+        )}
       </main>
       <SiteFooter />
     </div>
