@@ -460,8 +460,45 @@ function Index() {
           </div>
         </section>
 
+        {/* Výběr redakce */}
+        <section className="bg-background">
+          <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+            <SectionHeader
+              kicker="Výběr redakce"
+              title="To nejdůležitější"
+              to="/clanky"
+              linkLabel="Všechny články"
+            />
+            <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <ArticleCard
+                image={IMAGES.flags}
+                tag="Výběr redakce"
+                date="05/07/26"
+                title="Malý stát. Globální přínos."
+                perex="Izrael přináší světu víc, než by odpovídalo jeho velikosti — od technologií po medicínu."
+              />
+              <ArticleCard
+                image={IMAGES.media}
+                tag="Výběr redakce"
+                date="05/07/26"
+                title="Změň algoritmus — změníš realitu"
+                perex="Diskuze a komentáře na sociálních sítích ovlivňují naši realitu víc, než si myslíme."
+              />
+              <ArticleCard
+                image={IMAGES.politics}
+                tag="Výběr redakce"
+                date="05/07/26"
+                title="Slogany živí emoce, ne mír"
+                perex="Přestaňme podléhat prázdným heslům a hledejme skutečné řešení."
+              />
+            </div>
+          </div>
+        </section>
+
         {/* Sekce článků — záložky ve stylu Visegrad24 */}
         <ArticleTabs />
+
+
 
 
 
