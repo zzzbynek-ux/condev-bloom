@@ -58,11 +58,19 @@ export const AXES: Axis[] = [
     cta: "Číst článek",
   },
   {
+    kicker: "Co doplňujeme",
+    title: "Celý obraz. Bez ořezu.",
+    text:
+      "Když veřejný prostor ovládají silná slova a jednostranné příběhy, přinášíme témata, která zůstávají mimo pozornost. Spravedlnost není selektivní.",
+    href: "/manifest",
+    cta: "Číst manifest",
+  },
+  {
     kicker: "KLÍČOVÉ TÉMA",
     title: "Antisemitismus",
     text:
-      "Nový antisemitismus se tváří jako morální apel — mluví jazykem solidarity a historické křivdy. Ale pod pláštíkem vznešených slov jde o démonizaci a delegitimizaci židovského státu. Nacistickou pásku nahradila kefíja — ale posedlost Židy zůstala.",
-    href: "https://community.condevweb.com/antisemitismus/",
+      "Nový antisemitismus se tváří jako morální apel — mluví jazykem solidarity a historické křivdy. Ale pod pláštíkem vznešených slov jde o démonizaci a delegitimizaci židovského státu. Nacistickou pásku nahradila kefíja — ale posedlost Židy zůstává.",
+    href: "/antisemitismus",
     cta: "Otevřít téma",
     featured: true,
   },
