@@ -410,12 +410,7 @@ function Index() {
         {/* Výběr redakce */}
         <section className="bg-background">
           <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
-            <SectionHeader
-              kicker="Výběr redakce"
-              title="To nejdůležitější"
-              to="/clanky"
-              linkLabel="Všechny texty"
-            />
+            <SectionHeader kicker="Výběr redakce" title="To nejdůležitější" />
             <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               <ArticleCard
                 image={IMAGES.flags}
