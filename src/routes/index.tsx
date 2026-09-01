@@ -228,9 +228,13 @@ function ArticleCard({
       />
       <div className="flex flex-1 flex-col p-6">
         <div className="flex items-center justify-between gap-3">
-          <span className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground">
+          <Link
+            to="/clanky"
+            search={{ tag }}
+            className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground hover:opacity-85"
+          >
             {tag}
-          </span>
+          </Link>
           {date ? (
             <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
               {date}
@@ -464,7 +468,7 @@ function Index() {
               kicker="Výběr redakce"
               title="To nejdůležitější"
               to="/clanky"
-              linkLabel="Všechny články"
+              linkLabel="Všechny texty"
             />
             <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               <ArticleCard
