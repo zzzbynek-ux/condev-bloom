@@ -5,14 +5,11 @@ import { ArrowRight, ChevronLeft, ChevronRight, Flag, HelpCircle } from "lucide-
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { FEATURED, FEED, HERO_SLIDES } from "@/lib/content";
+import { ARTICLE_SECTIONS, HERO_SLIDES } from "@/lib/content";
 import heroImg from "@/assets/hero-blindfold.jpg";
 import flagsImg from "@/assets/news-flags.jpg";
 import mediaImg from "@/assets/news-media.jpg";
 import politicsImg from "@/assets/news-politics.jpg";
-import featuredAlgorithmImg from "@/assets/featured-algorithm.jpg";
-import featuredInnovationImg from "@/assets/featured-innovation.jpg";
-import featuredSlogansImg from "@/assets/featured-slogans.jpg";
 
 
 
@@ -201,11 +198,8 @@ const ACTIONS: {
 
 
 
-const FEATURED_IMAGES: Record<string, string> = {
-  sand: featuredAlgorithmImg,
-  flag: featuredInnovationImg,
-  red: featuredSlogansImg,
-};
+
+
 
 
 
@@ -299,6 +293,73 @@ function SectionHeader({
   );
 }
 
+function ArticleTabs() {
+  const [active, setActive] = useState(0);
+  const group = ARTICLE_SECTIONS[active] ?? ARTICLE_SECTIONS[0]!;
+
+  return (
+    <section className="bg-background">
+      <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+        {/* Záložky */}
+        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-border">
+          <div
+            role="tablist"
+            aria-label="Rubriky článků"
+            className="flex flex-wrap gap-x-8 gap-y-2"
+          >
+            {ARTICLE_SECTIONS.map((g, idx) => (
+              <button
+                key={g.id}
+                type="button"
+                role="tab"
+                aria-selected={idx === active}
+                onClick={() => setActive(idx)}
+                className={`-mb-px border-b-2 pb-3 font-display text-lg font-bold tracking-tight transition-colors md:text-xl ${
+                  idx === active
+                    ? "border-primary text-foreground"
+                    : "border-transparent text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {g.label}
+              </button>
+            ))}
+          </div>
+          <Link
+            to="/clanky"
+            className="hidden items-center gap-2 pb-3 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline md:inline-flex"
+          >
+            <span className="h-px w-10 bg-primary" aria-hidden />
+            Více z rubriky {group.label}
+          </Link>
+        </div>
+
+        {/* 6 článků aktivní záložky */}
+        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {group.items.slice(0, 6).map((item, idx) => (
+            <ArticleCard
+              key={`${group.id}-${item.slug}-${idx}`}
+              image={IMAGES[item.image]}
+              tag={item.tag}
+              date={item.date}
+              title={item.title}
+              perex={item.perex}
+            />
+          ))}
+        </div>
+
+        <div className="mt-8 md:hidden">
+          <Link
+            to="/clanky"
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
+          >
+            Více z rubriky {group.label} <ArrowRight className="size-4" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Index() {
   return (
     <div className="min-h-screen bg-background">
@@ -385,83 +446,34 @@ function Index() {
           </div>
         </section>
 
-        {/* Nové články */}
-        {FEED[0] ? (
-          <section className="bg-background">
-            <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
-              <SectionHeader
-                kicker="Rubrika"
-                title={FEED[0]!.label}
-                to="/clanky"
-              />
-              <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {FEED[0]!.items.slice(0, 3).map((item, idx) => (
+        {/* Sekce článků — záložky ve stylu Visegrad24 */}
+        <ArticleTabs />
+
+        {/* Všechny texty */}
+        <section className="border-t border-border bg-secondary/40">
+          <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+            <SectionHeader
+              kicker="Archiv"
+              title="Všechny texty"
+              subtitle="Kompletní přehled článků ze všech rubrik"
+              to="/clanky"
+            />
+            <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {ARTICLE_SECTIONS.flatMap((g) =>
+                g.items.map((item, idx) => (
                   <ArticleCard
-                    key={`${FEED[0]!.id}-${item.slug}-${idx}`}
+                    key={`all-${g.id}-${item.slug}-${idx}`}
                     image={IMAGES[item.image]}
-                    tag={item.tag}
+                    tag={g.label}
                     date={item.date}
                     title={item.title}
                     perex={item.perex}
                   />
-                ))}
-              </div>
-            </div>
-          </section>
-        ) : null}
-
-        {/* zvýrazněné karty */}
-        <section className="border-y border-primary/15 bg-primary/[0.06]">
-          <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
-            <SectionHeader
-              kicker="Výběr redakce"
-              title="Doporučujeme"
-              subtitle="Začněte tady"
-              to="/clanky"
-            />
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
-              {FEATURED.map((f) => (
-                <ArticleCard
-                  key={f.title}
-                  image={FEATURED_IMAGES[f.tone] ?? featuredAlgorithmImg}
-                  tag={f.tag}
-                  date={f.date}
-                  title={f.title.replace("\n", " ")}
-                  perex={f.text}
-                />
-              ))}
+                )),
+              )}
             </div>
           </div>
         </section>
-
-        {/* rubriky s výpisy článků */}
-        {FEED.slice(1).map((group, gi) => (
-          <section
-            key={group.id}
-            className={
-              gi % 2 === 0
-                ? "border-y border-border bg-secondary/50"
-                : "bg-background"
-            }
-          >
-            <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
-              <SectionHeader kicker="Rubrika" title={group.label} to="/clanky" />
-
-              <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {group.items.slice(0, 3).map((item, idx) => (
-                  <ArticleCard
-                    key={`${group.id}-${item.slug}-${idx}`}
-                    image={IMAGES[item.image]}
-                    tag={item.tag}
-                    date={item.date}
-                    title={item.title}
-                    perex={item.perex}
-                  />
-                ))}
-              </div>
-            </div>
-          </section>
-        ))}
 
 
 
