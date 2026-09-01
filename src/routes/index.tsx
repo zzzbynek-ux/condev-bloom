@@ -47,118 +47,149 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const CLAIM_SLIDE = {
-  kicker: "Jedním hlasem",
-  title: "Do debaty o Izraeli vracíme fakta, kontext a klidný tón.",
-  text: "Píšeme analýzy, ověřujeme tvrzení a pomáháme lidem reagovat tam, kde se rozhoduje o veřejném mínění.",
+type HeroTopic = {
+  name: string;
+  kicker: string;
+  perex: string;
+  image: string;
+  cta: string;
+  to: string;
 };
 
-const HERO = [CLAIM_SLIDE, ...HERO_SLIDES];
+const HERO_TOPICS: HeroTopic[] = [
+  {
+    name: "Antisemitismus",
+    kicker: "Klíčové téma",
+    perex: "Nová podoba starých předsudků — jak ji poznat, pojmenovat a věcně vyvracet. Sledujeme případy, kontext i data.",
+    image: heroImg,
+    cta: "Otevřít téma",
+    to: "/antisemitismus",
+  },
+  {
+    name: "Malý stát",
+    kicker: "Identita",
+    perex: "Izrael přináší světu víc, než by odpovídalo jeho velikosti — od technologií po medicínu.",
+    image: innovationImg,
+    cta: "Číst článek",
+    to: "/clanky",
+  },
+  {
+    name: "Jeden klik",
+    kicker: "Algoritmy",
+    perex: "Diskuze a komentáře na sociálních sítích ovlivňují naši realitu víc, než si myslíme.",
+    image: algorithmImg,
+    cta: "Číst článek",
+    to: "/clanky",
+  },
+  {
+    name: "Celý obraz",
+    kicker: "Manifest",
+    perex: "Do debaty o Izraeli vracíme fakta, kontext a klidný tón. Bez ořezu a bez křiku.",
+    image: flagsImg,
+    cta: "Číst manifest",
+    to: "/manifest",
+  },
+  {
+    name: "Rudo-zelená aliance",
+    kicker: "Ideologie",
+    perex: "Nečekané spojenectví extrémní levice a islamismu — a proč ohrožuje západní hodnoty.",
+    image: rudozelenaImg,
+    cta: "Číst článek",
+    to: "/clanky",
+  },
+  {
+    name: "Média ve službách teroru",
+    kicker: "Média",
+    perex: "Jak se zpravodajství stává nástrojem propagandy a co s tím můžeme dělat jako čtenáři.",
+    image: selMediaImg,
+    cta: "Číst článek",
+    to: "/clanky",
+  },
+  {
+    name: "Katar",
+    kicker: "Vliv",
+    perex: "Peníze z Kataru mění univerzity, politiky i veřejné mínění. Sledujeme, kam tečou.",
+    image: katarImg,
+    cta: "Číst článek",
+    to: "/clanky",
+  },
+  {
+    name: "Mír začíná s pravdou",
+    kicker: "Perspektiva",
+    perex: "Přestaňme podléhat prázdným heslům a hledejme skutečné řešení — mír začíná s pravdou.",
+    image: slogansImg,
+    cta: "Číst článek",
+    to: "/clanky",
+  },
+];
 
 function Hero() {
-  const [i, setI] = useState(0);
-  const go = (d: number) => setI((v) => (v + d + HERO.length) % HERO.length);
-
-  useEffect(() => {
-    const t = setInterval(() => setI((v) => (v + 1) % HERO.length), 8000);
-    return () => clearInterval(t);
-  }, []);
-
-  const slide = HERO[i] ?? HERO[0]!;
+  const [active, setActive] = useState(0);
+  const topic = HERO_TOPICS[active] ?? HERO_TOPICS[0]!;
 
   return (
-    <section className="relative isolate overflow-hidden bg-[#0b1a3a]">
-      <img
-        src={heroImg}
-        alt=""
-        width={1600}
-        height={900}
-        className="absolute inset-0 size-full object-cover object-left opacity-90"
-      />
-      <div aria-hidden className="absolute inset-0 bg-linear-to-r from-[#0b1a3a]/40 via-[#0b1a3a]/40 to-[#0b1a3a]/80" />
-
-      <div className="relative mx-auto grid max-w-[88rem] grid-cols-1 items-center gap-6 px-5 py-10 md:grid-cols-2 md:px-16 md:py-20">
-        <div className="hidden md:block" />
-        <div className="flex flex-col justify-center rounded-2xl bg-[#0a1730]/85 p-6 backdrop-blur-sm md:min-h-[22rem] md:p-9">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/60">
-            {slide.kicker}
-          </p>
-          {i === 0 ? (
-            <h1 key={slide.title} className="animate-rise mt-3 text-balance font-display text-3xl font-bold text-white md:text-[2.75rem] md:leading-[1.1]">
-              {slide.title}
-            </h1>
-          ) : (
-            <p key={slide.title} className="animate-rise mt-3 text-balance font-display text-3xl font-bold text-white md:text-[2.75rem] md:leading-[1.1]">
-              {slide.title}
+    <section className="bg-[#0b1a3a]">
+      <div className="mx-auto grid max-w-[88rem] grid-cols-1 gap-4 px-5 py-6 md:px-6 md:py-8 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:gap-6">
+        {/* Velká plocha — aktivní téma */}
+        <div className="relative isolate overflow-hidden rounded-2xl">
+          <img
+            src={topic.image}
+            alt={topic.name}
+            width={1280}
+            height={720}
+            className="absolute inset-0 size-full object-cover"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-linear-to-t from-[#0b1a3a]/90 via-[#0b1a3a]/45 to-[#0b1a3a]/15"
+          />
+          <div className="relative flex min-h-[20rem] flex-col justify-end p-6 md:min-h-[26rem] md:p-9">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/65">
+              {topic.kicker}
             </p>
-          )}
-          <p
-            key={slide.text}
-            className="animate-rise mt-4 text-pretty text-sm leading-relaxed text-white/85 md:text-[17px]"
-          >
-            {slide.text}
-          </p>
+            <h1
+              key={topic.name}
+              className="animate-rise mt-3 text-balance font-display text-3xl font-bold text-white md:text-[2.5rem] md:leading-[1.1]"
+            >
+              {topic.name}
+            </h1>
+            <p
+              key={topic.perex}
+              className="animate-rise mt-3 max-w-xl text-pretty text-sm leading-relaxed text-white/85 md:text-base"
+            >
+              {topic.perex}
+            </p>
+            <Link
+              to={topic.to}
+              className="mt-5 inline-flex w-fit items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-primary transition hover:opacity-90"
+            >
+              {topic.cta} <ArrowRight className="size-4" />
+            </Link>
+          </div>
+        </div>
 
-          <Link
-            to={i === 0 ? "/manifest" : "/clanky"}
-            className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-white/85 hover:text-white"
-          >
-            {i === 0 ? "Číst celý manifest" : "Číst článek"} <ArrowRight className="size-4" />
-          </Link>
+        {/* Mřížka 8 dlaždic */}
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-2">
+          {HERO_TOPICS.map((t, idx) => {
+            const isActive = idx === active;
+            return (
+              <button
+                key={t.name}
+                type="button"
+                onClick={() => setActive(idx)}
+                aria-pressed={isActive}
+                className={`flex min-h-[5.5rem] items-start rounded-xl border p-4 text-left transition-colors ${
+                  isActive
+                    ? "border-primary bg-primary text-primary-foreground shadow-md"
+                    : "border-white/15 bg-white/5 text-white/85 hover:border-white/30 hover:bg-white/10"
+                }`}
+              >
+                <span className="text-sm font-semibold leading-snug">{t.name}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
-
-      <button
-        type="button"
-        aria-label="Předchozí"
-        onClick={() => go(-1)}
-        className="absolute left-5 top-[58%] hidden size-9 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/55 md:grid"
-      >
-        <ChevronLeft className="size-4" strokeWidth={1.75} />
-      </button>
-      <button
-        type="button"
-        aria-label="Další"
-        onClick={() => go(1)}
-        className="absolute right-5 top-[58%] hidden size-9 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/55 md:grid"
-      >
-        <ChevronRight className="size-4" strokeWidth={1.75} />
-      </button>
-
-
-      <div className="relative flex items-center justify-center gap-3 pb-6">
-        <button
-          type="button"
-          aria-label="Předchozí"
-          onClick={() => go(-1)}
-          className="grid size-9 place-items-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/55 md:hidden"
-        >
-          <ChevronLeft className="size-4" />
-        </button>
-        <div className="flex items-center gap-2">
-          {HERO.map((s, idx) => (
-            <button
-              key={s.title}
-              type="button"
-              aria-label={`Zobrazit: ${s.title}`}
-              aria-current={idx === i}
-              onClick={() => setI(idx)}
-              className={`size-2.5 rounded-full transition-all ${
-                idx === i ? "scale-125 bg-primary" : "bg-white/45 hover:bg-white/70"
-              }`}
-            />
-          ))}
-        </div>
-        <button
-          type="button"
-          aria-label="Další"
-          onClick={() => go(1)}
-          className="grid size-9 place-items-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/55 md:hidden"
-        >
-          <ChevronRight className="size-4" />
-        </button>
-      </div>
-
     </section>
   );
 }
