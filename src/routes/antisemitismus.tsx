@@ -2,12 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { ArticleCard } from "@/components/article-card";
+import { MoreButton } from "@/components/more-button";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import flagsImg from "@/assets/news-flags.jpg";
+import politicsImg from "@/assets/news-politics.jpg";
 
 export const Route = createFileRoute("/antisemitismus")({
   head: () => ({
@@ -405,6 +409,42 @@ function Antisemitismus() {
               </AccordionItem>
             ))}
           </Accordion>
+        </section>
+
+        {/* Související texty k tématu */}
+        <section className="mx-auto max-w-[70rem] px-5 pb-16 md:px-6">
+          <div className="border-t-2 border-primary pt-4">
+            <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">
+              Související texty
+            </h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Analýzy a české příběhy k tématu antisemitismu.
+            </p>
+          </div>
+          <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <ArticleCard
+              image={flagsImg}
+              tag="Antisemitismus"
+              date="07/08/26"
+              title="Nový antisemitismus: o Palestinu tady vůbec nejde"
+              perex="Mluví jazykem solidarity a historické křivdy. Pod pláštíkem vznešených slov ale jde o něco jiného."
+            />
+            <ArticleCard
+              image={politicsImg}
+              tag="Antisemitismus"
+              date="10/06/26"
+              title="Co se děje na českých univerzitách"
+              perex="Protesty, petice a tlak na studenty. Mapujeme situaci na vysokých školách v Česku."
+            />
+            <ArticleCard
+              image={flagsImg}
+              tag="Antisemitismus"
+              date="02/06/26"
+              title="Židovské obce v Česku dnes"
+              perex="Život, tradice i obavy. Rozhovory s lidmi, kteří tvoří českou židovskou komunitu."
+            />
+          </div>
+          <MoreButton label="Další texty o antisemitismu" search={{ tag: "Antisemitismus" }} />
         </section>
       </main>
       <SiteFooter />

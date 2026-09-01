@@ -1,9 +1,10 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { MoreButton } from "@/components/more-button";
 import { ARTICLE_SECTIONS } from "@/lib/content";
 import flagsImg from "@/assets/news-flags.jpg";
 import mediaImg from "@/assets/news-media.jpg";
@@ -55,12 +56,22 @@ const FILTERS = [
   "Všechny texty",
 ];
 
+const MORE_LABELS: Record<string, string> = {
+  "Nové": "Další nové texty",
+  "Doporučujeme": "Další z výběru redakce",
+  "Češi a Izrael": "Další texty Česko a Izrael",
+  "Studie a analýzy": "Další studie a analýzy",
+};
+
 function Clanky() {
   const { tag } = Route.useSearch();
   const navigate = useNavigate({ from: "/clanky" });
+  const [visible, setVisible] = useState(3);
 
   const isTagFilter = Boolean(tag) && !FILTERS.includes(tag!);
   const active = isTagFilter ? "Všechny texty" : (tag ?? "Nové");
+
+  useEffect(() => setVisible(3), [active, tag]);
 
   const articles =
     active === "Všechny texty"
@@ -68,6 +79,15 @@ function Clanky() {
         ? ALL_ARTICLES.filter((a) => a.tag === tag)
         : ALL_ARTICLES
       : ALL_ARTICLES.filter((a) => a.section === active);
+
+  const remaining = articles.length - visible;
+  // „Všechny texty“ bez tagu už ukazuje celý archiv — tlačítko skrýt.
+  const hideMore = active === "Všechny texty" && !isTagFilter;
+  const moreLabel = isTagFilter
+    ? tag === "Antisemitismus"
+      ? "Další texty o antisemitismu"
+      : `Další texty s tagem ${tag}`
+    : (MORE_LABELS[active] ?? `Další texty z rubriky ${active}`);
 
   return (
     <div className="min-h-screen bg-background">
@@ -109,7 +129,7 @@ function Clanky() {
 
         {/* Mřížka článků */}
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {articles.map((a, idx) => (
+          {articles.slice(0, visible).map((a, idx) => (
             <article
               key={`${a.slug}-${idx}`}
               className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md"
@@ -149,6 +169,14 @@ function Clanky() {
         {articles.length === 0 ? (
           <p className="mt-10 text-muted-foreground">Pro tento filtr zatím žádné texty nemáme.</p>
         ) : null}
+
+        {/* Tlačítko pod mřížkou — přibere další články stejného filtru / tagu */}
+        {!hideMore && remaining > 0 && (
+          <MoreButton
+            label={moreLabel}
+            onClick={() => setVisible((v) => v + Math.min(9, remaining))}
+          />
+        )}
       </main>
       <SiteFooter />
     </div>

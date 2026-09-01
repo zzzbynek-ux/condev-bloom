@@ -5,6 +5,8 @@ import { ArrowRight, ChevronLeft, ChevronRight, Flag, HelpCircle } from "lucide-
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { ArticleCard } from "@/components/article-card";
+import { MoreButton } from "@/components/more-button";
 import { ARTICLE_SECTIONS, HERO_SLIDES } from "@/lib/content";
 import heroImg from "@/assets/hero-blindfold.jpg";
 import flagsImg from "@/assets/news-flags.jpg";
@@ -203,61 +205,6 @@ const ACTIONS: {
 
 
 
-function ArticleCard({
-  image,
-  tag,
-  date,
-  title,
-  perex,
-}: {
-  image: string;
-  tag: string;
-  date?: string | undefined;
-  title: string;
-  perex: string;
-}) {
-  return (
-    <article className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
-      <img
-        src={image}
-        alt={title}
-        loading="lazy"
-        width={1280}
-        height={720}
-        className="aspect-video w-full object-cover"
-      />
-      <div className="flex flex-1 flex-col p-6">
-        <div className="flex items-center justify-between gap-3">
-          <Link
-            to="/clanky"
-            search={{ tag }}
-            className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground hover:opacity-85"
-          >
-            {tag}
-          </Link>
-          {date ? (
-            <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
-              {date}
-            </span>
-          ) : null}
-        </div>
-
-        <h3 className="mt-3 font-display text-xl font-bold leading-snug text-primary">
-          <Link to="/clanky" className="group-hover:underline">
-            {title}
-          </Link>
-        </h3>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{perex}</p>
-        <Link
-          to="/clanky"
-          className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-primary hover:underline"
-        >
-          Číst dál <ArrowRight className="size-4" />
-        </Link>
-      </div>
-    </article>
-  );
-}
 
 
 
@@ -342,13 +289,6 @@ function ArticleTabs() {
               </button>
             ))}
           </div>
-          <Link
-            to="/clanky"
-            className="hidden items-center gap-2 pb-3 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline md:inline-flex"
-          >
-            <span className="h-px w-10 bg-primary" aria-hidden />
-            {isAll ? "Všechny texty" : `Více z rubriky ${group.label}`}
-          </Link>
         </div>
 
         {/* články aktivní záložky */}
@@ -365,18 +305,24 @@ function ArticleTabs() {
           ))}
         </div>
 
-        <div className="mt-8 md:hidden">
-          <Link
-            to="/clanky"
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
-          >
-            {isAll ? "Všechny texty" : `Více z rubriky ${group.label}`} <ArrowRight className="size-4" />
-          </Link>
-        </div>
+        {/* tlačítko pod mřížkou — další články stejné rubriky */}
+        {!isAll && (
+          <MoreButton
+            label={MORE_LABELS[group.label] ?? `Další texty z rubriky ${group.label}`}
+            search={group.label === "Nové" ? {} : { tag: group.label }}
+          />
+        )}
       </div>
     </section>
   );
 }
+
+const MORE_LABELS: Record<string, string> = {
+  "Nové": "Další nové texty",
+  "Doporučujeme": "Další z výběru redakce",
+  "Češi a Izrael": "Další texty Česko a Izrael",
+  "Studie a analýzy": "Další studie a analýzy",
+};
 
 function Index() {
   return (
@@ -464,12 +410,7 @@ function Index() {
         {/* Výběr redakce */}
         <section className="bg-background">
           <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
-            <SectionHeader
-              kicker="Výběr redakce"
-              title="To nejdůležitější"
-              to="/clanky"
-              linkLabel="Všechny texty"
-            />
+            <SectionHeader kicker="Výběr redakce" title="To nejdůležitější" />
             <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               <ArticleCard
                 image={IMAGES.flags}
@@ -493,6 +434,7 @@ function Index() {
                 perex="Přestaňme podléhat prázdným heslům a hledejme skutečné řešení."
               />
             </div>
+            <MoreButton label="Všechny texty" search={{}} />
           </div>
         </section>
 
