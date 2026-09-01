@@ -201,12 +201,8 @@ const ACTIONS: {
 
 
 
-const FEATURED_IMAGES: Record<string, string> = {
-  sand: featuredAlgorithmImg,
-  flag: featuredInnovationImg,
-  red: featuredSlogansImg,
-};
-void FEATURED_IMAGES;
+
+
 
 
 
