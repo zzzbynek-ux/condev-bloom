@@ -212,7 +212,7 @@ function ArticleCard({
 }: {
   image: string;
   tag: string;
-  date?: string;
+  date?: string | undefined;
   title: string;
   perex: string;
 }) {
