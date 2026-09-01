@@ -56,12 +56,22 @@ const FILTERS = [
   "Všechny texty",
 ];
 
+const MORE_LABELS: Record<string, string> = {
+  "Nové": "Další nové texty",
+  "Doporučujeme": "Další z výběru redakce",
+  "Češi a Izrael": "Další texty Česko a Izrael",
+  "Studie a analýzy": "Další studie a analýzy",
+};
+
 function Clanky() {
   const { tag } = Route.useSearch();
   const navigate = useNavigate({ from: "/clanky" });
+  const [visible, setVisible] = useState(3);
 
   const isTagFilter = Boolean(tag) && !FILTERS.includes(tag!);
   const active = isTagFilter ? "Všechny texty" : (tag ?? "Nové");
+
+  useEffect(() => setVisible(3), [active, tag]);
 
   const articles =
     active === "Všechny texty"
@@ -69,6 +79,15 @@ function Clanky() {
         ? ALL_ARTICLES.filter((a) => a.tag === tag)
         : ALL_ARTICLES
       : ALL_ARTICLES.filter((a) => a.section === active);
+
+  const remaining = articles.length - visible;
+  // „Všechny texty“ bez tagu už ukazuje celý archiv — tlačítko skrýt.
+  const hideMore = active === "Všechny texty" && !isTagFilter;
+  const moreLabel = isTagFilter
+    ? tag === "Antisemitismus"
+      ? "Další texty o antisemitismu"
+      : `Další texty s tagem ${tag}`
+    : (MORE_LABELS[active] ?? `Další texty z rubriky ${active}`);
 
   return (
     <div className="min-h-screen bg-background">
