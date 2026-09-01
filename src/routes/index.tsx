@@ -434,6 +434,7 @@ function Index() {
                 perex="Přestaňme podléhat prázdným heslům a hledejme skutečné řešení."
               />
             </div>
+            <MoreButton label="Všechny texty" search={{}} />
           </div>
         </section>
 
