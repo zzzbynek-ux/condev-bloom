@@ -379,83 +379,34 @@ function Index() {
           </div>
         </section>
 
-        {/* Nové články */}
-        {FEED[0] ? (
-          <section className="bg-background">
-            <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
-              <SectionHeader
-                kicker="Rubrika"
-                title={FEED[0]!.label}
-                to="/clanky"
-              />
-              <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {FEED[0]!.items.slice(0, 3).map((item, idx) => (
+        {/* Sekce článků — záložky ve stylu Visegrad24 */}
+        <ArticleTabs />
+
+        {/* Všechny texty */}
+        <section className="border-t border-border bg-secondary/40">
+          <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+            <SectionHeader
+              kicker="Archiv"
+              title="Všechny texty"
+              subtitle="Kompletní přehled článků ze všech rubrik"
+              to="/clanky"
+            />
+            <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {ARTICLE_SECTIONS.flatMap((g) =>
+                g.items.map((item, idx) => (
                   <ArticleCard
-                    key={`${FEED[0]!.id}-${item.slug}-${idx}`}
+                    key={`all-${g.id}-${item.slug}-${idx}`}
                     image={IMAGES[item.image]}
-                    tag={item.tag}
+                    tag={g.label}
                     date={item.date}
                     title={item.title}
                     perex={item.perex}
                   />
-                ))}
-              </div>
-            </div>
-          </section>
-        ) : null}
-
-        {/* zvýrazněné karty */}
-        <section className="border-y border-primary/15 bg-primary/[0.06]">
-          <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
-            <SectionHeader
-              kicker="Výběr redakce"
-              title="Doporučujeme"
-              subtitle="Začněte tady"
-              to="/clanky"
-            />
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
-              {FEATURED.map((f) => (
-                <ArticleCard
-                  key={f.title}
-                  image={FEATURED_IMAGES[f.tone] ?? featuredAlgorithmImg}
-                  tag={f.tag}
-                  date={f.date}
-                  title={f.title.replace("\n", " ")}
-                  perex={f.text}
-                />
-              ))}
+                )),
+              )}
             </div>
           </div>
         </section>
-
-        {/* rubriky s výpisy článků */}
-        {FEED.slice(1).map((group, gi) => (
-          <section
-            key={group.id}
-            className={
-              gi % 2 === 0
-                ? "border-y border-border bg-secondary/50"
-                : "bg-background"
-            }
-          >
-            <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
-              <SectionHeader kicker="Rubrika" title={group.label} to="/clanky" />
-
-              <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {group.items.slice(0, 3).map((item, idx) => (
-                  <ArticleCard
-                    key={`${group.id}-${item.slug}-${idx}`}
-                    image={IMAGES[item.image]}
-                    tag={item.tag}
-                    date={item.date}
-                    title={item.title}
-                    perex={item.perex}
-                  />
-                ))}
-              </div>
-            </div>
-          </section>
-        ))}
 
 
 
