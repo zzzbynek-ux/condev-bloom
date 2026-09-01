@@ -13,6 +13,7 @@ import politicsImg from "@/assets/news-politics.jpg";
 import featuredAlgorithmImg from "@/assets/featured-algorithm.jpg";
 import featuredInnovationImg from "@/assets/featured-innovation.jpg";
 import featuredSlogansImg from "@/assets/featured-slogans.jpg";
+void featuredAlgorithmImg; void featuredInnovationImg; void featuredSlogansImg;
 
 
 
