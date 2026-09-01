@@ -212,7 +212,7 @@ function ArticleCard({
 }: {
   image: string;
   tag: string;
-  date?: string;
+  date?: string | undefined;
   title: string;
   perex: string;
 }) {
@@ -293,9 +293,23 @@ function SectionHeader({
   );
 }
 
+const ALL_TAB = { id: "vse", label: "Všechny texty" } as const;
+
 function ArticleTabs() {
   const [active, setActive] = useState(0);
+  const isAll = active === ARTICLE_SECTIONS.length;
   const group = ARTICLE_SECTIONS[active] ?? ARTICLE_SECTIONS[0]!;
+  const items = isAll
+    ? ARTICLE_SECTIONS.flatMap((g) => g.items.map((item) => ({ ...item, sectionLabel: g.label })))
+    : (group.items.map((item) => ({ ...item, sectionLabel: item.tag })) as ({
+        slug: string;
+        image: "flags" | "media" | "politics";
+        tag: string;
+        title: string;
+        perex: string;
+        date?: string;
+        sectionLabel: string;
+      })[]);
 
   return (
     <section className="bg-background">
@@ -307,7 +321,7 @@ function ArticleTabs() {
             aria-label="Rubriky článků"
             className="flex flex-wrap gap-x-8 gap-y-2"
           >
-            {ARTICLE_SECTIONS.map((g, idx) => (
+            {[...ARTICLE_SECTIONS, ALL_TAB].map((g, idx) => (
               <button
                 key={g.id}
                 type="button"
@@ -329,17 +343,17 @@ function ArticleTabs() {
             className="hidden items-center gap-2 pb-3 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline md:inline-flex"
           >
             <span className="h-px w-10 bg-primary" aria-hidden />
-            Více z rubriky {group.label}
+            {isAll ? "Všechny texty" : `Více z rubriky ${group.label}`}
           </Link>
         </div>
 
-        {/* 6 článků aktivní záložky */}
+        {/* články aktivní záložky */}
         <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {group.items.slice(0, 6).map((item, idx) => (
+          {(isAll ? items : items.slice(0, 6)).map((item, idx) => (
             <ArticleCard
-              key={`${group.id}-${item.slug}-${idx}`}
+              key={`${isAll ? "all" : group.id}-${item.slug}-${idx}`}
               image={IMAGES[item.image]}
-              tag={item.tag}
+              tag={item.sectionLabel}
               date={item.date}
               title={item.title}
               perex={item.perex}
@@ -352,7 +366,7 @@ function ArticleTabs() {
             to="/clanky"
             className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
           >
-            Více z rubriky {group.label} <ArrowRight className="size-4" />
+            {isAll ? "Všechny texty" : `Více z rubriky ${group.label}`} <ArrowRight className="size-4" />
           </Link>
         </div>
       </div>
@@ -449,31 +463,6 @@ function Index() {
         {/* Sekce článků — záložky ve stylu Visegrad24 */}
         <ArticleTabs />
 
-        {/* Všechny texty */}
-        <section className="border-t border-border bg-secondary/40">
-          <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
-            <SectionHeader
-              kicker="Archiv"
-              title="Všechny texty"
-              subtitle="Kompletní přehled článků ze všech rubrik"
-              to="/clanky"
-            />
-            <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {ARTICLE_SECTIONS.flatMap((g) =>
-                g.items.map((item, idx) => (
-                  <ArticleCard
-                    key={`all-${g.id}-${item.slug}-${idx}`}
-                    image={IMAGES[item.image]}
-                    tag={g.label}
-                    date={item.date}
-                    title={item.title}
-                    perex={item.perex}
-                  />
-                )),
-              )}
-            </div>
-          </div>
-        </section>
 
 
 
