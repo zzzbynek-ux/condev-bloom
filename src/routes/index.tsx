@@ -5,7 +5,7 @@ import { ArrowRight, ChevronLeft, ChevronRight, Flag, HelpCircle } from "lucide-
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { FEATURED, FEED, HERO_SLIDES, TOPICS } from "@/lib/content";
+import { FEATURED, FEED, HERO_SLIDES } from "@/lib/content";
 import heroImg from "@/assets/hero-blindfold.jpg";
 import flagsImg from "@/assets/news-flags.jpg";
 import mediaImg from "@/assets/news-media.jpg";
@@ -13,9 +13,6 @@ import politicsImg from "@/assets/news-politics.jpg";
 import featuredAlgorithmImg from "@/assets/featured-algorithm.jpg";
 import featuredInnovationImg from "@/assets/featured-innovation.jpg";
 import featuredSlogansImg from "@/assets/featured-slogans.jpg";
-import selMediaImg from "@/assets/sel-media.jpg";
-import selKatarImg from "@/assets/sel-katar.jpg";
-import selRudozelenaImg from "@/assets/sel-rudozelena.jpg";
 
 
 
