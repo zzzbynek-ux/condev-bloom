@@ -352,7 +352,7 @@ function Index() {
               </div>
             </div>
             <Link
-              to="/clanky"
+              to="/antisemitismus"
               className="inline-flex shrink-0 items-center gap-2 rounded-full bg-primary-foreground px-6 py-3 text-sm font-semibold text-primary transition hover:opacity-90"
             >
               Číst k tématu
