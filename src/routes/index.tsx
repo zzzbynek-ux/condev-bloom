@@ -10,10 +10,6 @@ import heroImg from "@/assets/hero-blindfold.jpg";
 import flagsImg from "@/assets/news-flags.jpg";
 import mediaImg from "@/assets/news-media.jpg";
 import politicsImg from "@/assets/news-politics.jpg";
-import featuredAlgorithmImg from "@/assets/featured-algorithm.jpg";
-import featuredInnovationImg from "@/assets/featured-innovation.jpg";
-import featuredSlogansImg from "@/assets/featured-slogans.jpg";
-void featuredAlgorithmImg; void featuredInnovationImg; void featuredSlogansImg;
 
 
 
