@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { ChevronDown, Facebook, Instagram, Menu, Search, X } from "lucide-react";
+import { ChevronDown, Menu, Search, X } from "lucide-react";
 import { TOPICS } from "@/lib/content";
 
 type NavTo = "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" | "/manifest" | "/nahlasit-incident" | "/ptejte-se-ai";
@@ -61,7 +61,7 @@ export function SiteHeader() {
 
             <Link
               to="/zapojte-se"
-              className="hidden rounded-full bg-destructive px-6 py-2 text-sm font-semibold text-destructive-foreground transition-transform hover:-translate-y-0.5 lg:inline-flex"
+              className="hidden rounded-full border border-white bg-transparent px-6 py-2 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-white/10 lg:inline-flex"
             >
               Podpořte nás
             </Link>
@@ -179,26 +179,6 @@ export function SiteHeader() {
               className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
             >
               <XIcon className="size-4" />
-            </a>
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Sledujte nás na Facebooku"
-              title="Sledujte nás na Facebooku"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
-            >
-              <Facebook className="size-4" />
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Sledujte nás na Instagramu"
-              title="Sledujte nás na Instagramu"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
-            >
-              <Instagram className="size-4" />
             </a>
           </div>
 
