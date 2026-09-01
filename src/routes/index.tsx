@@ -293,6 +293,73 @@ function SectionHeader({
   );
 }
 
+function ArticleTabs() {
+  const [active, setActive] = useState(0);
+  const group = ARTICLE_SECTIONS[active] ?? ARTICLE_SECTIONS[0]!;
+
+  return (
+    <section className="bg-background">
+      <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+        {/* Záložky */}
+        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-border">
+          <div
+            role="tablist"
+            aria-label="Rubriky článků"
+            className="flex flex-wrap gap-x-8 gap-y-2"
+          >
+            {ARTICLE_SECTIONS.map((g, idx) => (
+              <button
+                key={g.id}
+                type="button"
+                role="tab"
+                aria-selected={idx === active}
+                onClick={() => setActive(idx)}
+                className={`-mb-px border-b-2 pb-3 font-display text-lg font-bold tracking-tight transition-colors md:text-xl ${
+                  idx === active
+                    ? "border-primary text-foreground"
+                    : "border-transparent text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {g.label}
+              </button>
+            ))}
+          </div>
+          <Link
+            to="/clanky"
+            className="hidden items-center gap-2 pb-3 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline md:inline-flex"
+          >
+            <span className="h-px w-10 bg-primary" aria-hidden />
+            Více z rubriky {group.label}
+          </Link>
+        </div>
+
+        {/* 6 článků aktivní záložky */}
+        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {group.items.slice(0, 6).map((item, idx) => (
+            <ArticleCard
+              key={`${group.id}-${item.slug}-${idx}`}
+              image={IMAGES[item.image]}
+              tag={item.tag}
+              date={item.date}
+              title={item.title}
+              perex={item.perex}
+            />
+          ))}
+        </div>
+
+        <div className="mt-8 md:hidden">
+          <Link
+            to="/clanky"
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
+          >
+            Více z rubriky {group.label} <ArrowRight className="size-4" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Index() {
   return (
     <div className="min-h-screen bg-background">
