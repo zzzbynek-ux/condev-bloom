@@ -5,11 +5,14 @@ import { ArrowRight, ChevronLeft, ChevronRight, Flag, HelpCircle } from "lucide-
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { FEED, HERO_SLIDES, TOPICS } from "@/lib/content";
+import { FEATURED, FEED, HERO_SLIDES, TOPICS } from "@/lib/content";
 import heroImg from "@/assets/hero-blindfold.jpg";
 import flagsImg from "@/assets/news-flags.jpg";
 import mediaImg from "@/assets/news-media.jpg";
 import politicsImg from "@/assets/news-politics.jpg";
+import featuredAlgorithmImg from "@/assets/featured-algorithm.jpg";
+import featuredInnovationImg from "@/assets/featured-innovation.jpg";
+import featuredSlogansImg from "@/assets/featured-slogans.jpg";
 import selMediaImg from "@/assets/sel-media.jpg";
 import selKatarImg from "@/assets/sel-katar.jpg";
 import selRudozelenaImg from "@/assets/sel-rudozelena.jpg";
@@ -201,6 +204,11 @@ const ACTIONS: {
 
 
 
+const FEATURED_IMAGES: Record<string, string> = {
+  sand: featuredAlgorithmImg,
+  flag: featuredInnovationImg,
+  red: featuredSlogansImg,
+};
 
 
 
@@ -407,6 +415,29 @@ function Index() {
           </div>
         </section>
 
+        {/* zvýrazněné karty */}
+        <section className="border-y border-primary/15 bg-primary/[0.06]">
+          <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+            <SectionHeader
+              kicker="Výběr redakce"
+              title="Doporučujeme"
+              subtitle="Začněte tady"
+              to="/clanky"
+            />
+            <div className="mt-8 grid gap-6 md:grid-cols-3">
+              {FEATURED.map((f) => (
+                <ArticleCard
+                  key={f.title}
+                  image={FEATURED_IMAGES[f.tone] ?? featuredAlgorithmImg}
+                  tag={f.tag}
+                  date={f.date}
+                  title={f.title.replace("\n", " ")}
+                  perex={f.text}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* rubriky s výpisy článků */}
         {FEED.map((group, gi) => (
