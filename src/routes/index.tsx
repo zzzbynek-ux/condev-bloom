@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import type * as React from "react";
 import { useEffect, useState } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight, Flag, HelpCircle, Users } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Flag, HelpCircle } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -186,26 +186,12 @@ const ACTIONS: {
   to: string;
 }[] = [
   {
-    icon: StarOfDavid,
-    title: "Antisemitismus",
-    text: "Nová podoba starých předsudků — jak ji poznat.",
-    tone: "bg-primary",
-    to: "/clanky",
-  },
-  {
     icon: HelpCircle,
     title: "Ptejte se AI",
     text: "Zeptejte se naší AI na dezinformace a fakta.",
     tone: "bg-primary",
 
     to: "/ptejte-se-ai",
-  },
-  {
-    icon: Users,
-    title: "Zapojte se",
-    text: "Přidejte se k nám a staňte se součástí řešení.",
-    tone: "bg-primary",
-    to: "/zapojte-se",
   },
   {
     icon: Flag,
@@ -370,7 +356,7 @@ function Index() {
         {/* rychlé akce */}
         <section className="mx-auto max-w-[88rem] px-5 pb-10 pt-14 md:px-6 md:pb-12 md:pt-16">
           <SectionHeader kicker="Rozcestník" title="Rychlé akce" />
-          <div className="mx-auto mt-8 grid max-w-[80rem] justify-center gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto mt-8 grid max-w-[40rem] justify-center gap-5 sm:grid-cols-2 lg:grid-cols-2">
 
 
 
