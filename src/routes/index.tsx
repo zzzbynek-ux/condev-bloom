@@ -1,17 +1,27 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import type * as React from "react";
-import { useEffect, useState } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight, Flag, HelpCircle } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Flag, HelpCircle } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
 import { MoreButton } from "@/components/more-button";
-import { ARTICLE_SECTIONS, HERO_SLIDES } from "@/lib/content";
+import { ARTICLE_SECTIONS } from "@/lib/content";
 import heroImg from "@/assets/hero-blindfold.jpg";
 import flagsImg from "@/assets/news-flags.jpg";
 import mediaImg from "@/assets/news-media.jpg";
 import politicsImg from "@/assets/news-politics.jpg";
+import algorithmImg from "@/assets/featured-algorithm.jpg";
+import innovationImg from "@/assets/featured-innovation.jpg";
+import slogansImg from "@/assets/featured-slogans.jpg";
+import katarImg from "@/assets/sel-katar.jpg";
+import rudozelenaImg from "@/assets/sel-rudozelena.jpg";
+import selMediaImg from "@/assets/sel-media.jpg";
+
+
+
+
 
 
 
