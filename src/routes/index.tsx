@@ -289,13 +289,6 @@ function ArticleTabs() {
               </button>
             ))}
           </div>
-          <Link
-            to="/clanky"
-            className="hidden items-center gap-2 pb-3 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline md:inline-flex"
-          >
-            <span className="h-px w-10 bg-primary" aria-hidden />
-            {isAll ? "Všechny texty" : `Více z rubriky ${group.label}`}
-          </Link>
         </div>
 
         {/* články aktivní záložky */}
@@ -312,18 +305,24 @@ function ArticleTabs() {
           ))}
         </div>
 
-        <div className="mt-8 md:hidden">
-          <Link
-            to="/clanky"
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
-          >
-            {isAll ? "Všechny texty" : `Více z rubriky ${group.label}`} <ArrowRight className="size-4" />
-          </Link>
-        </div>
+        {/* tlačítko pod mřížkou — další články stejné rubriky */}
+        {!isAll && (
+          <MoreButton
+            label={MORE_LABELS[group.label] ?? `Další texty z rubriky ${group.label}`}
+            search={group.label === "Nové" ? {} : { tag: group.label }}
+          />
+        )}
       </div>
     </section>
   );
 }
+
+const MORE_LABELS: Record<string, string> = {
+  "Nové": "Další nové texty",
+  "Doporučujeme": "Další z výběru redakce",
+  "Češi a Izrael": "Další texty Česko a Izrael",
+  "Studie a analýzy": "Další studie a analýzy",
+};
 
 function Index() {
   return (
