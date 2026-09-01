@@ -1,10 +1,22 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
+import { z } from "zod";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { TOPICS } from "@/lib/content";
+import { ARTICLE_SECTIONS } from "@/lib/content";
+import flagsImg from "@/assets/news-flags.jpg";
+import mediaImg from "@/assets/news-media.jpg";
+import politicsImg from "@/assets/news-politics.jpg";
+
+const IMAGES = { flags: flagsImg, media: mediaImg, politics: politicsImg };
+
+const searchSchema = z.object({
+  tag: z.string().optional(),
+});
 
 export const Route = createFileRoute("/clanky")({
+  validateSearch: (search) => searchSchema.parse(search),
   head: () => ({
     meta: [
       { title: "Články a analýzy — JednímHlasem" },
@@ -23,9 +35,40 @@ export const Route = createFileRoute("/clanky")({
   component: Clanky,
 });
 
-const FILTERS = ["Nové", "Doporučujeme", "Studie a analýzy", "České příběhy"];
+type Article = {
+  slug: string;
+  tag: string;
+  date?: string;
+  title: string;
+  perex: string;
+  image: "flags" | "media" | "politics";
+  section: string;
+};
+
+/** Všechny články napříč rubrikami, bez duplicit podle slug+rubrika */
+const ALL_ARTICLES: Article[] = ARTICLE_SECTIONS.flatMap((g) =>
+  g.items.map((item) => ({ ...item, section: g.label })),
+);
+
+const FILTERS = [
+  ...ARTICLE_SECTIONS.map((g) => g.label),
+  "Všechny texty",
+];
 
 function Clanky() {
+  const { tag } = Route.useSearch();
+  const navigate = useNavigate({ from: "/clanky" });
+
+  const isTagFilter = Boolean(tag) && !FILTERS.includes(tag!);
+  const active = isTagFilter ? "Všechny texty" : (tag ?? "Nové");
+
+  const articles =
+    active === "Všechny texty"
+      ? isTagFilter
+        ? ALL_ARTICLES.filter((a) => a.tag === tag)
+        : ALL_ARTICLES
+      : ALL_ARTICLES.filter((a) => a.section === active);
+
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
@@ -36,34 +79,76 @@ function Clanky() {
           Vše na jednom místě — od krátkých faktických vysvětlení po dlouhé studie.
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-2">
-          {FILTERS.map((f, idx) => (
-            <span
+        {/* Filtr — bez rámečků, aktivní tmavě modrý */}
+        <nav aria-label="Filtrovat články" className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-b border-border">
+          {FILTERS.map((f) => (
+            <button
               key={f}
-              className={`rounded-full border px-4 py-2 text-sm ${
-                idx === 0
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border text-muted-foreground"
+              type="button"
+              aria-current={active === f}
+              onClick={() => navigate({ search: f === "Nové" ? {} : { tag: f }, replace: false })}
+              className={`-mb-px border-b-2 pb-3 font-display text-base font-bold tracking-tight transition-colors md:text-lg ${
+                active === f
+                  ? "border-primary text-primary"
+                  : "border-transparent text-muted-foreground hover:text-foreground"
               }`}
             >
               {f}
-            </span>
+            </button>
           ))}
-        </div>
+        </nav>
 
-        <div className="mt-10 divide-y divide-border border-y border-border">
-          {TOPICS.map((t) => (
-            <article key={t.slug} className="grid gap-2 py-7 md:grid-cols-[10rem_1fr]">
-              <p className="text-xs uppercase tracking-[0.16em] text-primary">{t.kicker}</p>
-              <div>
-                <h2 className="text-xl font-semibold">{t.title}</h2>
-                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                  {t.perex}
-                </p>
+        {isTagFilter ? (
+          <p className="mt-6 text-sm text-muted-foreground">
+            Filtr podle tagu <span className="font-semibold text-foreground">„{tag}“</span> —{" "}
+            <Link to="/clanky" search={{}} className="font-semibold text-primary hover:underline">
+              zrušit filtr
+            </Link>
+          </p>
+        ) : null}
+
+        {/* Mřížka článků */}
+        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {articles.map((a, idx) => (
+            <article
+              key={`${a.slug}-${idx}`}
+              className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md"
+            >
+              <img
+                src={IMAGES[a.image]}
+                alt={a.title}
+                loading="lazy"
+                width={1280}
+                height={720}
+                className="aspect-video w-full object-cover"
+              />
+              <div className="flex flex-1 flex-col p-6">
+                <div className="flex items-center justify-between gap-3">
+                  <Link
+                    to="/clanky"
+                    search={{ tag: a.tag }}
+                    className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground hover:opacity-85"
+                  >
+                    {a.tag}
+                  </Link>
+                  {a.date ? (
+                    <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
+                      {a.date}
+                    </span>
+                  ) : null}
+                </div>
+                <h2 className="mt-3 font-display text-xl font-bold leading-snug text-primary">
+                  <span className="group-hover:underline">{a.title}</span>
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{a.perex}</p>
               </div>
             </article>
           ))}
         </div>
+
+        {articles.length === 0 ? (
+          <p className="mt-10 text-muted-foreground">Pro tento filtr zatím žádné texty nemáme.</p>
+        ) : null}
       </main>
       <SiteFooter />
     </div>
