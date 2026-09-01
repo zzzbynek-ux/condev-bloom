@@ -210,6 +210,254 @@ export type FeedGroup = {
   items: FeedItem[];
 };
 
+/** Sekce článků na homepage — každá záložka má 6 článků */
+export const ARTICLE_SECTIONS: FeedGroup[] = [
+  {
+    id: "nove",
+    label: "Nové",
+    showAll: true,
+    items: [
+      {
+        slug: "propustte-rukojmi",
+        tag: "Analýza",
+        date: "01/09/26",
+        title: "Propusťte rukojmí!",
+        perex:
+          "Izraelští rukojmí — někteří zavraždění, jiní stále ukrytí v tunelech Gazy. Svět zapomíná. My ne.",
+        image: "flags",
+      },
+      {
+        slug: "odlisni-virou",
+        tag: "Hlasy",
+        date: "28/08/26",
+        title: "Odlišní vírou, spojeni svědomím",
+        perex:
+          "Křesťané i muslimové otevřeně vystupují proti nenávisti. Jejich hlasy v debatě chybí nejvíc.",
+        image: "politics",
+      },
+      {
+        slug: "masinerie-lzi",
+        tag: "Média",
+        date: "21/08/26",
+        title: "Mašinerie lží: když média mluví za Hamás",
+        perex:
+          "Západní redakce přebírají informace od teroristů bez ověření. Jak to funguje a proč na tom záleží.",
+        image: "media",
+      },
+      {
+        slug: "zamereno-na-katar",
+        tag: "Report",
+        date: "14/08/26",
+        title: "Zaměřeno na Katar: peníze, moc, propaganda",
+        perex:
+          "Protesty na univerzitách i virální příspěvky mají společného víc, než se zdá. Kam sahá katarský vliv.",
+        image: "politics",
+      },
+      {
+        slug: "novy-antisemitismus",
+        tag: "Analýza",
+        date: "07/08/26",
+        title: "Nový antisemitismus: o Palestinu tady vůbec nejde",
+        perex:
+          "Mluví jazykem solidarity a historické křivdy. Pod pláštíkem vznešených slov ale jde o něco jiného.",
+        image: "flags",
+      },
+      {
+        slug: "wiki-jako-nastroj-vlivu",
+        tag: "Dezinformace",
+        date: "31/07/26",
+        title: "Když fakta nejsou fakta: Wiki jako nástroj vlivu",
+        perex:
+          "Otevřenost Wikipedie umožňuje i tiché přepisování reality. Ukazujeme konkrétní případy.",
+        image: "media",
+      },
+    ],
+  },
+  {
+    id: "doporucujeme",
+    label: "Doporučujeme",
+    showAll: true,
+    items: [
+      {
+        slug: "maly-stat-globalni-prinos",
+        tag: "Výběr redakce",
+        date: "05/07/26",
+        title: "Malý stát. Globální přínos.",
+        perex:
+          "Izrael přináší světu víc, než by odpovídalo jeho velikosti — od technologií po medicínu.",
+        image: "flags",
+      },
+      {
+        slug: "zmen-algoritmus",
+        tag: "Výběr redakce",
+        date: "05/07/26",
+        title: "Změň algoritmus — změníš realitu",
+        perex:
+          "Diskuze a komentáře na sociálních sítích ovlivňují naši realitu víc, než si myslíme.",
+        image: "media",
+      },
+      {
+        slug: "slogany-zivi-emoce",
+        tag: "Výběr redakce",
+        date: "05/07/26",
+        title: "Slogany živí emoce, ne mír",
+        perex:
+          "Přestaňme podléhat prázdným heslům a hledejme skutečné řešení.",
+        image: "politics",
+      },
+      {
+        slug: "mir-zacina-s-pravdou",
+        tag: "Blízký východ",
+        date: "19/04/26",
+        title: "Mír začíná s pravdou",
+        perex:
+          "Arabské státy a mezinárodní instituce konflikt nejen sledují — udržují ho při životě.",
+        image: "flags",
+      },
+      {
+        slug: "media-ve-sluzbach-teroru",
+        tag: "Média",
+        date: "12/06/26",
+        title: "Média ve službách teroru",
+        perex:
+          "Když přijde na Izrael, redakce bez váhání přebírají informace od teroristů.",
+        image: "media",
+      },
+      {
+        slug: "rudo-zelena-aliance",
+        tag: "Ideologie",
+        date: "28/05/26",
+        title: "Rudo-zelená aliance",
+        perex:
+          "Spojenectví progresivní levice a islamismu legitimizuje násilí a rozkládá morální páteř demokracií.",
+        image: "politics",
+      },
+    ],
+  },
+  {
+    id: "cesi-a-izrael",
+    label: "Češi a Izrael",
+    showAll: true,
+    items: [
+      {
+        slug: "maly-stat-globalni-prinos",
+        tag: "České příběhy",
+        date: "05/07/26",
+        title: "Malý stát. Globální přínos.",
+        perex:
+          "Izrael není jen spojencem Západu, je jeho součástí. Proto si zaslouží naši pozornost i podporu.",
+        image: "flags",
+      },
+      {
+        slug: "ceska-podpora-izraele",
+        tag: "Historie",
+        date: "20/06/26",
+        title: "Československo a zrození Izraele",
+        perex:
+          "Zbraně, výcvik i diplomatická podpora. Jak Čechoslovácko pomohlo Izraeli přežít první roky.",
+        image: "politics",
+      },
+      {
+        slug: "odlisni-virou",
+        tag: "Hlasy",
+        date: "28/08/26",
+        title: "Odlišní vírou, spojeni svědomím",
+        perex:
+          "Čeští křesťané i muslimové se otevřeně staví proti nenávisti vůči Židům.",
+        image: "media",
+      },
+      {
+        slug: "ceske-univerzity",
+        tag: "Vzdělávání",
+        date: "10/06/26",
+        title: "Co se děje na českých univerzitách",
+        perex:
+          "Protesty, petice a tlak na studenty. Mapujeme situaci na vysokých školách v Česku.",
+        image: "politics",
+      },
+      {
+        slug: "zidovske-obce-v-cesku",
+        tag: "Komunita",
+        date: "02/06/26",
+        title: "Židovské obce v Česku dnes",
+        perex:
+          "Život, tradice i obavy. Rozhovory s lidmi, kteří tvoří českou židovskou komunitu.",
+        image: "flags",
+      },
+      {
+        slug: "ceska-media-a-izrael",
+        tag: "Média",
+        date: "25/05/26",
+        title: "Jak česká média píší o Izraeli",
+        perex:
+          "Analýza titulků a formulací: kde končí zpravodajství a začíná šíření propagandy.",
+        image: "media",
+      },
+    ],
+  },
+  {
+    id: "studie-a-analyzy",
+    label: "Studie a analýzy",
+    showAll: true,
+    items: [
+      {
+        slug: "propustte-rukojmi",
+        tag: "Analýza",
+        date: "05/07/26",
+        title: "Propusťte rukojmí!",
+        perex:
+          "Informace o zadržovaných izraelských rukojmích v Gaze. Jejich příběhy držíme nad hladinou.",
+        image: "flags",
+      },
+      {
+        slug: "novy-antisemitismus",
+        tag: "Analýza",
+        date: "02/07/26",
+        title: "Nový antisemitismus: o Palestinu tady vůbec nejde",
+        perex:
+          "Tváří se jako morální apel. Pod povrchem jde o nejstarší nenávist v novém balení.",
+        image: "politics",
+      },
+      {
+        slug: "wiki-jako-nastroj-vlivu",
+        tag: "Studie",
+        date: "24/06/26",
+        title: "Když fakta nejsou fakta: Wiki jako nástroj vlivu",
+        perex:
+          "Systematické zkreslování otevřené encyklopedie — data, případy a mechanismy.",
+        image: "media",
+      },
+      {
+        slug: "financovani-kampani",
+        tag: "Studie",
+        date: "15/06/26",
+        title: "Kdo platí protizraelské kampaně",
+        perex:
+          "Penězovody z Kataru a dalších států do neziskovek, univerzit a médií.",
+        image: "politics",
+      },
+      {
+        slug: "informacni-valka",
+        tag: "Analýza",
+        date: "08/06/26",
+        title: "Informační válka: lži letí rychleji než fakta",
+        perex:
+          "Jak dezinformační cykly fungují a proč je dementi vždy o krok pozadu.",
+        image: "media",
+      },
+      {
+        slug: "mir-zacina-s-pravdou",
+        tag: "Blízký východ",
+        date: "19/04/26",
+        title: "Mír začíná s pravdou",
+        perex:
+          "Mýty, které konflikt udržují při životě — a jak je věcně vyvracet.",
+        image: "flags",
+      },
+    ],
+  },
+];
+
 export const FEED: FeedGroup[] = [
   {
     id: "nove",
