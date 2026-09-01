@@ -61,7 +61,7 @@ export function SiteHeader() {
 
             <Link
               to="/zapojte-se"
-              className="hidden rounded-full bg-destructive px-6 py-2 text-sm font-semibold text-destructive-foreground transition-transform hover:-translate-y-0.5 lg:inline-flex"
+              className="hidden rounded-full border border-white bg-transparent px-6 py-2 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-white/10 lg:inline-flex"
             >
               Podpořte nás
             </Link>
