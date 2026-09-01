@@ -187,6 +187,26 @@ export function SiteHeader() {
 
           <div className="my-auto flex shrink-0 items-center gap-2">
             <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Facebook"
+              title="Facebook"
+              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              <FacebookIcon className="size-4" />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram"
+              title="Instagram"
+              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              <InstagramIcon className="size-4" />
+            </a>
+            <a
               href="https://x.com"
               target="_blank"
               rel="noreferrer"
