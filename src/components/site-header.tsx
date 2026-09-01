@@ -180,26 +180,6 @@ export function SiteHeader() {
             >
               <XIcon className="size-4" />
             </a>
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Sledujte nás na Facebooku"
-              title="Sledujte nás na Facebooku"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
-            >
-              <Facebook className="size-4" />
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Sledujte nás na Instagramu"
-              title="Sledujte nás na Instagramu"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
-            >
-              <Instagram className="size-4" />
-            </a>
           </div>
 
 
