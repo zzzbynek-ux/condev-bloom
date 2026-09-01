@@ -356,7 +356,7 @@ function Index() {
         {/* rychlé akce */}
         <section className="mx-auto max-w-[88rem] px-5 pb-10 pt-14 md:px-6 md:pb-12 md:pt-16">
           <SectionHeader kicker="Rozcestník" title="Rychlé akce" />
-          <div className="mx-auto mt-8 grid max-w-[80rem] justify-center gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto mt-8 grid max-w-[40rem] justify-center gap-5 sm:grid-cols-2 lg:grid-cols-2">
 
 
 
