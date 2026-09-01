@@ -11,7 +11,7 @@ const buttonClass =
 export function MoreButton({
   label,
   to = "/clanky",
-  search,
+  search = {},
   onClick,
 }: {
   label: string;
