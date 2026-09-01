@@ -1,9 +1,10 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { MoreButton } from "@/components/more-button";
 import { ARTICLE_SECTIONS } from "@/lib/content";
 import flagsImg from "@/assets/news-flags.jpg";
 import mediaImg from "@/assets/news-media.jpg";

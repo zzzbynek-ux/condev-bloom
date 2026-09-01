@@ -2,12 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { ArticleCard } from "@/components/article-card";
+import { MoreButton } from "@/components/more-button";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import flagsImg from "@/assets/news-flags.jpg";
+import politicsImg from "@/assets/news-politics.jpg";
 
 export const Route = createFileRoute("/antisemitismus")({
   head: () => ({

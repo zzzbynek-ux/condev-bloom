@@ -255,7 +255,7 @@ export const ARTICLE_SECTIONS: FeedGroup[] = [
       },
       {
         slug: "novy-antisemitismus",
-        tag: "Analýza",
+        tag: "Antisemitismus",
         date: "07/08/26",
         title: "Nový antisemitismus: o Palestinu tady vůbec nejde",
         perex:
@@ -368,7 +368,7 @@ export const ARTICLE_SECTIONS: FeedGroup[] = [
       },
       {
         slug: "ceske-univerzity",
-        tag: "Vzdělávání",
+        tag: "Antisemitismus",
         date: "10/06/26",
         title: "Co se děje na českých univerzitách",
         perex:
@@ -377,7 +377,7 @@ export const ARTICLE_SECTIONS: FeedGroup[] = [
       },
       {
         slug: "zidovske-obce-v-cesku",
-        tag: "Komunita",
+        tag: "Antisemitismus",
         date: "02/06/26",
         title: "Židovské obce v Česku dnes",
         perex:
