@@ -133,11 +133,12 @@ export function SiteHeader() {
                   {menu === item.label ? (
                     <div className="absolute left-0 top-full z-50 w-64 rounded-b-xl border border-t-0 border-border bg-background py-2 shadow-lg">
                       {item.children.map((c) => {
+                        const currentFiltr = (location.search as { filtr?: string }).filtr;
                         const isActive =
                           c.to === "/clanky" && location.pathname === "/clanky"
                             ? c.search?.filtr
-                              ? new URLSearchParams(location.search).get("filtr") === c.search.filtr
-                              : !new URLSearchParams(location.search).get("filtr")
+                              ? currentFiltr === c.search.filtr
+                              : !currentFiltr
                             : false;
                         return c.to ? (
                           <Link
