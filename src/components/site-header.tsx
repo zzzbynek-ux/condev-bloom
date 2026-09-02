@@ -76,7 +76,7 @@ export function SiteHeader() {
 
 
             <Link
-              to="/zapojte-se"
+              to="/podporte-nas"
               className="hidden rounded-full bg-white px-6 py-2 text-sm font-semibold text-primary transition-transform hover:-translate-y-0.5 hover:bg-white/90 lg:inline-flex"
             >
               Podpořte nás
