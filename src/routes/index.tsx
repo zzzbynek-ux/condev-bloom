@@ -7,7 +7,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
 import { MoreButton } from "@/components/more-button";
-import { ARTICLE_SECTIONS, HERO_SLIDES, TYDYT_RECENT } from "@/lib/content";
+import { ARTICLE_SECTIONS, HERO_SLIDES } from "@/lib/content";
 import heroImg from "@/assets/hero-blindfold.jpg";
 import tydytPortrait from "@/assets/tydyt-portrait.jpg";
 import flagsImg from "@/assets/news-flags.jpg";
