@@ -133,6 +133,7 @@ export function SiteHeader() {
                           <Link
                             key={c.label}
                             to={c.to}
+                            search={c.search}
                             onClick={() => setMenu(null)}
                             className="block px-4 py-2 text-sm text-foreground transition-colors hover:bg-muted hover:text-primary"
                           >
