@@ -270,23 +270,33 @@ export function SiteHeader() {
                     {item.label}
                   </p>
                   <div className="flex flex-col pl-3">
-                    {item.children.map((c) =>
-                      c.to ? (
+                    {item.children.map((c) => {
+                      const isActive =
+                        c.to === "/clanky" && location.pathname === "/clanky"
+                          ? c.search?.filtr
+                            ? new URLSearchParams(location.search).get("filtr") === c.search.filtr
+                            : !new URLSearchParams(location.search).get("filtr")
+                          : false;
+                      return c.to ? (
                         <Link
                           key={c.label}
                           to={c.to}
                           {...(c.search ? { search: c.search } : {})}
                           onClick={() => setOpen(false)}
-                          className="py-2 text-sm text-foreground/80"
+                          className={`rounded-full py-2 text-[15px] font-semibold transition-colors ${
+                            isActive
+                              ? "bg-primary text-primary-foreground"
+                              : "text-primary hover:bg-primary/10"
+                          }`}
                         >
                           {c.label}
                         </Link>
                       ) : (
-                        <span key={c.label} className="py-2 text-sm text-muted-foreground">
+                        <span key={c.label} className="rounded-full py-2 text-[15px] font-semibold text-muted-foreground">
                           {c.label}
                         </span>
-                      ),
-                    )}
+                      );
+                    })}
                   </div>
                 </div>
               ) : (
