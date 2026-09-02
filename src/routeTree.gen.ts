@@ -20,6 +20,7 @@ import { Route as OchranaOsobnichUdajuRouteImport } from './routes/ochrana-osobn
 import { Route as PodporteNasRouteImport } from './routes/podporte-nas'
 import { Route as PtejteSeAiRouteImport } from './routes/ptejte-se-ai'
 import { Route as TemataRouteImport } from './routes/temata'
+import { Route as VykrikyRouteImport } from './routes/vykriky'
 import { Route as ZapojteSeRouteImport } from './routes/zapojte-se'
 
 const IndexRoute = IndexRouteImport.update({
@@ -77,6 +78,11 @@ const TemataRoute = TemataRouteImport.update({
   path: '/temata',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VykrikyRoute = VykrikyRouteImport.update({
+  id: '/vykriky',
+  path: '/vykriky',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ZapojteSeRoute = ZapojteSeRouteImport.update({
   id: '/zapojte-se',
   path: '/zapojte-se',
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/podporte-nas': typeof PodporteNasRoute
   '/ptejte-se-ai': typeof PtejteSeAiRoute
   '/temata': typeof TemataRoute
+  '/vykriky': typeof VykrikyRoute
   '/zapojte-se': typeof ZapojteSeRoute
 }
 export interface FileRoutesByTo {
@@ -109,6 +116,7 @@ export interface FileRoutesByTo {
   '/podporte-nas': typeof PodporteNasRoute
   '/ptejte-se-ai': typeof PtejteSeAiRoute
   '/temata': typeof TemataRoute
+  '/vykriky': typeof VykrikyRoute
   '/zapojte-se': typeof ZapojteSeRoute
 }
 export interface FileRoutesById {
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/podporte-nas': typeof PodporteNasRoute
   '/ptejte-se-ai': typeof PtejteSeAiRoute
   '/temata': typeof TemataRoute
+  '/vykriky': typeof VykrikyRoute
   '/zapojte-se': typeof ZapojteSeRoute
 }
 export interface FileRouteTypes {
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
     | '/podporte-nas'
     | '/ptejte-se-ai'
     | '/temata'
+    | '/vykriky'
     | '/zapojte-se'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
     | '/podporte-nas'
     | '/ptejte-se-ai'
     | '/temata'
+    | '/vykriky'
     | '/zapojte-se'
   id:
     | '__root__'
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/podporte-nas'
     | '/ptejte-se-ai'
     | '/temata'
+    | '/vykriky'
     | '/zapojte-se'
   fileRoutesById: FileRoutesById
 }
@@ -183,6 +195,7 @@ export interface RootRouteChildren {
   PodporteNasRoute: typeof PodporteNasRoute
   PtejteSeAiRoute: typeof PtejteSeAiRoute
   TemataRoute: typeof TemataRoute
+  VykrikyRoute: typeof VykrikyRoute
   ZapojteSeRoute: typeof ZapojteSeRoute
 }
 
@@ -265,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TemataRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vykriky': {
+      id: '/vykriky'
+      path: '/vykriky'
+      fullPath: '/vykriky'
+      preLoaderRoute: typeof VykrikyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/zapojte-se': {
       id: '/zapojte-se'
       path: '/zapojte-se'
@@ -287,6 +307,7 @@ const rootRouteChildren: RootRouteChildren = {
   PodporteNasRoute: PodporteNasRoute,
   PtejteSeAiRoute: PtejteSeAiRoute,
   TemataRoute: TemataRoute,
+  VykrikyRoute: VykrikyRoute,
   ZapojteSeRoute: ZapojteSeRoute,
 }
 export const routeTree = rootRouteImport

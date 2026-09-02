@@ -59,6 +59,50 @@ function NahlasitIncident() {
           </p>
         </div>
 
+        {/* Archiv evidovaných incidentů */}
+        <section id="archiv" className="mt-12 scroll-mt-24">
+          <h2 className="font-display text-2xl font-bold text-primary md:text-3xl">
+            Archiv incidentů
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Nahlášené a ověřené případy, které dokumentujeme.
+          </p>
+          <ul className="mt-6 grid gap-4">
+            {[
+              {
+                date: "28. 8. 2026",
+                place: "Praha",
+                text: "Poškozená výloha židovské restaurace. Případ zdokumentován a předán k ověření.",
+              },
+              {
+                date: "14. 8. 2026",
+                place: "Online",
+                text: "Vlna nenávistných komentářů pod profilem české židovské obce. Hlášení evidováno.",
+              },
+              {
+                date: "2. 8. 2026",
+                place: "Brno",
+                text: "Verbální napadení kolemjdoucího u synagogy. Incident nahlášen a zadokumentován.",
+              },
+            ].map((i) => (
+              <li
+                key={i.text}
+                className="rounded-xl border border-border bg-card p-5 shadow-sm"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <span className="rounded-sm bg-destructive px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-white">
+                    Incident
+                  </span>
+                  <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
+                    {i.date} · {i.place}
+                  </span>
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{i.text}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+
         {sent ? (
           <div className="mt-10 rounded-2xl border border-border bg-card p-8 text-center">
             <h2 className="font-display text-2xl font-bold">Děkujeme za hlášení</h2>
