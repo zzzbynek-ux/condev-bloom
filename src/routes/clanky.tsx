@@ -52,10 +52,14 @@ const ALL_ARTICLES: Article[] = ARTICLE_SECTIONS.flatMap((g) =>
   g.items.map((item) => ({ ...item, section: g.label })),
 );
 
-const FILTERS = [
-  ...ARTICLE_SECTIONS.map((g) => g.label),
-  "Všechny texty",
-];
+const FILTER_IDS = [
+  { id: "nove", label: "Nové" },
+  { id: "doporucujeme", label: "Doporučujeme" },
+  { id: "cesi-a-izrael", label: "Češi a Izrael" },
+  { id: "studie", label: "Studie a analýzy" },
+] as const;
+
+const FILTERS = [...FILTER_IDS.map((f) => f.label), "Všechny texty"];
 
 const MORE_LABELS: Record<string, string> = {
   "Nové": "Další nové texty",
@@ -65,14 +69,16 @@ const MORE_LABELS: Record<string, string> = {
 };
 
 function Clanky() {
-  const { tag } = Route.useSearch();
+  const { tag, filtr } = Route.useSearch();
   const navigate = useNavigate({ from: "/clanky" });
   const [visible, setVisible] = useState(3);
 
   const isTagFilter = Boolean(tag) && !FILTERS.includes(tag!);
-  const active = isTagFilter ? "Všechny texty" : (tag ?? "Nové");
+  const active = isTagFilter
+    ? "Všechny texty"
+    : (FILTER_IDS.find((f) => f.id === filtr)?.label ?? "Všechny texty");
 
-  useEffect(() => setVisible(3), [active, tag]);
+  useEffect(() => setVisible(3), [active, tag, filtr]);
 
   const articles =
     active === "Všechny texty"
