@@ -1,10 +1,9 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { ChevronDown, Menu, Search, X } from "lucide-react";
-import { TOPICS } from "@/lib/content";
 
 type NavTo = "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" | "/manifest" | "/nahlasit-incident" | "/ptejte-se-ai";
-type NavChild = { label: string; to?: NavTo };
+type NavChild = { label: string; to?: NavTo; search?: { filtr?: string } };
 type NavItem =
   | { label: string; to: NavTo; children?: undefined }
   | { label: string; to?: undefined; children: NavChild[] };
