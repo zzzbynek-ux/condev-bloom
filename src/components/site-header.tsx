@@ -12,11 +12,10 @@ const NAV: NavItem[] = [
   {
     label: "Články",
     children: [
-      { label: "Nové", to: "/clanky" },
-      { label: "Doporučujeme", to: "/clanky" },
-      { label: "Studie a analýzy", to: "/clanky" },
-      { label: "České příběhy", to: "/clanky" },
-      ...TOPICS.map((t) => ({ label: t.title, to: "/clanky" as NavTo })),
+      { label: "Nové", to: "/clanky", search: { filtr: "nove" } },
+      { label: "Doporučujeme", to: "/clanky", search: { filtr: "doporucujeme" } },
+      { label: "Češi a Izrael", to: "/clanky", search: { filtr: "cesi-a-izrael" } },
+      { label: "Studie a analýzy", to: "/clanky", search: { filtr: "studie" } },
       { label: "Všechny texty", to: "/clanky" },
     ],
   },
