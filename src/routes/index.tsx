@@ -450,22 +450,13 @@ function Index() {
               </h2>
             </div>
 
-            <div className="mt-4 grid gap-6 lg:grid-cols-2">
+            <div className="mt-4 grid items-start gap-6 lg:grid-cols-2">
               {/* Tydýt */}
-              <div className="flex flex-col">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">
-                    Tydýt týdne
-                  </p>
-                  <Link
-                    to="/clanky"
-                    search={{ filtr: "tydyt" }}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
-                  >
-                    Archiv tydýtů <ArrowRight className="size-4" />
-                  </Link>
-                </div>
-                <article className="group mt-3 flex flex-1 flex-row gap-0 overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">
+                  Tydýt týdne
+                </p>
+                <article className="group mt-3 flex flex-row gap-0 overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
                   <img
                     src={tydytPortrait}
                     alt="Tydýt týdne — Jméno Příjmení"
@@ -504,19 +495,26 @@ function Index() {
                     </Link>
                   </div>
                 </article>
+                <div className="mt-3">
+                  <Link
+                    to="/clanky"
+                    search={{ filtr: "tydyt" }}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
+                  >
+                    Archiv tydýtů <ArrowRight className="size-4" />
+                  </Link>
+                </div>
               </div>
 
               {/* Dokumentujeme */}
-              <div className="flex flex-col">
-                <div>
-                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">
-                    Monitoring
-                  </p>
-                  <h3 className="mt-1 font-display text-xl font-bold uppercase tracking-[0.03em] text-primary md:text-2xl">
-                    Dokumentujeme
-                  </h3>
-                </div>
-                <div className="mt-3 flex flex-1 flex-col gap-3">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">
+                  Monitoring
+                </p>
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">
+                  Dokumentujeme
+                </p>
+                <div className="mt-3 flex flex-col gap-3">
                   {[
                     {
                       tag: "Incident",
@@ -539,7 +537,7 @@ function Index() {
                   ].map((d) => (
                     <article
                       key={d.text}
-                      className="flex flex-col rounded-xl border border-border bg-card p-4 shadow-sm"
+                      className="flex flex-col rounded-xl border border-border bg-card p-3 shadow-sm"
                     >
                       <div className="flex items-center justify-between gap-3">
                         <span
