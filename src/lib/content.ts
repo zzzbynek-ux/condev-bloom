@@ -474,6 +474,11 @@ export const ARTICLE_SECTIONS: FeedGroup[] = [
   },
 ];
 
+export const TYDYT_RECENT = [
+  { slug: "tydyt-tydne-2", title: "Jiné Jméno", date: "26/08/26" },
+  { slug: "tydyt-tydne-3", title: "Třetí Osoba", date: "19/08/26" },
+] as const;
+
 export const FEED: FeedGroup[] = [
   {
     id: "nove",
