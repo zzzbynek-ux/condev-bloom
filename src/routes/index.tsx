@@ -248,8 +248,10 @@ const ALL_TAB = { id: "vse", label: "Všechny texty" } as const;
 
 function ArticleTabs() {
   const [active, setActive] = useState(0);
-  const isAll = active === ARTICLE_SECTIONS.length;
-  const group = ARTICLE_SECTIONS[active] ?? ARTICLE_SECTIONS[0]!;
+  // Tydýt týdne má na homepage vlastní blok — v záložkách ho nezobrazujeme.
+  const sections = ARTICLE_SECTIONS.filter((g) => g.id !== "tydyt");
+  const isAll = active === sections.length;
+  const group = sections[active] ?? sections[0]!;
   const items = isAll
     ? ARTICLE_SECTIONS.flatMap((g) => g.items.map((item) => ({ ...item, sectionLabel: g.label })))
     : (group.items.map((item) => ({ ...item, sectionLabel: item.tag })) as ({
