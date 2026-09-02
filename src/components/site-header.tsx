@@ -1,9 +1,9 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { ChevronDown, Menu, Search, X } from "lucide-react";
 
 type NavTo = "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" | "/manifest" | "/nahlasit-incident" | "/ptejte-se-ai";
-type NavChild = { label: string; to?: NavTo; search?: { filtr?: string } };
+type NavChild = { label: string; to?: NavTo; search?: { filtr: string } };
 type NavItem =
   | { label: string; to: NavTo; children?: undefined }
   | { label: string; to?: undefined; children: NavChild[] };
@@ -56,6 +56,7 @@ export function SiteHeader() {
   const [menu, setMenu] = useState<string | null>(null);
   const [q, setQ] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <header className="sticky top-0 z-50 shadow-sm">
@@ -131,26 +132,37 @@ export function SiteHeader() {
                   </button>
                   {menu === item.label ? (
                     <div className="absolute left-0 top-full z-50 w-64 rounded-b-xl border border-t-0 border-border bg-background py-2 shadow-lg">
-                      {item.children.map((c) =>
-                        c.to ? (
+                      {item.children.map((c) => {
+                        const currentFiltr = (location.search as { filtr?: string }).filtr;
+                        const isActive =
+                          c.to === "/clanky" && location.pathname === "/clanky"
+                            ? c.search?.filtr
+                              ? currentFiltr === c.search.filtr
+                              : !currentFiltr
+                            : false;
+                        return c.to ? (
                           <Link
                             key={c.label}
                             to={c.to}
                             {...(c.search ? { search: c.search } : {})}
                             onClick={() => setMenu(null)}
-                            className="block px-4 py-2 text-sm text-foreground transition-colors hover:bg-muted hover:text-primary"
+                            className={`block rounded-full px-4 py-2 text-[15px] font-semibold transition-colors ${
+                              isActive
+                                ? "bg-primary text-primary-foreground"
+                                : "text-primary hover:bg-primary/10"
+                            }`}
                           >
                             {c.label}
                           </Link>
                         ) : (
                           <span
                             key={c.label}
-                            className="block cursor-default px-4 py-2 text-sm text-muted-foreground"
+                            className="block cursor-default rounded-full px-4 py-2 text-[15px] font-semibold text-muted-foreground"
                           >
                             {c.label}
                           </span>
-                        ),
-                      )}
+                        );
+                      })}
                     </div>
                   ) : null}
                 </div>
@@ -259,23 +271,34 @@ export function SiteHeader() {
                     {item.label}
                   </p>
                   <div className="flex flex-col pl-3">
-                    {item.children.map((c) =>
-                      c.to ? (
+                    {item.children.map((c) => {
+                      const currentFiltr = (location.search as { filtr?: string }).filtr;
+                      const isActive =
+                        c.to === "/clanky" && location.pathname === "/clanky"
+                          ? c.search?.filtr
+                            ? currentFiltr === c.search.filtr
+                            : !currentFiltr
+                          : false;
+                      return c.to ? (
                         <Link
                           key={c.label}
                           to={c.to}
                           {...(c.search ? { search: c.search } : {})}
                           onClick={() => setOpen(false)}
-                          className="py-2 text-sm text-foreground/80"
+                          className={`rounded-full py-2 text-[15px] font-semibold transition-colors ${
+                            isActive
+                              ? "bg-primary text-primary-foreground"
+                              : "text-primary hover:bg-primary/10"
+                          }`}
                         >
                           {c.label}
                         </Link>
                       ) : (
-                        <span key={c.label} className="py-2 text-sm text-muted-foreground">
+                        <span key={c.label} className="rounded-full py-2 text-[15px] font-semibold text-muted-foreground">
                           {c.label}
                         </span>
-                      ),
-                    )}
+                      );
+                    })}
                   </div>
                 </div>
               ) : (
