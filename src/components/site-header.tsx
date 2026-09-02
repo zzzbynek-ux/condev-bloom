@@ -16,6 +16,7 @@ const NAV: NavItem[] = [
       { label: "Doporučujeme", to: "/clanky", search: { filtr: "doporucujeme" } },
       { label: "Češi a Izrael", to: "/clanky", search: { filtr: "cesi-a-izrael" } },
       { label: "Studie a analýzy", to: "/clanky", search: { filtr: "studie" } },
+      { label: "Tydýt týdne", to: "/clanky", search: { filtr: "tydyt" } },
       { label: "Všechny texty", to: "/clanky" },
     ],
   },
