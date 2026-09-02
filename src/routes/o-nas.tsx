@@ -68,7 +68,7 @@ function ONas() {
           <img
             src={heroBlindfold}
             alt={INTRO.image.alt}
-            className="mx-auto mt-10 h-56 w-full max-w-3xl rounded-2xl object-cover"
+            className="mx-auto mt-10 h-40 w-full max-w-3xl rounded-2xl object-cover md:h-56"
           />
         </section>
 
@@ -90,7 +90,7 @@ function ONas() {
           <SectionHeader
             kicker="Naše osy"
             title="O čem mluvíme"
-            subtitle="Osy, které nás vedou. Každá vede dál — na téma, článek nebo encyklopedii."
+            subtitle="Osy, kterým se věnujeme. Každá vede na téma nebo článek."
           />
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             {AXES.map((axis) => (
