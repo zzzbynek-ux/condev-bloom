@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ChevronDown, Menu, Search, X } from "lucide-react";
 
 type NavTo = "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" | "/manifest" | "/nahlasit-incident" | "/ptejte-se-ai";
-type NavChild = { label: string; to?: NavTo; search?: { filtr?: string } };
+type NavChild = { label: string; to?: NavTo; search?: { filtr: string } };
 type NavItem =
   | { label: string; to: NavTo; children?: undefined }
   | { label: string; to?: undefined; children: NavChild[] };
