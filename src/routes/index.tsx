@@ -429,16 +429,6 @@ function Index() {
             </div>
           </div>
         </section>
-
-        {/* Sekce článků — záložky ve stylu Visegrad24 */}
-        <ArticleTabs />
-
-
-
-
-
-
-
       </main>
       <SiteFooter />
     </div>
