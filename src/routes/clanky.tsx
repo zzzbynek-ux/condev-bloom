@@ -113,7 +113,14 @@ function Clanky() {
               key={f}
               type="button"
               aria-current={active === f}
-              onClick={() => navigate({ search: f === "Nové" ? {} : { tag: f }, replace: false })}
+              onClick={() =>
+                navigate({
+                  search: f === "Všechny texty"
+                    ? {}
+                    : { filtr: FILTER_IDS.find((x) => x.label === f)!.id },
+                  replace: false,
+                })
+              }
               className={`-mb-px border-b-2 pb-3 font-display text-base font-bold tracking-tight transition-colors md:text-lg ${
                 active === f
                   ? "border-primary text-primary"
