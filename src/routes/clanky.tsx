@@ -108,8 +108,8 @@ function Clanky() {
           Vše na jednom místě — od krátkých faktických vysvětlení po dlouhé studie.
         </p>
 
-        {/* Filtr — pill tlačítka v izraelské modři */}
-        <nav aria-label="Filtrovat články" className="mt-8 flex flex-wrap gap-2">
+        {/* Filtr — tabová lišta v izraelské modři */}
+        <nav aria-label="Filtrovat články" className="mt-8 flex flex-wrap gap-6 border-b border-border pb-0">
           {FILTERS.map((f) => (
             <button
               key={f}
@@ -123,10 +123,10 @@ function Clanky() {
                   replace: false,
                 })
               }
-              className={`rounded-full px-4 py-2 text-[15px] font-semibold transition-colors ${
+              className={`font-display text-[15px] transition-colors ${
                 active === f
-                  ? "bg-primary text-primary-foreground"
-                  : "text-primary hover:bg-primary/10"
+                  ? "-mb-[1px] border-b-2 border-primary pb-2 font-semibold text-primary"
+                  : "pb-2 font-medium text-primary hover:opacity-80"
               }`}
             >
               {f}
