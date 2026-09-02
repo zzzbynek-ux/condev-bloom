@@ -376,34 +376,23 @@ function Index() {
 
 
         {/* rychlé akce */}
-        <section className="mx-auto max-w-[88rem] px-5 pb-10 pt-14 md:px-6 md:pb-12 md:pt-16">
-          <SectionHeader kicker="Rozcestník" title="Rychlé akce" />
-          <div className="mx-auto mt-8 grid max-w-[40rem] justify-center gap-5 sm:grid-cols-2 lg:grid-cols-2">
-
-
-
+        <section className="mx-auto max-w-[88rem] px-5 pt-8 md:px-6 md:pt-10 lg:max-h-[160px]">
+          <div className="border-t-2 border-primary pt-4">
+            <p className="text-sm font-bold text-primary">Rychlé akce</p>
+          </div>
+          <div className="mt-3 flex flex-wrap gap-4">
             {ACTIONS.map((a) => (
               <Link
                 key={a.title}
                 to={a.to}
-
-                className="flex items-center gap-5 rounded-xl border border-border bg-card p-6 shadow-sm transition-shadow hover:shadow-md"
+                className="flex items-center gap-4 rounded-xl border border-border bg-card px-5 py-3 shadow-sm transition-shadow hover:shadow-md"
               >
-                {"image" in a && a.image ? (
-                  <img
-                    src={a.image}
-                    alt=""
-                    className="size-14 shrink-0 rounded-full object-cover"
-                  />
-                ) : (
-                  <span className={`grid size-14 shrink-0 place-items-center rounded-full ${a.tone}`}>
-                    {a.icon ? <a.icon className="size-7 text-white" /> : null}
-                  </span>
-                )}
-
+                <span className={`grid size-10 shrink-0 place-items-center rounded-full ${a.tone}`}>
+                  {a.icon ? <a.icon className="size-5 text-white" /> : null}
+                </span>
                 <span className="min-w-0">
-                  <span className="block font-display text-lg font-bold text-foreground">{a.title}</span>
-                  <span className="mt-1 block text-sm leading-snug text-muted-foreground">{a.text}</span>
+                  <span className="block font-display text-base font-bold text-foreground">{a.title}</span>
+                  <span className="mt-0.5 block text-sm leading-snug text-muted-foreground">{a.text}</span>
                 </span>
               </Link>
             ))}
@@ -412,9 +401,19 @@ function Index() {
 
         {/* Výběr redakce */}
         <section className="bg-background">
-          <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
-            <SectionHeader kicker="Výběr redakce" title="To nejdůležitější" />
-            <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mx-auto max-w-[88rem] px-5 py-8 md:px-6 md:py-10">
+            <div className="border-t-2 border-primary pt-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <p className="text-sm font-bold text-primary">Výběr redakce</p>
+                <Link
+                  to="/clanky"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
+                >
+                  Všechny texty <ArrowRight className="size-4" />
+                </Link>
+              </div>
+            </div>
+            <div className="mt-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               <ArticleCard
                 image={IMAGES.flags}
                 tag="Výběr redakce"
@@ -437,7 +436,6 @@ function Index() {
                 perex="Přestaňme podléhat prázdným heslům a hledejme skutečné řešení."
               />
             </div>
-            <MoreButton label="Všechny texty" search={{}} />
           </div>
         </section>
 
