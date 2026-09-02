@@ -123,10 +123,10 @@ function Clanky() {
                   replace: false,
                 })
               }
-              className={`font-display text-[15px] transition-colors ${
+              className={`border-b-2 pb-2 text-base font-semibold tracking-wide text-primary transition-colors ${
                 active === f
-                  ? "-mb-[1px] border-b-2 border-primary pb-2 font-semibold text-primary"
-                  : "pb-2 font-medium text-primary hover:opacity-80"
+                  ? "-mb-[1px] border-primary font-bold"
+                  : "border-transparent hover:opacity-90"
               }`}
             >
               {f}
