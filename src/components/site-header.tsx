@@ -132,26 +132,36 @@ export function SiteHeader() {
                   </button>
                   {menu === item.label ? (
                     <div className="absolute left-0 top-full z-50 w-64 rounded-b-xl border border-t-0 border-border bg-background py-2 shadow-lg">
-                      {item.children.map((c) =>
-                        c.to ? (
+                      {item.children.map((c) => {
+                        const isActive =
+                          c.to === "/clanky" && location.pathname === "/clanky"
+                            ? c.search?.filtr
+                              ? new URLSearchParams(location.search).get("filtr") === c.search.filtr
+                              : !new URLSearchParams(location.search).get("filtr")
+                            : false;
+                        return c.to ? (
                           <Link
                             key={c.label}
                             to={c.to}
                             {...(c.search ? { search: c.search } : {})}
                             onClick={() => setMenu(null)}
-                            className="block px-4 py-2 text-sm text-foreground transition-colors hover:bg-muted hover:text-primary"
+                            className={`block rounded-full px-4 py-2 text-[15px] font-semibold transition-colors ${
+                              isActive
+                                ? "bg-primary text-primary-foreground"
+                                : "text-primary hover:bg-primary/10"
+                            }`}
                           >
                             {c.label}
                           </Link>
                         ) : (
                           <span
                             key={c.label}
-                            className="block cursor-default px-4 py-2 text-sm text-muted-foreground"
+                            className="block cursor-default rounded-full px-4 py-2 text-[15px] font-semibold text-muted-foreground"
                           >
                             {c.label}
                           </span>
-                        ),
-                      )}
+                        );
+                      })}
                     </div>
                   ) : null}
                 </div>
