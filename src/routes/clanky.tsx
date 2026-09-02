@@ -110,28 +110,24 @@ function Clanky() {
 
         {/* Filtr — tabová lišta v izraelské modři */}
         <nav aria-label="Filtrovat články" className="mt-8 flex flex-wrap gap-6 border-b border-border pb-0">
-          {FILTERS.map((f) => (
-            <button
-              key={f}
-              type="button"
-              aria-current={active === f}
-              onClick={() =>
-                navigate({
-                  search: f === "Všechny texty"
-                    ? {}
-                    : { filtr: FILTER_IDS.find((x) => x.label === f)!.id },
-                  replace: false,
-                })
-              }
-              className={`border-b-2 pb-2 text-base font-semibold tracking-wide text-primary transition-colors ${
-                active === f
-                  ? "-mb-[1px] border-primary font-bold"
-                  : "border-transparent hover:opacity-90"
-              }`}
-            >
-              {f}
-            </button>
-          ))}
+          {FILTERS.map((f) => {
+            const filterId = FILTER_IDS.find((x) => x.label === f)?.id;
+            return (
+              <Link
+                key={f}
+                to="/clanky"
+                search={f === "Všechny texty" ? {} : { filtr: filterId }}
+                aria-current={active === f}
+                className={`border-b-2 pb-2 text-base font-semibold tracking-wide text-primary no-underline transition-colors ${
+                  active === f
+                    ? "-mb-[1px] border-primary font-bold"
+                    : "border-transparent hover:text-primary"
+                }`}
+              >
+                {f}
+              </Link>
+            );
+          })}
         </nav>
 
         {isTagFilter ? (
