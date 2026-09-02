@@ -16,7 +16,7 @@ export function MoreButton({
 }: {
   label: string;
   to?: string;
-  search?: { tag?: string };
+  search?: { tag?: string; filtr?: string };
   /** Když je zadaný, tlačítko nenaviguje, ale přibere další karty na místě. */
   onClick?: () => void;
 }) {
