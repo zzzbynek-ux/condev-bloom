@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 const LINKS = [
   { to: "/o-nas", label: "O nás" },
   
-  { to: "/zapojte-se", label: "Podpořte nás" },
+  { to: "/podporte-nas", label: "Podpořte nás" },
 ] as const;
 
 export function SiteFooter() {
