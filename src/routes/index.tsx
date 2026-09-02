@@ -442,7 +442,7 @@ function Index() {
 
         {/* Tydýt týdne */}
         <section className="bg-background">
-          <div className="mx-auto max-w-[88rem] px-5 pb-14 md:px-6 md:pb-16">
+          <div className="mx-auto max-w-[88rem] px-5 pb-10 md:px-6 md:pb-12">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">
                 Tydýt týdne
@@ -455,8 +455,16 @@ function Index() {
                 Archiv tydýtů <ArrowRight className="size-4" />
               </Link>
             </div>
-            <article className="group mt-6 grid overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md md:grid-cols-2">
-              <div className="flex flex-col justify-center p-6 md:p-10">
+            <article className="group mt-4 flex max-h-72 max-w-4xl flex-row gap-0 overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
+              <img
+                src={IMAGES.politics}
+                alt="Tydýt týdne — Jméno Příjmení"
+                loading="lazy"
+                width={320}
+                height={320}
+                className="hidden h-40 w-40 shrink-0 object-cover sm:block"
+              />
+              <div className="flex flex-col justify-center p-5">
                 <div className="flex items-center gap-3">
                   <Link
                     to="/clanky"
@@ -469,29 +477,22 @@ function Index() {
                     02/09/26
                   </span>
                 </div>
-                <h2 className="mt-4 font-display text-2xl font-bold leading-snug text-primary md:text-3xl">
-                  Jméno Příjmení
-                </h2>
-                <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
-                  Tento týden vysvětluje, proč se o Izraeli mluví jinak než o jiných státech.
-                  Krátký, věcný pohled na jedno téma, které rezonuje debatou.
+                <h3 className="mt-2 font-display text-xl font-bold leading-snug text-primary">
+                  <Link to="/clanky" search={{ filtr: "tydyt" }} className="group-hover:underline">
+                    Jméno Příjmení
+                  </Link>
+                </h3>
+                <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                  Tento týden vysvětluje, proč se o Izraeli mluví jinak než o jiných státech. Krátký, věcný pohled na jedno téma.
                 </p>
                 <Link
                   to="/clanky"
                   search={{ filtr: "tydyt" }}
-                  className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
+                  className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-primary hover:underline"
                 >
                   Číst celý tydýt <ArrowRight className="size-4" />
                 </Link>
               </div>
-              <img
-                src={IMAGES.politics}
-                alt="Tydýt týdne — Jméno Příjmení"
-                loading="lazy"
-                width={1280}
-                height={720}
-                className="aspect-video w-full object-cover md:aspect-auto md:h-full"
-              />
             </article>
           </div>
         </section>
