@@ -57,6 +57,7 @@ const FILTER_IDS = [
   { id: "doporucujeme", label: "Doporučujeme" },
   { id: "cesi-a-izrael", label: "Češi a Izrael" },
   { id: "studie", label: "Studie a analýzy" },
+  { id: "tydyt", label: "Tydýt týdne" },
 ] as const;
 
 const FILTERS = [...FILTER_IDS.map((f) => f.label), "Všechny texty"];
