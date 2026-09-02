@@ -53,11 +53,36 @@ export function SiteFooter() {
           ))}
         </nav>
 
-        <div className="flex items-center justify-end gap-3">
-          <a href="https://x.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="Jedním Hlasem na X" className="opacity-90 hover:opacity-100">
-            <svg viewBox="0 0 24 24" aria-hidden className="size-6" fill="currentColor">
-              <path d="M18.9 2H22l-6.8 7.8L23 22h-6.4l-5-6.5L5.8 22H2.7l7.3-8.3L1.5 2H8l4.5 6 6.4-6Zm-1.1 18h1.7L7.3 3.8H5.5L17.8 20Z" />
-            </svg>
+        <div className="flex items-center justify-end gap-2">
+          <a
+            href="https://www.facebook.com/JednimHlasem"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="JednímHlasem na Facebooku"
+            title="JednímHlasem na Facebooku"
+            className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10"
+          >
+            <FacebookIcon className="size-4" />
+          </a>
+          <a
+            href="https://www.instagram.com/JednimHlasem"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="JednímHlasem na Instagramu"
+            title="JednímHlasem na Instagramu"
+            className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10"
+          >
+            <InstagramIcon className="size-4" />
+          </a>
+          <a
+            href="https://x.com/JednimHlasem"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="JednímHlasem na X"
+            title="JednímHlasem na X"
+            className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10"
+          >
+            <XIcon className="size-4" />
           </a>
         </div>
 
