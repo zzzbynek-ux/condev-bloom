@@ -322,6 +322,7 @@ const MORE_LABELS: Record<string, string> = {
   "Doporučujeme": "Další z výběru redakce",
   "Češi a Izrael": "Další texty Česko a Izrael",
   "Studie a analýzy": "Další studie a analýzy",
+  "Tydýt týdne": "Další tydýty",
 };
 
 function Index() {
