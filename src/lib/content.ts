@@ -396,6 +396,22 @@ export const ARTICLE_SECTIONS: FeedGroup[] = [
     ],
   },
   {
+    id: "tydyt",
+    label: "Tydýt týdne",
+    showAll: true,
+    items: [
+      {
+        slug: "tydyt-tydne-1",
+        tag: "Tydýt",
+        date: "02/09/26",
+        title: "Jméno Příjmení",
+        perex:
+          "Tento týden vysvětluje, proč se o Izraeli mluví jinak než o jiných státech. Krátký, věcný pohled na jedno téma, které rezonuje debatou.",
+        image: "politics",
+      },
+    ],
+  },
+  {
     id: "studie-a-analyzy",
     label: "Studie a analýzy",
     showAll: true,

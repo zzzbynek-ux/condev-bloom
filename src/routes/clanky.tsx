@@ -57,6 +57,7 @@ const FILTER_IDS = [
   { id: "doporucujeme", label: "Doporučujeme" },
   { id: "cesi-a-izrael", label: "Češi a Izrael" },
   { id: "studie", label: "Studie a analýzy" },
+  { id: "tydyt", label: "Tydýt týdne" },
 ] as const;
 
 const FILTERS = [...FILTER_IDS.map((f) => f.label), "Všechny texty"];
@@ -66,6 +67,7 @@ const MORE_LABELS: Record<string, string> = {
   "Doporučujeme": "Další z výběru redakce",
   "Češi a Izrael": "Další texty Česko a Izrael",
   "Studie a analýzy": "Další studie a analýzy",
+  "Tydýt týdne": "Další tydýty",
 };
 
 function Clanky() {
