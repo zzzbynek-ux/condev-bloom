@@ -330,13 +330,29 @@ function Index() {
                 </p>
               </div>
             </div>
-            <Link
-              to="/antisemitismus"
-              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-primary-foreground px-6 py-3 text-sm font-semibold text-primary transition hover:opacity-90"
-            >
-              Číst k tématu
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            <div className="flex flex-wrap items-center gap-3">
+              <Link
+                to="/antisemitismus"
+                className="inline-flex shrink-0 items-center gap-2 rounded-full bg-primary-foreground px-6 py-3 text-sm font-semibold text-primary transition hover:opacity-90"
+              >
+                Číst k tématu
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/ptejte-se-ai"
+                className="inline-flex shrink-0 items-center gap-2 rounded-full bg-primary-foreground px-6 py-3 text-sm font-semibold text-primary transition hover:opacity-90"
+              >
+                Ptejte se AI
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/nahlasit-incident"
+                className="inline-flex shrink-0 items-center gap-2 rounded-full bg-destructive px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
+              >
+                Nahlásit incident
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </section>
 
