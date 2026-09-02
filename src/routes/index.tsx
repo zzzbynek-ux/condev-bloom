@@ -456,45 +456,62 @@ function Index() {
                 Archiv tydýtů <ArrowRight className="size-4" />
               </Link>
             </div>
-            <article className="group mt-4 flex max-h-72 max-w-4xl flex-row gap-0 overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
-              <img
-                src={IMAGES.politics}
-                alt="Tydýt týdne — Jméno Příjmení"
-                loading="lazy"
-                width={320}
-                height={320}
-                className="hidden h-40 w-40 shrink-0 object-cover sm:block"
-              />
-              <div className="flex flex-col justify-center p-5">
-                <div className="flex items-center gap-3">
+            <div className="mt-4 flex flex-col gap-4 lg:flex-row lg:items-stretch">
+              <article className="group flex max-h-72 w-full max-w-[720px] flex-row gap-0 overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
+                <img
+                  src={tydytPortrait}
+                  alt="Tydýt týdne — Jméno Příjmení"
+                  loading="lazy"
+                  width={320}
+                  height={320}
+                  className="hidden h-40 w-40 shrink-0 object-cover sm:block"
+                />
+                <div className="flex flex-col justify-center p-5">
+                  <div className="flex items-center gap-3">
+                    <Link
+                      to="/clanky"
+                      search={{ filtr: "tydyt" }}
+                      className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground hover:opacity-85"
+                    >
+                      Tydýt
+                    </Link>
+                    <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
+                      02/09/26
+                    </span>
+                  </div>
+                  <h3 className="mt-2 font-display text-xl font-bold leading-snug text-primary">
+                    <Link to="/clanky" search={{ filtr: "tydyt" }} className="group-hover:underline">
+                      Jméno Příjmení
+                    </Link>
+                  </h3>
+                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                    Tento týden vysvětluje, proč se o Izraeli mluví jinak než o jiných státech. Krátký, věcný pohled na jedno téma.
+                  </p>
                   <Link
                     to="/clanky"
                     search={{ filtr: "tydyt" }}
-                    className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground hover:opacity-85"
+                    className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-primary hover:underline"
                   >
-                    Tydýt
+                    Číst celý tydýt <ArrowRight className="size-4" />
                   </Link>
-                  <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
-                    02/09/26
-                  </span>
                 </div>
-                <h3 className="mt-2 font-display text-xl font-bold leading-snug text-primary">
-                  <Link to="/clanky" search={{ filtr: "tydyt" }} className="group-hover:underline">
-                    Jméno Příjmení
+              </article>
+              <div className="hidden min-w-0 flex-1 flex-col justify-center gap-3 lg:flex">
+                {TYDYT_RECENT.map((t) => (
+                  <Link
+                    key={t.slug}
+                    to="/clanky"
+                    search={{ filtr: "tydyt" }}
+                    className="flex flex-col justify-center rounded-xl border border-border bg-card p-4 shadow-sm transition-shadow hover:shadow-md"
+                  >
+                    <span className="font-display text-sm font-bold text-primary">{t.title}</span>
+                    <span className="mt-0.5 text-[11px] font-semibold tracking-wide text-muted-foreground">
+                      {t.date}
+                    </span>
                   </Link>
-                </h3>
-                <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-                  Tento týden vysvětluje, proč se o Izraeli mluví jinak než o jiných státech. Krátký, věcný pohled na jedno téma.
-                </p>
-                <Link
-                  to="/clanky"
-                  search={{ filtr: "tydyt" }}
-                  className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-primary hover:underline"
-                >
-                  Číst celý tydýt <ArrowRight className="size-4" />
-                </Link>
+                ))}
               </div>
-            </article>
+            </div>
           </div>
         </section>
 
