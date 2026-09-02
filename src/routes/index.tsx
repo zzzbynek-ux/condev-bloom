@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import type * as React from "react";
 import { useEffect, useState } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight, Flag, HelpCircle } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -173,31 +173,6 @@ function StarOfDavid({ className }: { className?: string }) {
   );
 }
 
-const ACTIONS: {
-  icon?: React.ComponentType<{ className?: string }>;
-
-  image?: string;
-  title: string;
-  text: string;
-  tone: string;
-  to: string;
-}[] = [
-  {
-    icon: HelpCircle,
-    title: "Ptejte se AI",
-    text: "Zeptejte se naší AI na dezinformace a fakta.",
-    tone: "bg-primary",
-
-    to: "/ptejte-se-ai",
-  },
-  {
-    icon: Flag,
-    title: "Nahlásit incident",
-    text: "Pomozte nám monitorovat a reagovat.",
-    tone: "bg-destructive",
-    to: "/nahlasit-incident",
-  },
-];
 
 
 
@@ -375,42 +350,26 @@ function Index() {
 
 
 
-        {/* rychlé akce */}
-        <section className="mx-auto max-w-[88rem] px-5 pt-8 md:px-6 md:pt-10 lg:max-h-[160px]">
-          <div className="border-t-2 border-primary pt-4">
-            <p className="text-sm font-bold text-primary">Rychlé akce</p>
-          </div>
-          <div className="mt-3 flex flex-wrap gap-4">
-            {ACTIONS.map((a) => (
-              <Link
-                key={a.title}
-                to={a.to}
-                className="flex items-center gap-4 rounded-xl border border-border bg-card px-5 py-3 shadow-sm transition-shadow hover:shadow-md"
-              >
-                <span className={`grid size-10 shrink-0 place-items-center rounded-full ${a.tone}`}>
-                  {a.icon ? <a.icon className="size-5 text-white" /> : null}
-                </span>
-                <span className="min-w-0">
-                  <span className="block font-display text-base font-bold text-foreground">{a.title}</span>
-                  <span className="mt-0.5 block text-sm leading-snug text-muted-foreground">{a.text}</span>
-                </span>
-              </Link>
-            ))}
-          </div>
-        </section>
-
         {/* Výběr redakce */}
         <section className="bg-background">
           <div className="mx-auto max-w-[88rem] px-5 py-8 md:px-6 md:py-10">
             <div className="border-t-2 border-primary pt-4">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <p className="text-sm font-bold text-primary">Výběr redakce</p>
-                <Link
-                  to="/clanky"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
-                >
-                  Všechny texty <ArrowRight className="size-4" />
-                </Link>
+                <div className="flex flex-wrap items-center gap-4">
+                  <Link
+                    to="/ptejte-se-ai"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
+                  >
+                    Ptejte se AI <ArrowRight className="size-4" />
+                  </Link>
+                  <Link
+                    to="/clanky"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
+                  >
+                    Všechny texty <ArrowRight className="size-4" />
+                  </Link>
+                </div>
               </div>
             </div>
             <div className="mt-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
