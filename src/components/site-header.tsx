@@ -285,7 +285,7 @@ export function SiteHeader() {
                           to={c.to}
                           {...(c.search ? { search: c.search } : {})}
                           onClick={() => setOpen(false)}
-                          className={`border-b-2 pb-1 font-display text-[15px] transition-colors ${
+                          className={`inline-block border-b-2 px-4 pb-1 font-display text-[15px] transition-colors ${
                             isActive
                               ? "border-primary font-semibold text-primary"
                               : "border-transparent font-medium text-primary hover:opacity-80"
