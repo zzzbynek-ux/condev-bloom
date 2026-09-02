@@ -6,8 +6,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
-import { MoreButton } from "@/components/more-button";
-import { ARTICLE_SECTIONS, HERO_SLIDES } from "@/lib/content";
+import { HERO_SLIDES } from "@/lib/content";
 import heroImg from "@/assets/hero-blindfold.jpg";
 import tydytPortrait from "@/assets/tydyt-portrait.jpg";
 import flagsImg from "@/assets/news-flags.jpg";
@@ -184,124 +183,6 @@ function StarOfDavid({ className }: { className?: string }) {
 
 
 
-function SectionHeader({
-  kicker,
-  title,
-  subtitle,
-  to,
-  linkLabel = "Zobrazit vše",
-}: {
-  kicker: string;
-  title: string;
-  subtitle?: string;
-  to?: string;
-  linkLabel?: string;
-}) {
-  return (
-    <div className="border-t-2 border-primary pt-4">
-      {kicker ? <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">{kicker}</p> : null}
-      <div className="mt-2 flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">
-            {title}
-          </h2>
-          {subtitle ? <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p> : null}
-        </div>
-        {to ? (
-          <Link
-            to={to}
-            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
-          >
-            {linkLabel} <ArrowRight className="size-4" />
-          </Link>
-        ) : null}
-      </div>
-    </div>
-  );
-}
-
-const ALL_TAB = { id: "vse", label: "Všechny texty" } as const;
-
-function ArticleTabs() {
-  const [active, setActive] = useState(0);
-  // Tydýt týdne má na homepage vlastní blok — v záložkách ho nezobrazujeme.
-  const sections = ARTICLE_SECTIONS.filter((g) => g.id !== "tydyt");
-  const isAll = active === sections.length;
-  const group = sections[active] ?? sections[0]!;
-  const items = isAll
-    ? ARTICLE_SECTIONS.flatMap((g) => g.items.map((item) => ({ ...item, sectionLabel: g.label })))
-    : (group.items.map((item) => ({ ...item, sectionLabel: item.tag })) as ({
-        slug: string;
-        image: "flags" | "media" | "politics";
-        tag: string;
-        title: string;
-        perex: string;
-        date?: string;
-        sectionLabel: string;
-      })[]);
-
-  return (
-    <section className="bg-background">
-      <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
-        {/* Záložky */}
-        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-border">
-          <div
-            role="tablist"
-            aria-label="Rubriky článků"
-            className="flex flex-wrap gap-x-8 gap-y-2"
-          >
-            {[...sections, ALL_TAB].map((g, idx) => (
-              <button
-                key={g.id}
-                type="button"
-                role="tab"
-                aria-selected={idx === active}
-                onClick={() => setActive(idx)}
-                className={`-mb-px border-b-2 pb-3 font-display text-lg font-bold tracking-tight transition-colors md:text-xl ${
-                  idx === active
-                    ? "border-primary text-foreground"
-                    : "border-transparent text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {g.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* články aktivní záložky */}
-        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {(isAll ? items : items.slice(0, 6)).map((item, idx) => (
-            <ArticleCard
-              key={`${isAll ? "all" : group.id}-${item.slug}-${idx}`}
-              image={IMAGES[item.image]}
-              tag={item.sectionLabel}
-              date={item.date}
-              title={item.title}
-              perex={item.perex}
-            />
-          ))}
-        </div>
-
-        {/* tlačítko pod mřížkou — další články stejné rubriky */}
-        {!isAll && (
-          <MoreButton
-            label={MORE_LABELS[group.label] ?? `Další texty z rubriky ${group.label}`}
-            search={{ filtr: group.id }}
-          />
-        )}
-      </div>
-    </section>
-  );
-}
-
-const MORE_LABELS: Record<string, string> = {
-  "Nové": "Další nové texty",
-  "Doporučujeme": "Další z výběru redakce",
-  "Češi a Izrael": "Další texty Česko a Izrael",
-  "Studie a analýzy": "Další studie a analýzy",
-  "Tydýt týdne": "Další tydýty",
-};
 
 function Index() {
   return (
@@ -548,16 +429,6 @@ function Index() {
             </div>
           </div>
         </section>
-
-        {/* Sekce článků — záložky ve stylu Visegrad24 */}
-        <ArticleTabs />
-
-
-
-
-
-
-
       </main>
       <SiteFooter />
     </div>
