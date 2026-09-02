@@ -445,12 +445,12 @@ function Index() {
         <section className="bg-background">
           <div className="mx-auto max-w-[88rem] px-5 pb-14 md:px-6 md:pb-16">
             <div className="border-t-2 border-primary pt-4">
-              <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">
-                Tydýt týdne &amp; Dokumentujeme
+              <h2 className="sr-only font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">
+                Tydýt týdne a Dokumentujeme
               </h2>
             </div>
 
-            <div className="mt-6 grid gap-6 lg:grid-cols-2">
+            <div className="mt-4 grid gap-6 lg:grid-cols-2">
               {/* Tydýt */}
               <div className="flex flex-col">
                 <div className="flex flex-wrap items-center justify-between gap-3">
