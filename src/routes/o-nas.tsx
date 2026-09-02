@@ -110,11 +110,14 @@ function ONas() {
         {/* 4. Co děláme */}
         <section className="mt-20">
           <SectionHeader kicker="Aktivity" title={WHAT_WE_DO.title} />
-          <div className="mt-8 max-w-3xl space-y-4 text-left leading-relaxed text-muted-foreground">
+          <ul className="mt-8 max-w-3xl space-y-4">
             {WHAT_WE_DO.paragraphs.map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
+              <li key={index} className="flex gap-3 text-foreground">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                <span className="leading-relaxed">{paragraph}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
 
         {/* 5. Naše mise */}
