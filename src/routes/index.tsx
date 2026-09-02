@@ -257,9 +257,9 @@ function ArticleTabs() {
                 role="tab"
                 aria-selected={idx === active}
                 onClick={() => setActive(idx)}
-                className={`-mb-px border-b-2 pb-3 font-display text-base font-semibold uppercase tracking-[0.03em] text-primary transition-colors ${
+                className={`-mb-px border-b-2 pb-3 font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary transition-colors md:text-3xl ${
                   idx === active
-                    ? "border-primary font-bold"
+                    ? "border-primary"
                     : "border-transparent hover:border-primary/40"
                 }`}
               >
