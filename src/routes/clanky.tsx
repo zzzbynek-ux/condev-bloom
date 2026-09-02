@@ -14,6 +14,7 @@ const IMAGES = { flags: flagsImg, media: mediaImg, politics: politicsImg };
 
 const searchSchema = z.object({
   tag: z.string().optional(),
+  filtr: z.string().optional(),
 });
 
 export const Route = createFileRoute("/clanky")({
