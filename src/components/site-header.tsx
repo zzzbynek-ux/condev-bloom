@@ -1,10 +1,9 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { ChevronDown, Menu, Search, X } from "lucide-react";
-import { TOPICS } from "@/lib/content";
 
 type NavTo = "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" | "/manifest" | "/nahlasit-incident" | "/ptejte-se-ai";
-type NavChild = { label: string; to?: NavTo };
+type NavChild = { label: string; to?: NavTo; search?: { filtr?: string } };
 type NavItem =
   | { label: string; to: NavTo; children?: undefined }
   | { label: string; to?: undefined; children: NavChild[] };
@@ -13,11 +12,10 @@ const NAV: NavItem[] = [
   {
     label: "Články",
     children: [
-      { label: "Nové", to: "/clanky" },
-      { label: "Doporučujeme", to: "/clanky" },
-      { label: "Studie a analýzy", to: "/clanky" },
-      { label: "České příběhy", to: "/clanky" },
-      ...TOPICS.map((t) => ({ label: t.title, to: "/clanky" as NavTo })),
+      { label: "Nové", to: "/clanky", search: { filtr: "nove" } },
+      { label: "Doporučujeme", to: "/clanky", search: { filtr: "doporucujeme" } },
+      { label: "Češi a Izrael", to: "/clanky", search: { filtr: "cesi-a-izrael" } },
+      { label: "Studie a analýzy", to: "/clanky", search: { filtr: "studie" } },
       { label: "Všechny texty", to: "/clanky" },
     ],
   },
@@ -135,6 +133,7 @@ export function SiteHeader() {
                           <Link
                             key={c.label}
                             to={c.to}
+                            {...(c.search ? { search: c.search } : {})}
                             onClick={() => setMenu(null)}
                             className="block px-4 py-2 text-sm text-foreground transition-colors hover:bg-muted hover:text-primary"
                           >
@@ -260,6 +259,7 @@ export function SiteHeader() {
                         <Link
                           key={c.label}
                           to={c.to}
+                          {...(c.search ? { search: c.search } : {})}
                           onClick={() => setOpen(false)}
                           className="py-2 text-sm text-foreground/80"
                         >

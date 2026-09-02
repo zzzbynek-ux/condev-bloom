@@ -309,7 +309,7 @@ function ArticleTabs() {
         {!isAll && (
           <MoreButton
             label={MORE_LABELS[group.label] ?? `Další texty z rubriky ${group.label}`}
-            search={group.label === "Nové" ? {} : { tag: group.label }}
+            search={{ filtr: group.id }}
           />
         )}
       </div>
