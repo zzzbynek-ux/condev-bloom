@@ -376,16 +376,16 @@ function Index() {
 
 
         {/* rychlé akce */}
-        <section className="mx-auto max-w-[88rem] px-5 pt-8 md:px-6 md:pt-10 lg:max-h-[160px]">
-          <div className="border-t-2 border-primary pt-4">
+        <section className="mx-auto max-w-[88rem] px-5 py-3 md:px-6 md:py-4 lg:max-h-[140px]">
+          <div className="border-t-2 border-primary pt-2">
             <p className="text-sm font-bold text-primary">Rychlé akce</p>
           </div>
-          <div className="mt-3 flex flex-wrap gap-4">
+          <div className="mt-2 flex flex-wrap gap-4">
             {ACTIONS.map((a) => (
               <Link
                 key={a.title}
                 to={a.to}
-                className="flex items-center gap-4 rounded-xl border border-border bg-card px-5 py-3 shadow-sm transition-shadow hover:shadow-md"
+                className="flex items-center gap-4 rounded-xl border border-border bg-card px-5 py-2.5 shadow-sm transition-shadow hover:shadow-md"
               >
                 <span className={`grid size-10 shrink-0 place-items-center rounded-full ${a.tone}`}>
                   {a.icon ? <a.icon className="size-5 text-white" /> : null}
