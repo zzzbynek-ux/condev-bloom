@@ -496,6 +496,84 @@ function Index() {
           </div>
         </section>
 
+        {/* Dokumentujeme — incidenty a výkřiky */}
+        <section className="bg-background">
+          <div className="mx-auto max-w-[88rem] px-5 pb-14 md:px-6 md:pb-16">
+            <div className="border-t-2 border-primary pt-4">
+              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">
+                Monitoring
+              </p>
+              <h2 className="mt-2 font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">
+                Dokumentujeme
+              </h2>
+            </div>
+            <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_16rem]">
+              <div className="grid gap-5 sm:grid-cols-3">
+                {[
+                  {
+                    tag: "Incident",
+                    date: "28/08/26",
+                    text: "Poškozená výloha židovské restaurace v Praze — případ dokumentován a předán k ověření.",
+                    destructive: true,
+                  },
+                  {
+                    tag: "Výkřik",
+                    date: "21/08/26",
+                    text: "Poslanec v debatě zopakoval vyvrácené tvrzení o „genocidě“ bez jakéhokoliv kontextu.",
+                    destructive: false,
+                  },
+                  {
+                    tag: "Incident",
+                    date: "14/08/26",
+                    text: "Nenávistné komentáře pod profilem české židovské obce na sociální síti — hlášení evidováno.",
+                    destructive: true,
+                  },
+                ].map((d) => (
+                  <article
+                    key={d.text}
+                    className="flex flex-col rounded-xl border border-border bg-card p-5 shadow-sm"
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <span
+                        className={`rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-white ${
+                          d.destructive ? "bg-destructive" : "bg-primary"
+                        }`}
+                      >
+                        {d.tag}
+                      </span>
+                      <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
+                        {d.date}
+                      </span>
+                    </div>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{d.text}</p>
+                  </article>
+                ))}
+              </div>
+              <div className="flex flex-col items-start gap-4 lg:items-end lg:pt-1">
+                <Link
+                  to="/nahlasit-incident"
+                  hash="archiv"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
+                >
+                  Archiv incidentů <ArrowRight className="size-4" />
+                </Link>
+                <Link
+                  to="/vykriky"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
+                >
+                  Výkřiky <ArrowRight className="size-4" />
+                </Link>
+                <Link
+                  to="/nahlasit-incident"
+                  className="mt-2 inline-flex items-center gap-2 rounded-full bg-destructive px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
+                >
+                  Nahlásit incident
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Sekce článků — záložky ve stylu Visegrad24 */}
         <ArticleTabs />
 
