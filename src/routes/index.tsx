@@ -355,7 +355,7 @@ function Index() {
           <div className="mx-auto max-w-[88rem] px-5 py-8 md:px-6 md:py-10">
             <div className="border-t-2 border-primary pt-4">
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <p className="text-sm font-bold text-primary">Výběr redakce</p>
+                <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">Výběr redakce</h2>
                 <div className="flex flex-wrap items-center gap-4">
                   <Link
                     to="/ptejte-se-ai"
@@ -406,7 +406,7 @@ function Index() {
             <div className="mt-4 grid gap-6 lg:grid-cols-2 lg:items-stretch">
               {/* Tydýt */}
               <div className="flex flex-col">
-                <p className="text-sm font-bold text-primary">Tydýt týdne</p>
+                <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">Tydýt týdne</h2>
                 <article className="group mt-3 flex flex-1 flex-row gap-0 overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
                   <img
                     src={tydytPortrait}
@@ -459,7 +459,7 @@ function Index() {
 
               {/* Dokumentujeme */}
               <div className="flex flex-col">
-                <p className="text-sm font-bold text-primary">Dokumentujeme</p>
+                <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">Dokumentujeme</h2>
                 <article className="mt-3 flex flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
                   <div className="flex flex-1 flex-col justify-between p-5">
                     <div className="flex flex-col gap-4">
