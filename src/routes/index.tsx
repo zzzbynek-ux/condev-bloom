@@ -441,153 +441,145 @@ function Index() {
           </div>
         </section>
 
-        {/* Tydýt týdne */}
+        {/* Tydýt týdne + Dokumentujeme */}
         <section className="bg-background">
-          <div className="mx-auto max-w-[88rem] px-5 pb-10 md:px-6 md:pb-12">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">
-                Tydýt týdne
-              </p>
-              <Link
-                to="/clanky"
-                search={{ filtr: "tydyt" }}
-                className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
-              >
-                Archiv tydýtů <ArrowRight className="size-4" />
-              </Link>
+          <div className="mx-auto max-w-[88rem] px-5 pb-14 md:px-6 md:pb-16">
+            <div className="border-t-2 border-primary pt-4">
+              <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">
+                Tydýt týdne &amp; Dokumentujeme
+              </h2>
             </div>
-            <div className="mt-4 flex flex-col gap-4 lg:flex-row lg:items-stretch">
-              <article className="group flex max-h-72 w-full max-w-[720px] flex-row gap-0 overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
-                <img
-                  src={tydytPortrait}
-                  alt="Tydýt týdne — Jméno Příjmení"
-                  loading="lazy"
-                  width={320}
-                  height={320}
-                  className="hidden h-40 w-40 shrink-0 object-cover sm:block"
-                />
-                <div className="flex flex-col justify-center p-5">
-                  <div className="flex items-center gap-3">
-                    <Link
-                      to="/clanky"
-                      search={{ filtr: "tydyt" }}
-                      className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground hover:opacity-85"
-                    >
-                      Tydýt
-                    </Link>
-                    <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
-                      02/09/26
-                    </span>
-                  </div>
-                  <h3 className="mt-2 font-display text-xl font-bold leading-snug text-primary">
-                    <Link to="/clanky" search={{ filtr: "tydyt" }} className="group-hover:underline">
-                      Jméno Příjmení
-                    </Link>
-                  </h3>
-                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-                    Tento týden vysvětluje, proč se o Izraeli mluví jinak než o jiných státech. Krátký, věcný pohled na jedno téma.
+
+            <div className="mt-6 grid gap-6 lg:grid-cols-2">
+              {/* Tydýt */}
+              <div className="flex flex-col">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">
+                    Tydýt týdne
                   </p>
                   <Link
                     to="/clanky"
                     search={{ filtr: "tydyt" }}
-                    className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-primary hover:underline"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
                   >
-                    Číst celý tydýt <ArrowRight className="size-4" />
+                    Archiv tydýtů <ArrowRight className="size-4" />
                   </Link>
                 </div>
-              </article>
-              <div className="hidden min-w-0 flex-1 flex-col justify-center gap-3 lg:flex">
-                {TYDYT_RECENT.map((t) => (
-                  <Link
-                    key={t.slug}
-                    to="/clanky"
-                    search={{ filtr: "tydyt" }}
-                    className="flex flex-col justify-center rounded-xl border border-border bg-card p-4 shadow-sm transition-shadow hover:shadow-md"
-                  >
-                    <span className="font-display text-sm font-bold text-primary">{t.title}</span>
-                    <span className="mt-0.5 text-[11px] font-semibold tracking-wide text-muted-foreground">
-                      {t.date}
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Dokumentujeme — incidenty a výkřiky */}
-        <section className="bg-background">
-          <div className="mx-auto max-w-[88rem] px-5 pb-14 md:px-6 md:pb-16">
-            <div className="border-t-2 border-primary pt-4">
-              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">
-                Monitoring
-              </p>
-              <h2 className="mt-2 font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">
-                Dokumentujeme
-              </h2>
-            </div>
-            <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_16rem]">
-              <div className="grid gap-5 sm:grid-cols-3">
-                {[
-                  {
-                    tag: "Incident",
-                    date: "28/08/26",
-                    text: "Poškozená výloha židovské restaurace v Praze — případ dokumentován a předán k ověření.",
-                    destructive: true,
-                  },
-                  {
-                    tag: "Výkřik",
-                    date: "21/08/26",
-                    text: "Poslanec v debatě zopakoval vyvrácené tvrzení o „genocidě“ bez jakéhokoliv kontextu.",
-                    destructive: false,
-                  },
-                  {
-                    tag: "Incident",
-                    date: "14/08/26",
-                    text: "Nenávistné komentáře pod profilem české židovské obce na sociální síti — hlášení evidováno.",
-                    destructive: true,
-                  },
-                ].map((d) => (
-                  <article
-                    key={d.text}
-                    className="flex flex-col rounded-xl border border-border bg-card p-5 shadow-sm"
-                  >
-                    <div className="flex items-center justify-between gap-3">
-                      <span
-                        className={`rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-white ${
-                          d.destructive ? "bg-destructive" : "bg-primary"
-                        }`}
+                <article className="group mt-3 flex flex-1 flex-row gap-0 overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
+                  <img
+                    src={tydytPortrait}
+                    alt="Tydýt týdne — Jméno Příjmení"
+                    loading="lazy"
+                    width={320}
+                    height={320}
+                    className="hidden h-40 w-40 shrink-0 object-cover sm:block"
+                  />
+                  <div className="flex flex-col justify-center p-5">
+                    <div className="flex items-center gap-3">
+                      <Link
+                        to="/clanky"
+                        search={{ filtr: "tydyt" }}
+                        className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground hover:opacity-85"
                       >
-                        {d.tag}
-                      </span>
+                        Tydýt
+                      </Link>
                       <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
-                        {d.date}
+                        02/09/26
                       </span>
                     </div>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{d.text}</p>
-                  </article>
-                ))}
+                    <h3 className="mt-2 font-display text-xl font-bold leading-snug text-primary">
+                      <Link to="/clanky" search={{ filtr: "tydyt" }} className="group-hover:underline">
+                        Jméno Příjmení
+                      </Link>
+                    </h3>
+                    <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                      Tento týden vysvětluje, proč se o Izraeli mluví jinak než o jiných státech. Krátký, věcný pohled na jedno téma.
+                    </p>
+                    <Link
+                      to="/clanky"
+                      search={{ filtr: "tydyt" }}
+                      className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-primary hover:underline"
+                    >
+                      Číst celý tydýt <ArrowRight className="size-4" />
+                    </Link>
+                  </div>
+                </article>
               </div>
-              <div className="flex flex-col items-start gap-4 lg:items-end lg:pt-1">
-                <Link
-                  to="/nahlasit-incident"
-                  hash="archiv"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
-                >
-                  Archiv incidentů <ArrowRight className="size-4" />
-                </Link>
-                <Link
-                  to="/vykriky"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
-                >
-                  Výkřiky <ArrowRight className="size-4" />
-                </Link>
-                <Link
-                  to="/nahlasit-incident"
-                  className="mt-2 inline-flex items-center gap-2 rounded-full bg-destructive px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
-                >
-                  Nahlásit incident
-                </Link>
+
+              {/* Dokumentujeme */}
+              <div className="flex flex-col">
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">
+                    Monitoring
+                  </p>
+                  <h3 className="mt-1 font-display text-xl font-bold uppercase tracking-[0.03em] text-primary md:text-2xl">
+                    Dokumentujeme
+                  </h3>
+                </div>
+                <div className="mt-3 flex flex-1 flex-col gap-3">
+                  {[
+                    {
+                      tag: "Incident",
+                      date: "28/08/26",
+                      text: "Poškozená výloha židovské restaurace v Praze — případ dokumentován a předán k ověření.",
+                      destructive: true,
+                    },
+                    {
+                      tag: "Výkřik",
+                      date: "21/08/26",
+                      text: "Poslanec v debatě zopakoval vyvrácené tvrzení o „genocidě“ bez jakéhokoliv kontextu.",
+                      destructive: false,
+                    },
+                    {
+                      tag: "Incident",
+                      date: "14/08/26",
+                      text: "Nenávistné komentáře pod profilem české židovské obce na sociální síti — hlášení evidováno.",
+                      destructive: true,
+                    },
+                  ].map((d) => (
+                    <article
+                      key={d.text}
+                      className="flex flex-col rounded-xl border border-border bg-card p-4 shadow-sm"
+                    >
+                      <div className="flex items-center justify-between gap-3">
+                        <span
+                          className={`rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-white ${
+                            d.destructive ? "bg-destructive" : "bg-primary"
+                          }`}
+                        >
+                          {d.tag}
+                        </span>
+                        <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
+                          {d.date}
+                        </span>
+                      </div>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{d.text}</p>
+                    </article>
+                  ))}
+                </div>
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+                  <div className="flex flex-wrap items-center gap-4">
+                    <Link
+                      to="/nahlasit-incident"
+                      hash="archiv"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
+                    >
+                      Archiv incidentů <ArrowRight className="size-4" />
+                    </Link>
+                    <Link
+                      to="/vykriky"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
+                    >
+                      Výkřiky <ArrowRight className="size-4" />
+                    </Link>
+                  </div>
+                  <Link
+                    to="/nahlasit-incident"
+                    className="inline-flex items-center gap-2 rounded-full bg-destructive px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90"
+                  >
+                    Nahlásit incident
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
