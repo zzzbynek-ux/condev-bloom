@@ -274,7 +274,7 @@ function ArticleTabs() {
             aria-label="Rubriky článků"
             className="flex flex-wrap gap-x-8 gap-y-2"
           >
-            {[...ARTICLE_SECTIONS, ALL_TAB].map((g, idx) => (
+            {[...sections, ALL_TAB].map((g, idx) => (
               <button
                 key={g.id}
                 type="button"
