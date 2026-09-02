@@ -119,10 +119,10 @@ function Clanky() {
                 to="/clanky"
                 search={f === "Všechny texty" ? {} : { filtr: filterId }}
                 aria-current={isActive}
-                className={`border-b-2 pb-2 font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary no-underline transition-colors md:text-3xl ${
+                className={`border-b-2 pb-2 text-base font-semibold leading-none text-[#0038B8] no-underline transition-colors ${
                   isActive
-                    ? "-mb-[1px] border-primary"
-                    : "border-transparent hover:text-primary"
+                    ? "-mb-[1px] border-[#0038B8]"
+                    : "border-transparent hover:text-[#0038B8]/80"
                 }`}
               >
                 {f}
