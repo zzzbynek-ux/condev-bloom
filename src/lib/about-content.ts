@@ -1,29 +1,20 @@
 export const INTRO = {
   eyebrow: "O NÁS",
   title: "Jedním hlasem neznamená všichni stejně, ale společně za to, co nás spojuje.",
-  perex:
+  paragraphs: [
+    "JednímHlasem podporujeme Izrael a jeho právo na existenci a sebeobranu. Bojujeme proti antisemitismu ve všech jeho formách. Vyvracíme dezinformace, které zkreslují realitu. Posilujeme odvážné hlasy, které se nebojí promluvit. A budujeme komunitu, která se navzájem inspiruje a chrání hodnoty, na nichž stojí svobodná společnost.",
     "JednímHlasem je nezávislá občanská iniciativa a otevřená platforma, která vznikla jako reakce na rostoucí dezinformace, selektivní empatii a zkreslený obraz Izraele ve veřejném prostoru. Naším cílem je vracet fakta, kontext a důstojnost do debaty – v době, kdy se realita ohýbá podle ideologie a pravda přizpůsobuje algoritmům.",
+  ] as const,
+  image: {
+    src: "@/assets/hero-blindfold.jpg",
+    alt: "Skupina lidí se stuhou přes oči jako symbol slepoty vůči realitě",
+  },
   links: [
     { label: "Naše hodnoty", href: "#hodnoty" },
     { label: "Naše osy", href: "#osy" },
     { label: "Zapojte se", href: "#zapojte-se" },
   ] as const,
 };
-
-export const PILLARS = [
-  {
-    title: "Izrael",
-    text: "Podporujeme Izrael a jeho právo na existenci a sebeobranu.",
-  },
-  {
-    title: "Antisemitismus",
-    text: "Bojujeme proti antisemitismu ve všech jeho formách.",
-  },
-  {
-    title: "Pravda",
-    text: "Vyvracíme dezinformace, posilujeme odvážné hlasy a chráníme hodnoty svobodné společnosti.",
-  },
-] as const;
 
 export const VALUES = [
   "Podporujeme Izrael jako demokratický stát s právem na existenci a sebeobranu.",
@@ -69,7 +60,7 @@ export const AXES: Axis[] = [
     kicker: "KLÍČOVÉ TÉMA",
     title: "Antisemitismus",
     text:
-      "Nový antisemitismus se tváří jako morální apel — mluví jazykem solidarity a historické křivdy. Ale pod pláštíkem vznešených slov jde o démonizaci a delegitimizaci židovského státu. Nacistickou pásku nahradila kefíja — ale posedlost Židy zůstává.",
+      "Nový antisemitismus se tváří jako morální apel — mluví jazykem solidarity a historické křivdy. Ale pod pláštíkem vznešených slov jde o démonizaci a delegitimizaci židovského státu. Nacistickou pásku nahradila kefíja — ale posedlost Židy zůstala.",
     href: "/antisemitismus",
     cta: "Otevřít téma",
     featured: true,
@@ -126,15 +117,21 @@ export const AXES: Axis[] = [
 
 export const WHAT_WE_DO = {
   title: "Co děláme",
-  text:
-    "Publikujeme analýzy, komentáře a investigativní články, které vyvracejí dezinformace a doplňují kontext. Vytváříme kampaně a obsah, který přináší věcný, srozumitelný a důstojný pohled na dění v Izraeli, České republice i v dalších západních zemích. Sledujeme a komentujeme mediální zkreslení i roli NGO, akademie a dalších institucí ve formování veřejného obrazu Izraele. Budujeme komunitu lidí, kterým není lhostejné, když se realita mění v propagandu.",
-} as const;
+  paragraphs: [
+    "Publikujeme analýzy, komentáře a investigativní články, které vyvracejí dezinformace a doplňují kontext.",
+    "Vytváříme kampaně a obsah, který přináší věcný, srozumitelný a důstojný pohled na dění v Izraeli, České republice i v dalších západních zemích.",
+    "Sledujeme a komentujeme mediální zkreslení i roli NGO, akademie a dalších institucí ve formování veřejného obrazu Izraele.",
+    "Budujeme komunitu lidí, kterým není lhostejné, když se realita mění v propagandu.",
+  ] as const,
+};
 
 export const MISSION = {
   title: "Naše mise",
-  text:
-    "Věříme, že pravda potřebuje obhájce. V čase, kdy jsou fakta zpochybňována a nenávist se maskuje jako humanismus, je potřeba mluvit jasně a přesvědčivě. JednímHlasem propojuje odborníky, novináře, akademiky i aktivní občany, kteří sdílejí závazek k odpovědné debatě o Izraeli, antisemitismu a hodnotách svobodného světa.",
-} as const;
+  paragraphs: [
+    "Věříme, že pravda potřebuje obhájce. V čase, kdy jsou fakta zpochybňována a nenávist se maskuje jako humanismus, je potřeba mluvit jasně a přesvědčivě.",
+    "JednímHlasem propojuje odborníky, novináře, akademiky i aktivní občany, kteří sdílejí závazek k odpovědné debatě o Izraeli, antisemitismu a hodnotách svobodného světa.",
+  ] as const,
+};
 
 export const GET_INVOLVED = {
   title: "Zapojte se",
