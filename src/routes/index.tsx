@@ -438,6 +438,62 @@ function Index() {
           </div>
         </section>
 
+        {/* Tydýt týdne */}
+        <section className="bg-background">
+          <div className="mx-auto max-w-[88rem] px-5 pb-14 md:px-6 md:pb-16">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">
+                Tydýt týdne
+              </p>
+              <Link
+                to="/clanky"
+                search={{ filtr: "tydyt" }}
+                className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
+              >
+                Archiv tydýtů <ArrowRight className="size-4" />
+              </Link>
+            </div>
+            <article className="group mt-6 grid overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md md:grid-cols-2">
+              <div className="flex flex-col justify-center p-6 md:p-10">
+                <div className="flex items-center gap-3">
+                  <Link
+                    to="/clanky"
+                    search={{ filtr: "tydyt" }}
+                    className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground hover:opacity-85"
+                  >
+                    Tydýt
+                  </Link>
+                  <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
+                    02/09/26
+                  </span>
+                </div>
+                <h2 className="mt-4 font-display text-2xl font-bold leading-snug text-primary md:text-3xl">
+                  Jméno Příjmení
+                </h2>
+                <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
+                  Tento týden vysvětluje, proč se o Izraeli mluví jinak než o jiných státech.
+                  Krátký, věcný pohled na jedno téma, které rezonuje debatou.
+                </p>
+                <Link
+                  to="/clanky"
+                  search={{ filtr: "tydyt" }}
+                  className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-primary hover:underline"
+                >
+                  Číst celý tydýt <ArrowRight className="size-4" />
+                </Link>
+              </div>
+              <img
+                src={IMAGES.politics}
+                alt="Tydýt týdne — Jméno Příjmení"
+                loading="lazy"
+                width={1280}
+                height={720}
+                className="aspect-video w-full object-cover md:aspect-auto md:h-full"
+              />
+            </article>
+          </div>
+        </section>
+
         {/* Sekce článků — záložky ve stylu Visegrad24 */}
         <ArticleTabs />
 
