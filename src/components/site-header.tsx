@@ -56,6 +56,7 @@ export function SiteHeader() {
   const [menu, setMenu] = useState<string | null>(null);
   const [q, setQ] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <header className="sticky top-0 z-50 shadow-sm">
