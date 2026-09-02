@@ -7,13 +7,13 @@ import { TopicCard } from "@/components/topic-card";
 import { Button } from "@/components/ui/button";
 import {
   INTRO,
-  PILLARS,
   VALUES,
   AXES,
   WHAT_WE_DO,
   MISSION,
   GET_INVOLVED,
 } from "@/lib/about-content";
+import heroBlindfold from "@/assets/hero-blindfold.jpg";
 
 export const Route = createFileRoute("/o-nas")({
   head: () => ({
@@ -49,9 +49,11 @@ function ONas() {
           <h1 className="mx-auto mt-3 max-w-4xl font-display text-3xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl">
             {INTRO.title}
           </h1>
-          <p className="mx-auto mt-5 max-w-3xl text-left text-lg leading-relaxed text-muted-foreground md:text-xl">
-            {INTRO.perex}
-          </p>
+          <div className="mx-auto mt-5 max-w-3xl space-y-4 text-left text-lg leading-relaxed text-muted-foreground md:text-xl">
+            {INTRO.paragraphs.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
+          </div>
           <nav className="mt-8 flex flex-wrap items-center justify-center gap-4 text-sm font-semibold text-primary">
             {INTRO.links.map((link) => (
               <a
@@ -63,29 +65,14 @@ function ONas() {
               </a>
             ))}
           </nav>
+          <img
+            src={heroBlindfold}
+            alt={INTRO.image.alt}
+            className="mx-auto mt-10 h-56 w-full max-w-3xl rounded-2xl object-cover"
+          />
         </section>
 
-        {/* 2. Co nás drží */}
-        <section className="mt-20">
-          <SectionHeader kicker="Základ" title="Co nás drží" />
-          <div className="mt-8 grid gap-8 md:grid-cols-3">
-            {PILLARS.map((pillar) => (
-              <div key={pillar.title} className="flex gap-3">
-                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                <div>
-                  <h3 className="font-display text-lg font-semibold text-foreground">
-                    {pillar.title}
-                  </h3>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    {pillar.text}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 3. Naše hodnoty */}
+        {/* 2. Naše hodnoty */}
         <section id="hodnoty" className="mt-20 scroll-mt-32">
           <SectionHeader kicker="Co nás definuje" title="Naše hodnoty" />
           <ul className="mt-8 max-w-3xl space-y-4">
@@ -98,7 +85,7 @@ function ONas() {
           </ul>
         </section>
 
-        {/* 4. Naše osy */}
+        {/* 3. Naše osy */}
         <section id="osy" className="mt-20 scroll-mt-32">
           <SectionHeader
             kicker="Naše osy"
@@ -120,23 +107,27 @@ function ONas() {
           </div>
         </section>
 
-        {/* 5. Co děláme */}
+        {/* 4. Co děláme */}
         <section className="mt-20">
           <SectionHeader kicker="Aktivity" title={WHAT_WE_DO.title} />
-          <p className="mt-8 max-w-3xl text-left leading-relaxed text-muted-foreground">
-            {WHAT_WE_DO.text}
-          </p>
+          <div className="mt-8 max-w-3xl space-y-4 text-left leading-relaxed text-muted-foreground">
+            {WHAT_WE_DO.paragraphs.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
+          </div>
         </section>
 
-        {/* 6. Naše mise */}
+        {/* 5. Naše mise */}
         <section className="mt-20">
           <SectionHeader kicker="Proč to děláme" title={MISSION.title} />
-          <p className="mt-8 max-w-3xl text-left leading-relaxed text-muted-foreground">
-            {MISSION.text}
-          </p>
+          <div className="mt-8 max-w-3xl space-y-4 text-left leading-relaxed text-muted-foreground">
+            {MISSION.paragraphs.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
+          </div>
         </section>
 
-        {/* 7. Zapojte se */}
+        {/* 6. Zapojte se */}
         <section id="zapojte-se" className="mt-20 scroll-mt-32">
           <SectionHeader kicker="Přidejte se" title={GET_INVOLVED.title} />
           <p className="mt-8 max-w-3xl text-left leading-relaxed text-muted-foreground">
