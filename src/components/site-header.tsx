@@ -146,10 +146,10 @@ export function SiteHeader() {
                             to={c.to}
                             {...(c.search ? { search: c.search } : {})}
                             onClick={() => setMenu(null)}
-                            className={`block rounded-full px-4 py-2 text-[15px] font-semibold transition-colors ${
+                            className={`block border-b-2 pb-1 font-display text-[15px] transition-colors ${
                               isActive
-                                ? "bg-primary text-primary-foreground"
-                                : "text-primary hover:bg-primary/10"
+                                ? "border-primary font-semibold text-primary"
+                                : "border-transparent font-medium text-primary hover:opacity-80"
                             }`}
                           >
                             {c.label}
@@ -157,7 +157,7 @@ export function SiteHeader() {
                         ) : (
                           <span
                             key={c.label}
-                            className="block cursor-default rounded-full px-4 py-2 text-[15px] font-semibold text-muted-foreground"
+                            className="block cursor-default border-b-2 border-transparent pb-1 font-display text-[15px] font-medium text-muted-foreground"
                           >
                             {c.label}
                           </span>
