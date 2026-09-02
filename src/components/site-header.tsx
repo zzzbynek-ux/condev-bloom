@@ -272,11 +272,12 @@ export function SiteHeader() {
                   </p>
                   <div className="flex flex-col pl-3">
                     {item.children.map((c) => {
+                      const currentFiltr = (location.search as { filtr?: string }).filtr;
                       const isActive =
                         c.to === "/clanky" && location.pathname === "/clanky"
                           ? c.search?.filtr
-                            ? new URLSearchParams(location.search).get("filtr") === c.search.filtr
-                            : !new URLSearchParams(location.search).get("filtr")
+                            ? currentFiltr === c.search.filtr
+                            : !currentFiltr
                           : false;
                       return c.to ? (
                         <Link
