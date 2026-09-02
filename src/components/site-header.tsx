@@ -259,6 +259,7 @@ export function SiteHeader() {
                         <Link
                           key={c.label}
                           to={c.to}
+                          {...(c.search ? { search: c.search } : {})}
                           onClick={() => setOpen(false)}
                           className="py-2 text-sm text-foreground/80"
                         >
