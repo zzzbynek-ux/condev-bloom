@@ -112,16 +112,17 @@ function Clanky() {
         <nav aria-label="Filtrovat články" className="mt-8 flex flex-wrap gap-6 border-b border-border pb-0">
           {FILTERS.map((f) => {
             const filterId = FILTER_IDS.find((x) => x.label === f)?.id;
+            const isActive = active === f;
             return (
               <Link
                 key={f}
                 to="/clanky"
                 search={f === "Všechny texty" ? {} : { filtr: filterId }}
-                aria-current={active === f}
-                className={`border-b-2 pb-2 text-base font-semibold tracking-wide text-primary no-underline transition-colors ${
-                  active === f
+                aria-current={isActive}
+                className={`border-b-2 pb-2 text-base tracking-wide text-primary no-underline transition-colors ${
+                  isActive
                     ? "-mb-[1px] border-primary font-bold"
-                    : "border-transparent hover:text-primary"
+                    : "border-transparent font-semibold hover:text-primary"
                 }`}
               >
                 {f}
