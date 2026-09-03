@@ -220,25 +220,20 @@ function SectionHeader({
   );
 }
 
-const ALL_TAB = { id: "vse", label: "Všechny texty" } as const;
+const SECTION_LINKS = [
+  { id: "nove", label: "Nové" },
+  { id: "doporucujeme", label: "Doporučujeme" },
+  { id: "cesi-a-izrael", label: "Češi a Izrael" },
+  { id: "studie", label: "Studie a analýzy" },
+] as const;
 
 function ArticleTabs() {
-  const [active, setActive] = useState(0);
-  // Tydýt týdne má na homepage vlastní blok — v záložkách ho nezobrazujeme.
+  // Tydýt týdne má na homepage vlastní blok — v odkazech ho nezobrazujeme.
   const sections = ARTICLE_SECTIONS.filter((g) => g.id !== "tydyt");
-  const isAll = active === sections.length;
-  const group = sections[active] ?? sections[0]!;
-  const items = isAll
-    ? ARTICLE_SECTIONS.flatMap((g) => g.items.map((item) => ({ ...item, sectionLabel: g.label })))
-    : (group.items.map((item) => ({ ...item, sectionLabel: item.tag })) as ({
-        slug: string;
-        image: "flags" | "media" | "politics";
-        tag: string;
-        title: string;
-        perex: string;
-        date?: string;
-        sectionLabel: string;
-      })[]);
+  const group = sections[0]!;
+  const items = group.items
+    .slice(0, 6)
+    .map((item) => ({ ...item, sectionLabel: item.tag }));
 
   return (
     <section className="bg-background">
@@ -247,37 +242,34 @@ function ArticleTabs() {
           Články
         </h2>
 
-        {/* Záložky */}
-        <div className="mt-2 flex flex-wrap items-end justify-between gap-4 border-b border-border">
-          <div
-            role="tablist"
-            aria-label="Rubriky článků"
-            className="clanky-tabs flex flex-nowrap gap-x-6 gap-y-2 overflow-x-auto md:flex-wrap"
+        {/* Odkazy na rubriky */}
+        <nav
+          aria-label="Rubriky článků"
+          className="clanky-tabs mt-2 flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-border pb-3"
+        >
+          {SECTION_LINKS.map((link) => (
+            <Link
+              key={link.id}
+              to="/clanky"
+              search={{ filtr: link.id }}
+              className="text-base font-semibold normal-case text-[#0038B8] transition-colors hover:text-[#0038B8]/70"
+            >
+              {link.label}
+            </Link>
+          ))}
+          <Link
+            to="/clanky"
+            className="text-base font-semibold normal-case text-[#0038B8] transition-colors hover:text-[#0038B8]/70"
           >
-            {[...sections, ALL_TAB].map((g, idx) => (
-              <button
-                key={g.id}
-                type="button"
-                role="tab"
-                aria-selected={idx === active}
-                onClick={() => setActive(idx)}
-                className={`whitespace-nowrap -mb-px border-b-2 pb-3 text-base font-semibold normal-case text-[#0038B8] transition-colors ${
-                  idx === active
-                    ? "border-[#0038B8]"
-                    : "border-transparent hover:border-[#0038B8]/40"
-                }`}
-              >
-                {g.label}
-              </button>
-            ))}
-          </div>
-        </div>
+            Všechny texty
+          </Link>
+        </nav>
 
-        {/* články aktivní záložky */}
+        {/* články */}
         <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {(isAll ? items : items.slice(0, 6)).map((item, idx) => (
+          {items.map((item, idx) => (
             <ArticleCard
-              key={`${isAll ? "all" : group.id}-${item.slug}-${idx}`}
+              key={`${group.id}-${item.slug}-${idx}`}
               image={IMAGES[item.image]}
               tag={item.sectionLabel}
               date={item.date}
@@ -287,13 +279,11 @@ function ArticleTabs() {
           ))}
         </div>
 
-        {/* tlačítko pod mřížkou — další články stejné rubriky */}
-        {!isAll && (
-          <MoreButton
-            label={MORE_LABELS[group.label] ?? `Další texty z rubriky ${group.label}`}
-            search={{ filtr: group.id }}
-          />
-        )}
+        {/* tlačítko pod mřížkou */}
+        <MoreButton
+          label={MORE_LABELS[group.label] ?? `Další texty z rubriky ${group.label}`}
+          search={{ filtr: group.id }}
+        />
       </div>
     </section>
   );
