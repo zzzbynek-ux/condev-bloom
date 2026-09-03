@@ -131,7 +131,7 @@ export function SiteHeader() {
                     />
                   </button>
                   {menu === item.label ? (
-                    <div className="absolute left-0 top-full z-50 w-64 rounded-b-xl border border-t-0 border-border bg-background py-2 shadow-lg">
+                    <div className="absolute left-0 top-full z-50 w-max min-w-[14rem] rounded-b-xl border border-t-0 border-border bg-background py-2 shadow-lg">
                       {item.children.map((c) => {
                         const currentFiltr = (location.search as { filtr?: string }).filtr;
                         const isActive =
@@ -146,10 +146,8 @@ export function SiteHeader() {
                             to={c.to}
                             {...(c.search ? { search: c.search } : {})}
                             onClick={() => setMenu(null)}
-                            className={`inline-block border-b-2 px-4 pb-1 font-display text-[15px] transition-colors ${
-                              isActive
-                                ? "border-primary font-semibold text-primary"
-                                : "border-transparent font-medium text-primary hover:opacity-80"
+                            className={`block whitespace-nowrap px-4 py-3 text-base font-semibold uppercase tracking-wide text-primary transition-colors ${
+                              isActive ? "opacity-100" : "hover:opacity-80"
                             }`}
                           >
                             {c.label}
@@ -157,7 +155,7 @@ export function SiteHeader() {
                         ) : (
                           <span
                             key={c.label}
-                            className="block cursor-default border-b-2 border-transparent pb-1 font-display text-[15px] font-medium text-muted-foreground"
+                            className="block cursor-default whitespace-nowrap px-4 py-3 text-base font-semibold uppercase tracking-wide text-muted-foreground"
                           >
                             {c.label}
                           </span>
