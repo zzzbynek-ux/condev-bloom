@@ -248,7 +248,7 @@ function ArticleTabs() {
           <div
             role="tablist"
             aria-label="Rubriky článků"
-            className="flex flex-wrap gap-x-8 gap-y-2"
+            className="flex flex-nowrap gap-x-6 gap-y-2 overflow-x-auto md:flex-wrap"
           >
             {[...sections, ALL_TAB].map((g, idx) => (
               <button
@@ -257,10 +257,10 @@ function ArticleTabs() {
                 role="tab"
                 aria-selected={idx === active}
                 onClick={() => setActive(idx)}
-                className={`-mb-px border-b-2 pb-3 font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary transition-colors md:text-3xl ${
+                className={`whitespace-nowrap -mb-px border-b-2 pb-3 text-base font-semibold normal-case text-[#0038B8] transition-colors md:font-display md:text-2xl md:font-bold md:uppercase md:text-primary md:tracking-[0.03em] ${
                   idx === active
-                    ? "border-primary"
-                    : "border-transparent hover:border-primary/40"
+                    ? "border-[#0038B8] md:border-primary"
+                    : "border-transparent hover:border-[#0038B8]/40 md:hover:border-primary/40"
                 }`}
               >
                 {g.label}
