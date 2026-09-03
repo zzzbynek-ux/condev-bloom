@@ -476,9 +476,9 @@ function Index() {
               {/* Dokumentujeme */}
               <div className="flex flex-col">
                 <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">Dokumentujeme</h2>
-                <article className="mt-3 flex flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-                  <div className="flex flex-1 flex-col justify-between p-5">
-                    <div className="flex flex-col gap-4">
+                <article className="documentujeme-card mt-3 flex flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+                  <div className="documentujeme-inner flex flex-1 flex-col justify-between p-5">
+                    <div className="documentujeme-entries flex flex-col gap-4">
                       {[
                         {
                           tag: "Incident",
@@ -501,7 +501,7 @@ function Index() {
                       ].map((d) => (
                         <div
                           key={d.text}
-                          className="flex flex-col gap-1 border-b border-border pb-4 last:border-0 last:pb-0"
+                          className="documentujeme-entry flex flex-col gap-1 border-b border-border pb-4 last:border-0 last:pb-0"
                         >
                           <div className="flex items-center justify-between gap-3">
                             <span
@@ -519,7 +519,7 @@ function Index() {
                         </div>
                       ))}
                     </div>
-                    <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
+                    <div className="documentujeme-footer mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
                       <div className="flex flex-wrap items-center gap-4">
                         <Link
                           to="/nahlasit-incident"

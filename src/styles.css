@@ -300,4 +300,22 @@
     font-weight: 700;
     border-bottom: 2px solid #0038b8;
   }
+
+  /* Dokumentujeme: na mobilu 2 záznamy, menší padding */
+  .documentujeme-inner {
+    padding: 0.75rem !important;
+  }
+  .documentujeme-entries {
+    gap: 0.75rem !important;
+  }
+  .documentujeme-entries > .documentujeme-entry:last-child {
+    display: none;
+  }
+  .documentujeme-entry {
+    padding-bottom: 0.5rem !important;
+  }
+  .documentujeme-footer {
+    margin-top: 0.75rem !important;
+    padding-top: 0.75rem !important;
+  }
 }
