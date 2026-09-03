@@ -238,14 +238,15 @@ function ArticleTabs() {
   return (
     <section className="bg-background">
       <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
-        <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">
+        <div className="border-t-2 border-primary pt-4" />
+        <h2 className="mt-4 font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">
           Články
         </h2>
 
         {/* Odkazy na rubriky */}
         <nav
           aria-label="Rubriky článků"
-          className="clanky-tabs mt-2 flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-border pb-3"
+          className="clanky-tabs mt-2 flex flex-wrap items-center gap-x-6 gap-y-2 pb-3"
         >
           {SECTION_LINKS.map((link) => (
             <Link
