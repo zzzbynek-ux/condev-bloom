@@ -5,12 +5,9 @@ import { z } from "zod";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { MoreButton } from "@/components/more-button";
-import { ARTICLE_SECTIONS } from "@/lib/content";
-import flagsImg from "@/assets/news-flags.jpg";
-import mediaImg from "@/assets/news-media.jpg";
-import politicsImg from "@/assets/news-politics.jpg";
-
-const IMAGES = { flags: flagsImg, media: mediaImg, politics: politicsImg };
+import { ARTICLE_SECTIONS, allArticles } from "@/lib/content";
+import { articlesIn } from "@/lib/articles";
+import { formatDate } from "@/lib/articles";
 
 const searchSchema = z.object({
   tag: z.string().optional(),
@@ -43,14 +40,15 @@ type Article = {
   date?: string;
   title: string;
   perex: string;
-  image: "flags" | "media" | "politics";
+  image: string;
   section: string;
 };
 
-/** Všechny články napříč rubrikami, bez duplicit podle slug+rubrika */
-const ALL_ARTICLES: Article[] = ARTICLE_SECTIONS.flatMap((g) =>
-  g.items.map((item) => ({ ...item, section: g.label })),
-);
+/** Všechny články napříč rubrikami, bez duplicit podle slug */
+const ALL_ARTICLES: Article[] = allArticles().map((item) => ({
+  ...item,
+  section: ARTICLE_SECTIONS.find((g) => g.id !== "nove" && g.id !== "vse" && g.items.some((i) => i.slug === item.slug))?.label ?? "Nové",
+}));
 
 const FILTER_IDS = [
   { id: "nove", label: "Nové" },
@@ -87,7 +85,15 @@ function Clanky() {
       ? isTagFilter
         ? ALL_ARTICLES.filter((a) => a.tag === tag)
         : ALL_ARTICLES
-      : ALL_ARTICLES.filter((a) => a.section === active);
+      : (filtr ? articlesIn(filtr) : ALL_ARTICLES.filter((a) => a.section === active)).map((a) => ({
+          slug: a.slug,
+          tag: a.tag,
+          date: "iso" in a ? formatDate(a.iso) : a.date,
+          title: a.title,
+          perex: a.perex,
+          image: a.image,
+          section: active,
+        }));
 
   const remaining = articles.length - visible;
   // „Všechny texty“ bez tagu už ukazuje celý archiv — tlačítko skrýt.
@@ -151,7 +157,7 @@ function Clanky() {
               className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md"
             >
               <img
-                src={IMAGES[a.image]}
+                src={a.image}
                 alt={a.title}
                 loading="lazy"
                 width={1280}
@@ -174,7 +180,9 @@ function Clanky() {
                   ) : null}
                 </div>
                 <h2 className="mt-3 font-display text-xl font-bold leading-snug text-primary">
-                  <span className="group-hover:underline">{a.title}</span>
+                  <Link to="/clanky/$slug" params={{ slug: a.slug }} className="group-hover:underline">
+                    {a.title}
+                  </Link>
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{a.perex}</p>
               </div>

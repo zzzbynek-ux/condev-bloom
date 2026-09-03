@@ -174,18 +174,26 @@
   animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* ===== Mobil a tablet (do 1023 px) — desktop zůstává beze změny ===== */
-@media (max-width: 1023px) {
-  /* 5) Sticky header: neprůhledný, nad obsahem */
-  .site-header-sticky {
-    background-color: #ffffff;
-    z-index: 60;
-  }
+.hero-nav {
+  z-index: 40;
+  pointer-events: none;
+  isolation: isolate;
+}
+.hero-dots {
+  pointer-events: auto;
+  z-index: 40;
+}
+.hero-nav-btn {
+  pointer-events: auto;
+  position: relative;
+  z-index: 40;
+}
 
-  /* 1) Hero: fotka nahoře, textová karta pod ní na celou šířku */
+@media (max-width: 767px) {
   .hero-section {
     display: flex;
     flex-direction: column;
+    height: auto;
   }
   .hero-section .hero-img {
     position: relative;
@@ -193,24 +201,70 @@
     height: 220px;
     width: 100%;
     opacity: 1;
+    object-fit: cover;
   }
   .hero-section .hero-overlay {
     display: none;
   }
+  .hero-nav {
+    position: relative;
+    inset: auto;
+    height: auto;
+  }
   .hero-section .hero-grid {
     display: block;
     max-width: none;
+    height: auto;
     padding: 0;
-  }
-  .hero-section .hero-grid > div:first-child {
-    display: none;
   }
   .hero-section .hero-card {
     width: 100%;
+    max-width: none;
     min-height: auto;
     border-radius: 0;
     background-color: #0a1730;
     backdrop-filter: none;
+  }
+  .hero-dots {
+    position: relative;
+    inset: auto;
+    padding: 0.5rem 0 0.85rem;
+    background-color: #0a1730;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-section {
+    height: 20rem;
+  }
+  .hero-section .hero-img {
+    object-fit: cover;
+    object-position: 50% 40%;
+  }
+  .hero-section .hero-grid {
+    min-height: 20rem;
+    align-items: flex-start;
+    padding-top: 1.25rem;
+    padding-right: 2rem;
+    padding-bottom: 3.25rem;
+    padding-left: 3.75rem;
+  }
+  .hero-dots {
+    position: absolute;
+    right: 0;
+    bottom: 0.85rem;
+    left: 0;
+    padding: 0;
+    background: transparent;
+  }
+}
+
+/* ===== Mobil a tablet (do 1023 px) — desktop zůstává beze změny ===== */
+@media (max-width: 1023px) {
+  /* 5) Sticky header: neprůhledný, nad obsahem */
+  .site-header-sticky {
+    background-color: #ffffff;
+    z-index: 60;
   }
 
   /* 2) Pruh Antisemitismus: tlačítka pod textem */
@@ -329,21 +383,74 @@
   }
 }
 
+/* Tablet + úzký desktop: text nahoře, tři stejně široká tlačítka v řadě */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .tema-strip {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    gap: 1.25rem;
+    padding: 1.25rem 1.5rem;
+  }
+  .tema-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    gap: 0.6rem;
+  }
+  .tema-buttons > a,
+  .tema-buttons > button {
+    width: 100%;
+    justify-content: center;
+    white-space: nowrap;
+    padding: 0.6rem 0.5rem;
+    font-size: 0.8125rem;
+    text-align: center;
+  }
+}
+
+/* Široký desktop: jedna řada vpravo, stejná šířka, bez zalamování */
+@media (min-width: 1280px) {
+  .tema-strip > div:first-child {
+    min-width: 0;
+    flex: 1;
+  }
+  .tema-buttons {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 0.75rem;
+  }
+  .tema-buttons > a,
+  .tema-buttons > button {
+    width: 12rem;
+    justify-content: center;
+    white-space: nowrap;
+    padding-inline: 0.75rem;
+    text-align: center;
+  }
+}
+
 /* ===== Pouze desktop (≥1024 px) ===== */
 @media (min-width: 1024px) {
   .hero-section {
+    height: 23rem;
     min-height: 0;
-    max-height: calc(100vh - 220px);
+    max-height: none;
   }
   .hero-section .hero-grid {
+    min-height: 23rem;
+    align-items: center;
     padding-top: 2rem;
-    padding-bottom: 1rem;
+    padding-right: 2.5rem;
+    padding-bottom: 3.5rem;
+    padding-left: 4.5rem;
   }
   .hero-section .hero-card {
-    min-height: 14rem;
+    min-height: auto;
   }
   .hero-dots {
-    padding-bottom: 0.75rem;
+    padding-bottom: 0;
   }
   .vyber-grid article img {
     max-height: 180px;

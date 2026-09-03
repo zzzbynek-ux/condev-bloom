@@ -7,17 +7,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
 import { MoreButton } from "@/components/more-button";
-import { ARTICLE_SECTIONS, HERO_SLIDES } from "@/lib/content";
-import heroImg from "@/assets/hero-blindfold.jpg";
-import tydytPortrait from "@/assets/tydyt-portrait.jpg";
-import flagsImg from "@/assets/news-flags.jpg";
-import mediaImg from "@/assets/news-media.jpg";
-import politicsImg from "@/assets/news-politics.jpg";
-
-
-
-
-const IMAGES = { flags: flagsImg, media: mediaImg, politics: politicsImg };
+import { ARTICLE_SECTIONS, HERO_BANNER } from "@/lib/content";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -38,118 +28,115 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const CLAIM_SLIDE = {
-  kicker: "Jedním hlasem",
-  title: "Do debaty o Izraeli vracíme fakta, kontext a klidný tón.",
-  text: "Píšeme analýzy, ověřujeme tvrzení a pomáháme lidem reagovat tam, kde se rozhoduje o veřejném mínění.",
-};
-
-const HERO = [CLAIM_SLIDE, ...HERO_SLIDES];
-
 function Hero() {
   const [i, setI] = useState(0);
-  const go = (d: number) => setI((v) => (v + d + HERO.length) % HERO.length);
+  const total = HERO_BANNER.length;
+  const go = (d: number) => setI((v) => (v + d + total) % total);
 
   useEffect(() => {
-    const t = setInterval(() => setI((v) => (v + 1) % HERO.length), 8000);
+    const t = setInterval(() => setI((v) => (v + 1) % total), 6000);
     return () => clearInterval(t);
-  }, []);
+  }, [total, i]);
 
-  const slide = HERO[i] ?? HERO[0]!;
+  const slide = HERO_BANNER[i] ?? HERO_BANNER[0]!;
 
   return (
-<section className="hero-section relative isolate overflow-hidden bg-[#0b1a3a]">
+    <section className="hero-section relative isolate overflow-hidden bg-[#0b1a3a]">
       <img
-        src={heroImg}
+        src={slide.image}
         alt=""
         width={1600}
         height={900}
-        className="hero-img absolute inset-0 size-full object-cover object-left opacity-90"
+        className="hero-img pointer-events-none absolute inset-0 size-full object-cover"
+        style={{ ["--hero-focus" as string]: slide.focus, objectPosition: slide.focus }}
       />
-      <div aria-hidden className="hero-overlay absolute inset-0 bg-linear-to-r from-[#0b1a3a]/40 via-[#0b1a3a]/40 to-[#0b1a3a]/80" />
+      <div
+        aria-hidden
+        className="hero-overlay pointer-events-none absolute inset-0 bg-linear-to-r from-[#0b1a3a]/55 via-[#0b1a3a]/15 to-transparent"
+      />
 
-      <div className="hero-grid relative mx-auto grid max-w-[88rem] grid-cols-1 items-center gap-6 px-5 py-10 md:grid-cols-2 md:px-16 md:py-20">
-        <div className="hidden md:block" />
-        <div className="hero-card flex flex-col justify-center rounded-2xl bg-[#0a1730]/85 p-6 backdrop-blur-sm md:min-h-[22rem] md:p-9">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/60">
+      <div className="hero-grid pointer-events-none relative z-10 mx-auto flex h-full max-w-[88rem] items-center justify-start px-5 py-6 md:px-16">
+        <div className="hero-card pointer-events-auto w-full max-w-xl rounded-2xl bg-[#0a1730]/75 p-4 backdrop-blur-md md:p-5 lg:max-w-2xl lg:px-8 lg:py-5">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60">
             {slide.kicker}
           </p>
           {i === 0 ? (
-            <h1 key={slide.title} className="animate-rise mt-3 text-balance font-display text-3xl font-bold text-white md:text-[2.75rem] md:leading-[1.1]">
+            <h1 key={slide.title} className="animate-rise mt-1.5 text-balance font-display text-2xl font-bold text-white md:text-[1.85rem] md:leading-[1.15]">
               {slide.title}
             </h1>
           ) : (
-            <p key={slide.title} className="animate-rise mt-3 text-balance font-display text-3xl font-bold text-white md:text-[2.75rem] md:leading-[1.1]">
+            <p key={slide.title} className="animate-rise mt-1.5 text-balance font-display text-2xl font-bold text-white md:text-[1.85rem] md:leading-[1.15]">
               {slide.title}
             </p>
           )}
           <p
             key={slide.text}
-            className="animate-rise mt-4 hidden text-pretty text-sm leading-relaxed text-white/85 md:block md:text-[17px]"
+            className="animate-rise mt-2 hidden text-pretty text-sm leading-snug text-white/85 lg:line-clamp-2 lg:block"
           >
             {slide.text}
           </p>
 
           <Link
             to={i === 0 ? "/manifest" : "/clanky"}
-            className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-white/85 hover:text-white"
+            className="mt-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-white/85 hover:text-white"
           >
             {i === 0 ? "Číst celý manifest" : "Číst článek"} <ArrowRight className="size-4" />
           </Link>
         </div>
       </div>
 
-      <button
-        type="button"
-        aria-label="Předchozí"
-        onClick={() => go(-1)}
-        className="absolute left-5 top-[58%] hidden size-9 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/55 md:grid"
-      >
-        <ChevronLeft className="size-4" strokeWidth={1.75} />
-      </button>
-      <button
-        type="button"
-        aria-label="Další"
-        onClick={() => go(1)}
-        className="absolute right-5 top-[58%] hidden size-9 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/55 md:grid"
-      >
-        <ChevronRight className="size-4" strokeWidth={1.75} />
-      </button>
-
-
-      <div className="hero-dots relative flex items-center justify-center gap-3 pb-6">
-        <button
-          type="button"
-          aria-label="Předchozí"
-          onClick={() => go(-1)}
-          className="grid size-9 place-items-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/55 md:hidden"
-        >
-          <ChevronLeft className="size-4" />
-        </button>
-        <div className="flex items-center gap-2">
-          {HERO.map((s, idx) => (
+      <div className="hero-nav pointer-events-none absolute inset-0 z-40">
+        <div className="hero-dots pointer-events-auto absolute inset-x-0 bottom-3 z-40 flex items-center justify-center">
+          <div className="flex items-center">
             <button
-              key={s.title}
               type="button"
-              aria-label={`Zobrazit: ${s.title}`}
-              aria-current={idx === i}
-              onClick={() => setI(idx)}
-              className={`size-2.5 rounded-full transition-all ${
-                idx === i ? "scale-125 bg-primary" : "bg-white/45 hover:bg-white/70"
-              }`}
-            />
-          ))}
+              aria-label="Předchozí"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                go(-1);
+              }}
+              className="hero-nav-btn pointer-events-auto relative z-40 grid size-9 place-items-center text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.75)] transition-opacity hover:opacity-70"
+            >
+              <ChevronLeft className="pointer-events-none size-6" strokeWidth={2} />
+            </button>
+            <div className="flex items-center gap-1.5 px-1">
+              {HERO_BANNER.map((s, idx) => (
+                <button
+                  key={s.title}
+                  type="button"
+                  aria-label={`Zobrazit: ${s.title}`}
+                  aria-current={idx === i}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setI(idx);
+                  }}
+                  className="relative z-40 grid size-6 place-items-center"
+                >
+                  <span
+                    className={`block rounded-full transition-all ${
+                      idx === i ? "size-2 bg-white" : "size-1.5 bg-white/55 hover:bg-white/80"
+                    }`}
+                  />
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              aria-label="Další"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                go(1);
+              }}
+              className="hero-nav-btn pointer-events-auto relative z-40 grid size-9 place-items-center text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.75)] transition-opacity hover:opacity-70"
+            >
+              <ChevronRight className="pointer-events-none size-6" strokeWidth={2} />
+            </button>
+          </div>
         </div>
-        <button
-          type="button"
-          aria-label="Další"
-          onClick={() => go(1)}
-          className="grid size-9 place-items-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/55 md:hidden"
-        >
-          <ChevronRight className="size-4" />
-        </button>
       </div>
-
     </section>
   );
 }
@@ -225,15 +212,14 @@ const SECTION_LINKS = [
   { id: "doporucujeme", label: "Doporučujeme" },
   { id: "cesi-a-izrael", label: "Češi a Izrael" },
   { id: "studie", label: "Studie a analýzy" },
+  { id: "vse", label: "Všechny texty" },
 ] as const;
 
 function ArticleTabs() {
-  // Tydýt týdne má na homepage vlastní blok — v odkazech ho nezobrazujeme.
+  const [active, setActive] = useState<(typeof SECTION_LINKS)[number]["id"]>("nove");
   const sections = ARTICLE_SECTIONS.filter((g) => g.id !== "tydyt");
-  const group = sections[0]!;
-  const items = group.items
-    .slice(0, 6)
-    .map((item) => ({ ...item, sectionLabel: item.tag }));
+  const group = sections.find((g) => g.id === active) ?? sections[0]!;
+  const items = group.items.slice(0, 6);
 
   return (
     <section className="bg-background">
@@ -243,44 +229,39 @@ function ArticleTabs() {
           Články
         </h2>
 
-        {/* Odkazy na rubriky */}
         <nav
           aria-label="Rubriky článků"
           className="clanky-tabs mt-2 flex flex-wrap items-center gap-x-6 gap-y-2 pb-3"
         >
           {SECTION_LINKS.map((link) => (
-            <Link
+            <button
               key={link.id}
-              to="/clanky"
-              search={{ filtr: link.id }}
-              className="text-base font-semibold normal-case text-[#0038B8] transition-colors hover:text-[#0038B8]/70"
+              type="button"
+              onClick={() => setActive(link.id)}
+              aria-current={active === link.id}
+              className={`text-base font-semibold normal-case transition-colors ${
+                active === link.id ? "border-b-2 border-[#0038B8] text-[#0038B8]" : "text-[#0038B8] hover:text-[#0038B8]/70"
+              }`}
             >
               {link.label}
-            </Link>
+            </button>
           ))}
-          <Link
-            to="/clanky"
-            className="text-base font-semibold normal-case text-[#0038B8] transition-colors hover:text-[#0038B8]/70"
-          >
-            Všechny texty
-          </Link>
         </nav>
 
-        {/* články */}
         <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {items.map((item, idx) => (
             <ArticleCard
               key={`${group.id}-${item.slug}-${idx}`}
-              image={IMAGES[item.image]}
-              tag={item.sectionLabel}
+              image={item.image}
+              tag={item.tag}
               date={item.date}
               title={item.title}
               perex={item.perex}
+              slug={item.slug}
             />
           ))}
         </div>
 
-        {/* tlačítko pod mřížkou */}
         <MoreButton
           label={MORE_LABELS[group.label] ?? `Další texty z rubriky ${group.label}`}
           search={{ filtr: group.id }}
@@ -384,27 +365,17 @@ function Index() {
               </div>
             </div>
             <div className="vyber-grid mt-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <ArticleCard
-                image={IMAGES.flags}
-                tag="Výběr redakce"
-                date="05/07/26"
-                title="Malý stát. Globální přínos."
-                perex="Izrael přináší světu víc, než by odpovídalo jeho velikosti — od technologií po medicínu."
-              />
-              <ArticleCard
-                image={IMAGES.media}
-                tag="Výběr redakce"
-                date="05/07/26"
-                title="Změň algoritmus — změníš realitu"
-                perex="Diskuze a komentáře na sociálních sítích ovlivňují naši realitu víc, než si myslíme."
-              />
-              <ArticleCard
-                image={IMAGES.politics}
-                tag="Výběr redakce"
-                date="05/07/26"
-                title="Slogany živí emoce, ne mír"
-                perex="Přestaňme podléhat prázdným heslům a hledejme skutečné řešení."
-              />
+              {(ARTICLE_SECTIONS.find((g) => g.id === "doporucujeme")?.items ?? []).slice(0, 3).map((item) => (
+                <ArticleCard
+                  key={item.slug}
+                  image={item.image}
+                  tag={item.tag}
+                  date={item.date}
+                  title={item.title}
+                  perex={item.perex}
+                  slug={item.slug}
+                />
+              ))}
             </div>
           </div>
         </section>
@@ -420,8 +391,8 @@ function Index() {
                 <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">Tydýt týdne</h2>
                 <article className="group mt-3 flex flex-1 flex-row gap-0 overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
                   <img
-                    src={tydytPortrait}
-                    alt="Tydýt týdne — Jméno Příjmení"
+                    src="/images/tydyt-konrad.jpg"
+                    alt="Tydýt týdne — Konrad Stavridis"
                     loading="lazy"
                     className="hidden shrink-0 object-cover sm:block md:h-[160px] md:w-[160px]"
                   />
@@ -441,7 +412,7 @@ function Index() {
                       </div>
                       <h3 className="mt-2 font-display text-xl font-bold leading-snug text-primary">
                         <Link to="/clanky" search={{ filtr: "tydyt" }} className="group-hover:underline">
-                          Jméno Příjmení
+                          Konrad Stavridis
                         </Link>
                       </h3>
                       <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">

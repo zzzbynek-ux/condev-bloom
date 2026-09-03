@@ -22,6 +22,7 @@ import { Route as PtejteSeAiRouteImport } from './routes/ptejte-se-ai'
 import { Route as TemataRouteImport } from './routes/temata'
 import { Route as VykrikyRouteImport } from './routes/vykriky'
 import { Route as ZapojteSeRouteImport } from './routes/zapojte-se'
+import { Route as ClankySlugRouteImport } from './routes/clanky.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -88,11 +89,16 @@ const ZapojteSeRoute = ZapojteSeRouteImport.update({
   path: '/zapojte-se',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ClankySlugRoute = ClankySlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ClankyRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/antisemitismus': typeof AntisemitismusRoute
-  '/clanky': typeof ClankyRoute
+  '/clanky': typeof ClankyRouteWithChildren
   '/hledat': typeof HledatRoute
   '/manifest': typeof ManifestRoute
   '/nahlasit-incident': typeof NahlasitIncidentRoute
@@ -103,11 +109,12 @@ export interface FileRoutesByFullPath {
   '/temata': typeof TemataRoute
   '/vykriky': typeof VykrikyRoute
   '/zapojte-se': typeof ZapojteSeRoute
+  '/clanky/$slug': typeof ClankySlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/antisemitismus': typeof AntisemitismusRoute
-  '/clanky': typeof ClankyRoute
+  '/clanky': typeof ClankyRouteWithChildren
   '/hledat': typeof HledatRoute
   '/manifest': typeof ManifestRoute
   '/nahlasit-incident': typeof NahlasitIncidentRoute
@@ -118,12 +125,13 @@ export interface FileRoutesByTo {
   '/temata': typeof TemataRoute
   '/vykriky': typeof VykrikyRoute
   '/zapojte-se': typeof ZapojteSeRoute
+  '/clanky/$slug': typeof ClankySlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/antisemitismus': typeof AntisemitismusRoute
-  '/clanky': typeof ClankyRoute
+  '/clanky': typeof ClankyRouteWithChildren
   '/hledat': typeof HledatRoute
   '/manifest': typeof ManifestRoute
   '/nahlasit-incident': typeof NahlasitIncidentRoute
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/temata': typeof TemataRoute
   '/vykriky': typeof VykrikyRoute
   '/zapojte-se': typeof ZapojteSeRoute
+  '/clanky/$slug': typeof ClankySlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -151,6 +160,7 @@ export interface FileRouteTypes {
     | '/temata'
     | '/vykriky'
     | '/zapojte-se'
+    | '/clanky/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
     | '/temata'
     | '/vykriky'
     | '/zapojte-se'
+    | '/clanky/$slug'
   id:
     | '__root__'
     | '/'
@@ -181,12 +192,13 @@ export interface FileRouteTypes {
     | '/temata'
     | '/vykriky'
     | '/zapojte-se'
+    | '/clanky/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AntisemitismusRoute: typeof AntisemitismusRoute
-  ClankyRoute: typeof ClankyRoute
+  ClankyRoute: typeof ClankyRouteWithChildren
   HledatRoute: typeof HledatRoute
   ManifestRoute: typeof ManifestRoute
   NahlasitIncidentRoute: typeof NahlasitIncidentRoute
@@ -292,13 +304,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ZapojteSeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/clanky/$slug': {
+      id: '/clanky/$slug'
+      path: '/$slug'
+      fullPath: '/clanky/$slug'
+      preLoaderRoute: typeof ClankySlugRouteImport
+      parentRoute: typeof ClankyRoute
+    }
   }
 }
+
+interface ClankyRouteChildren {
+  ClankySlugRoute: typeof ClankySlugRoute
+}
+
+const ClankyRouteChildren: ClankyRouteChildren = {
+  ClankySlugRoute: ClankySlugRoute,
+}
+
+const ClankyRouteWithChildren =
+  ClankyRoute._addFileChildren(ClankyRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AntisemitismusRoute: AntisemitismusRoute,
-  ClankyRoute: ClankyRoute,
+  ClankyRoute: ClankyRouteWithChildren,
   HledatRoute: HledatRoute,
   ManifestRoute: ManifestRoute,
   NahlasitIncidentRoute: NahlasitIncidentRoute,
@@ -315,11 +345,10 @@ export const routeTree = rootRouteImport
   ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
+import type { createStart } from '@tanstack/react-start'
 declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
   }
 }
