@@ -423,9 +423,9 @@ function Index() {
                     src={tydytPortrait}
                     alt="Tydýt týdne — Jméno Příjmení"
                     loading="lazy"
-                    className="hidden w-2/5 shrink-0 object-cover sm:block"
+                    className="hidden shrink-0 object-cover sm:block md:h-[160px] md:w-[160px]"
                   />
-                  <div className="flex flex-1 flex-col justify-between p-5">
+                  <div className="flex flex-1 flex-col justify-between p-5 md:p-4">
                     <div>
                       <div className="flex items-center gap-3">
                         <Link
@@ -472,7 +472,7 @@ function Index() {
               <div className="flex flex-col">
                 <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">Dokumentujeme</h2>
                 <article className="documentujeme-card mt-3 flex flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-                  <div className="documentujeme-inner flex flex-1 flex-col justify-between p-5">
+                  <div className="documentujeme-inner flex flex-1 flex-col justify-between p-5 md:p-4">
                     <div className="documentujeme-entries flex flex-col gap-4">
                       {[
                         {
