@@ -58,19 +58,19 @@ function Hero() {
   const slide = HERO[i] ?? HERO[0]!;
 
   return (
-    <section className="relative isolate overflow-hidden bg-[#0b1a3a]">
+<section className="hero-section relative isolate overflow-hidden bg-[#0b1a3a]">
       <img
         src={heroImg}
         alt=""
         width={1600}
         height={900}
-        className="absolute inset-0 size-full object-cover object-left opacity-90"
+        className="hero-img absolute inset-0 size-full object-cover object-left opacity-90"
       />
-      <div aria-hidden className="absolute inset-0 bg-linear-to-r from-[#0b1a3a]/40 via-[#0b1a3a]/40 to-[#0b1a3a]/80" />
+      <div aria-hidden className="hero-overlay absolute inset-0 bg-linear-to-r from-[#0b1a3a]/40 via-[#0b1a3a]/40 to-[#0b1a3a]/80" />
 
-      <div className="relative mx-auto grid max-w-[88rem] grid-cols-1 items-center gap-6 px-5 py-10 md:grid-cols-2 md:px-16 md:py-20">
+      <div className="hero-grid relative mx-auto grid max-w-[88rem] grid-cols-1 items-center gap-6 px-5 py-10 md:grid-cols-2 md:px-16 md:py-20">
         <div className="hidden md:block" />
-        <div className="flex flex-col justify-center rounded-2xl bg-[#0a1730]/85 p-6 backdrop-blur-sm md:min-h-[22rem] md:p-9">
+        <div className="hero-card flex flex-col justify-center rounded-2xl bg-[#0a1730]/85 p-6 backdrop-blur-sm md:min-h-[22rem] md:p-9">
           <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/60">
             {slide.kicker}
           </p>
@@ -248,7 +248,7 @@ function ArticleTabs() {
           <div
             role="tablist"
             aria-label="Rubriky článků"
-            className="flex flex-nowrap gap-x-6 gap-y-2 overflow-x-auto md:flex-wrap"
+            className="clanky-tabs flex flex-nowrap gap-x-6 gap-y-2 overflow-x-auto md:flex-wrap"
           >
             {[...sections, ALL_TAB].map((g, idx) => (
               <button
@@ -312,7 +312,7 @@ function Index() {
 
         {/* Zvýrazněné téma: Antisemitismus */}
         <section className="bg-primary text-primary-foreground">
-          <div className="mx-auto flex max-w-[88rem] flex-col items-start gap-6 px-4 py-8 md:h-[135px] md:flex-row md:items-center md:justify-between md:px-6 md:py-0">
+          <div className="tema-strip mx-auto flex max-w-[88rem] flex-col items-start gap-6 px-4 py-8 md:h-[135px] md:flex-row md:items-center md:justify-between md:px-6 md:py-0">
             <div className="flex items-start gap-4 md:items-center">
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary-foreground/10 ring-1 ring-primary-foreground/25">
                 <StarOfDavid className="h-6 w-6" />
@@ -388,7 +388,7 @@ function Index() {
                 </div>
               </div>
             </div>
-            <div className="mt-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="vyber-grid mt-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               <ArticleCard
                 image={IMAGES.flags}
                 tag="Výběr redakce"

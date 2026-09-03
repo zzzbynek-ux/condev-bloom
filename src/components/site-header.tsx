@@ -59,7 +59,7 @@ export function SiteHeader() {
   const location = useLocation();
 
   return (
-    <header className="sticky top-0 z-50 shadow-sm">
+    <header className="site-header-sticky sticky top-0 z-50 shadow-sm">
       {/* horní modrý pruh: identita + rychlé kontakty */}
       <div className="bg-primary text-primary-foreground">
 
