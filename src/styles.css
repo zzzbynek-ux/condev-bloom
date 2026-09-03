@@ -173,3 +173,78 @@
 @utility animate-rise {
   animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+/* ===== Mobil a tablet (do 1023 px) — desktop zůstává beze změny ===== */
+@media (max-width: 1023px) {
+  /* 5) Sticky header: neprůhledný, nad obsahem */
+  .site-header-sticky {
+    background-color: #ffffff;
+    z-index: 60;
+  }
+
+  /* 1) Hero: fotka nahoře, textová karta pod ní na celou šířku */
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-section .hero-img {
+    position: relative;
+    inset: auto;
+    height: 220px;
+    width: 100%;
+    opacity: 1;
+  }
+  .hero-section .hero-overlay {
+    display: none;
+  }
+  .hero-section .hero-grid {
+    display: block;
+    max-width: none;
+    padding: 0;
+  }
+  .hero-section .hero-grid > div:first-child {
+    display: none;
+  }
+  .hero-section .hero-card {
+    width: 100%;
+    min-height: auto;
+    border-radius: 0;
+    background-color: #0a1730;
+    backdrop-filter: none;
+  }
+
+  /* 2) Pruh Antisemitismus: tlačítka pod textem */
+  .tema-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    padding: 2rem 1.25rem;
+  }
+
+  /* 3) Výběr redakce: jeden sloupec */
+  .vyber-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* 4) Lišta filtrů (homepage i /clanky): jedna řada, swipe */
+  .clanky-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .clanky-tabs a,
+  .clanky-tabs button {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #0038b8;
+    white-space: nowrap;
+  }
+  .clanky-tabs a[aria-current="true"],
+  .clanky-tabs button[aria-selected="true"] {
+    font-weight: 700;
+    border-bottom: 2px solid #0038b8;
+  }
+}
