@@ -214,14 +214,14 @@ export type FeedGroup = {
 
 
 export const HERO_BANNER = [
-  { kicker: "Proč to děláme", title: "Malý stát. Globální přínos.", text: "Izrael není jen spojencem Západu, je jeho součástí. Přináší světu víc, než by odpovídalo jeho velikosti — od technologií přes medicínu až po humanitární pomoc.", image: "/images/hero/maly-stat.jpg", focus: "80% 45%" },
-  { kicker: "Jak to funguje", title: "Jeden klik mění svět", text: "Pod příspěvkem s tisíci lajky se objeví jediný věcný komentář a naruší sdílený obraz. Algoritmus je jednoduchý: čím víc reakcí, tím větší dosah.", image: "/images/hero/jeden-klik.jpg", focus: "50% 40%" },
-  { kicker: "Antisemitismus", title: "Antisemitismus 2.0", text: "Nový antisemitismus mluví jazykem solidarity a historické křivdy. Nacistickou pásku nahradila kefíja — ale posedlost Židy zůstala.", image: "/images/hero/antisemitismus.jpg", focus: "70% 30%" },
-  { kicker: "Výběr redakce", title: "Slogany živí emoce, ne mír", text: "Přestaňme podléhat prázdným heslům a hledejme skutečné řešení.", image: "/images/hero/slogany.jpg", focus: "50% 50%" },
-  { kicker: "Ideologie", title: "Rudo-zelená aliance", text: "Útoky na Židy rostou z ideologického spojenectví progresivní levice a islamismu, jež pod pláštíkem lidských práv legitimizuje násilí.", image: "/images/hero/rudo-zelena.jpg", focus: "45% 40%" },
-  { kicker: "Média", title: "Média ve službách teroru", text: "Západní média se prezentují jako objektivní strážci pravdy. Když ale přijde na Izrael, přebírají informace od teroristů bez váhání.", image: "/images/hero/media-teror.jpg", focus: "50% 45%" },
-  { kicker: "Vliv", title: "Zaměřeno na Katar", text: "Protesty na univerzitách, výkřiky v ulicích i virální příspěvky spojuje víc, než se zdá. Ukazujeme, jak hluboko sahá katarský vliv.", image: "/images/hero/katar.jpg", focus: "55% 40%" },
-  { kicker: "Dezinformace", title: "Wiki jako nástroj vlivu", text: "Záměrná manipulace a systematické zkreslování faktů proměňují otevřenou encyklopedii ve vlivový nástroj.", image: "/images/hero/wiki.jpg", focus: "50% 40%" },
+  { kicker: "Proč to děláme", title: "Malý stát. Globální přínos.", text: "Izrael není jen spojencem Západu, je jeho součástí. Přináší světu víc, než by odpovídalo jeho velikosti — od technologií přes medicínu až po humanitární pomoc.", image: "/images/hero/maly-stat.jpg", focus: "80% 42%", slug: "izrael-haji-vic-nez-jen-vlastni-hranice" },
+  { kicker: "Jak to funguje", title: "Jeden klik mění svět", text: "Pod příspěvkem s tisíci lajky se objeví jediný věcný komentář a naruší sdílený obraz. Algoritmus je jednoduchý: čím víc reakcí, tím větší dosah.", image: "/images/hero/jeden-klik.jpg", focus: "48% 72%", slug: "jeden-klik-meni-svet" },
+  { kicker: "Antisemitismus", title: "Antisemitismus 2.0", text: "Nový antisemitismus mluví jazykem solidarity a historické křivdy. Nacistickou pásku nahradila kefíja — ale posedlost Židy zůstala.", image: "/images/hero/antisemitismus.jpg", focus: "68% 22%", slug: "novy-antisemitismus-o-palestinu-tady-vubec-nejde" },
+  { kicker: "Výběr redakce", title: "Slogany živí emoce, ne mír", text: "Přestaňme podléhat prázdným heslům a hledejme skutečné řešení.", image: "/images/hero/slogany.jpg", focus: "50% 50%", slug: "slogany-zivi-emoce-ne-mir" },
+  { kicker: "Ideologie", title: "Rudo-zelená aliance", text: "Útoky na Židy rostou z ideologického spojenectví progresivní levice a islamismu, jež pod pláštíkem lidských práv legitimizuje násilí.", image: "/images/hero/rudo-zelena.jpg", focus: "45% 40%", slug: "rudo-zelena-aliance" },
+  { kicker: "Média", title: "Média ve službách teroru", text: "Západní média se prezentují jako objektivní strážci pravdy. Když ale přijde na Izrael, přebírají informace od teroristů bez váhání.", image: "/images/hero/media-teror.jpg", focus: "50% 45%", slug: "masinerie-lzi-kdyz-media-mluvi-za-hamas" },
+  { kicker: "Vliv", title: "Zaměřeno na Katar", text: "Protesty na univerzitách, výkřiky v ulicích i virální příspěvky spojuje víc, než se zdá. Ukazujeme, jak hluboko sahá katarský vliv.", image: "/images/hero/katar.jpg", focus: "55% 40%", slug: "zamereno-na-katar" },
+  { kicker: "Dezinformace", title: "Wiki jako nástroj vlivu", text: "Záměrná manipulace a systematické zkreslování faktů proměňují otevřenou encyklopedii ve vlivový nástroj.", image: "/images/hero/wiki.jpg", focus: "50% 40%", slug: "wiki-jako-nastroj-vlivu" },
 ] as const;
 
 function toItem(a: { slug: string; tag: string; iso: string; title: string; perex: string; image: string }) {

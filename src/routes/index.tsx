@@ -76,12 +76,22 @@ function Hero() {
             {slide.text}
           </p>
 
-          <Link
-            to={i === 0 ? "/manifest" : "/clanky"}
-            className="mt-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-white/85 hover:text-white"
-          >
-            {i === 0 ? "Číst celý manifest" : "Číst článek"} <ArrowRight className="size-4" />
-          </Link>
+          {i === 0 ? (
+            <Link
+              to="/manifest"
+              className="mt-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-white/85 hover:text-white"
+            >
+              Číst celý manifest <ArrowRight className="size-4" />
+            </Link>
+          ) : (
+            <Link
+              to="/clanky/$slug"
+              params={{ slug: slide.slug }}
+              className="mt-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-white/85 hover:text-white"
+            >
+              Číst článek <ArrowRight className="size-4" />
+            </Link>
+          )}
         </div>
       </div>
 
@@ -238,6 +248,7 @@ function ArticleTabs() {
               key={link.id}
               type="button"
               onClick={() => setActive(link.id)}
+              aria-selected={active === link.id}
               aria-current={active === link.id}
               className={`text-base font-semibold normal-case transition-colors ${
                 active === link.id ? "border-b-2 border-[#0038B8] text-[#0038B8]" : "text-[#0038B8] hover:text-[#0038B8]/70"
@@ -300,7 +311,7 @@ function Index() {
                 <h2 className="mt-1 text-2xl font-bold tracking-tight md:text-3xl">
                   Antisemitismus
                 </h2>
-                <p className="mt-2 text-sm leading-relaxed text-primary-foreground/85 md:text-base">
+                <p className="tema-perex mt-2 text-sm leading-relaxed text-primary-foreground/85 md:text-base">
                   Nová podoba starých předsudků — jak ji poznat, pojmenovat a věcně vyvracet.
                   Sledujeme případy, kontext i data.
                 </p>
@@ -394,7 +405,7 @@ function Index() {
                     src="/images/tydyt-konrad.jpg"
                     alt="Tydýt týdne — Konrad Stavridis"
                     loading="lazy"
-                    className="hidden shrink-0 object-cover sm:block md:h-[160px] md:w-[160px]"
+                    className="hidden shrink-0 object-cover sm:block sm:h-[120px] sm:w-[120px] md:h-[140px] md:w-[140px]"
                   />
                   <div className="flex flex-1 flex-col justify-between p-5 md:p-4">
                     <div>
@@ -443,7 +454,7 @@ function Index() {
               <div className="flex flex-col">
                 <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">Dokumentujeme</h2>
                 <article className="documentujeme-card mt-3 flex flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-                  <div className="documentujeme-inner flex flex-1 flex-col justify-between p-5 md:p-4">
+                  <div className="documentujeme-inner flex flex-1 flex-col justify-between p-4 md:p-3">
                     <div className="documentujeme-entries flex flex-col gap-4">
                       {[
                         {

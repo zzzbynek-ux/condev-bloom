@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useParams } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 
@@ -6,8 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { MoreButton } from "@/components/more-button";
 import { ARTICLE_SECTIONS, allArticles } from "@/lib/content";
-import { articlesIn } from "@/lib/articles";
-import { formatDate } from "@/lib/articles";
+import { articlesIn, articlesByTag, formatDate } from "@/lib/articles";
 
 const searchSchema = z.object({
   tag: z.string().optional(),
@@ -69,21 +68,31 @@ const MORE_LABELS: Record<string, string> = {
 };
 
 function Clanky() {
+  const params = useParams({ strict: false }) as { slug?: string };
+  if (params.slug) return <Outlet />;
+
   const { tag, filtr } = Route.useSearch();
-  const navigate = useNavigate({ from: "/clanky" });
-  const [visible, setVisible] = useState(3);
+  const [visible, setVisible] = useState(6);
 
   const isTagFilter = Boolean(tag) && !FILTERS.includes(tag!);
   const active = isTagFilter
     ? "Všechny texty"
     : (FILTER_IDS.find((f) => f.id === filtr)?.label ?? "Všechny texty");
 
-  useEffect(() => setVisible(3), [active, tag, filtr]);
+  useEffect(() => setVisible(6), [active, tag, filtr]);
 
   const articles =
     active === "Všechny texty"
       ? isTagFilter
-        ? ALL_ARTICLES.filter((a) => a.tag === tag)
+        ? articlesByTag(tag!).map((a) => ({
+            slug: a.slug,
+            tag: a.tag,
+            date: formatDate(a.iso),
+            title: a.title,
+            perex: a.perex,
+            image: a.image,
+            section: "Všechny texty",
+          }))
         : ALL_ARTICLES
       : (filtr ? articlesIn(filtr) : ALL_ARTICLES.filter((a) => a.section === active)).map((a) => ({
           slug: a.slug,
@@ -128,6 +137,7 @@ function Clanky() {
                 to="/clanky"
                 search={f === "Všechny texty" ? {} : { filtr: filterId }}
                 aria-current={isActive}
+                aria-selected={isActive}
                 className={`whitespace-nowrap border-b-2 pb-2 text-base font-semibold leading-none text-[#0038B8] no-underline transition-colors ${
                   isActive
                     ? "-mb-[1px] border-[#0038B8]"
