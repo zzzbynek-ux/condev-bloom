@@ -238,6 +238,7 @@ function ArticleTabs() {
   return (
     <section className="bg-background">
       <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+        <div className="border-t-2 border-primary" />
         <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">
           Články
         </h2>
