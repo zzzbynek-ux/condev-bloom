@@ -349,3 +349,10 @@
     max-height: 180px;
   }
 }
+
+/* ===== Tablet (768–1023 px): Dokumentujeme 2 záznamy ===== */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .documentujeme-entries > .documentujeme-entry:last-child {
+    display: none;
+  }
+}
