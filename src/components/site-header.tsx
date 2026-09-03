@@ -263,57 +263,75 @@ export function SiteHeader() {
               className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
             />
           </form>
-          <div className="flex flex-col">
-            {NAV.map((item) =>
-              item.children ? (
-                <div key={item.label} className="border-b border-border py-2">
-                  <p className="py-1 text-sm font-semibold uppercase tracking-wide text-foreground">
-                    {item.label}
-                  </p>
-                  <div className="flex flex-col pl-3">
-                    {item.children.map((c) => {
-                      const currentFiltr = (location.search as { filtr?: string }).filtr;
-                      const isActive =
-                        c.to === "/clanky" && location.pathname === "/clanky"
-                          ? c.search?.filtr
-                            ? currentFiltr === c.search.filtr
-                            : !currentFiltr
-                          : false;
-                      return c.to ? (
-                        <Link
-                          key={c.label}
-                          to={c.to}
-                          {...(c.search ? { search: c.search } : {})}
-                          onClick={() => setOpen(false)}
-                          className={`inline-block border-b-2 px-4 pb-1 font-display text-[15px] transition-colors ${
-                            isActive
-                              ? "border-primary font-semibold text-primary"
-                              : "border-transparent font-medium text-primary hover:opacity-80"
-                          }`}
-                        >
-                          {c.label}
-                        </Link>
-                      ) : (
-                        <span key={c.label} className="border-b-2 border-transparent pb-1 font-display text-[15px] font-medium text-muted-foreground">
-                          {c.label}
-                        </span>
-                      );
-                    })}
-                  </div>
-                </div>
-              ) : (
-                <Link
-                  key={item.label}
-                  to={item.to}
-                  onClick={() => setOpen(false)}
-                  className="border-b border-border py-3 text-sm font-semibold uppercase tracking-wide text-foreground"
-                >
-                  {item.label}
-                </Link>
-              ),
-            )}
+          <nav className="flex flex-col">
+            <Link
+              to="/clanky"
+              onClick={() => setOpen(false)}
+              className="border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground"
+            >
+              Články
+            </Link>
+            <Link
+              to="/o-nas"
+              onClick={() => setOpen(false)}
+              className="border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground"
+            >
+              O nás
+            </Link>
+            <Link
+              to="/ptejte-se-ai"
+              onClick={() => setOpen(false)}
+              className="border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground"
+            >
+              Ptejte se AI
+            </Link>
+            <Link
+              to="/nahlasit-incident"
+              onClick={() => setOpen(false)}
+              className="border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground"
+            >
+              Nahlásit incident
+            </Link>
+            <Link
+              to="/podporte-nas"
+              onClick={() => setOpen(false)}
+              className="py-3 text-base font-semibold uppercase tracking-wide text-foreground"
+            >
+              Podpořte nás
+            </Link>
+          </nav>
+          <div className="mt-4 flex items-center gap-3 border-t border-border pt-4">
+            <a
+              href="https://www.facebook.com/JednimHlasem"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="JednímHlasem na Facebooku"
+              title="JednímHlasem na Facebooku"
+              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              <FacebookIcon className="size-4" />
+            </a>
+            <a
+              href="https://www.instagram.com/JednimHlasem"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="JednímHlasem na Instagramu"
+              title="JednímHlasem na Instagramu"
+              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              <InstagramIcon className="size-4" />
+            </a>
+            <a
+              href="https://x.com/JednimHlasem"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="JednímHlasem na X"
+              title="JednímHlasem na X"
+              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              <XIcon className="size-4" />
+            </a>
           </div>
-
         </div>
       ) : null}
     </header>
