@@ -243,8 +243,12 @@ function ArticleTabs() {
   return (
     <section className="bg-background">
       <div className="mx-auto max-w-[88rem] px-5 py-14 md:px-6 md:py-16">
+        <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">
+          Články
+        </h2>
+
         {/* Záložky */}
-        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-border">
+        <div className="mt-2 flex flex-wrap items-end justify-between gap-4 border-b border-border">
           <div
             role="tablist"
             aria-label="Rubriky článků"
@@ -257,10 +261,10 @@ function ArticleTabs() {
                 role="tab"
                 aria-selected={idx === active}
                 onClick={() => setActive(idx)}
-                className={`whitespace-nowrap -mb-px border-b-2 pb-3 text-base font-semibold normal-case text-[#0038B8] transition-colors md:font-display md:text-2xl md:font-bold md:uppercase md:text-primary md:tracking-[0.03em] ${
+                className={`whitespace-nowrap -mb-px border-b-2 pb-3 text-base font-semibold normal-case text-[#0038B8] transition-colors ${
                   idx === active
-                    ? "border-[#0038B8] md:border-primary"
-                    : "border-transparent hover:border-[#0038B8]/40 md:hover:border-primary/40"
+                    ? "border-[#0038B8]"
+                    : "border-transparent hover:border-[#0038B8]/40"
                 }`}
               >
                 {g.label}
