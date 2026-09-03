@@ -248,3 +248,27 @@
     border-bottom: 2px solid #0038b8;
   }
 }
+
+/* ===== Pouze mobil (<768px) — tlačítka v pruhu Antisemitismus ===== */
+@media (max-width: 767px) {
+  .tema-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    width: 100%;
+  }
+  .tema-buttons > a,
+  .tema-buttons > button {
+    width: 100%;
+    justify-content: center;
+  }
+  .tema-buttons > :nth-child(1) {
+    grid-column: 1;
+  }
+  .tema-buttons > :nth-child(2) {
+    grid-column: 2;
+  }
+  .tema-buttons > :nth-child(3) {
+    grid-column: 1 / span 2;
+  }
+}

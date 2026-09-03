@@ -330,7 +330,7 @@ function Index() {
                 </p>
               </div>
             </div>
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="tema-buttons flex flex-wrap items-center gap-3">
               <Link
                 to="/antisemitismus"
                 className="inline-flex shrink-0 items-center gap-2 rounded-full bg-primary-foreground px-6 py-3 text-sm font-semibold text-primary transition hover:opacity-90"
