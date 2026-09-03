@@ -328,3 +328,24 @@
     padding-top: 0.75rem !important;
   }
 }
+
+/* ===== Pouze desktop (≥1024 px) ===== */
+@media (min-width: 1024px) {
+  .hero-section {
+    min-height: 0;
+    max-height: calc(100vh - 220px);
+  }
+  .hero-section .hero-grid {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+  }
+  .hero-section .hero-card {
+    min-height: 14rem;
+  }
+  .hero-dots {
+    padding-bottom: 0.75rem;
+  }
+  .vyber-grid article img {
+    max-height: 180px;
+  }
+}
