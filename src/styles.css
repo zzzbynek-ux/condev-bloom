@@ -271,4 +271,33 @@
   .tema-buttons > :nth-child(3) {
     grid-column: 1 / span 2;
   }
+
+  /* Filtry na homepage a /clanky: obyčejné odkazy, bez karuselu */
+  .clanky-tabs {
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+    -webkit-overflow-scrolling: auto;
+    gap: 0.5rem 1.25rem;
+    border-bottom: none;
+  }
+  .clanky-tabs a,
+  .clanky-tabs button {
+    white-space: normal;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #0038b8;
+    border-bottom: none;
+    padding: 0;
+    margin-bottom: 0;
+    line-height: 1.4;
+    background: transparent;
+  }
+  .clanky-tabs a[aria-current="true"],
+  .clanky-tabs button[aria-selected="true"] {
+    font-weight: 700;
+    border-bottom: 2px solid #0038b8;
+  }
 }
