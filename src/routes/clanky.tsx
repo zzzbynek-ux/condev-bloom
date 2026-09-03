@@ -111,7 +111,7 @@ function Clanky() {
         {/* Filtr — tabová lišta v izraelské modři */}
         <nav
           aria-label="Filtrovat články"
-          className="mt-8 flex flex-nowrap gap-6 overflow-x-auto border-b border-border pb-0 md:flex-wrap"
+          className="clanky-tabs mt-8 flex flex-nowrap gap-6 overflow-x-auto border-b border-border pb-0 md:flex-wrap"
         >
           {FILTERS.map((f) => {
             const filterId = FILTER_IDS.find((x) => x.label === f)?.id;
