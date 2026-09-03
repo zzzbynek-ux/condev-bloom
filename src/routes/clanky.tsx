@@ -109,7 +109,10 @@ function Clanky() {
         </p>
 
         {/* Filtr — tabová lišta v izraelské modři */}
-        <nav aria-label="Filtrovat články" className="mt-8 flex flex-wrap gap-6 border-b border-border pb-0">
+        <nav
+          aria-label="Filtrovat články"
+          className="mt-8 flex flex-nowrap gap-6 overflow-x-auto border-b border-border pb-0 md:flex-wrap"
+        >
           {FILTERS.map((f) => {
             const filterId = FILTER_IDS.find((x) => x.label === f)?.id;
             const isActive = active === f;
@@ -119,7 +122,7 @@ function Clanky() {
                 to="/clanky"
                 search={f === "Všechny texty" ? {} : { filtr: filterId }}
                 aria-current={isActive}
-                className={`border-b-2 pb-2 text-base font-semibold leading-none text-[#0038B8] no-underline transition-colors ${
+                className={`whitespace-nowrap border-b-2 pb-2 text-base font-semibold leading-none text-[#0038B8] no-underline transition-colors ${
                   isActive
                     ? "-mb-[1px] border-[#0038B8]"
                     : "border-transparent hover:text-[#0038B8]/80"
