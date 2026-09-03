@@ -117,7 +117,7 @@ function Hero() {
       </button>
 
 
-      <div className="relative flex items-center justify-center gap-3 pb-6">
+      <div className="hero-dots relative flex items-center justify-center gap-3 pb-6">
         <button
           type="button"
           aria-label="Předchozí"
