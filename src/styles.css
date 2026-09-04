@@ -282,9 +282,19 @@
 
   /* 4) Lišta filtrů (homepage i /clanky): jedna řada, swipe */
   .clanky-tabs {
-    flex-wrap: nowrap;
-    overflow-x: auto;
+    display: flex;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 1.25rem;
+  }
+  .clanky-tabs::-webkit-scrollbar,
+  .clanky-tabs::-webkit-scrollbar-button {
+    display: none !important;
+    width: 0;
+    height: 0;
   }
   .clanky-tabs a,
   .clanky-tabs button {
@@ -344,27 +354,34 @@
     font-size: clamp(13px, 3.4vw, 14px);
   }
 
-  /* Filtry na homepage a /clanky: obyčejné odkazy, bez karuselu */
+  /* Filtry na mobilu: swipe, nic nezalamovat */
   .clanky-tabs {
-    flex-wrap: wrap !important;
-    overflow-x: visible !important;
-    -webkit-overflow-scrolling: auto;
-    gap: 0.5rem 1.25rem;
-    border-bottom: none;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    gap: 1.25rem;
+    scrollbar-width: none;
+  }
+  .clanky-tabs::-webkit-scrollbar,
+  .clanky-tabs::-webkit-scrollbar-button {
+    display: none !important;
+    width: 0;
+    height: 0;
   }
   .clanky-tabs a,
   .clanky-tabs button {
-    white-space: normal;
+    white-space: nowrap;
     font-family: var(--font-sans);
     font-size: 16px;
     font-weight: 600;
     text-transform: none;
     letter-spacing: 0;
     color: #0038b8;
-    border-bottom: none;
-    padding: 0;
+    flex: 0 0 auto;
+    padding: 0 0 0.55rem;
     margin-bottom: 0;
-    line-height: 1.4;
+    line-height: 1.2;
     background: transparent;
   }
   .clanky-tabs a[aria-current="true"],
@@ -470,6 +487,31 @@
 @media (min-width: 768px) and (max-width: 1023px) {
   .documentujeme-entries > .documentujeme-entry:last-child {
     display: none;
+  }
+  /* Stejný swipe jako mobil */
+  .clanky-tabs {
+    display: flex;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 1.25rem;
+  }
+  .clanky-tabs::-webkit-scrollbar,
+  .clanky-tabs::-webkit-scrollbar-button {
+    display: none !important;
+    width: 0;
+    height: 0;
+  }
+  .clanky-tabs a,
+  .clanky-tabs button {
+    white-space: nowrap;
+    flex: 0 0 auto;
+    font-size: 16px;
+    font-weight: 600;
+    color: #0038b8;
+    padding: 0 0 0.55rem;
   }
 }
 
