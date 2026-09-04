@@ -17,7 +17,7 @@ export const Route = createFileRoute("/hledat")({
       { title: "Vyhledávání — JednímHlasem" },
       {
         name: "description",
-        content: "Prohledejte články, témata a manifesty komunity JednímHlasem.",
+        content: "Prohledejte články a témata komunity JednímHlasem.",
       },
       { property: "og:title", content: "Vyhledávání — JednímHlasem" },
       { property: "og:description", content: "Najděte články, témata a analýzy na webu." },
@@ -72,7 +72,7 @@ function Hledat() {
           </p>
         ) : (
           <p className="mt-6 text-sm text-muted-foreground">
-            Prohledáváme články, témata, rubriky i manifesty.
+            Prohledáváme články, témata i rubriky.
           </p>
         )}
 

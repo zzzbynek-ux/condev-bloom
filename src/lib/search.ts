@@ -25,7 +25,7 @@ const INDEX: SearchResult[] = [
   ...SLIDES.map((s) => ({
     title: s.title,
     text: `${s.kicker} — ${s.text}`,
-    kind: "Manifest",
+    kind: "Úvod",
     to: "/",
   })),
   ...FEATURED.map((f) => ({

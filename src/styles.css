@@ -4,6 +4,20 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * Design system definition.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
 @theme inline {
   --font-sans: "Public Sans", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
@@ -47,17 +61,29 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-navy-900: var(--navy-900);
+  --color-blue-700: var(--blue-700);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-soft: var(--accent-soft);
 }
 
 :root {
   --radius: 0.75rem;
+  --navy-900: #0b1a3a;
+  --blue-700: #0038B8;
+  --paper: #f7f8fb;
+  --ink: #1a2332;
+  --accent-blue: #6BA3F5;
+  --accent-soft: #E8F1FF;
   --background: oklch(0.995 0.002 250);
   --foreground: oklch(0.22 0.045 260);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.22 0.045 260);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.22 0.045 260);
-  --primary: oklch(0.41 0.206 262.94);
+  --primary: oklch(0.41 0.206 262.94); /* Israeli flag blue #0038B8 */
   --primary-foreground: oklch(0.99 0.005 250);
   --secondary: oklch(0.955 0.012 250);
   --secondary-foreground: oklch(0.28 0.05 258);
@@ -85,6 +111,7 @@
   --sidebar-ring: oklch(0.41 0.206 262.94);
 }
 
+
 .dark {
   --background: oklch(0.129 0.042 264.695);
   --foreground: oklch(0.984 0.003 247.858);
@@ -92,7 +119,7 @@
   --card-foreground: oklch(0.984 0.003 247.858);
   --popover: oklch(0.208 0.042 265.755);
   --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.65 0.17 262.94);
+  --primary: oklch(0.65 0.17 262.94); /* Lighter Israeli flag blue for dark mode */
   --primary-foreground: oklch(0.208 0.042 265.755);
   --secondary: oklch(0.279 0.041 260.031);
   --secondary-foreground: oklch(0.984 0.003 247.858);
@@ -121,75 +148,240 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
+  * {
+    border-color: var(--color-border);
+  }
+
   body {
     background-color: var(--color-background);
-    color: var(--color-foreground);
+    color: var(--ink);
     font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3 {
+
+  h1,
+  h2,
+  h3 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
   }
 }
 
-@utility font-display { font-family: var(--font-display); }
+@utility font-display {
+  font-family: var(--font-display);
+}
 
 @keyframes rise {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
+
 @utility animate-rise {
   animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.hero-nav { z-index: 40; pointer-events: none; isolation: isolate; }
-.hero-dots { pointer-events: auto; z-index: 40; }
-.hero-nav-btn { pointer-events: auto; position: relative; z-index: 40; }
+@utility section-y {
+  padding-top: 2.25rem;
+  padding-bottom: 2.25rem;
+}
+
+.kicker {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.cta-link {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.cta-link:hover {
+  color: var(--accent-blue);
+}
+.hero-section .cta-link:hover {
+  color: #fff;
+}
+
+.article-tag {
+  background-color: var(--accent-soft);
+  color: #0038B8;
+}
+
+.cta-link:focus-visible,
+.article-tag:focus-visible,
+.clanky-tabs a:focus-visible,
+.clanky-tabs button:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+@media (min-width: 768px) {
+  .section-y {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+@media (min-width: 1280px) {
+  .section-y {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+}
+
+.hero-nav {
+  z-index: 40;
+  pointer-events: none;
+  isolation: isolate;
+}
+.hero-dots {
+  pointer-events: auto;
+  z-index: 40;
+}
+.hero-nav-btn {
+  pointer-events: auto;
+  position: relative;
+  z-index: 40;
+}
+.hero-count {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
+}
 
 @media (max-width: 767px) {
-  .hero-section { display: flex; flex-direction: column; height: auto; }
-  .hero-section .hero-img {
-    position: relative; inset: auto; height: 220px; width: 100%;
-    opacity: 1; object-fit: cover;
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    background-color: var(--navy-900);
   }
-  .hero-section .hero-overlay { display: none; }
-  .hero-nav { position: relative; inset: auto; height: auto; }
-  .hero-section .hero-grid { display: block; max-width: none; height: auto; padding: 0; }
+  .hero-section .hero-img {
+    position: relative;
+    inset: auto;
+    height: 220px;
+    width: 100%;
+    opacity: 1;
+    object-fit: cover;
+  }
+  .hero-section .hero-overlay {
+    display: none;
+  }
+  .hero-nav {
+    position: relative;
+    inset: auto;
+    height: auto;
+    background-color: var(--navy-900);
+  }
+  .hero-section .hero-grid {
+    display: block;
+    max-width: none;
+    height: auto;
+    padding: 0.85rem 1rem 0.25rem;
+  }
   .hero-section .hero-card {
-    width: 100%; max-width: none; min-height: auto; border-radius: 0;
-    background-color: #0a1730; backdrop-filter: none;
+    width: 100%;
+    max-width: none;
+    min-height: auto;
+    border-radius: 0;
+    background-color: var(--navy-900);
+    backdrop-filter: none;
+    padding: 0;
+  }
+  .hero-section .hero-card::after {
+    content: none;
+    display: none;
   }
   .hero-dots {
-    position: relative; inset: auto; padding: 0.5rem 0 0.85rem;
-    background-color: #0a1730;
+    position: relative;
+    inset: auto;
+    padding: 0.2rem 0 0.7rem;
+    background-color: var(--navy-900);
+  }
+  .hero-perex {
+    display: none;
   }
 }
 
 @media (min-width: 768px) {
-  .hero-section { height: 20rem; }
+  .hero-section {
+    height: clamp(28rem, calc(100vw / 2.69), 34rem);
+    min-height: 28rem;
+  }
   .hero-section .hero-img {
-    object-fit: cover; object-position: var(--hero-focus, 50% 50%);
+    object-fit: cover;
+    object-position: var(--hero-focus, 74% 50%);
   }
   .hero-section .hero-grid {
-    min-height: 20rem; align-items: flex-start;
-    padding-top: 1.25rem; padding-right: 2rem;
-    padding-bottom: 3.25rem; padding-left: 3.75rem;
+    min-height: 100%;
+    height: 100%;
+    align-items: center;
+    padding-top: 1.5rem;
+    padding-right: 2rem;
+    padding-bottom: 3.25rem;
+    padding-left: 3.75rem;
+  }
+  .hero-section .hero-card {
+    position: relative;
+    background: transparent;
+    background-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    border-radius: 0;
+    max-width: 22rem;
+    padding: 0;
+  }
+  .hero-section .hero-card::after {
+    content: "";
+    position: absolute;
+    left: 0.15rem;
+    bottom: -10px;
+    width: 14px;
+    height: 10px;
+    background: rgba(11, 26, 58, 0.28);
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    pointer-events: none;
   }
   .hero-dots {
-    position: absolute; right: 0; bottom: 0.85rem; left: 0;
-    padding: 0; background: transparent;
+    position: absolute;
+    right: 0;
+    bottom: 0.85rem;
+    left: 0;
+    padding: 0;
+    background: transparent;
   }
 }
 
+/* ===== Mobil a tablet (do 1023 px) — desktop zůstává beze změny ===== */
 @media (max-width: 1023px) {
-  .site-header-sticky { background-color: #ffffff; z-index: 60; }
-  .tema-strip {
-    flex-direction: column; align-items: flex-start;
-    height: auto; padding: 2rem 1.25rem;
+  /* 5) Sticky header: neprůhledný, nad obsahem */
+  .site-header-sticky {
+    background-color: #ffffff;
+    z-index: 60;
   }
-  .vyber-grid { grid-template-columns: 1fr; }
+
+  /* 3) Výběr redakce: jeden sloupec */
+  .vyber-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* 4) Lišta filtrů: swipe pilulky */
   .clanky-tabs {
     display: flex;
     flex-wrap: nowrap !important;
@@ -197,172 +389,284 @@
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    gap: 1.25rem;
-    border-bottom: 1px solid rgba(0, 56, 184, 0.16);
+    gap: 0.45rem;
+    border-bottom: none;
+    padding: 0.15rem 1.75rem 0.15rem 0;
+    mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 1.75rem), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 1.75rem), transparent 100%);
   }
   .clanky-tabs::-webkit-scrollbar,
   .clanky-tabs::-webkit-scrollbar-button {
-    display: none !important; width: 0; height: 0;
+    display: none !important;
+    width: 0;
+    height: 0;
   }
   .clanky-tabs a,
   .clanky-tabs button {
+    white-space: nowrap;
+    flex: 0 0 auto;
     font-family: var(--font-sans);
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 600;
     text-transform: none;
     letter-spacing: 0;
+    line-height: 1;
     color: #0038B8;
-    white-space: nowrap;
-    flex: 0 0 auto;
-    padding: 0 0 0.55rem;
+    background: transparent;
+    border: 1px solid rgba(0, 56, 184, 0.22) !important;
+    border-radius: 9999px;
+    box-shadow: none !important;
+    padding: 0.45rem 0.85rem !important;
   }
   .clanky-tabs a[aria-current="true"],
   .clanky-tabs button[aria-selected="true"] {
     font-weight: 700;
-    border-bottom: 2px solid #0038B8;
+    background: var(--accent-soft);
+    border-color: #0038B8 !important;
+    box-shadow: none !important;
   }
 }
 
+/* ===== Pouze mobil (<768px) ===== */
 @media (max-width: 767px) {
-  .tema-strip { gap: 1rem; padding: 1rem 1rem 1.1rem; }
-  .tema-strip .tema-perex { display: none; }
+  /* Dokumentujeme: na mobilu 2 záznamy, menší padding */
+  .documentujeme-inner {
+    padding: 1rem !important;
+  }
+  .documentujeme-entries {
+    gap: 0.75rem !important;
+  }
+  .documentujeme-entry {
+    padding-bottom: 0.5rem !important;
+  }
+  .documentujeme-footer {
+    margin-top: 0.75rem !important;
+    padding-top: 0.75rem !important;
+  }
+}
+
+/* Pruh Antisemitismus: 2+1 do 899 px */
+@media (max-width: 899px) {
+  .tema-strip {
+    flex-direction: column;
+    height: auto;
+    gap: 1rem;
+    padding: 1rem 1rem 1.1rem;
+  }
+  .tema-perex {
+    display: none;
+  }
   .tema-buttons {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    width: 100%;
   }
   .tema-buttons > a,
   .tema-buttons > button {
-    width: 100%; justify-content: center;
-    padding: 0.55rem 0.7rem; font-size: clamp(12px, 3.2vw, 13px);
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 2.75rem;
+    height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    padding: 0 0.6rem !important;
+    font-size: 13px !important;
+    line-height: 1;
+    border-radius: 9999px;
   }
   .tema-buttons > :nth-child(1) { grid-column: 1; }
   .tema-buttons > :nth-child(2) { grid-column: 2; }
-  .tema-buttons > :nth-child(3) { grid-column: 1 / span 2; }
-  .tema-buttons > :nth-child(1),
-  .tema-buttons > :nth-child(2) {
-    white-space: nowrap; text-align: center;
-    padding: 0.75rem 1rem !important;
-    font-size: clamp(13px, 3.4vw, 14px);
+  .tema-buttons > :nth-child(3) { grid-column: 1 / -1; }
+}
+
+/* Tablet / úzký desktop: 3 stejně široká tlačítka */
+@media (min-width: 900px) and (max-width: 1279px) {
+  .tema-strip {
+    flex-direction: column;
+    height: auto;
+    padding: 1.25rem 1.5rem;
   }
+  .tema-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem;
+    width: 100%;
+  }
+  .tema-buttons > a,
+  .tema-buttons > button {
+    width: 100%;
+    height: 2.75rem;
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    font-size: 0.8125rem;
+  }
+}
+
+/* Široký desktop: jedna řada vpravo, stejná šířka, bez zalamování */
+@media (min-width: 1280px) {
+  .hero-section {
+    height: clamp(28rem, calc(100vw / 2.69), 34rem);
+    min-height: 28rem;
+  }
+  .hero-section .hero-grid {
+    min-height: 100%;
+    height: 100%;
+    align-items: center;
+  }
+  .hero-section .hero-img {
+    object-fit: cover;
+    object-position: var(--hero-focus, 74% 50%);
+  }
+  .hero-section .hero-card {
+    background: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+    border-radius: 0;
+    max-width: 32rem;
+    padding: 0;
+  }
+  .tema-strip > div:first-child {
+    min-width: 0;
+    flex: 1;
+  }
+  .tema-buttons {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 0.75rem;
+  }
+  .tema-buttons > a,
+  .tema-buttons > button {
+    width: 12rem;
+    height: 2.75rem;
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    padding-inline: 0.75rem;
+    text-align: center;
+  }
+}
+
+/* ===== Pouze desktop (≥1024 px) ===== */
+@media (min-width: 1024px) {
+  .hero-section {
+    height: clamp(28rem, calc(100vw / 2.69), 34rem);
+    min-height: 28rem;
+    max-height: 34rem;
+  }
+  .hero-section .hero-grid {
+    min-height: 100%;
+    height: 100%;
+    align-items: center;
+    padding-top: 1.5rem;
+    padding-right: 2.5rem;
+    padding-bottom: 3.25rem;
+    padding-left: 4.5rem;
+  }
+  .hero-section .hero-img {
+    object-fit: cover;
+    object-position: var(--hero-focus, 74% 50%);
+  }
+  .hero-section .hero-card {
+    background: transparent;
+    background-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    border-radius: 0;
+    min-height: auto;
+    max-width: 28rem;
+    padding: 0;
+  }
+  .hero-dots {
+    padding-bottom: 0;
+  }
+  .vyber-grid article img {
+    max-height: 180px;
+  }
+
+  /* Rubriky desktop: pilulky pod titulkem (varianta A) */
   .clanky-tabs {
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    -webkit-overflow-scrolling: touch;
-    gap: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: visible !important;
+    gap: 0.5rem;
+    border-bottom: none;
+    padding: 0.35rem 0 0;
+    mask-image: none;
+    -webkit-mask-image: none;
     scrollbar-width: none;
-    border-bottom: 1px solid rgba(0, 56, 184, 0.16);
   }
   .clanky-tabs::-webkit-scrollbar,
   .clanky-tabs::-webkit-scrollbar-button {
-    display: none !important; width: 0; height: 0;
+    display: none !important;
+    width: 0;
+    height: 0;
   }
   .clanky-tabs a,
   .clanky-tabs button {
+    flex: 0 0 auto;
     white-space: nowrap;
     font-family: var(--font-sans);
-    font-size: 16px;
+    font-size: 0.875rem;
     font-weight: 600;
+    line-height: 1;
+    color: #0038B8;
+    background: transparent;
+    border: 1px solid rgba(0, 56, 184, 0.22) !important;
+    border-radius: 9999px;
+    box-shadow: none !important;
+    padding: 0.5rem 1rem !important;
     text-transform: none;
     letter-spacing: 0;
-    color: #0038B8;
-    flex: 0 0 auto;
-    padding: 0 0 0.55rem;
-    margin-bottom: 0;
-    line-height: 1.2;
-    background: transparent;
   }
   .clanky-tabs a[aria-current="true"],
   .clanky-tabs button[aria-selected="true"] {
     font-weight: 700;
-    border-bottom: 2px solid #0038B8;
-  }
-  .documentujeme-inner { padding: 0.75rem !important; }
-  .documentujeme-entries { gap: 0.75rem !important; }
-  .documentujeme-entries > .documentujeme-entry:last-child { display: none; }
-  .documentujeme-entry { padding-bottom: 0.5rem !important; }
-  .documentujeme-footer { margin-top: 0.75rem !important; padding-top: 0.75rem !important; }
-}
-
-@media (min-width: 768px) and (max-width: 1279px) {
-  .tema-strip {
-    flex-direction: column; align-items: stretch;
-    height: auto; gap: 1.25rem; padding: 1.25rem 1.5rem;
-  }
-  .tema-buttons {
-    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-    width: 100%; gap: 0.6rem;
-  }
-  .tema-buttons > a,
-  .tema-buttons > button {
-    width: 100%; justify-content: center; white-space: nowrap;
-    padding: 0.6rem 0.5rem; font-size: 0.8125rem; text-align: center;
+    background: var(--accent-soft, #E8F1FF);
+    border-color: #0038B8 !important;
+    box-shadow: none !important;
   }
 }
 
 @media (min-width: 1280px) {
-  .tema-strip > div:first-child { min-width: 0; flex: 1; }
-  .tema-buttons { display: flex; flex-wrap: nowrap; flex-shrink: 0; gap: 0.75rem; }
-  .tema-buttons > a,
-  .tema-buttons > button {
-    width: 12rem; justify-content: center; white-space: nowrap;
-    padding-inline: 0.75rem; text-align: center;
+  .hero-section .hero-card {
+    max-width: 32rem;
   }
 }
 
-@media (min-width: 1024px) {
-  .hero-section { height: 20rem; min-height: 0; max-height: none; }
-  .hero-section .hero-grid {
-    min-height: 20rem; align-items: flex-start;
-    padding-top: 1.25rem; padding-right: 2.5rem;
-    padding-bottom: 3.25rem; padding-left: 4.5rem;
-  }
-  .hero-section .hero-card { min-height: auto; }
-  .hero-dots { padding-bottom: 0; }
-  .vyber-grid article img { max-height: 180px; }
-  .clanky-tabs {
-    overflow: visible !important;
-    flex-wrap: wrap;
-    gap: 0 1.75rem;
-    scrollbar-width: none;
-  }
-  .clanky-tabs::-webkit-scrollbar,
-  .clanky-tabs::-webkit-scrollbar-button {
-    display: none !important; width: 0; height: 0;
-  }
-  .clanky-tabs a,
-  .clanky-tabs button {
-    font-size: 1.125rem; line-height: 1.2;
-    padding-bottom: 0.6rem; font-weight: 600;
-  }
+.card-lift {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  box-shadow: 0 1px 2px rgba(11, 26, 58, 0.06);
+}
+.card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(11, 26, 58, 0.1);
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-  .documentujeme-entries > .documentujeme-entry:last-child { display: none; }
-  .clanky-tabs {
-    display: flex;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    gap: 1.25rem;
-    border-bottom: 1px solid rgba(0, 56, 184, 0.16);
-  }
-  .clanky-tabs::-webkit-scrollbar,
-  .clanky-tabs::-webkit-scrollbar-button {
-    display: none !important; width: 0; height: 0;
-  }
-  .clanky-tabs a,
-  .clanky-tabs button {
-    white-space: nowrap; flex: 0 0 auto;
-    font-size: 16px; font-weight: 600; color: #0038B8;
-    padding: 0 0 0.55rem;
-  }
+.header-nahlasit {
+  height: 2.5rem;
+  background-color: #0038b8;
 }
 
-.site-header-sticky { overflow: visible; }
-.article-body :where(p, ul, ol) { margin-bottom: 1rem; }
+.article-body :where(p, ul, ol) {
+  margin-bottom: 1rem;
+}
 .article-body img {
-  max-width: 100%; height: auto; border-radius: 0.75rem; margin: 1rem 0;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  margin: 1rem 0;
 }
-.article-body a { color: #0038b8; text-decoration: underline; }
+.article-body a {
+  color: var(--blue-700);
+  text-decoration: underline;
+}

@@ -18,7 +18,7 @@ export function ArticleCard({
 }) {
   const href = slug ? `/clanky/${slug}` : "/clanky";
   return (
-    <article className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
+    <article className="card-lift group flex flex-col overflow-hidden rounded-xl border border-border bg-card">
       <img
         src={image}
         alt={title}
@@ -32,7 +32,7 @@ export function ArticleCard({
           <Link
             to="/clanky"
             search={{ tag }}
-            className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground hover:opacity-85"
+            className="article-tag rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] hover:opacity-85"
           >
             {tag}
           </Link>
@@ -54,21 +54,21 @@ export function ArticleCard({
             </Link>
           )}
         </h3>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{perex}</p>
+        <p className="mt-3 text-[0.95rem] leading-[1.55] text-muted-foreground">{perex}</p>
         {slug ? (
           <Link
             to="/clanky/$slug"
             params={{ slug }}
-            className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-primary hover:underline"
+            className="cta-link mt-4 inline-flex items-center gap-2 text-primary hover:underline"
           >
-            Číst dál <ArrowRight className="size-4" />
+            Číst článek <ArrowRight className="size-4" />
           </Link>
         ) : (
           <Link
             to="/clanky"
-            className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-primary hover:underline"
+            className="cta-link mt-4 inline-flex items-center gap-2 text-primary hover:underline"
           >
-            Číst dál <ArrowRight className="size-4" />
+            Číst článek <ArrowRight className="size-4" />
           </Link>
         )}
       </div>

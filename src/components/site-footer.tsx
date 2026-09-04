@@ -58,13 +58,34 @@ export function SiteFooter() {
         </nav>
 
         <div className="flex items-center justify-center gap-2 lg:justify-end">
-          <a href="https://www.facebook.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="JednímHlasem na Facebooku" title="JednímHlasem na Facebooku" className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10">
+          <a
+            href="https://www.facebook.com/JednimHlasem"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="JednímHlasem na Facebooku"
+            title="JednímHlasem na Facebooku"
+            className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10"
+          >
             <FacebookIcon className="size-4" />
           </a>
-          <a href="https://www.instagram.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="JednímHlasem na Instagramu" title="JednímHlasem na Instagramu" className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10">
+          <a
+            href="https://www.instagram.com/JednimHlasem"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="JednímHlasem na Instagramu"
+            title="JednímHlasem na Instagramu"
+            className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10"
+          >
             <InstagramIcon className="size-4" />
           </a>
-          <a href="https://x.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="JednímHlasem na X" title="JednímHlasem na X" className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10">
+          <a
+            href="https://x.com/JednimHlasem"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="JednímHlasem na X"
+            title="JednímHlasem na X"
+            className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10"
+          >
             <XIcon className="size-4" />
           </a>
         </div>

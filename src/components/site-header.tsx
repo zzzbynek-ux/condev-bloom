@@ -1,27 +1,6 @@
-import { Link, useLocation, useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Menu, Search, X } from "lucide-react";
-
-type NavTo = "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" | "/manifest" | "/nahlasit-incident" | "/ptejte-se-ai";
-type NavChild = { label: string; to?: NavTo; search?: { filtr: string } };
-type NavItem =
-  | { label: string; to: NavTo; children?: undefined }
-  | { label: string; to?: undefined; children: NavChild[] };
-
-const NAV: NavItem[] = [
-  {
-    label: "Články",
-    children: [
-      { label: "Nové", to: "/clanky", search: { filtr: "nove" } },
-      { label: "Doporučujeme", to: "/clanky", search: { filtr: "doporucujeme" } },
-      { label: "Češi a Izrael", to: "/clanky", search: { filtr: "cesi-a-izrael" } },
-      { label: "Studie a analýzy", to: "/clanky", search: { filtr: "studie" } },
-      { label: "Tydýt týdne", to: "/clanky", search: { filtr: "tydyt" } },
-      { label: "Všechny texty", to: "/clanky" },
-    ],
-  },
-  { label: "O nás", to: "/o-nas" },
-];
+import { Menu, Search, X } from "lucide-react";
 
 function FacebookIcon({ className }: { className?: string }) {
   return (
@@ -47,12 +26,22 @@ function XIcon({ className }: { className?: string }) {
   );
 }
 
+const DESKTOP_LINKS = [
+  { label: "Články", to: "/clanky" as const },
+  { label: "O nás", to: "/o-nas" as const },
+];
+
+const MENU_LINKS = [
+  ...DESKTOP_LINKS,
+  { label: "Ptejte se AI", to: "/ptejte-se-ai" as const },
+  { label: "Nahlásit incident", to: "/nahlasit-incident" as const },
+  { label: "Podpořte nás", to: "/podporte-nas" as const },
+];
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
-  const [menu, setMenu] = useState<string | null>(null);
   const [q, setQ] = useState("");
   const navigate = useNavigate();
-  const location = useLocation();
   const searchRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -70,7 +59,7 @@ export function SiteHeader() {
   return (
     <header className="site-header-sticky sticky top-0 z-50 shadow-sm">
       <div className="bg-primary text-primary-foreground">
-        <div className="mx-auto flex h-16 max-w-[88rem] items-center gap-4 px-4 md:h-[4.25rem] md:px-6">
+        <div className="mx-auto flex h-16 max-w-[88rem] items-center gap-6 px-4 md:h-[4.25rem] md:px-6">
           <Link to="/" className="flex shrink-0 items-center" aria-label="JednímHlasem — domů">
             <img
               src="/images/logo-jednim-hlasem.png"
@@ -88,7 +77,12 @@ export function SiteHeader() {
             >
               Podpořte nás
             </Link>
-            <button type="button" aria-label="Hledat" onClick={openSearch} className="rounded-md p-2 lg:hidden">
+            <button
+              type="button"
+              aria-label="Hledat"
+              onClick={openSearch}
+              className="rounded-md p-2 lg:hidden"
+            >
               <Search className="size-5" />
             </button>
             <button
@@ -106,67 +100,16 @@ export function SiteHeader() {
       <div className="hidden border-b border-border bg-background lg:block">
         <div className="mx-auto flex h-12 max-w-[88rem] items-center justify-between gap-8 px-4 md:px-6">
           <nav className="flex items-center gap-8" aria-label="Hlavní navigace">
-            {NAV.map((item) =>
-              item.children ? (
-                <div
-                  key={item.label}
-                  className="group relative flex items-center"
-                  onMouseEnter={() => setMenu(item.label)}
-                  onMouseLeave={() => setMenu(null)}
-                >
-                  <button
-                    type="button"
-                    onClick={() => setMenu((m) => (m === item.label ? null : item.label))}
-                    aria-expanded={menu === item.label}
-                    className="flex items-center gap-1 text-[13px] font-semibold text-foreground transition-colors hover:text-primary"
-                  >
-                    {item.label}
-                    <ChevronDown className={`size-3.5 transition-transform ${menu === item.label ? "rotate-180" : ""}`} />
-                  </button>
-                  {menu === item.label ? (
-                    <div className="absolute left-0 top-full z-50 w-max min-w-[14rem] rounded-b-xl border border-t-0 border-border bg-background py-2 shadow-lg">
-                      {item.children.map((c) => {
-                        const currentFiltr = (location.search as { filtr?: string }).filtr;
-                        const isActive =
-                          c.to === "/clanky" && location.pathname === "/clanky"
-                            ? c.search?.filtr
-                              ? currentFiltr === c.search.filtr
-                              : !currentFiltr
-                            : false;
-                        return c.to ? (
-                          <Link
-                            key={c.label}
-                            to={c.to}
-                            {...(c.search ? { search: c.search } : {})}
-                            onClick={() => setMenu(null)}
-                            className={`block whitespace-nowrap px-4 py-3 text-sm font-semibold text-primary transition-colors ${
-                              isActive ? "opacity-100" : "hover:opacity-80"
-                            }`}
-                          >
-                            {c.label}
-                          </Link>
-                        ) : (
-                          <span key={c.label} className="block cursor-default whitespace-nowrap px-4 py-3 text-sm font-semibold text-muted-foreground">
-                            {c.label}
-                          </span>
-                        );
-                      })}
-                    </div>
-                  ) : null}
-                </div>
-              ) : (
-                <Link
-                  key={item.label}
-                  to={item.to}
-                  className="text-[13px] font-semibold text-foreground transition-colors hover:text-primary"
-                  activeProps={{ className: "text-primary" }}
-                >
-                  {item.label}
-                </Link>
-              ),
-            )}
+            {DESKTOP_LINKS.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="text-[13px] font-semibold text-foreground transition-colors hover:text-primary"
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
-
           <div className="flex items-center gap-3">
             <form
               role="search"
@@ -186,13 +129,31 @@ export function SiteHeader() {
                 className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
               />
             </form>
-            <a href="https://www.facebook.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="JednímHlasem na Facebooku" title="JednímHlasem na Facebooku" className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:text-primary">
+            <a
+              href="https://www.facebook.com/JednimHlasem"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="JednímHlasem na Facebooku"
+              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:text-primary"
+            >
               <FacebookIcon className="size-4" />
             </a>
-            <a href="https://www.instagram.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="JednímHlasem na Instagramu" title="JednímHlasem na Instagramu" className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:text-primary">
+            <a
+              href="https://www.instagram.com/JednimHlasem"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="JednímHlasem na Instagramu"
+              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:text-primary"
+            >
               <InstagramIcon className="size-4" />
             </a>
-            <a href="https://x.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="JednímHlasem na X" title="JednímHlasem na X" className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:text-primary">
+            <a
+              href="https://x.com/JednimHlasem"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="JednímHlasem na X"
+              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:text-primary"
+            >
               <XIcon className="size-4" />
             </a>
           </div>
@@ -222,20 +183,43 @@ export function SiteHeader() {
             />
           </form>
           <nav className="flex flex-col" aria-label="Mobilní menu">
-            <Link to="/clanky" onClick={() => setOpen(false)} className="border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground">Články</Link>
-            <Link to="/o-nas" onClick={() => setOpen(false)} className="border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground">O nás</Link>
-            <Link to="/ptejte-se-ai" onClick={() => setOpen(false)} className="border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground">Ptejte se AI</Link>
-            <Link to="/nahlasit-incident" onClick={() => setOpen(false)} className="border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground">Nahlásit incident</Link>
-            <Link to="/podporte-nas" onClick={() => setOpen(false)} className="py-3 text-base font-semibold uppercase tracking-wide text-foreground">Podpořte nás</Link>
+            {MENU_LINKS.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                onClick={() => setOpen(false)}
+                className="border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground"
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
           <div className="mt-4 flex items-center gap-3 border-t border-border pt-4">
-            <a href="https://www.facebook.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="JednímHlasem na Facebooku" title="JednímHlasem na Facebooku" className="flex size-9 items-center justify-center rounded-full border border-border text-foreground">
+            <a
+              href="https://www.facebook.com/JednimHlasem"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="JednímHlasem na Facebooku"
+              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground"
+            >
               <FacebookIcon className="size-4" />
             </a>
-            <a href="https://www.instagram.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="JednímHlasem na Instagramu" title="JednímHlasem na Instagramu" className="flex size-9 items-center justify-center rounded-full border border-border text-foreground">
+            <a
+              href="https://www.instagram.com/JednimHlasem"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="JednímHlasem na Instagramu"
+              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground"
+            >
               <InstagramIcon className="size-4" />
             </a>
-            <a href="https://x.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="JednímHlasem na X" title="JednímHlasem na X" className="flex size-9 items-center justify-center rounded-full border border-border text-foreground">
+            <a
+              href="https://x.com/JednimHlasem"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="JednímHlasem na X"
+              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground"
+            >
               <XIcon className="size-4" />
             </a>
           </div>

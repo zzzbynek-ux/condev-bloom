@@ -5,8 +5,8 @@ import { z } from "zod";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { MoreButton } from "@/components/more-button";
-import { ARTICLE_SECTIONS, allArticles } from "@/lib/content";
-import { articlesIn, articlesByTag, formatDate } from "@/lib/articles";
+import { ARTICLE_SECTIONS, allArticles, KONRAD } from "@/lib/content";
+import { articlesIn, articlesByTag, formatDate, shuffle } from "@/lib/articles";
 
 const searchSchema = z.object({
   tag: z.string().optional(),
@@ -43,10 +43,13 @@ type Article = {
   section: string;
 };
 
+/** Všechny články napříč rubrikami, bez duplicit podle slug */
 const ALL_ARTICLES: Article[] = allArticles().map((item) => ({
   ...item,
   section: ARTICLE_SECTIONS.find((g) => g.id !== "nove" && g.id !== "vse" && g.items.some((i) => i.slug === item.slug))?.label ?? "Nové",
 }));
+
+const DOPORUCUME = shuffle(articlesIn("doporucujeme"));
 
 const FILTER_IDS = [
   { id: "nove", label: "Nové" },
@@ -58,45 +61,59 @@ const FILTER_IDS = [
 
 const FILTERS = [...FILTER_IDS.map((f) => f.label), "Všechny texty"];
 
+function toCard(a: {
+  slug: string;
+  tag: string;
+  title: string;
+  perex: string;
+  image: string;
+  iso?: string;
+  date?: string;
+}, section: string): Article {
+  return {
+    slug: a.slug,
+    tag: a.tag,
+    date: a.iso ? formatDate(a.iso) : a.date,
+    title: a.title,
+    perex: a.perex,
+    image: a.image,
+    section,
+  };
+}
+
 function Clanky() {
   const params = useParams({ strict: false }) as { slug?: string };
   if (params.slug) return <Outlet />;
 
   const { tag, filtr } = Route.useSearch();
-  const [visible, setVisible] = useState(6);
+  const [visible, setVisible] = useState(12);
 
   const isTagFilter = Boolean(tag) && !FILTERS.includes(tag!);
   const active = isTagFilter
     ? "Všechny texty"
     : (FILTER_IDS.find((f) => f.id === filtr)?.label ?? "Všechny texty");
 
-  useEffect(() => setVisible(6), [active, tag, filtr]);
+  useEffect(() => setVisible(12), [active, tag, filtr]);
 
-  const articles =
-    active === "Všechny texty"
-      ? isTagFilter
-        ? articlesByTag(tag!).map((a) => ({
-            slug: a.slug,
-            tag: a.tag,
-            date: formatDate(a.iso),
-            title: a.title,
-            perex: a.perex,
-            image: a.image,
-            section: "Všechny texty",
-          }))
-        : ALL_ARTICLES
-      : (filtr ? articlesIn(filtr) : ALL_ARTICLES.filter((a) => a.section === active)).map((a) => ({
-          slug: a.slug,
-          tag: a.tag,
-          date: "iso" in a ? formatDate(a.iso) : a.date,
-          title: a.title,
-          perex: a.perex,
-          image: a.image,
-          section: active,
-        }));
+  const articles: Article[] = (() => {
+    if (isTagFilter) {
+      return articlesByTag(tag!).map((a) => toCard(a, "Všechny texty"));
+    }
+    if (!filtr || filtr === "vse" || active === "Všechny texty") {
+      return ALL_ARTICLES;
+    }
+    if (filtr === "doporucujeme") {
+      return DOPORUCUME.map((a) => toCard(a, active));
+    }
+    if (filtr === "tydyt") {
+      const fromData = articlesIn("tydyt").map((a) => toCard(a, active));
+      if (fromData.length > 0) return fromData;
+      return [toCard(KONRAD, active)];
+    }
+    return articlesIn(filtr).map((a) => toCard(a, active));
+  })();
 
   const remaining = articles.length - visible;
-  const hideMore = active === "Všechny texty" && !isTagFilter;
 
   return (
     <div className="min-h-screen bg-background">
@@ -108,9 +125,10 @@ function Clanky() {
           Vše na jednom místě — od krátkých faktických vysvětlení po dlouhé studie.
         </p>
 
+        {/* Filtr — tabová lišta v izraelské modři */}
         <nav
           aria-label="Filtrovat články"
-          className="clanky-tabs mt-8 flex flex-nowrap gap-6 overflow-x-auto border-b border-border pb-0 lg:flex-wrap lg:overflow-visible"
+          className="clanky-tabs mt-8 flex flex-nowrap overflow-x-auto border-b border-border pb-0 lg:flex-wrap lg:overflow-visible"
         >
           {FILTERS.map((f) => {
             const filterId = FILTER_IDS.find((x) => x.label === f)?.id;
@@ -122,11 +140,7 @@ function Clanky() {
                 search={f === "Všechny texty" ? {} : { filtr: filterId }}
                 aria-current={isActive}
                 aria-selected={isActive}
-                className={`whitespace-nowrap border-b-2 pb-2 text-base font-semibold leading-none text-[#0038B8] no-underline transition-colors ${
-                  isActive
-                    ? "-mb-[1px] border-[#0038B8]"
-                    : "border-transparent hover:text-[#0038B8]/80"
-                }`}
+                className="whitespace-nowrap text-base font-semibold leading-none text-[#0038B8] no-underline transition-colors"
               >
                 {f}
               </Link>
@@ -143,6 +157,7 @@ function Clanky() {
           </p>
         ) : null}
 
+        {/* Mřížka článků */}
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {articles.slice(0, visible).map((a, idx) => (
             <article
@@ -162,7 +177,7 @@ function Clanky() {
                   <Link
                     to="/clanky"
                     search={{ tag: a.tag }}
-                    className="rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground hover:opacity-85"
+                    className="article-tag rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] hover:opacity-85"
                   >
                     {a.tag}
                   </Link>
@@ -187,7 +202,8 @@ function Clanky() {
           <p className="mt-10 text-muted-foreground">Pro tento filtr zatím žádné texty nemáme.</p>
         ) : null}
 
-        {!hideMore && remaining > 0 && (
+        {/* Tlačítko pod mřížkou — přibere další články stejného filtru / tagu */}
+        {remaining > 0 && (
           <MoreButton
             label="Další texty"
             onClick={() => setVisible((v) => v + Math.min(9, remaining))}

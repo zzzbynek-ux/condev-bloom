@@ -53,8 +53,8 @@ export const AXES: Axis[] = [
     title: "Celý obraz. Bez ořezu.",
     text:
       "Když veřejný prostor ovládají silná slova a jednostranné příběhy, přinášíme témata, která zůstávají mimo pozornost. Spravedlnost není selektivní.",
-    href: "/manifest",
-    cta: "Číst manifest",
+    href: "/o-nas",
+    cta: "O nás",
   },
   {
     kicker: "KLÍČOVÉ TÉMA",

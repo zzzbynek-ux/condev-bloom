@@ -43,7 +43,14 @@ function ONas() {
       <main className="mx-auto max-w-[1120px] px-5 py-14 md:py-20">
         {/* 1. Intro */}
         <section className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+          <img
+            src="/images/logo-bublina-modra.png"
+            alt="JednímHlasem"
+            width={280}
+            height={218}
+            className="mx-auto h-24 w-auto md:h-32"
+          />
+          <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
             {INTRO.eyebrow}
           </p>
           <h1 className="mx-auto mt-3 max-w-4xl font-display text-3xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl">
