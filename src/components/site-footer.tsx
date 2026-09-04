@@ -33,16 +33,20 @@ function XIcon({ className }: { className?: string }) {
 export function SiteFooter() {
   return (
     <footer className="bg-primary text-primary-foreground">
-      <div className="mx-auto grid max-w-[88rem] grid-cols-[minmax(0,1fr)_auto] items-center gap-6 px-5 py-8 md:grid-cols-3 md:px-6">
-        <div className="min-w-0">
-          <p className="font-display text-xl font-bold text-white">Jedním Hlasem</p>
-          <p className="mt-1 text-xs text-primary-foreground/70">
-            Fakta, kontext a klidný tón do debaty o Izraeli.
-          </p>
+      <div className="mx-auto flex max-w-[88rem] flex-col items-center gap-5 px-5 py-8 lg:grid lg:grid-cols-3 lg:items-center lg:gap-6 lg:px-6">
+        <div className="lg:justify-self-start">
+          <Link to="/" className="inline-block" aria-label="JednímHlasem — domů">
+            <img
+              src="/images/logo-bublina.png"
+              alt="JednímHlasem"
+              width={140}
+              height={109}
+              className="h-12 w-auto md:h-14"
+            />
+          </Link>
         </div>
 
-
-        <nav className="col-span-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm md:col-span-1 md:justify-center">
+        <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm">
           {LINKS.map((l, i) => (
             <span key={l.label} className="flex items-center gap-4">
               {i > 0 ? <span className="h-4 w-px bg-primary-foreground/35" /> : null}
@@ -53,39 +57,17 @@ export function SiteFooter() {
           ))}
         </nav>
 
-        <div className="flex items-center justify-end gap-2">
-          <a
-            href="https://www.facebook.com/JednimHlasem"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="JednímHlasem na Facebooku"
-            title="JednímHlasem na Facebooku"
-            className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10"
-          >
+        <div className="flex items-center justify-center gap-2 lg:justify-end">
+          <a href="https://www.facebook.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="JednímHlasem na Facebooku" title="JednímHlasem na Facebooku" className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10">
             <FacebookIcon className="size-4" />
           </a>
-          <a
-            href="https://www.instagram.com/JednimHlasem"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="JednímHlasem na Instagramu"
-            title="JednímHlasem na Instagramu"
-            className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10"
-          >
+          <a href="https://www.instagram.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="JednímHlasem na Instagramu" title="JednímHlasem na Instagramu" className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10">
             <InstagramIcon className="size-4" />
           </a>
-          <a
-            href="https://x.com/JednimHlasem"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="JednímHlasem na X"
-            title="JednímHlasem na X"
-            className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10"
-          >
+          <a href="https://x.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="JednímHlasem na X" title="JednímHlasem na X" className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10">
             <XIcon className="size-4" />
           </a>
         </div>
-
       </div>
 
       <div className="border-t border-primary-foreground/20">

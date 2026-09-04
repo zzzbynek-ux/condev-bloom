@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, Search, X } from "lucide-react";
 
 type NavTo = "/clanky" | "/temata" | "/o-nas" | "/zapojte-se" | "/manifest" | "/nahlasit-incident" | "/ptejte-se-ai";
@@ -22,8 +22,6 @@ const NAV: NavItem[] = [
   },
   { label: "O nás", to: "/o-nas" },
 ];
-
-
 
 function FacebookIcon({ className }: { className?: string }) {
   return (
@@ -49,52 +47,53 @@ function XIcon({ className }: { className?: string }) {
   );
 }
 
-
-
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [menu, setMenu] = useState<string | null>(null);
   const [q, setQ] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (open) searchRef.current?.focus();
+  }, [open]);
+
+  const openSearch = () => {
+    if (open) {
+      searchRef.current?.focus();
+      return;
+    }
+    setOpen(true);
+  };
 
   return (
     <header className="site-header-sticky sticky top-0 z-50 shadow-sm">
-      {/* horní modrý pruh: identita + rychlé kontakty */}
       <div className="bg-primary text-primary-foreground">
-
-        <div className="mx-auto flex max-w-[88rem] items-stretch gap-4 pr-4 md:pr-6">
-          {/* textové logo na modré */}
-          <Link to="/" className="flex shrink-0 flex-col justify-center py-4 pl-4 md:pl-6">
-            <span className="font-display text-xl font-extrabold uppercase leading-none tracking-[0.02em] text-primary-foreground md:text-2xl">
-              Jedním Hlasem
-            </span>
-            <span className="mt-1.5 block text-[9px] font-semibold uppercase tracking-[0.22em] text-primary-foreground/75 md:text-[10px]">
-              Fakta proti dezinformacím
-            </span>
+        <div className="mx-auto flex h-16 max-w-[88rem] items-center gap-4 px-4 md:h-[4.25rem] md:px-6">
+          <Link to="/" className="flex shrink-0 items-center" aria-label="JednímHlasem — domů">
+            <img
+              src="/images/logo-jednim-hlasem.png"
+              alt="JednímHlasem"
+              width={264}
+              height={60}
+              className="h-9 w-auto md:h-10"
+            />
           </Link>
 
-          <div className="ml-auto flex items-center gap-4">
-
-
+          <div className="ml-auto flex items-center gap-3">
             <Link
               to="/podporte-nas"
-              className="hidden rounded-full bg-white px-6 py-2 text-sm font-semibold text-primary transition-transform hover:-translate-y-0.5 hover:bg-white/90 lg:inline-flex"
+              className="hidden h-10 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-primary transition-opacity hover:opacity-90 lg:inline-flex"
             >
               Podpořte nás
             </Link>
-
-
-
-
-
-
-            <Link to="/hledat" aria-label="Hledat" className="rounded-md p-2 lg:hidden">
+            <button type="button" aria-label="Hledat" onClick={openSearch} className="rounded-md p-2 lg:hidden">
               <Search className="size-5" />
-            </Link>
+            </button>
             <button
               type="button"
-              aria-label="Otevřít menu"
+              aria-label={open ? "Zavřít menu" : "Otevřít menu"}
               onClick={() => setOpen((v) => !v)}
               className="rounded-md border border-primary-foreground/30 p-2 lg:hidden"
             >
@@ -104,18 +103,14 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {/* bílá lišta: hlavní navigace + hledání + CTA */}
       <div className="hidden border-b border-border bg-background lg:block">
-        <div className="mx-auto flex max-w-[88rem] items-stretch gap-7 px-4 md:px-6">
-          <nav className="flex flex-1 items-stretch gap-7">
-
-
-
+        <div className="mx-auto flex h-12 max-w-[88rem] items-center justify-between gap-8 px-4 md:px-6">
+          <nav className="flex items-center gap-8" aria-label="Hlavní navigace">
             {NAV.map((item) =>
               item.children ? (
                 <div
                   key={item.label}
-                  className="group relative flex items-stretch"
+                  className="group relative flex items-center"
                   onMouseEnter={() => setMenu(item.label)}
                   onMouseLeave={() => setMenu(null)}
                 >
@@ -123,12 +118,10 @@ export function SiteHeader() {
                     type="button"
                     onClick={() => setMenu((m) => (m === item.label ? null : item.label))}
                     aria-expanded={menu === item.label}
-                    className="flex items-center gap-1.5 border-b-2 border-transparent py-4 text-base font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
+                    className="flex items-center gap-1 text-[13px] font-semibold text-foreground transition-colors hover:text-primary"
                   >
                     {item.label}
-                    <ChevronDown
-                      className={`size-4 transition-transform ${menu === item.label ? "rotate-180" : ""}`}
-                    />
+                    <ChevronDown className={`size-3.5 transition-transform ${menu === item.label ? "rotate-180" : ""}`} />
                   </button>
                   {menu === item.label ? (
                     <div className="absolute left-0 top-full z-50 w-max min-w-[14rem] rounded-b-xl border border-t-0 border-border bg-background py-2 shadow-lg">
@@ -146,17 +139,14 @@ export function SiteHeader() {
                             to={c.to}
                             {...(c.search ? { search: c.search } : {})}
                             onClick={() => setMenu(null)}
-                            className={`block whitespace-nowrap px-4 py-3 text-base font-semibold uppercase tracking-wide text-primary transition-colors ${
+                            className={`block whitespace-nowrap px-4 py-3 text-sm font-semibold text-primary transition-colors ${
                               isActive ? "opacity-100" : "hover:opacity-80"
                             }`}
                           >
                             {c.label}
                           </Link>
                         ) : (
-                          <span
-                            key={c.label}
-                            className="block cursor-default whitespace-nowrap px-4 py-3 text-base font-semibold uppercase tracking-wide text-muted-foreground"
-                          >
+                          <span key={c.label} className="block cursor-default whitespace-nowrap px-4 py-3 text-sm font-semibold text-muted-foreground">
                             {c.label}
                           </span>
                         );
@@ -168,8 +158,8 @@ export function SiteHeader() {
                 <Link
                   key={item.label}
                   to={item.to}
-                  className="flex items-center border-b-2 border-transparent py-4 text-base font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
-                  activeProps={{ className: "border-primary text-primary" }}
+                  className="text-[13px] font-semibold text-foreground transition-colors hover:text-primary"
+                  activeProps={{ className: "text-primary" }}
                 >
                   {item.label}
                 </Link>
@@ -177,68 +167,37 @@ export function SiteHeader() {
             )}
           </nav>
 
-          <form
-            role="search"
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (!q.trim()) return;
-              void navigate({ to: "/hledat", search: { q } });
-            }}
-            className="my-auto flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 transition-colors focus-within:border-primary"
-          >
-            <Search className="size-4 text-muted-foreground" />
-            <input
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Hledat články"
-              aria-label="Hledat články"
-              className="w-40 bg-transparent text-sm text-foreground outline-none transition-all placeholder:text-muted-foreground focus:w-56"
-            />
-          </form>
-
-
-          <div className="my-auto flex shrink-0 items-center gap-2">
-            <a
-              href="https://www.facebook.com/JednimHlasem"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="JednímHlasem na Facebooku"
-              title="JednímHlasem na Facebooku"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+          <div className="flex items-center gap-3">
+            <form
+              role="search"
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!q.trim()) return;
+                void navigate({ to: "/hledat", search: { q } });
+              }}
+              className="flex h-9 w-56 items-center gap-2 rounded-full border border-border bg-card px-3"
             >
+              <Search className="size-4 shrink-0 text-muted-foreground" />
+              <input
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                placeholder="Hledat články"
+                aria-label="Hledat články"
+                className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+              />
+            </form>
+            <a href="https://www.facebook.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="JednímHlasem na Facebooku" title="JednímHlasem na Facebooku" className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:text-primary">
               <FacebookIcon className="size-4" />
             </a>
-            <a
-              href="https://www.instagram.com/JednimHlasem"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="JednímHlasem na Instagramu"
-              title="JednímHlasem na Instagramu"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
-            >
+            <a href="https://www.instagram.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="JednímHlasem na Instagramu" title="JednímHlasem na Instagramu" className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:text-primary">
               <InstagramIcon className="size-4" />
             </a>
-            <a
-              href="https://x.com/JednimHlasem"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="JednímHlasem na X"
-              title="JednímHlasem na X"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
-            >
+            <a href="https://x.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="JednímHlasem na X" title="JednímHlasem na X" className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:text-primary">
               <XIcon className="size-4" />
             </a>
           </div>
-
-
-
-
-
-
         </div>
       </div>
-
-
 
       {open ? (
         <div className="border-b border-border bg-background px-5 py-3 lg:hidden">
@@ -254,6 +213,7 @@ export function SiteHeader() {
           >
             <Search className="size-4 text-muted-foreground" />
             <input
+              ref={searchRef}
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="Hledat články"
@@ -261,72 +221,21 @@ export function SiteHeader() {
               className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
             />
           </form>
-          <nav className="flex flex-col">
-            <Link
-              to="/clanky"
-              onClick={() => setOpen(false)}
-              className="border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground"
-            >
-              Články
-            </Link>
-            <Link
-              to="/o-nas"
-              onClick={() => setOpen(false)}
-              className="border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground"
-            >
-              O nás
-            </Link>
-            <Link
-              to="/ptejte-se-ai"
-              onClick={() => setOpen(false)}
-              className="border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground"
-            >
-              Ptejte se AI
-            </Link>
-            <Link
-              to="/nahlasit-incident"
-              onClick={() => setOpen(false)}
-              className="border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground"
-            >
-              Nahlásit incident
-            </Link>
-            <Link
-              to="/podporte-nas"
-              onClick={() => setOpen(false)}
-              className="py-3 text-base font-semibold uppercase tracking-wide text-foreground"
-            >
-              Podpořte nás
-            </Link>
+          <nav className="flex flex-col" aria-label="Mobilní menu">
+            <Link to="/clanky" onClick={() => setOpen(false)} className="border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground">Články</Link>
+            <Link to="/o-nas" onClick={() => setOpen(false)} className="border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground">O nás</Link>
+            <Link to="/ptejte-se-ai" onClick={() => setOpen(false)} className="border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground">Ptejte se AI</Link>
+            <Link to="/nahlasit-incident" onClick={() => setOpen(false)} className="border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground">Nahlásit incident</Link>
+            <Link to="/podporte-nas" onClick={() => setOpen(false)} className="py-3 text-base font-semibold uppercase tracking-wide text-foreground">Podpořte nás</Link>
           </nav>
           <div className="mt-4 flex items-center gap-3 border-t border-border pt-4">
-            <a
-              href="https://www.facebook.com/JednimHlasem"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="JednímHlasem na Facebooku"
-              title="JednímHlasem na Facebooku"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
-            >
+            <a href="https://www.facebook.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="JednímHlasem na Facebooku" title="JednímHlasem na Facebooku" className="flex size-9 items-center justify-center rounded-full border border-border text-foreground">
               <FacebookIcon className="size-4" />
             </a>
-            <a
-              href="https://www.instagram.com/JednimHlasem"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="JednímHlasem na Instagramu"
-              title="JednímHlasem na Instagramu"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
-            >
+            <a href="https://www.instagram.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="JednímHlasem na Instagramu" title="JednímHlasem na Instagramu" className="flex size-9 items-center justify-center rounded-full border border-border text-foreground">
               <InstagramIcon className="size-4" />
             </a>
-            <a
-              href="https://x.com/JednimHlasem"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="JednímHlasem na X"
-              title="JednímHlasem na X"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
-            >
+            <a href="https://x.com/JednimHlasem" target="_blank" rel="noreferrer" aria-label="JednímHlasem na X" title="JednímHlasem na X" className="flex size-9 items-center justify-center rounded-full border border-border text-foreground">
               <XIcon className="size-4" />
             </a>
           </div>
