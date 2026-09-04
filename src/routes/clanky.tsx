@@ -110,7 +110,7 @@ function Clanky() {
 
         <nav
           aria-label="Filtrovat články"
-          className="clanky-tabs mt-8 flex flex-nowrap gap-6 overflow-x-auto border-b border-border pb-0 md:flex-wrap"
+          className="clanky-tabs mt-8 flex flex-nowrap gap-6 overflow-x-auto border-b border-border pb-0 lg:flex-wrap lg:overflow-visible"
         >
           {FILTERS.map((f) => {
             const filterId = FILTER_IDS.find((x) => x.label === f)?.id;
