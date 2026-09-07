@@ -293,7 +293,7 @@
   .hero-section .hero-img {
     position: relative;
     inset: auto;
-    height: 220px;
+    height: 200px;
     width: 100%;
     opacity: 1;
     object-fit: cover;
@@ -311,7 +311,8 @@
     display: block;
     max-width: none;
     height: auto;
-    padding: 0.85rem 1rem 0.25rem;
+    padding: 0.5rem 1.15rem 0.1rem;
+    text-align: center;
   }
   .hero-section .hero-card {
     width: 100%;
@@ -322,11 +323,32 @@
     backdrop-filter: none;
     padding: 0;
   }
+  .hero-section .hero-card .kicker {
+    margin: 0;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .hero-section .hero-card h1,
+  .hero-section .hero-card p.animate-rise:not(.hero-perex),
+  .hero-section .hero-title {
+    font-size: 1.375rem;
+    line-height: 1.15;
+    margin-top: 0.35rem;
+  }
+  .hero-section .hero-cta {
+    margin-top: 0.5rem;
+    font-size: 11px;
+  }
   .hero-dots {
     position: relative;
     inset: auto;
-    padding: 0.2rem 0 0.7rem;
+    padding: 0.05rem 0 0.4rem;
     background-color: var(--navy-900);
+  }
+  .hero-section .hero-nav-btn {
+    width: 2rem;
+    height: 2rem;
   }
   .hero-perex {
     display: none;
@@ -363,6 +385,25 @@
     padding: 0;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55), 0 0 22px rgba(11, 26, 58, 0.45);
   }
+  .hero-section .hero-card .kicker {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .hero-section .hero-title {
+    margin-top: 0.4rem;
+    font-size: 1.5rem;
+    line-height: 1.15;
+  }
+  .hero-section .hero-perex {
+    margin-top: 0.65rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+  .hero-section .hero-cta {
+    margin-top: 0.75rem;
+    font-size: 12px;
+  }
   .hero-dots {
     position: absolute;
     right: 0;
@@ -392,7 +433,8 @@
     box-shadow: none;
   }
   .hero-section .hero-card h1,
-  .hero-section .hero-card p.animate-rise:not(.hero-perex) {
+  .hero-section .hero-card p.animate-rise:not(.hero-perex),
+  .hero-section .hero-title {
     font-size: 1.5rem !important;
     line-height: 1.18;
     display: -webkit-box;
@@ -539,20 +581,92 @@
   }
 }
 
-/* Pruh Antisemitismus: 2+1 do 899 px */
-@media (max-width: 899px) {
+/* Pruh Antisemitismus: pod 700 px textový řádek */
+@media (max-width: 699px) {
   .tema-strip {
     flex-direction: column;
     height: auto;
-    gap: 1rem;
-    padding: 1rem 1rem 1.1rem;
+    gap: 0.55rem;
+    padding: 0.75rem 1rem 0.8rem;
+  }
+  .tema-perex {
+    display: none;
+  }
+  .tema-strip > div:first-child {
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .tema-strip > div:first-child > span {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+  .tema-strip > div:first-child svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+  .tema-strip .kicker {
+    font-size: 10px;
+  }
+  .tema-strip h2 {
+    margin-top: 0.05rem;
+    font-size: 1.25rem;
+    line-height: 1.15;
+  }
+  .tema-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.15rem 0;
+    width: 100%;
+  }
+  .tema-buttons > a,
+  .tema-buttons > button {
+    box-sizing: border-box;
+    width: auto;
+    height: auto;
+    min-height: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    padding: 0.2rem 0 !important;
+    font-size: 13px !important;
+    font-weight: 600;
+    line-height: 1.3;
+    border-radius: 0;
+    background: transparent !important;
+    color: #fff !important;
+  }
+  .tema-buttons > a svg,
+  .tema-buttons > button svg {
+    display: none;
+  }
+  .tema-buttons > a:not(:last-child)::after {
+    content: "·";
+    margin: 0 0.55rem;
+    font-weight: 500;
+    opacity: 0.55;
+    color: #fff;
+  }
+  .tema-buttons > :nth-child(3) {
+    color: #ffc9c9 !important;
+  }
+}
+
+/* Od 700 px do 1279: tři pilulky vedle sebe */
+@media (min-width: 700px) and (max-width: 1279px) {
+  .tema-strip {
+    flex-direction: column;
+    height: auto;
+    gap: 0.85rem;
+    padding: 1rem 1.25rem 1.1rem;
   }
   .tema-perex {
     display: none;
   }
   .tema-buttons {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.5rem;
     width: 100%;
   }
@@ -560,45 +674,16 @@
   .tema-buttons > button {
     box-sizing: border-box;
     width: 100%;
-    min-height: 2.75rem;
-    height: 2.75rem;
+    height: 2.5rem;
+    min-height: 2.5rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     white-space: nowrap;
-    padding: 0 0.6rem !important;
-    font-size: 13px !important;
+    padding: 0 0.45rem !important;
+    font-size: 12px !important;
     line-height: 1;
     border-radius: 9999px;
-  }
-  .tema-buttons > :nth-child(1) { grid-column: 1; }
-  .tema-buttons > :nth-child(2) { grid-column: 2; }
-  .tema-buttons > :nth-child(3) { grid-column: 1 / -1; }
-}
-
-/* Tablet / úzký desktop: 3 stejně široká tlačítka */
-@media (min-width: 900px) and (max-width: 1279px) {
-  .tema-strip {
-    flex-direction: column;
-    height: auto;
-    padding: 1.25rem 1.5rem;
-  }
-  .tema-buttons {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.6rem;
-    width: 100%;
-  }
-  .tema-buttons > a,
-  .tema-buttons > button {
-    width: 100%;
-    height: 2.75rem;
-    min-height: 2.75rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    font-size: 0.8125rem;
   }
 }
 
@@ -688,6 +773,20 @@
     max-width: 28rem;
     padding: 0;
   }
+  .hero-section .hero-title {
+    font-size: 2.15rem;
+    line-height: 1.12;
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+  .hero-section .hero-perex {
+    font-size: 1rem;
+    line-height: 1.5;
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
   .hero-dots {
     padding-bottom: 0;
   }
@@ -743,6 +842,10 @@
   .hero-section .hero-card {
     max-width: 32rem;
   }
+  .hero-section .hero-title {
+    font-size: 2.25rem;
+    line-height: 1.12;
+  }
 }
 
 .card-lift {
@@ -772,3 +875,113 @@
   color: var(--blue-700);
   text-decoration: underline;
 }
+
+/* O nás — hero jako homepage (text vlevo, motiv vpravo) */
+.onas-hero {
+  background-color: var(--navy-900);
+}
+.onas-hero-img {
+  object-fit: cover;
+  object-position: 78% 46%;
+}
+.onas-hero-card {
+  background: transparent;
+  max-width: 36rem;
+}
+
+.onas-invert {
+  background-color: var(--navy-900);
+  color: #fff;
+}
+.onas-invert .border-primary {
+  border-color: rgba(255, 255, 255, 0.38);
+}
+.onas-invert h2 {
+  color: #fff;
+}
+.onas-invert .kicker {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+@media (max-width: 767px) {
+  .onas-hero {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+  .onas-hero-img {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 220px;
+    object-position: 82% 40%;
+  }
+  .onas-hero-overlay {
+    display: none;
+  }
+  .onas-hero-grid {
+    height: auto;
+    padding: 1rem 0 1.35rem;
+  }
+  .onas-hero-card {
+    max-width: none;
+  }
+  .onas-hero-copy {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .onas-hero {
+    min-height: clamp(28rem, 46vw, 36rem);
+  }
+  .onas-hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .onas-hero-grid {
+    min-height: clamp(28rem, 46vw, 36rem);
+    padding-top: 2rem;
+    padding-bottom: 2.5rem;
+    align-items: center;
+  }
+  .onas-hero-card {
+    max-width: min(26rem, 46vw);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .onas-hero-card {
+    max-width: min(18.5rem, 42vw);
+  }
+  .onas-hero-img {
+    object-position: 92% 42%;
+  }
+  .onas-hero-overlay {
+    background: linear-gradient(
+      to right,
+      rgba(11, 26, 58, 0.94) 0%,
+      rgba(11, 26, 58, 0.55) 28%,
+      rgba(11, 26, 58, 0.12) 48%,
+      transparent 62%
+    );
+  }
+  .onas-hero-copy p + p {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .onas-hero-card {
+    max-width: 32rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .onas-hero-card {
+    max-width: 36rem;
+  }
+}
+

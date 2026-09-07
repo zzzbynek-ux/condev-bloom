@@ -15,15 +15,11 @@ export function SectionHeader({
   linkLabel?: string;
 }) {
   return (
-    <div className="border-t-2 border-primary pt-4">
-      {kicker ? (
-        <p className="kicker text-primary/70">
-          {kicker}
-        </p>
-      ) : null}
+    <div className="border-t-2 border-primary pt-5">
+      {kicker ? <p className="kicker text-primary/70">{kicker}</p> : null}
       <div className="mt-2 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h2 className="font-display text-[1.5rem] font-bold uppercase tracking-[0.03em] text-primary md:text-[1.875rem]">
+          <h2 className="font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">
             {title}
           </h2>
           {subtitle ? (
@@ -35,7 +31,7 @@ export function SectionHeader({
         {to ? (
           <Link
             to={to}
-            className="cta-link inline-flex shrink-0 items-center gap-1 text-primary hover:underline"
+            className="cta-link inline-flex shrink-0 items-center gap-1.5 text-primary hover:underline"
           >
             {linkLabel} <ArrowRight className="size-4" />
           </Link>

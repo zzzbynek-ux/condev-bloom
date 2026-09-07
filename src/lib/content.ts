@@ -214,7 +214,7 @@ export type FeedGroup = {
 
 
 export const HERO_BANNER = [
-  { kicker: "Jedním hlasem", title: "Do debaty o Izraeli vracíme fakta, kontext a klidný tón.", text: "Píšeme analýzy, ověřujeme tvrzení a pomáháme lidem reagovat tam, kde se rozhoduje o veřejném mínění.", image: "/images/hero/manifest.jpg", focus: "70% 48%", slug: "manifest", overlay: "default" },
+  { kicker: "Co doplňujeme", title: "Celý obraz. Bez ořezu.", text: "Když veřejný prostor ovládají silná slova a jednostranné příběhy, přinášíme témata, která zůstávají mimo pozornost. Spravedlnost není selektivní.", image: "/images/hero/manifest.jpg", focus: "82% 18%", slug: "manifest", overlay: "default" },
   { kicker: "Proč to děláme", title: "Malý stát. Globální přínos.", text: "Izrael není jen spojencem Západu, je jeho součástí. Přináší světu víc, než by odpovídalo jeho velikosti — od technologií přes medicínu až po humanitární pomoc.", image: "/images/hero/maly-stat.jpg", focus: "72% 46%", slug: "izrael-haji-vic-nez-jen-vlastni-hranice", overlay: "default" },
   { kicker: "Jak to funguje", title: "Jeden klik mění svět", text: "Pod příspěvkem s tisíci lajky se objeví jediný věcný komentář a naruší sdílený obraz. Algoritmus je jednoduchý: čím víc reakcí, tím větší dosah.", image: "/images/hero/jeden-klik.jpg", focus: "78% 50%", slug: "jeden-klik-meni-svet", overlay: "default" },
   { kicker: "Antisemitismus", title: "Antisemitismus 2.0", text: "Nový antisemitismus mluví jazykem solidarity a historické křivdy. Nacistickou pásku nahradila kefíja — ale posedlost Židy zůstala.", image: "/images/hero/antisemitismus.jpg", focus: "78% 48%", slug: "novy-antisemitismus-o-palestinu-tady-vubec-nejde", overlay: "default" },

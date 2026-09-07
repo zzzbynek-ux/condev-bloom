@@ -53,17 +53,16 @@ export const AXES: Axis[] = [
     title: "Celý obraz. Bez ořezu.",
     text:
       "Když veřejný prostor ovládají silná slova a jednostranné příběhy, přinášíme témata, která zůstávají mimo pozornost. Spravedlnost není selektivní.",
-    href: "/o-nas",
-    cta: "O nás",
+    href: "/clanky/udavame-ton",
+    cta: "Číst článek",
   },
   {
     kicker: "KLÍČOVÉ TÉMA",
-    title: "Antisemitismus",
+    title: "Antisemitismus 2.0",
     text:
       "Nový antisemitismus se tváří jako morální apel — mluví jazykem solidarity a historické křivdy. Ale pod pláštíkem vznešených slov jde o démonizaci a delegitimizaci židovského státu. Nacistickou pásku nahradila kefíja — ale posedlost Židy zůstala.",
-    href: "/antisemitismus",
-    cta: "Otevřít téma",
-    featured: true,
+    href: "/clanky/novy-antisemitismus-o-palestinu-tady-vubec-nejde",
+    cta: "Číst článek",
   },
   {
     kicker: "Ideologie",
