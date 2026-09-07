@@ -1,8 +1,9 @@
 import { Link } from "@tanstack/react-router";
 
 const LINKS = [
+  { to: "/clanky", label: "Články" },
   { to: "/o-nas", label: "O nás" },
-
+  { to: "/nahlasit-incident", label: "Nahlásit incident" },
   { to: "/podporte-nas", label: "Podpořte nás" },
 ] as const;
 
@@ -39,8 +40,9 @@ export function SiteFooter() {
             <img
               src="/images/logo-bublina.png"
               alt="JednímHlasem"
-              width={140}
-              height={109}
+              width={280}
+              height={218}
+              decoding="async"
               className="h-12 w-auto md:h-14"
             />
           </Link>
@@ -92,8 +94,11 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-primary-foreground/20">
-        <div className="mx-auto flex max-w-[88rem] items-center justify-between gap-4 px-5 py-4 text-xs text-primary-foreground/85 md:px-6">
+        <div className="mx-auto flex max-w-[88rem] flex-wrap items-center justify-center gap-x-4 gap-y-2 px-5 py-4 text-xs text-primary-foreground/85 md:px-6 lg:justify-between">
           <span>© {new Date().getFullYear()} JednímHlasem</span>
+          <a href="mailto:info@jednimhlasem.cz" className="hover:text-white">
+            info@jednimhlasem.cz
+          </a>
           <Link to="/ochrana-osobnich-udaju" className="hover:text-white">
             Ochrana osobních údajů
           </Link>
