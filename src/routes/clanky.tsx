@@ -7,6 +7,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { MoreButton } from "@/components/more-button";
 import { ARTICLE_SECTIONS, allArticles, KONRAD } from "@/lib/content";
 import { articlesIn, articlesByTag, formatDate, shuffle } from "@/lib/articles";
+import { CARD_SIZES } from "@/lib/img";
 
 const searchSchema = z.object({
   tag: z.string().optional(),
@@ -49,7 +50,7 @@ const ALL_ARTICLES: Article[] = allArticles().map((item) => ({
   section: ARTICLE_SECTIONS.find((g) => g.id !== "nove" && g.id !== "vse" && g.items.some((i) => i.slug === item.slug))?.label ?? "Nové",
 }));
 
-const DOPORUCUME = shuffle(articlesIn("doporucujeme"));
+const DOPORUCUJEME = shuffle(articlesIn("doporucujeme"));
 
 const FILTER_IDS = [
   { id: "nove", label: "Nové" },
@@ -103,7 +104,7 @@ function Clanky() {
       return ALL_ARTICLES;
     }
     if (filtr === "doporucujeme") {
-      return DOPORUCUME.map((a) => toCard(a, active));
+      return DOPORUCUJEME.map((a) => toCard(a, active));
     }
     if (filtr === "tydyt") {
       const fromData = articlesIn("tydyt").map((a) => toCard(a, active));
@@ -140,6 +141,9 @@ function Clanky() {
                 search={f === "Všechny texty" ? {} : { filtr: filterId }}
                 aria-current={isActive}
                 aria-selected={isActive}
+                onClick={(e) => {
+                  e.currentTarget.scrollIntoView({ inline: "nearest", block: "nearest", behavior: "smooth" });
+                }}
                 className="whitespace-nowrap text-base font-semibold leading-none text-[#0038B8] no-underline transition-colors"
               >
                 {f}
@@ -168,8 +172,10 @@ function Clanky() {
                 src={a.image}
                 alt={a.title}
                 loading="lazy"
+                decoding="async"
                 width={1280}
                 height={720}
+                sizes={CARD_SIZES}
                 className="aspect-video w-full object-cover"
               />
               <div className="flex flex-1 flex-col p-6">

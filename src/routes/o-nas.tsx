@@ -46,8 +46,9 @@ function ONas() {
           <img
             src="/images/logo-bublina-modra.png"
             alt="JednímHlasem"
-            width={280}
-            height={218}
+            width={720}
+            height={562}
+            decoding="async"
             className="mx-auto h-24 w-auto md:h-32"
           />
           <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
