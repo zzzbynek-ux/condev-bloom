@@ -1,25 +1,31 @@
 export const INTRO = {
   eyebrow: "O NÁS",
-  title: "Jedním hlasem neznamená všichni stejně, ale společně za to, co nás spojuje.",
+  title:
+    "Jedním hlasem neznamená všichni stejně, ale společně za to, co nás spojuje.",
   paragraphs: [
     "JednímHlasem podporujeme Izrael a jeho právo na existenci a sebeobranu. Bojujeme proti antisemitismu ve všech jeho formách. Vyvracíme dezinformace, které zkreslují realitu. Posilujeme odvážné hlasy, které se nebojí promluvit. A budujeme komunitu, která se navzájem inspiruje a chrání hodnoty, na nichž stojí svobodná společnost.",
-    "JednímHlasem je nezávislá občanská iniciativa a otevřená platforma, která vznikla jako reakce na rostoucí dezinformace, selektivní empatii a zkreslený obraz Izraele ve veřejném prostoru. Naším cílem je vracet fakta, kontext a důstojnost do debaty – v době, kdy se realita ohýbá podle ideologie a pravda přizpůsobuje algoritmům.",
-  ] as const,
-  image: {
-    src: "@/assets/hero-blindfold.jpg",
-    alt: "Skupina lidí se stuhou přes oči jako symbol slepoty vůči realitě",
-  },
-  links: [
-    { label: "Naše hodnoty", href: "#hodnoty" },
-    { label: "Naše osy", href: "#osy" },
-    { label: "Zapojte se", href: "#zapojte-se" },
+    "JednímHlasem je nezávislá občanská iniciativa a otevřená platforma, která vznikla jako reakce na rostoucí dezinformace, selektivní empatii a zkreslený obraz Izraele ve veřejném prostoru.",
   ] as const,
 };
 
+export const SLOGAN = "Nechceme stejný názor. Chceme stejná fakta.";
+
 export const VALUES = [
-  "Podporujeme Izrael jako demokratický stát s právem na existenci a sebeobranu.",
-  "Odmítáme antisemitismus ve všech jeho podobách – ať už se skrývá za tzv. kritiku politiky, levicový aktivismus nebo konspirační teorie krajní pravice.",
-  "Věříme, že obhajoba Izraele je zároveň obranou principů svobodného světa.",
+  {
+    index: "01",
+    title: "Izrael",
+    text: "Podporujeme Izrael jako demokratický stát s právem na existenci a sebeobranu.",
+  },
+  {
+    index: "02",
+    title: "Antisemitismus",
+    text: "Odmítáme antisemitismus ve všech jeho podobách – ať už se skrývá za tzv. kritiku politiky, levicový aktivismus nebo konspirační teorie krajní pravice.",
+  },
+  {
+    index: "03",
+    title: "Svobodný svět",
+    text: "Věříme, že obhajoba Izraele je zároveň obranou principů svobodného světa.",
+  },
 ] as const;
 
 export type Axis = {
@@ -28,92 +34,31 @@ export type Axis = {
   text: string;
   href: string;
   cta: string;
-  featured?: boolean;
 };
 
 export const AXES: Axis[] = [
   {
-    kicker: "Identita",
-    title: "Malý stát. Globální přínos.",
-    text:
-      "Izrael není jen spojencem Západu. Je jeho součástí. A právě proto si zaslouží naši pozornost i podporu. Přináší světu víc, než by odpovídalo jeho velikosti – od technologických inovací přes medicínu až po humanitární pomoc.",
-    href: "/clanky/izrael-haji-vic-nez-jen-vlastni-hranice",
-    cta: "Číst článek",
-  },
-  {
-    kicker: "Jeden klik",
-    title: "Jeden klik mění svět",
-    text:
-      "Pod příspěvkem s tisíci lajky se objeví jediný komentář — stručný, věcný, rezonující. Naruší sdílený obraz a připomene, co ostatní přehlédli. Tak dnes vypadá zápas o pravdu. Algoritmus je jednoduchý: čím víc reakcí, tím větší dosah.",
-    href: "/clanky/jeden-klik-meni-svet",
-    cta: "Číst článek",
-  },
-  {
-    kicker: "Co doplňujeme",
-    title: "Celý obraz. Bez ořezu.",
-    text:
-      "Když veřejný prostor ovládají silná slova a jednostranné příběhy, přinášíme témata, která zůstávají mimo pozornost. Spravedlnost není selektivní.",
-    href: "/o-nas",
-    cta: "O nás",
-  },
-  {
-    kicker: "KLÍČOVÉ TÉMA",
+    kicker: "Klíčové téma",
     title: "Antisemitismus",
-    text:
-      "Nový antisemitismus se tváří jako morální apel — mluví jazykem solidarity a historické křivdy. Ale pod pláštíkem vznešených slov jde o démonizaci a delegitimizaci židovského státu. Nacistickou pásku nahradila kefíja — ale posedlost Židy zůstala.",
+    text: "Nový antisemitismus se tváří jako morální apel. Pod pláštíkem solidarity jde o démonizaci židovského státu.",
     href: "/antisemitismus",
     cta: "Otevřít téma",
-    featured: true,
   },
   {
-    kicker: "Ideologie",
-    title: "Rudo-zelená aliance",
-    text:
-      "Spojenectví progresivní levice a islamismu pod pláštíkem lidských práv legitimizuje násilí a rozkládá morální páteř demokracií.",
-    href: "/clanky/rudo-zelena-aliance",
+    kicker: "Identita",
+    title: "Malý stát. Globální přínos.",
+    text: "Izrael není jen spojencem Západu. Je jeho součástí — od technologií přes medicínu až po humanitární pomoc.",
+    href: "/clanky/izrael-haji-vic-nez-jen-vlastni-hranice",
     cta: "Číst článek",
   },
   {
     kicker: "Média",
     title: "Média ve službách teroru",
-    text:
-      "Když přijde na Izrael, redakce často bez váhání přebírají informace od teroristů. Výsledkem je informační válka, kde lži letí rychleji než fakta.",
+    text: "Když přijde na Izrael, redakce často přebírají informace od teroristů. Lži letí rychleji než fakta.",
     href: "/clanky/masinerie-lzi-kdyz-media-mluvi-za-hamas",
     cta: "Číst článek",
   },
-  {
-    kicker: "Vliv",
-    title: "Zaměřeno na Katar",
-    text:
-      "Za atmosférou nenávisti vůči Izraeli stojí promyšlená, štědře financovaná kampaň s kořeny v Kataru. Ukazujeme, kam až sahá.",
-    href: "/clanky/zamereno-na-katar",
-    cta: "Číst článek",
-  },
-  {
-    kicker: "Blízký východ",
-    title: "Mír začíná s pravdou",
-    text:
-      "Konflikt není jen o dvou stranách. Arabské státy a mezinárodní instituce ho nejen sledují — udržují ho při životě.",
-    href: "/clanky/mir-zacina-pravdou",
-    cta: "Číst článek",
-  },
-  {
-    kicker: "Dezinformace",
-    title: "Wiki jako nástroj vlivu",
-    text:
-      "Záměrná manipulace a systematické zkreslování faktů proměňují otevřenou encyklopedii ve vlivový nástroj.",
-    href: "/clanky/wiki-jako-nastroj-vlivu",
-    cta: "Číst článek",
-  },
-  {
-    kicker: "Hlasy",
-    title: "Odlišní vírou, spojeni svědomím",
-    text:
-      "Křesťané i muslimové otevřeně vystupují proti nenávisti. Jejich hlasy v debatě chybí nejvíc.",
-    href: "/clanky/odlisni-virou-spojeni-svedomim",
-    cta: "Číst článek",
-  },
-] as const;
+];
 
 export const WHAT_WE_DO = {
   title: "Co děláme",
@@ -135,8 +80,10 @@ export const MISSION = {
 
 export const GET_INVOLVED = {
   title: "Zapojte se",
-  text:
-    "JednímHlasem je otevřená platforma. Nabízíme prostor autorům, kteří chtějí publikovat vlastní články, analýzy nebo komentáře.",
-  primary: { label: "Napsat na info@jednimhlasem.cz", href: "mailto:info@jednimhlasem.cz" },
+  text: "JednímHlasem je otevřená platforma. Nabízíme prostor autorům, kteří chtějí publikovat vlastní články, analýzy nebo komentáře.",
+  primary: {
+    label: "Napsat na info@jednimhlasem.cz",
+    href: "mailto:info@jednimhlasem.cz",
+  },
   secondary: { label: "Jak se zapojit", href: "/zapojte-se" },
 } as const;
