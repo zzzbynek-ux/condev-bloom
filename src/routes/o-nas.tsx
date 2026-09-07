@@ -100,11 +100,7 @@ function ONas() {
           </section>
 
           <section id="osy" className="mt-16 scroll-mt-32 md:mt-20">
-            <SectionHeader
-              kicker="Naše osy"
-              title="O čem mluvíme"
-              subtitle="Osy, kterým se věnujeme. Každá vede na téma nebo článek."
-            />
+            <SectionHeader kicker="Naše témata" title="O čem mluvíme" />
             <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {AXES.map((axis) => (
                 <TopicCard

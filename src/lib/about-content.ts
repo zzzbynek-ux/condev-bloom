@@ -11,7 +11,7 @@ export const INTRO = {
   },
   links: [
     { label: "Naše hodnoty", href: "#hodnoty" },
-    { label: "Naše osy", href: "#osy" },
+    { label: "Naše témata", href: "#osy" },
     { label: "Zapojte se", href: "#zapojte-se" },
   ] as const,
 };
