@@ -37,7 +37,7 @@ export const AXES: Axis[] = [
     title: "Malý stát. Globální přínos.",
     text:
       "Izrael není jen spojencem Západu. Je jeho součástí. A právě proto si zaslouží naši pozornost i podporu. Přináší světu víc, než by odpovídalo jeho velikosti – od technologických inovací přes medicínu až po humanitární pomoc.",
-    href: "/clanky/maly-stat-globalni-prinos",
+    href: "/clanky/izrael-haji-vic-nez-jen-vlastni-hranice",
     cta: "Číst článek",
   },
   {
@@ -45,7 +45,7 @@ export const AXES: Axis[] = [
     title: "Jeden klik mění svět",
     text:
       "Pod příspěvkem s tisíci lajky se objeví jediný komentář — stručný, věcný, rezonující. Naruší sdílený obraz a připomene, co ostatní přehlédli. Tak dnes vypadá zápas o pravdu. Algoritmus je jednoduchý: čím víc reakcí, tím větší dosah.",
-    href: "/clanky",
+    href: "/clanky/jeden-klik-meni-svet",
     cta: "Číst článek",
   },
   {
@@ -78,7 +78,7 @@ export const AXES: Axis[] = [
     title: "Média ve službách teroru",
     text:
       "Když přijde na Izrael, redakce často bez váhání přebírají informace od teroristů. Výsledkem je informační válka, kde lži letí rychleji než fakta.",
-    href: "/clanky/media-ve-sluzbach-teroru",
+    href: "/clanky/masinerie-lzi-kdyz-media-mluvi-za-hamas",
     cta: "Číst článek",
   },
   {
@@ -94,7 +94,7 @@ export const AXES: Axis[] = [
     title: "Mír začíná s pravdou",
     text:
       "Konflikt není jen o dvou stranách. Arabské státy a mezinárodní instituce ho nejen sledují — udržují ho při životě.",
-    href: "/clanky/mir-zacina-s-pravdou",
+    href: "/clanky/mir-zacina-pravdou",
     cta: "Číst článek",
   },
   {
@@ -110,7 +110,7 @@ export const AXES: Axis[] = [
     title: "Odlišní vírou, spojeni svědomím",
     text:
       "Křesťané i muslimové otevřeně vystupují proti nenávisti. Jejich hlasy v debatě chybí nejvíc.",
-    href: "/clanky/odlisni-virou",
+    href: "/clanky/odlisni-virou-spojeni-svedomim",
     cta: "Číst článek",
   },
 ] as const;

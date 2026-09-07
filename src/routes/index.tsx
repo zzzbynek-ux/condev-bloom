@@ -8,6 +8,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
 import { MoreButton } from "@/components/more-button";
 import { ARTICLE_SECTIONS, HERO_BANNER, VYBER_REDAKCE } from "@/lib/content";
+import { heroSrcSet, HERO_SIZES } from "@/lib/img";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -41,37 +42,45 @@ function Hero() {
   const slide = HERO_BANNER[i] ?? HERO_BANNER[0]!;
 
   return (
-    <section className="hero-section relative isolate overflow-hidden bg-navy-900">
+    <section className={`hero-section relative isolate overflow-hidden bg-navy-900${slide.overlay === "strong" ? " hero-overlay-strong" : ""}`}>
       <img
         src={slide.image}
+        srcSet={heroSrcSet(slide.image)}
+        sizes={HERO_SIZES}
         alt=""
-        width={1600}
-        height={900}
+        width={1235}
+        height={459}
+        decoding="async"
+        fetchPriority="high"
         className="hero-img pointer-events-none absolute inset-0 size-full object-cover"
         style={{ ["--hero-focus" as string]: slide.focus, objectPosition: slide.focus }}
       />
       <div
         aria-hidden
-        className="hero-overlay pointer-events-none absolute inset-0 bg-linear-to-r from-[#0b1a3a]/80 via-[#0b1a3a]/30 to-transparent"
+        className={
+          slide.overlay === "strong"
+            ? "hero-overlay pointer-events-none absolute inset-0 bg-linear-to-r from-[#0b1a3a]/96 via-[#0b1a3a]/78 via-[40%] to-transparent"
+            : "hero-overlay pointer-events-none absolute inset-0 bg-linear-to-r from-[#0b1a3a]/92 via-[#0b1a3a]/62 via-[42%] to-transparent"
+        }
       />
 
       <div className="hero-grid pointer-events-none relative z-10 mx-auto flex h-full max-w-[88rem] items-center justify-start px-5 py-6 md:px-16">
-        <div className="hero-card pointer-events-auto w-full max-w-md rounded-2xl bg-navy-900/72 p-4 backdrop-blur-md md:max-w-md md:p-5 lg:max-w-lg lg:px-6 lg:py-5">
-          <p className="kicker text-white/60">
+        <div className="hero-card pointer-events-auto w-full max-w-md md:max-w-md lg:max-w-lg">
+          <p className="kicker text-white/85">
             {slide.kicker}
           </p>
           {i === 0 ? (
-            <h1 key={slide.title} className="animate-rise mt-1.5 text-balance font-display text-[1.65rem] font-bold leading-[1.15] text-white md:text-[1.85rem] lg:text-[2.1rem]">
+            <h1 key={slide.title} className="animate-rise mt-1.5 text-balance font-display text-[1.65rem] font-bold leading-[1.15] text-white lg:text-[2.1rem]">
               {slide.title}
             </h1>
           ) : (
-            <p key={slide.title} className="animate-rise mt-1.5 text-balance font-display text-[1.65rem] font-bold leading-[1.15] text-white md:text-[1.85rem] lg:text-[2.1rem]">
+            <p key={slide.title} className="animate-rise mt-1.5 text-balance font-display text-[1.65rem] font-bold leading-[1.15] text-white lg:text-[2.1rem]">
               {slide.title}
             </p>
           )}
           <p
             key={slide.text}
-            className="hero-perex animate-rise mt-3 hidden max-w-md text-pretty text-[0.95rem] leading-[1.55] text-white/90 md:block lg:max-w-lg"
+            className="hero-perex animate-rise mt-3 hidden max-w-md text-pretty text-[0.95rem] leading-[1.55] text-white md:block lg:max-w-lg"
           >
             {slide.text}
           </p>
@@ -79,7 +88,7 @@ function Hero() {
           {i === 0 ? (
             <Link
               to="/o-nas"
-              className="cta-link mt-3 inline-flex items-center gap-2 text-white/85 hover:text-white"
+              className="cta-link mt-3 inline-flex items-center gap-2 text-white hover:text-white"
             >
               O nás <ArrowRight className="size-4" />
             </Link>
@@ -87,7 +96,7 @@ function Hero() {
             <Link
               to="/clanky/$slug"
               params={{ slug: slide.slug }}
-              className="cta-link mt-3 inline-flex items-center gap-2 text-white/85 hover:text-white"
+              className="cta-link mt-3 inline-flex items-center gap-2 text-white hover:text-white"
             >
               Číst článek <ArrowRight className="size-4" />
             </Link>
@@ -106,12 +115,12 @@ function Hero() {
                 e.stopPropagation();
                 go(-1);
               }}
-              className="hero-nav-btn pointer-events-auto relative z-40 grid size-9 place-items-center text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.75)] transition-opacity hover:opacity-70"
+              className="hero-nav-btn pointer-events-auto relative z-40 grid size-9 place-items-center text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.95)] drop-shadow-[0_0_10px_rgba(0,0,0,0.8)] transition-opacity hover:opacity-70"
             >
               <ChevronLeft className="pointer-events-none size-6" strokeWidth={2} />
             </button>
             <span
-              className="hero-count pointer-events-none px-2 font-sans text-xs font-semibold tabular-nums text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.75)]"
+              className="hero-count pointer-events-none px-2 font-sans text-xs font-semibold tabular-nums text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.95)] drop-shadow-[0_0_10px_rgba(0,0,0,0.8)]"
               aria-live="polite"
             >
               {i + 1} / {total}
@@ -124,7 +133,7 @@ function Hero() {
                 e.stopPropagation();
                 go(1);
               }}
-              className="hero-nav-btn pointer-events-auto relative z-40 grid size-9 place-items-center text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.75)] transition-opacity hover:opacity-70"
+              className="hero-nav-btn pointer-events-auto relative z-40 grid size-9 place-items-center text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.95)] drop-shadow-[0_0_10px_rgba(0,0,0,0.8)] transition-opacity hover:opacity-70"
             >
               <ChevronRight className="pointer-events-none size-6" strokeWidth={2} />
             </button>
@@ -183,7 +192,7 @@ function SectionHeader({
       {kicker ? <p className="kicker text-primary/70">{kicker}</p> : null}
       <div className="mt-2 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h2 className="font-display text-[1.5rem] font-bold uppercase tracking-[0.03em] text-primary md:text-[1.875rem]">
+          <h2 className="font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">
             {title}
           </h2>
           {subtitle ? <p className="mt-1 text-[0.95rem] leading-[1.55] text-muted-foreground">{subtitle}</p> : null}
@@ -219,7 +228,7 @@ function ArticleTabs() {
     <section className="bg-background">
       <div className="mx-auto max-w-[88rem] px-5 section-y md:px-6">
         <div className="border-t-2 border-primary pt-5">
-          <h2 className="font-display text-[1.5rem] font-bold uppercase tracking-[0.03em] text-primary md:text-[1.875rem]">
+          <h2 className="font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">
             Články
           </h2>
 
@@ -231,7 +240,10 @@ function ArticleTabs() {
             <button
               key={link.id}
               type="button"
-              onClick={() => setActive(link.id)}
+              onClick={(e) => {
+                setActive(link.id);
+                e.currentTarget.scrollIntoView({ inline: "nearest", block: "nearest", behavior: "smooth" });
+              }}
               aria-selected={active === link.id}
               aria-current={active === link.id}
               className="text-base font-semibold normal-case text-primary transition-colors"
@@ -274,7 +286,7 @@ function Index() {
 
         {/* Zvýrazněné téma: Antisemitismus */}
         <section className="bg-primary text-primary-foreground">
-          <div className="tema-strip mx-auto flex max-w-[88rem] flex-col items-start gap-6 px-4 py-8 md:h-[135px] md:flex-row md:items-center md:justify-between md:px-6 md:py-0">
+          <div className="tema-strip mx-auto flex max-w-[88rem] flex-col items-start gap-6 px-4 py-8 md:px-6">
             <div className="flex items-start gap-4 md:items-center">
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary-foreground/10 ring-1 ring-primary-foreground/25">
                 <StarOfDavid className="h-6 w-6" />
@@ -331,8 +343,9 @@ function Index() {
         {/* Výběr redakce */}
         <section className="vyber-section bg-background">
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
+            <div className="border-t-2 border-primary pt-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2 className="font-display text-[1.5rem] font-bold uppercase tracking-[0.03em] text-primary md:text-[1.875rem]">Výběr redakce</h2>
+              <h2 className="font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">Výběr redakce</h2>
               <Link
                 to="/clanky"
                 className="cta-link inline-flex items-center gap-1.5 text-primary hover:underline"
@@ -353,6 +366,7 @@ function Index() {
                 />
               ))}
             </div>
+            </div>
           </div>
         </section>
 
@@ -363,15 +377,18 @@ function Index() {
               <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2 lg:gap-6">
                 {/* Tydýt */}
                 <div className="flex h-full min-h-0 flex-col">
-                  <h2 className="font-display text-[1.5rem] font-bold uppercase tracking-[0.03em] text-primary md:text-[1.875rem]">Tydýt týdne</h2>
-                  <article className="card-lift group mt-3 flex min-h-0 h-full flex-1 flex-row overflow-hidden rounded-2xl border border-border bg-card">
+                  <h2 className="font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">Tydýt týdne</h2>
+                  <article className="tydyt-card card-lift group mt-3 flex h-full min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card md:flex-row">
                     <img
                       src="/images/tydyt-konrad.jpg"
                       alt="Tydýt týdne — Konrad Stavridis"
                       loading="lazy"
-                      className="hidden w-[112px] shrink-0 self-stretch object-cover sm:block md:w-[128px]"
+                      className="tydyt-photo shrink-0 object-cover object-[50%_18%]"
+                      width={363}
+                      height={387}
+                      decoding="async"
                     />
-                    <div className="flex min-w-0 flex-1 flex-col justify-between gap-3 p-4">
+                    <div className="tydyt-body flex min-w-0 flex-1 flex-col justify-between gap-3">
                       <div>
                         <div className="flex items-center gap-3">
                           <Link
@@ -394,7 +411,7 @@ function Index() {
                           Tento týden vysvětluje, proč se o Izraeli mluví jinak než o jiných státech.
                         </p>
                       </div>
-                      <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div className="tydyt-actions flex flex-wrap items-center gap-x-4 gap-y-2">
                         <Link
                           to="/clanky"
                           search={{ filtr: "tydyt" }}
@@ -405,7 +422,7 @@ function Index() {
                         <Link
                           to="/clanky"
                           search={{ filtr: "tydyt" }}
-                          className="cta-link inline-flex items-center gap-1.5 text-primary hover:underline"
+                          className="tydyt-archive cta-link inline-flex items-center gap-1.5 text-primary hover:underline"
                         >
                           Archiv tydýtů <ArrowRight className="size-4" />
                         </Link>
@@ -416,7 +433,7 @@ function Index() {
 
                 {/* Dokumentujeme */}
                 <div className="flex h-full min-h-0 flex-col">
-                  <h2 className="font-display text-[1.5rem] font-bold uppercase tracking-[0.03em] text-primary md:text-[1.875rem]">Dokumentujeme</h2>
+                  <h2 className="font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">Dokumentujeme</h2>
                   <article className="documentujeme-card mt-3 flex h-full flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card">
                     <div className="documentujeme-inner flex h-full flex-1 flex-col justify-start p-4">
                       <div className="documentujeme-entries flex flex-col gap-3">

@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
+import { CARD_SIZES } from "@/lib/img";
 
 export function ArticleCard({
   image,
@@ -23,8 +24,10 @@ export function ArticleCard({
         src={image}
         alt={title}
         loading="lazy"
+        decoding="async"
         width={1280}
         height={720}
+        sizes={CARD_SIZES}
         className="aspect-video w-full object-cover"
       />
       <div className="flex flex-1 flex-col p-6">

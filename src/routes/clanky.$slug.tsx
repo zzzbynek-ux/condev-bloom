@@ -1,7 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { articleBySlug, IMPORTED, formatDate } from "@/lib/articles";
+import { articleBySlug, IMPORTED, formatDate, rewriteImportedHtml, htmlHasImage } from "@/lib/articles";
+import { ARTICLE_HERO_SIZES } from "@/lib/img";
 
 export const Route = createFileRoute("/clanky/$slug")({
   loader: ({ params }) => {
@@ -21,6 +22,8 @@ export const Route = createFileRoute("/clanky/$slug")({
 function ArticlePage() {
   const { article } = Route.useLoaderData();
   const related = IMPORTED.filter((a) => a.slug !== article.slug && a.tag === article.tag).slice(0, 3);
+  const body = rewriteImportedHtml(article.html, article.image);
+  const showLeadImage = Boolean(article.image) && !article.image.includes("fallback") && !htmlHasImage(article.html);
 
   return (
     <div className="min-h-screen bg-background">
@@ -29,10 +32,18 @@ function ArticlePage() {
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">{article.tag}</p>
         <h1 className="mt-3 font-display text-3xl font-bold text-primary md:text-4xl">{article.title}</h1>
         <p className="mt-3 text-sm text-muted-foreground">{formatDate(article.iso)}</p>
-        {article.image && !article.image.includes("fallback") ? (
-          <img src={article.image} alt="" className="mt-8 w-full rounded-xl object-cover" />
+        {showLeadImage ? (
+          <img
+            src={article.image}
+            alt=""
+            width={1280}
+            height={720}
+            sizes={ARTICLE_HERO_SIZES}
+            decoding="async"
+            className="mt-8 w-full rounded-xl object-cover"
+          />
         ) : null}
-        <div className="article-body mt-8 text-[17px] leading-relaxed text-foreground" dangerouslySetInnerHTML={{ __html: article.html }} />
+        <div className="article-body mt-8 text-[17px] leading-relaxed text-foreground" dangerouslySetInnerHTML={{ __html: body }} />
         {article.tags.length ? (
           <div className="mt-10 flex flex-wrap gap-2">
             {article.tags.map((t) => (

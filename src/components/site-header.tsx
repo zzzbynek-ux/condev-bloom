@@ -63,6 +63,8 @@ export function SiteHeader() {
           <Link to="/" className="flex shrink-0 items-center" aria-label="JednímHlasem — domů">
             <img
               src="/images/logo-jednim-hlasem.png"
+              srcSet="/images/logo-jednim-hlasem-1x.png 264w, /images/logo-jednim-hlasem.png 528w"
+              sizes="(min-width: 768px) 176px, 141px"
               alt="JednímHlasem"
               width={528}
               height={120}
@@ -90,7 +92,7 @@ export function SiteHeader() {
               type="button"
               aria-label={open ? "Zavřít menu" : "Otevřít menu"}
               onClick={() => setOpen((v) => !v)}
-              className="rounded-md border border-primary-foreground/30 p-1.5 md:p-2 lg:hidden"
+              className="rounded-md border border-primary-foreground/30 p-1.5 lg:hidden"
             >
               {open ? <X className="size-5" /> : <Menu className="size-5" />}
             </button>
@@ -111,7 +113,7 @@ export function SiteHeader() {
               </Link>
             ))}
           </nav>
-          <div className="flex items-center gap-2 lg:gap-3">
+          <div className="flex min-w-0 items-center gap-2 lg:gap-3">
             <form
               role="search"
               onSubmit={(e) => {
@@ -119,7 +121,7 @@ export function SiteHeader() {
                 if (!q.trim()) return;
                 void navigate({ to: "/hledat", search: { q } });
               }}
-              className="flex h-9 w-44 items-center gap-2 rounded-full border border-border bg-card px-3 lg:w-56"
+              className="flex h-9 w-40 items-center gap-2 rounded-full border border-border bg-card px-3 sm:w-44 lg:w-56"
             >
               <Search className="size-4 shrink-0 text-muted-foreground" />
               <input
