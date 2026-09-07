@@ -1,17 +1,15 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { SectionHeader } from "@/components/section-header";
 import { TopicCard } from "@/components/topic-card";
-import { Button } from "@/components/ui/button";
 import {
   INTRO,
   VALUES,
   AXES,
   WHAT_WE_DO,
   MISSION,
-  GET_INVOLVED,
 } from "@/lib/about-content";
 
 export const Route = createFileRoute("/o-nas")({
@@ -83,11 +81,11 @@ function ONas() {
         <section id="hodnoty" className="scroll-mt-32">
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
             <SectionHeader kicker="Co nás definuje" title="Naše hodnoty" />
-            <ul className="mt-8 grid gap-4 md:grid-cols-3">
+            <ul className="mt-8 grid items-stretch gap-4 md:grid-cols-3">
               {VALUES.map((value) => (
                 <li
                   key={value}
-                  className="card-lift rounded-xl border border-primary/15 bg-accent-soft p-6 text-[0.95rem] leading-[1.55] text-foreground"
+                  className="card-lift flex h-full rounded-xl border border-border bg-card p-6 text-[0.95rem] leading-[1.55] text-foreground"
                 >
                   {value}
                 </li>
@@ -138,33 +136,8 @@ function ONas() {
             </div>
           </div>
         </section>
-
-        <section id="zapojte-se" className="scroll-mt-32">
-          <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
-            <SectionHeader kicker="Přidejte se" title={GET_INVOLVED.title} />
-            <p className="mt-8 max-w-3xl text-left text-[0.95rem] leading-[1.55] text-muted-foreground">
-              {GET_INVOLVED.text}
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Button
-                asChild
-                className="h-11 rounded-full bg-primary px-6 text-white hover:bg-primary/90"
-              >
-                <a href={GET_INVOLVED.primary.href}>{GET_INVOLVED.primary.label}</a>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                className="h-11 rounded-full border-primary text-primary hover:bg-primary/5"
-              >
-                <Link to={GET_INVOLVED.secondary.href}>{GET_INVOLVED.secondary.label}</Link>
-              </Button>
-            </div>
-          </div>
-        </section>
       </main>
       <SiteFooter />
     </div>
   );
 }
-

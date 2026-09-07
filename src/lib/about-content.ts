@@ -12,7 +12,6 @@ export const INTRO = {
   links: [
     { label: "Naše hodnoty", href: "#hodnoty" },
     { label: "Naše témata", href: "#osy" },
-    { label: "Zapojte se", href: "#zapojte-se" },
   ] as const,
 };
 
@@ -131,11 +130,3 @@ export const MISSION = {
     "JednímHlasem propojuje odborníky, novináře, akademiky i aktivní občany, kteří sdílejí závazek k odpovědné debatě o Izraeli, antisemitismu a hodnotách svobodného světa.",
   ] as const,
 };
-
-export const GET_INVOLVED = {
-  title: "Zapojte se",
-  text:
-    "JednímHlasem je otevřená platforma. Nabízíme prostor autorům, kteří chtějí publikovat vlastní články, analýzy nebo komentáře.",
-  primary: { label: "Napsat na info@jednimhlasem.cz", href: "mailto:info@jednimhlasem.cz" },
-  secondary: { label: "Jak se zapojit", href: "/zapojte-se" },
-} as const;
