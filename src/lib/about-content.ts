@@ -6,8 +6,8 @@ export const INTRO = {
     "JednímHlasem je nezávislá občanská iniciativa a otevřená platforma, která vznikla jako reakce na rostoucí dezinformace, selektivní empatii a zkreslený obraz Izraele ve veřejném prostoru. Naším cílem je vracet fakta, kontext a důstojnost do debaty – v době, kdy se realita ohýbá podle ideologie a pravda přizpůsobuje algoritmům.",
   ] as const,
   image: {
-    src: "@/assets/hero-blindfold.jpg",
-    alt: "Skupina lidí se stuhou přes oči jako symbol slepoty vůči realitě",
+    src: "/images/o-nas-vlajka.jpg",
+    alt: "Žena zahalená izraelskou vlajkou hledí do krajiny",
   },
   links: [
     { label: "Naše hodnoty", href: "#hodnoty" },
