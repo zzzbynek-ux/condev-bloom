@@ -144,7 +144,7 @@ export const LATEST: NewsItem[] = [
     slug: "propustte-rukojmi",
     tag: "Analýza",
     tagTone: "primary",
-    title: "Pusťte rukojmí!",
+    title: "Propustte rukojmí!",
     perex: "Informace o zadržovaných izraelských rukojmích v Gaze.",
     date: "5. 7. 2026",
     image: "flags",
