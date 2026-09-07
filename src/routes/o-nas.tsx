@@ -126,10 +126,10 @@ function ONas() {
           </div>
         </section>
 
-        <section className="onas-invert bg-navy-900 text-white">
+        <section>
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
             <SectionHeader kicker="Proč to děláme" title={MISSION.title} />
-            <div className="mt-8 max-w-3xl space-y-4 text-left text-[0.95rem] leading-[1.55] text-white/85">
+            <div className="mt-8 max-w-3xl space-y-4 text-left text-[0.95rem] leading-[1.55] text-foreground">
               {MISSION.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
