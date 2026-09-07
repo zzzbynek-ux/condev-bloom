@@ -59,21 +59,22 @@ export function SiteHeader() {
   return (
     <header className="site-header-sticky sticky top-0 z-50 shadow-sm">
       <div className="bg-primary text-primary-foreground">
-        <div className="mx-auto flex h-16 max-w-[88rem] items-center gap-6 px-4 md:h-[4.25rem] md:px-6">
+        <div className="mx-auto flex h-12 max-w-[88rem] items-center gap-3 px-4 md:h-[4.25rem] md:gap-6 md:px-6">
           <Link to="/" className="flex shrink-0 items-center" aria-label="JednímHlasem — domů">
             <img
               src="/images/logo-jednim-hlasem.png"
               alt="JednímHlasem"
-              width={264}
-              height={60}
-              className="h-9 w-auto md:h-10"
+              width={528}
+              height={120}
+              decoding="async"
+              className="h-8 w-auto md:h-10"
             />
           </Link>
 
           <div className="ml-auto flex items-center gap-3">
             <Link
               to="/podporte-nas"
-              className="hidden h-10 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-primary transition-opacity hover:opacity-90 lg:inline-flex"
+              className="hidden h-9 items-center justify-center rounded-full bg-white px-4 text-[13px] font-semibold text-primary transition-opacity hover:opacity-90 md:inline-flex lg:h-10 lg:px-6 lg:text-sm"
             >
               Podpořte nás
             </Link>
@@ -81,7 +82,7 @@ export function SiteHeader() {
               type="button"
               aria-label="Hledat"
               onClick={openSearch}
-              className="rounded-md p-2 lg:hidden"
+              className="rounded-md p-1.5 md:hidden"
             >
               <Search className="size-5" />
             </button>
@@ -89,7 +90,7 @@ export function SiteHeader() {
               type="button"
               aria-label={open ? "Zavřít menu" : "Otevřít menu"}
               onClick={() => setOpen((v) => !v)}
-              className="rounded-md border border-primary-foreground/30 p-2 lg:hidden"
+              className="rounded-md border border-primary-foreground/30 p-1.5 md:p-2 lg:hidden"
             >
               {open ? <X className="size-5" /> : <Menu className="size-5" />}
             </button>
@@ -97,9 +98,9 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <div className="hidden border-b border-border bg-background lg:block">
-        <div className="mx-auto flex h-12 max-w-[88rem] items-center justify-between gap-8 px-4 md:px-6">
-          <nav className="flex items-center gap-8" aria-label="Hlavní navigace">
+      <div className="hidden border-b border-border bg-background md:block">
+        <div className="mx-auto flex h-12 max-w-[88rem] items-center justify-between gap-4 px-4 md:px-6 lg:gap-8">
+          <nav className="flex items-center gap-6 lg:gap-8" aria-label="Hlavní navigace">
             {DESKTOP_LINKS.map((item) => (
               <Link
                 key={item.to}
@@ -110,7 +111,7 @@ export function SiteHeader() {
               </Link>
             ))}
           </nav>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 lg:gap-3">
             <form
               role="search"
               onSubmit={(e) => {
@@ -118,7 +119,7 @@ export function SiteHeader() {
                 if (!q.trim()) return;
                 void navigate({ to: "/hledat", search: { q } });
               }}
-              className="flex h-9 w-56 items-center gap-2 rounded-full border border-border bg-card px-3"
+              className="flex h-9 w-44 items-center gap-2 rounded-full border border-border bg-card px-3 lg:w-56"
             >
               <Search className="size-4 shrink-0 text-muted-foreground" />
               <input
@@ -170,7 +171,7 @@ export function SiteHeader() {
               setOpen(false);
               void navigate({ to: "/hledat", search: { q } });
             }}
-            className="mb-3 flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2"
+            className="mb-3 flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 md:hidden"
           >
             <Search className="size-4 text-muted-foreground" />
             <input
@@ -194,7 +195,7 @@ export function SiteHeader() {
               </Link>
             ))}
           </nav>
-          <div className="mt-4 flex items-center gap-3 border-t border-border pt-4">
+          <div className="mt-4 flex items-center gap-3 border-t border-border pt-4 md:hidden">
             <a
               href="https://www.facebook.com/JednimHlasem"
               target="_blank"
