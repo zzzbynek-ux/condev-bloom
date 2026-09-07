@@ -144,7 +144,7 @@ export const LATEST: NewsItem[] = [
     slug: "propustte-rukojmi",
     tag: "Analýza",
     tagTone: "primary",
-    title: "Propusťte rukojmí!",
+    title: "Pusťte rukojmí!",
     perex: "Informace o zadržovaných izraelských rukojmích v Gaze.",
     date: "5. 7. 2026",
     image: "flags",
@@ -214,7 +214,8 @@ export type FeedGroup = {
 
 
 export const HERO_BANNER = [
-  { kicker: "Co doplňujeme", title: "Celý obraz. Bez ořezu.", text: "Když veřejný prostor ovládají silná slova a jednostranné příběhy, přinášíme témata, která zůstávají mimo pozornost. Spravedlnost není selektivní.", image: "/images/hero/manifest.jpg", focus: "82% 18%", slug: "manifest", overlay: "default" },
+  { kicker: "O nás", title: "Jedním hlasem neznamená všichni stejně, ale společně za to, co nás spojuje.", text: "JednímHlasem je nezávislá občanská iniciativa a otevřená platforma, která vznikla jako reakce na rostoucí dezinformace, selektivní empatii a zkreslený obraz Izraele ve veřejném prostoru.", image: "/images/o-nas-vlajka.jpg", focus: "82% 22%", slug: "o-nas", overlay: "default" },
+  { kicker: "Co doplňujeme", title: "Celý obraz. Bez ořezu.", text: "Když veřejný prostor ovládají silná slova a jednostranné příběhy, přinášíme témata, která zůstávají mimo pozornost. Spravedlnost není selektivní.", image: "/images/hero/slogany.jpg", focus: "78% 48%", slug: "udavame-ton", overlay: "default" },
   { kicker: "Proč to děláme", title: "Malý stát. Globální přínos.", text: "Izrael není jen spojencem Západu, je jeho součástí. Přináší světu víc, než by odpovídalo jeho velikosti — od technologií přes medicínu až po humanitární pomoc.", image: "/images/hero/maly-stat.jpg", focus: "72% 46%", slug: "izrael-haji-vic-nez-jen-vlastni-hranice", overlay: "default" },
   { kicker: "Jak to funguje", title: "Jeden klik mění svět", text: "Pod příspěvkem s tisíci lajky se objeví jediný věcný komentář a naruší sdílený obraz. Algoritmus je jednoduchý: čím víc reakcí, tím větší dosah.", image: "/images/hero/jeden-klik.jpg", focus: "78% 50%", slug: "jeden-klik-meni-svet", overlay: "default" },
   { kicker: "Antisemitismus", title: "Antisemitismus 2.0", text: "Nový antisemitismus mluví jazykem solidarity a historické křivdy. Nacistickou pásku nahradila kefíja — ale posedlost Židy zůstala.", image: "/images/hero/antisemitismus.jpg", focus: "78% 48%", slug: "novy-antisemitismus-o-palestinu-tady-vubec-nejde", overlay: "default" },
