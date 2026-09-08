@@ -52,8 +52,8 @@ function ONas() {
             aria-hidden
             className="onas-hero-overlay pointer-events-none absolute inset-0 bg-linear-to-r from-[#0b1a3a]/92 via-[#0b1a3a]/58 via-[42%] to-transparent"
           />
-          <div className="onas-hero-grid relative z-10 mx-auto flex h-full max-w-[88rem] items-center px-5 md:px-6 lg:px-16">
-            <div className="onas-hero-card w-full">
+          <div className="onas-hero-grid relative z-10 mx-auto flex h-full w-full max-w-[88rem] items-start justify-start px-5 md:px-6">
+            <div className="onas-hero-card w-full text-left">
               <p className="kicker text-white/70">{INTRO.eyebrow}</p>
               <h1 className="mt-3 max-w-xl text-balance font-display text-[1.65rem] font-bold leading-[1.15] text-white md:text-[1.85rem] lg:text-[2.1rem]">
                 {INTRO.title}
