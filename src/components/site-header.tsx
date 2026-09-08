@@ -33,10 +33,14 @@ const DESKTOP_LINKS = [
 
 const MENU_LINKS = [
   ...DESKTOP_LINKS,
+  { label: "E-shop", to: "/eshop" as const },
   { label: "Ptejte se AI", to: "/ptejte-se-ai" as const },
   { label: "Nahlásit incident", to: "/nahlasit-incident" as const },
   { label: "Podpořte nás", to: "/podporte-nas" as const },
 ];
+
+const navLinkClass =
+  "text-[15px] font-semibold leading-none tracking-normal text-foreground transition-colors hover:text-primary";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -100,20 +104,19 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <div className="hidden border-b border-border bg-background md:block">
+      <div className="hidden border-b border-border bg-card md:block">
         <div className="mx-auto flex h-12 max-w-[88rem] items-center justify-between gap-4 px-4 md:px-6 lg:gap-8">
           <nav className="flex items-center gap-6 lg:gap-8" aria-label="Hlavní navigace">
             {DESKTOP_LINKS.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className="text-[13px] font-semibold text-foreground transition-colors hover:text-primary"
-              >
+              <Link key={item.to} to={item.to} className={navLinkClass}>
                 {item.label}
               </Link>
             ))}
           </nav>
-          <div className="flex min-w-0 items-center gap-2 lg:gap-3">
+          <div className="flex min-w-0 items-center gap-3 lg:gap-4">
+            <Link to="/eshop" className={navLinkClass}>
+              E-shop
+            </Link>
             <form
               role="search"
               onSubmit={(e) => {
