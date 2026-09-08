@@ -739,8 +739,12 @@
   }
   .tema-buttons > :nth-child(3),
   .tema-buttons > .tema-report {
-    background: #FF3B3B !important;
+    background: #E11D2E !important;
     color: #fff !important;
+  }
+  .tema-buttons > :nth-child(3):hover,
+  .tema-buttons > .tema-report:hover {
+    background: #C41625 !important;
   }
 }
 
@@ -812,11 +816,21 @@
     justify-content: space-between;
     height: auto;
     min-height: 0;
-    padding: 1.25rem 1.5rem;
+    padding: 0.85rem 1.5rem;
   }
   .tema-strip > div:first-child {
     min-width: 0;
     flex: 1;
+  }
+  .tema-perex {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 13px;
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 36rem;
   }
   .tema-buttons {
     display: flex;
