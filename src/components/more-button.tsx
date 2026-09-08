@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
  * Vede na další články stejné rubriky / tagu.
  */
 const buttonClass =
-  "inline-flex items-center gap-2 rounded-full border-2 border-primary px-7 py-2.5 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground";
+  "pill-solid inline-flex items-center gap-2 rounded-full px-7 py-2.5 text-sm font-bold transition-colors";
 
 export function MoreButton({
   label,

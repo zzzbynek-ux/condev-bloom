@@ -87,12 +87,15 @@ function Clanky() {
   if (params.slug) return <Outlet />;
 
   const { tag, filtr } = Route.useSearch();
+  const navigate = Route.useNavigate();
   const [visible, setVisible] = useState(12);
 
   const isTagFilter = Boolean(tag) && !FILTERS.includes(tag!);
   const active = isTagFilter
     ? "Všechny texty"
-    : (FILTER_IDS.find((f) => f.id === filtr)?.label ?? "Všechny texty");
+    : filtr === "vse"
+      ? "Všechny texty"
+      : (FILTER_IDS.find((f) => f.id === filtr)?.label ?? "Nové");
 
   useEffect(() => setVisible(12), [active, tag, filtr]);
 
@@ -100,8 +103,11 @@ function Clanky() {
     if (isTagFilter) {
       return articlesByTag(tag!).map((a) => toCard(a, "Všechny texty"));
     }
-    if (!filtr || filtr === "vse" || active === "Všechny texty") {
+    if (filtr === "vse") {
       return ALL_ARTICLES;
+    }
+    if (!filtr || filtr === "nove") {
+      return articlesIn("nove").map((a) => toCard(a, "Nové"));
     }
     if (filtr === "doporucujeme") {
       return DOPORUCUJEME.map((a) => toCard(a, active));
@@ -121,7 +127,7 @@ function Clanky() {
       <SiteHeader />
       <main className="mx-auto max-w-6xl px-5 py-14">
         <p className="text-xs uppercase tracking-[0.18em] text-primary">Texty</p>
-        <h1 className="mt-2 text-4xl font-semibold md:text-5xl">Články a analýzy</h1>
+        <h1 className="mt-2 font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">Články a analýzy</h1>
         <p className="mt-4 max-w-2xl text-muted-foreground">
           Vše na jednom místě — od krátkých faktických vysvětlení po dlouhé studie.
         </p>
@@ -134,20 +140,36 @@ function Clanky() {
           {FILTERS.map((f) => {
             const filterId = FILTER_IDS.find((x) => x.label === f)?.id;
             const isActive = active === f;
+            const search =
+              f === "Všechny texty"
+                ? { filtr: "vse" }
+                : f === "Nové"
+                  ? {}
+                  : { filtr: filterId };
+            const href =
+              f === "Všechny texty"
+                ? "/clanky?filtr=vse"
+                : f === "Nové"
+                  ? "/clanky"
+                  : `/clanky?filtr=${filterId}`;
             return (
-              <Link
+              <a
                 key={f}
-                to="/clanky"
-                search={f === "Všechny texty" ? {} : { filtr: filterId }}
-                aria-current={isActive}
-                aria-selected={isActive}
+                href={href}
+                aria-current={isActive ? "true" : undefined}
                 onClick={(e) => {
-                  e.currentTarget.scrollIntoView({ inline: "nearest", block: "nearest", behavior: "smooth" });
+                  e.preventDefault();
+                  void navigate({ to: "/clanky", search });
+                  e.currentTarget.scrollIntoView({
+                    inline: "nearest",
+                    block: "nearest",
+                    behavior: "smooth",
+                  });
                 }}
-                className="whitespace-nowrap text-base font-semibold leading-none text-[#0038B8] no-underline transition-colors"
+                className="whitespace-nowrap text-base font-semibold leading-none no-underline"
               >
                 {f}
-              </Link>
+              </a>
             );
           })}
         </nav>

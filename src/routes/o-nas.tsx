@@ -63,12 +63,12 @@ function ONas() {
                   <p key={paragraph}>{paragraph}</p>
                 ))}
               </div>
-              <nav className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-semibold text-white">
+              <nav className="onas-hero-nav mt-5" aria-label="Sekce stránky O nás">
                 {INTRO.links.map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
-                    className="transition-colors hover:text-white/80 hover:underline"
+                    className="onas-hero-pill"
                   >
                     {link.label}
                   </a>
@@ -112,7 +112,7 @@ function ONas() {
           </div>
         </section>
 
-        <section>
+        <section id="aktivity" className="scroll-mt-32">
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
             <SectionHeader kicker="Aktivity" title={WHAT_WE_DO.title} />
             <ul className="mt-8 max-w-3xl space-y-4">
@@ -126,7 +126,7 @@ function ONas() {
           </div>
         </section>
 
-        <section>
+        <section id="mise" className="scroll-mt-32">
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
             <SectionHeader kicker="Proč to děláme" title={MISSION.title} />
             <div className="mt-8 max-w-3xl space-y-4 text-left text-[0.95rem] leading-[1.55] text-foreground">

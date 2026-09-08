@@ -7,3 +7,4 @@ export function heroSrcSet(src: string): string | undefined {
 export const HERO_SIZES = "100vw";
 export const CARD_SIZES = "(min-width: 1280px) 410px, (min-width: 768px) 45vw, 100vw";
 export const ARTICLE_HERO_SIZES = "(min-width: 768px) 768px, 100vw";
+export const RELATED_SIZES = "(min-width: 1280px) 360px, (min-width: 768px) 33vw, 80vw";

@@ -39,9 +39,6 @@ const MENU_LINKS = [
   { label: "Podpořte nás", to: "/podporte-nas" as const },
 ];
 
-const navLinkClass =
-  "text-[15px] font-semibold leading-none tracking-normal text-foreground transition-colors hover:text-primary";
-
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState("");
@@ -108,13 +105,20 @@ export function SiteHeader() {
         <div className="mx-auto flex h-12 max-w-[88rem] items-center justify-between gap-4 px-4 md:px-6 lg:gap-8">
           <nav className="flex items-center gap-6 lg:gap-8" aria-label="Hlavní navigace">
             {DESKTOP_LINKS.map((item) => (
-              <Link key={item.to} to={item.to} className={navLinkClass}>
+              <Link
+                key={item.to}
+                to={item.to}
+                className="text-[15px] font-semibold leading-none tracking-normal text-foreground transition-colors hover:text-primary"
+              >
                 {item.label}
               </Link>
             ))}
           </nav>
           <div className="flex min-w-0 items-center gap-3 lg:gap-4">
-            <Link to="/eshop" className={navLinkClass}>
+            <Link
+              to="/eshop"
+              className="text-[15px] font-semibold leading-none tracking-normal text-foreground transition-colors hover:text-primary"
+            >
               E-shop
             </Link>
             <form

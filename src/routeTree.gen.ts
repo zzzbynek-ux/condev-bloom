@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AntisemitismusRouteImport } from './routes/antisemitismus'
 import { Route as ClankyRouteImport } from './routes/clanky'
+import { Route as EshopRouteImport } from './routes/eshop'
 import { Route as HledatRouteImport } from './routes/hledat'
 import { Route as NahlasitIncidentRouteImport } from './routes/nahlasit-incident'
 import { Route as ONasRouteImport } from './routes/o-nas'
@@ -36,6 +37,11 @@ const AntisemitismusRoute = AntisemitismusRouteImport.update({
 const ClankyRoute = ClankyRouteImport.update({
   id: '/clanky',
   path: '/clanky',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EshopRoute = EshopRouteImport.update({
+  id: '/eshop',
+  path: '/eshop',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HledatRoute = HledatRouteImport.update({
@@ -93,6 +99,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/antisemitismus': typeof AntisemitismusRoute
   '/clanky': typeof ClankyRouteWithChildren
+  '/eshop': typeof EshopRoute
   '/hledat': typeof HledatRoute
   '/nahlasit-incident': typeof NahlasitIncidentRoute
   '/o-nas': typeof ONasRoute
@@ -108,6 +115,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/antisemitismus': typeof AntisemitismusRoute
   '/clanky': typeof ClankyRouteWithChildren
+  '/eshop': typeof EshopRoute
   '/hledat': typeof HledatRoute
   '/nahlasit-incident': typeof NahlasitIncidentRoute
   '/o-nas': typeof ONasRoute
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/antisemitismus': typeof AntisemitismusRoute
   '/clanky': typeof ClankyRouteWithChildren
+  '/eshop': typeof EshopRoute
   '/hledat': typeof HledatRoute
   '/nahlasit-incident': typeof NahlasitIncidentRoute
   '/o-nas': typeof ONasRoute
@@ -141,6 +150,7 @@ export interface FileRouteTypes {
     | '/'
     | '/antisemitismus'
     | '/clanky'
+    | '/eshop'
     | '/hledat'
     | '/nahlasit-incident'
     | '/o-nas'
@@ -156,6 +166,7 @@ export interface FileRouteTypes {
     | '/'
     | '/antisemitismus'
     | '/clanky'
+    | '/eshop'
     | '/hledat'
     | '/nahlasit-incident'
     | '/o-nas'
@@ -171,6 +182,7 @@ export interface FileRouteTypes {
     | '/'
     | '/antisemitismus'
     | '/clanky'
+    | '/eshop'
     | '/hledat'
     | '/nahlasit-incident'
     | '/o-nas'
@@ -187,6 +199,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AntisemitismusRoute: typeof AntisemitismusRoute
   ClankyRoute: typeof ClankyRouteWithChildren
+  EshopRoute: typeof EshopRoute
   HledatRoute: typeof HledatRoute
   NahlasitIncidentRoute: typeof NahlasitIncidentRoute
   ONasRoute: typeof ONasRoute
@@ -219,6 +232,13 @@ declare module '@tanstack/react-router' {
       path: '/clanky'
       fullPath: '/clanky'
       preLoaderRoute: typeof ClankyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/eshop': {
+      id: '/eshop'
+      path: '/eshop'
+      fullPath: '/eshop'
+      preLoaderRoute: typeof EshopRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hledat': {
@@ -309,6 +329,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AntisemitismusRoute: AntisemitismusRoute,
   ClankyRoute: ClankyRouteWithChildren,
+  EshopRoute: EshopRoute,
   HledatRoute: HledatRoute,
   NahlasitIncidentRoute: NahlasitIncidentRoute,
   ONasRoute: ONasRoute,
