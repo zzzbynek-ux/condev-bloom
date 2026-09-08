@@ -45,7 +45,6 @@ export const TOPICS: Topic[] = [
   },
 ];
 
-/** Rubriky ve druhém navigačním pruhu */
 export const SECTIONS = [
   "Izrael a Židé",
   "Antisemitismus",
@@ -54,80 +53,6 @@ export const SECTIONS = [
   "Hlasy a příběhy",
   "Reporty",
 ] as const;
-
-/** Texty v hero slideru */
-export const SLIDES = [
-  {
-    kicker: "Proč to děláme",
-    title: "Malý stát. Globální přínos.",
-    text: "Izrael není jen spojencem Západu, je jeho součástí. Přináší světu víc, než by odpovídalo jeho velikosti — od technologií přes medicínu až po humanitární pomoc.",
-  },
-  {
-    kicker: "Jak to funguje",
-    title: "Jeden klik mění svět",
-    text: "Pod příspěvkem s tisíci lajky se objeví jediný věcný komentář a naruší sdílený obraz. Algoritmus je jednoduchý: čím víc reakcí, tím větší dosah.",
-  },
-  {
-    kicker: "Antisemitismus",
-    title: "Antisemitismus 2.0",
-    text: "Nový antisemitismus mluví jazykem solidarity a historické křivdy. Nacistickou pásku nahradila kefíja — ale posedlost Židy zůstala.",
-  },
-  {
-    kicker: "Co doplňujeme",
-    title: "Celý obraz. Bez ořezu.",
-    text: "Když veřejný prostor ovládají silná slova a jednostranné příběhy, přinášíme témata, která zůstávají mimo pozornost. Spravedlnost není selektivní.",
-  },
-  {
-    kicker: "Ideologie",
-    title: "Rudo-zelená aliance",
-    text: "Útoky na Židy rostou z ideologického spojenectví progresivní levice a islamismu, jež pod pláštíkem lidských práv legitimizuje násilí.",
-  },
-  {
-    kicker: "Média",
-    title: "Média ve službách teroru",
-    text: "Západní média se prezentují jako objektivní strážci pravdy. Když ale přijde na Izrael, přebírají informace od teroristů bez váhání.",
-  },
-  {
-    kicker: "Vliv",
-    title: "Zaměřeno na Katar",
-    text: "Protesty na univerzitách, výkřiky v ulicích i virální příspěvky spojuje víc, než se zdá. Ukazujeme, jak hluboko sahá katarský vliv.",
-  },
-  {
-    kicker: "Blízký východ",
-    title: "Mír začíná s pravdou",
-    text: "Konflikt není jen o dvou stranách. Arabské státy a mezinárodní instituce ho nejen sledují — udržují ho při životě.",
-  },
-];
-
-/** Texty v hero slideru */
-export const HERO_SLIDES = SLIDES.slice(0, 4);
-
-
-/** Tři zvýrazněné karty pod rychlými akcemi */
-export const FEATURED = [
-  {
-    title: "Změň algoritmus\n— změníš realitu",
-    text: "Diskuze a komentáře na sociálních sítích ovlivňují naši realitu.",
-    tone: "sand",
-    tag: "Výběr redakce",
-    date: "05/07/25",
-  },
-  {
-    title: "Malý stát.\nGlobální přínos.",
-    text: "Naše podpora a aktivity mají globální dosah.",
-    tone: "flag",
-    tag: "Výběr redakce",
-    date: "05/07/25",
-  },
-  {
-    title: "Slogany živí\nemoce, ne mír",
-    text: "Přestaňme podléhat prázdným heslům a hledejme skutečné řešení.",
-    tone: "red",
-    tag: "Výběr redakce",
-    date: "05/07/25",
-  },
-] as const;
-
 
 export type NewsItem = {
   slug: string;
@@ -212,10 +137,9 @@ export type FeedGroup = {
   items: FeedItem[];
 };
 
-
 export const HERO_BANNER = [
-  { kicker: "Co doplňujeme", title: "Celý obraz. Bez ořezu.", text: "Když veřejný prostor ovládají silná slova a jednostranné příběhy, přinášíme témata, která zůstávají mimo pozornost. Spravedlnost není selektivní.", image: "/images/hero/vlajka.svg", focus: "50% 45%", slug: "o-nas", overlay: "default" },
-  { kicker: "Co doplňujeme", title: "Celý obraz. Bez ořezu.", text: "Když veřejný prostor ovládají silná slova a jednostranné příběhy, přinášíme témata, která zůstávají mimo pozornost. Spravedlnost není selektivní.", image: "/images/hero/community-05-Rectangle-44-1.jpg", focus: "78% 48%", slug: "udavame-ton", overlay: "default" },
+  { kicker: "O nás", title: "Jedním hlasem neznamená všichni stejně, ale společně za to, co nás spojuje.", text: "JednímHlasem je nezávislá občanská iniciativa a otevřená platforma, která vznikla jako reakce na rostoucí dezinformace, selektivní empatii a zkreslený obraz Izraele ve veřejném prostoru.", image: "/images/hero/vlajka.svg", focus: "50% 45%", slug: "o-nas", overlay: "default" },
+  { kicker: "Co doplňujeme", title: "Celý obraz. Bez ořezu.", text: "Když veřejný prostor ovládají silná slova a jednostranné příběhy, přinášíme témata, která zůstávají mimo pozornost. Spravedlnost není selektivní.", image: "https://community.condevweb.com/wp-content/uploads/2026/01/Rectangle-44-1.jpg", focus: "72% 48%", slug: "udavame-ton", overlay: "default" },
   { kicker: "Proč to děláme", title: "Malý stát. Globální přínos.", text: "Izrael není jen spojencem Západu, je jeho součástí. Přináší světu víc, než by odpovídalo jeho velikosti — od technologií přes medicínu až po humanitární pomoc.", image: "/images/hero/maly-stat.jpg", focus: "72% 46%", slug: "izrael-haji-vic-nez-jen-vlastni-hranice", overlay: "default" },
   { kicker: "Jak to funguje", title: "Jeden klik mění svět", text: "Pod příspěvkem s tisíci lajky se objeví jediný věcný komentář a naruší sdílený obraz. Algoritmus je jednoduchý: čím víc reakcí, tím větší dosah.", image: "/images/hero/jeden-klik.jpg", focus: "78% 50%", slug: "jeden-klik-meni-svet", overlay: "default" },
   { kicker: "Antisemitismus", title: "Antisemitismus 2.0", text: "Nový antisemitismus mluví jazykem solidarity a historické křivdy. Nacistickou pásku nahradila kefíja — ale posedlost Židy zůstala.", image: "/images/hero/antisemitismus.jpg", focus: "78% 48%", slug: "novy-antisemitismus-o-palestinu-tady-vubec-nejde", overlay: "default" },
