@@ -1,15 +1,25 @@
-/* Mobile Antisemitismus strip: center + redder report link */
+/* Pruh Antisemitismus: mobil vycentrovaný, Nahlásit ostřejší červeň */
 @media (max-width: 699px) {
   .tema-strip {
     align-items: center !important;
-    text-align: center;
+    text-align: center !important;
   }
   .tema-strip > div:first-child {
+    width: 100%;
     justify-content: center !important;
     align-items: center !important;
   }
+  .tema-strip .kicker,
+  .tema-strip h2 {
+    text-align: left;
+  }
   .tema-buttons {
     justify-content: center !important;
+    text-align: center;
+  }
+  .tema-buttons > a,
+  .tema-buttons > button {
+    color: #fff !important;
   }
   .tema-buttons > :nth-child(3),
   .tema-buttons > .tema-report {
