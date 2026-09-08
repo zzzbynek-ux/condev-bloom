@@ -59,7 +59,7 @@ function NahlasitIncident() {
             </p>
 
             <img
-              src="https://community.condevweb.com/wp-content/uploads/2026/01/Rectangle-50-1.jpg"
+              src="/images/nahlas-nenavist.jpg"
               alt="Nahlaš nenávist, než zdomácní"
               width={715}
               height={367}
