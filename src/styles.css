@@ -621,6 +621,10 @@
 }
 
 /* Tydýt: čtvercový medailon na všech šířkách */
+.tydyt-card,
+.documentujeme-card {
+  border-left: 3px solid #0038B8;
+}
 .tydyt-card {
   flex-direction: row;
   align-items: flex-start;
@@ -1247,19 +1251,31 @@
 .kampan-strip { background: var(--paper, #f7f8fb); }
 .kampan-card {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
+  position: relative;
   overflow: hidden;
   background: #fff;
   border-radius: 0.75rem;
   border: 1px solid rgba(0, 56, 184, 0.12);
   border-left: 3px solid #0038B8;
-  text-decoration: none;
   color: inherit;
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 .kampan-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(11, 26, 58, 0.10);
+}
+/* /o-nas: statická karta je pořád <a.kampan-card> s copy + fotkou */
+a.kampan-card {
+  flex-direction: column-reverse;
+  text-decoration: none;
+}
+.kampan-hit {
+  display: flex;
+  flex-direction: column-reverse;
+  text-decoration: none;
+  color: inherit;
+  min-width: 0;
 }
 .kampan-copy {
   padding: 1rem 1.1rem 1.1rem;
@@ -1285,8 +1301,28 @@
   line-height: 1.2;
 }
 .kampan-card:hover .kampan-cta { color: #002a8a; }
+.kampan-strip .kampan-copy {
+  padding: 0.7rem 1rem 0.8rem;
+}
+.kampan-strip .kampan-photo {
+  height: 7rem;
+}
+.kampan-strip .kampan-cta {
+  margin-top: 0.4rem;
+}
+@keyframes kampan-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.kampan-fade {
+  animation: kampan-fade 0.45s ease both;
+}
 @media (min-width: 768px) {
-  .kampan-card {
+  a.kampan-card {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .kampan-hit {
     flex-direction: row;
     align-items: stretch;
   }
@@ -1303,6 +1339,12 @@
     height: auto;
     min-height: 11rem;
     align-self: stretch;
+  }
+  .kampan-strip .kampan-copy {
+    padding: 0.7rem 1.2rem;
+  }
+  .kampan-strip .kampan-photo {
+    min-height: 8.25rem;
   }
 }
 

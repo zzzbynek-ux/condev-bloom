@@ -7,7 +7,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
 import { MoreButton } from "@/components/more-button";
-import { ARTICLE_SECTIONS, HERO_BANNER, VYBER_REDAKCE } from "@/lib/content";
+import { ARTICLE_SECTIONS, HERO_BANNER, KAMPAN_SLIDES, VYBER_REDAKCE } from "@/lib/content";
 import { heroSrcSet, HERO_SIZES } from "@/lib/img";
 
 export const Route = createFileRoute("/")({
@@ -37,7 +37,7 @@ function Hero() {
   useEffect(() => {
     const t = setInterval(() => setI((v) => (v + 1) % total), 6000);
     return () => clearInterval(t);
-  }, [total, i]);
+  }, [total]);
 
   const slide = HERO_BANNER[i] ?? HERO_BANNER[0]!;
 
@@ -146,6 +146,8 @@ function Hero() {
   );
 }
 
+
+
 function StarOfDavid({ className }: { className?: string }) {
   return (
     <svg
@@ -162,6 +164,17 @@ function StarOfDavid({ className }: { className?: string }) {
     </svg>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
 
 function SectionHeader({
   kicker,
@@ -266,6 +279,52 @@ function ArticleTabs() {
   );
 }
 
+function KampanStrip() {
+  const [i, setI] = useState(0);
+  const total = KAMPAN_SLIDES.length;
+  const slide = KAMPAN_SLIDES[i]!;
+
+  useEffect(() => {
+    const t = setInterval(() => setI((v) => (v + 1) % total), 8000);
+    return () => clearInterval(t);
+  }, [total, i]);
+
+  return (
+    <section className="kampan-strip" aria-label="Kampaň Gaza GenoLIE">
+      <div className="mx-auto max-w-[88rem] px-5 py-3 md:px-6 md:py-3.5">
+        <div className="kampan-card">
+          <a
+            href={slide.href}
+            target="_blank"
+            rel="noreferrer"
+            className="kampan-hit"
+          >
+            <div className="kampan-copy">
+              <p className="kicker text-primary">Kampaň</p>
+              <div key={slide.href} className="kampan-fade">
+                <h2 className="mt-1 font-display text-[1.35rem] font-bold text-navy-900 md:text-[1.5rem]">
+                  {slide.title}
+                </h2>
+                <p className="mt-1 line-clamp-2 text-[0.95rem] leading-[1.55] text-muted-foreground">
+                  {slide.text}
+                </p>
+              </div>
+              <span className="kampan-cta">Gaza GenoLIE →</span>
+            </div>
+            <img
+              src="/images/kampan-gazagenolie.jpg"
+              alt="The Gaza GenoLIE"
+              className="kampan-photo"
+              width={720}
+              height={400}
+            />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Index() {
   return (
     <div className="min-h-screen bg-paper">
@@ -273,6 +332,7 @@ function Index() {
       <main>
         <Hero />
 
+        {/* Zvýrazněné téma: Antisemitismus */}
         <section className="bg-primary text-primary-foreground">
           <div className="tema-strip mx-auto flex max-w-[88rem] w-full flex-col items-stretch gap-6 px-4 py-8 md:px-6">
             <div className="flex w-full items-center justify-start gap-4">
@@ -317,35 +377,9 @@ function Index() {
           </div>
         </section>
 
-        <section className="kampan-strip" aria-label="Kampaň Gaza GenoLIE">
-          <div className="mx-auto max-w-[88rem] px-5 py-5 md:px-6 md:py-6">
-            <a
-              href="https://gazagenolie.com/hamass-human-shields-strategy/"
-              target="_blank"
-              rel="noreferrer"
-              className="kampan-card"
-            >
-              <div className="kampan-copy">
-                <p className="kicker text-primary">Kampaň</p>
-                <h2 className="mt-1 font-display text-[1.35rem] font-bold text-navy-900 md:text-[1.5rem]">
-                  Lidské štíty Hamásu
-                </h2>
-                <p className="mt-1 text-[0.95rem] leading-[1.55] text-muted-foreground">
-                  Hamás schoval válku pod nemocnice, školy a ložnice.
-                </p>
-                <span className="kampan-cta">Gaza GenoLIE →</span>
-              </div>
-              <img
-                src="/images/kampan-gazagenolie.jpg"
-                alt="The Gaza GenoLIE"
-                className="kampan-photo"
-                width={720}
-                height={400}
-              />
-            </a>
-          </div>
-        </section>
+        <KampanStrip />
 
+        {/* Výběr redakce */}
         <section className="vyber-section">
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
             <div className="border-t-2 border-primary pt-5">
@@ -375,10 +409,12 @@ function Index() {
           </div>
         </section>
 
+        {/* Tydýt týdne + Dokumentujeme */}
         <section className="section-band">
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
             <div className="border-t-2 border-primary pt-5">
               <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2 lg:gap-6">
+                {/* Tydýt */}
                 <div className="flex h-full min-h-0 flex-col">
                   <h2 className="font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">Tydýt týdne</h2>
                   <article className="tydyt-card card-lift group mt-3 flex h-full min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card md:flex-row">
@@ -434,6 +470,7 @@ function Index() {
                   </article>
                 </div>
 
+                {/* Dokumentujeme */}
                 <div className="flex h-full min-h-0 flex-col">
                   <h2 className="font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">Dokumentujeme</h2>
                   <article className="documentujeme-card mt-3 flex h-full flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card">
@@ -474,20 +511,12 @@ function Index() {
                         ))}
                       </div>
                       <div className="documentujeme-footer mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-border pt-3">
-                        <div className="flex flex-wrap items-center gap-4">
-                          <Link
-                            to="/galerie-incidentu"
-                            className="cta-link inline-flex items-center gap-1.5 text-primary hover:underline"
-                          >
-                            Archiv incidentů <ArrowRight className="size-4" />
-                          </Link>
-                          <Link
-                            to="/vykriky"
-                            className="cta-link inline-flex items-center gap-1.5 text-primary hover:underline"
-                          >
-                            Výkřiky <ArrowRight className="size-4" />
-                          </Link>
-                        </div>
+                        <Link
+                          to="/galerie-incidentu"
+                          className="cta-link inline-flex items-center gap-1.5 text-primary hover:underline"
+                        >
+                          Archiv incidentů <ArrowRight className="size-4" />
+                        </Link>
                         <Link
                           to="/nahlasit-incident"
                           className="inline-flex items-center gap-2 rounded-full bg-destructive px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
@@ -503,7 +532,15 @@ function Index() {
           </div>
         </section>
 
+        {/* Sekce článků — záložky ve stylu Visegrad24 */}
         <ArticleTabs />
+
+
+
+
+
+
+
       </main>
       <SiteFooter />
     </div>
