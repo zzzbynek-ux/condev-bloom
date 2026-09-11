@@ -123,6 +123,25 @@ function ONas() {
                 </li>
               ))}
             </ul>
+            <div className="kampan-card mt-8">
+              <div className="min-w-0">
+                <p className="kicker text-primary">Kampaň</p>
+                <h2 className="mt-1 font-display text-[1.35rem] font-bold text-navy-900 md:text-[1.5rem]">
+                  Lidské štíty Hamásu
+                </h2>
+                <p className="mt-1 text-[0.95rem] leading-[1.55] text-muted-foreground">
+                  Hamás schoval válku pod nemocnice, školy a ložnice.
+                </p>
+              </div>
+              <a
+                href="https://gazagenolie.com/hamass-human-shields-strategy/"
+                target="_blank"
+                rel="noreferrer"
+                className="kampan-cta"
+              >
+                Gaza GenoLIE →
+              </a>
+            </div>
           </div>
         </section>
 

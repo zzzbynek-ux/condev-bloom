@@ -58,6 +58,17 @@ export function SiteFooter() {
               </Link>
             </span>
           ))}
+          <span className="flex items-center gap-4">
+            <span className="h-4 w-px bg-primary-foreground/35" />
+            <a
+              href="https://gazagenolie.com/hamass-human-shields-strategy/"
+              target="_blank"
+              rel="noreferrer"
+              className="text-primary-foreground/85 hover:text-white"
+            >
+              Gaza GenoLIE
+            </a>
+          </span>
         </nav>
 
         <div className="flex items-center justify-center gap-2 lg:justify-end">
