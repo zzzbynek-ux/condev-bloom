@@ -146,8 +146,6 @@ function Hero() {
   );
 }
 
-
-
 function StarOfDavid({ className }: { className?: string }) {
   return (
     <svg
@@ -164,17 +162,6 @@ function StarOfDavid({ className }: { className?: string }) {
     </svg>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
 
 function SectionHeader({
   kicker,
@@ -286,7 +273,6 @@ function Index() {
       <main>
         <Hero />
 
-        {/* Zvýrazněné téma: Antisemitismus */}
         <section className="bg-primary text-primary-foreground">
           <div className="tema-strip mx-auto flex max-w-[88rem] w-full flex-col items-stretch gap-6 px-4 py-8 md:px-6">
             <div className="flex w-full items-center justify-start gap-4">
@@ -360,7 +346,6 @@ function Index() {
           </div>
         </section>
 
-        {/* Výběr redakce */}
         <section className="vyber-section">
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
             <div className="border-t-2 border-primary pt-5">
@@ -390,12 +375,10 @@ function Index() {
           </div>
         </section>
 
-        {/* Tydýt týdne + Dokumentujeme */}
         <section className="section-band">
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
             <div className="border-t-2 border-primary pt-5">
               <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2 lg:gap-6">
-                {/* Tydýt */}
                 <div className="flex h-full min-h-0 flex-col">
                   <h2 className="font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">Tydýt týdne</h2>
                   <article className="tydyt-card card-lift group mt-3 flex h-full min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card md:flex-row">
@@ -451,7 +434,6 @@ function Index() {
                   </article>
                 </div>
 
-                {/* Dokumentujeme */}
                 <div className="flex h-full min-h-0 flex-col">
                   <h2 className="font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">Dokumentujeme</h2>
                   <article className="documentujeme-card mt-3 flex h-full flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card">
@@ -494,8 +476,7 @@ function Index() {
                       <div className="documentujeme-footer mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-border pt-3">
                         <div className="flex flex-wrap items-center gap-4">
                           <Link
-                            to="/nahlasit-incident"
-                            hash="archiv"
+                            to="/galerie-incidentu"
                             className="cta-link inline-flex items-center gap-1.5 text-primary hover:underline"
                           >
                             Archiv incidentů <ArrowRight className="size-4" />
@@ -522,15 +503,7 @@ function Index() {
           </div>
         </section>
 
-        {/* Sekce článků — záložky ve stylu Visegrad24 */}
         <ArticleTabs />
-
-
-
-
-
-
-
       </main>
       <SiteFooter />
     </div>
