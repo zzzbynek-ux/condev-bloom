@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import { CARD_SIZES } from "@/lib/img";
+import { CARD_SIZES, cardSrcSet } from "@/lib/img";
 
 export function ArticleCard({
   image,
@@ -18,8 +18,8 @@ export function ArticleCard({
   slug?: string;
 }) {
   const href = slug ? `/clanky/${slug}` : "/clanky";
-  return (
-    <article className="card-lift group flex flex-col overflow-hidden rounded-xl border border-border bg-card">
+  const webp = cardSrcSet(image);
+  const photo = (
       <img
         src={image}
         alt={title}
@@ -30,6 +30,17 @@ export function ArticleCard({
         sizes={CARD_SIZES}
         className="aspect-video w-full object-cover"
       />
+  );
+  return (
+    <article className="card-lift group flex flex-col overflow-hidden rounded-xl border border-border bg-card">
+      {webp ? (
+        <picture className="contents">
+          <source type="image/webp" srcSet={webp} sizes={CARD_SIZES} />
+          {photo}
+        </picture>
+      ) : (
+        photo
+      )}
       <div className="flex flex-1 flex-col p-6">
         <div className="flex items-center justify-between gap-3">
           <Link

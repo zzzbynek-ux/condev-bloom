@@ -8,7 +8,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
 import { MoreButton } from "@/components/more-button";
 import { ARTICLE_SECTIONS, HERO_BANNER, KAMPAN_SLIDES, VYBER_REDAKCE } from "@/lib/content";
-import { heroSrcSet, HERO_SIZES } from "@/lib/img";
+import { heroSrcSet, heroWebpSrcSet, HERO_SIZES, webpExists } from "@/lib/img";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -40,9 +40,8 @@ function Hero() {
   }, [total]);
 
   const slide = HERO_BANNER[i] ?? HERO_BANNER[0]!;
-
-  return (
-    <section className={`hero-section relative isolate overflow-hidden bg-navy-900${slide.overlay === "strong" ? " hero-overlay-strong" : ""}`}>
+  const heroWebp = heroWebpSrcSet(slide.image);
+  const heroImg = (
       <img
         src={slide.image}
         srcSet={heroSrcSet(slide.image)}
@@ -55,6 +54,18 @@ function Hero() {
         className="hero-img pointer-events-none absolute inset-0 size-full object-cover"
         style={{ ["--hero-focus" as string]: slide.focus, objectPosition: slide.focus }}
       />
+  );
+
+  return (
+    <section className={`hero-section relative isolate overflow-hidden bg-navy-900${slide.overlay === "strong" ? " hero-overlay-strong" : ""}`}>
+      {heroWebp ? (
+        <picture className="contents">
+          <source type="image/webp" srcSet={heroWebp} sizes={HERO_SIZES} />
+          {heroImg}
+        </picture>
+      ) : (
+        heroImg
+      )}
       <div
         aria-hidden
         className={
@@ -311,13 +322,26 @@ function KampanStrip() {
               </div>
               <span className="kampan-cta">Gaza GenoLIE →</span>
             </div>
-            <img
-              src="/images/kampan-gazagenolie.jpg"
-              alt="The Gaza GenoLIE"
-              className="kampan-photo"
-              width={720}
-              height={400}
-            />
+            {webpExists("/images/kampan-gazagenolie.webp") ? (
+              <picture className="contents">
+                <source type="image/webp" srcSet="/images/kampan-gazagenolie.webp" />
+                <img
+                  src="/images/kampan-gazagenolie.jpg"
+                  alt="The Gaza GenoLIE"
+                  className="kampan-photo"
+                  width={720}
+                  height={400}
+                />
+              </picture>
+            ) : (
+              <img
+                src="/images/kampan-gazagenolie.jpg"
+                alt="The Gaza GenoLIE"
+                className="kampan-photo"
+                width={720}
+                height={400}
+              />
+            )}
           </a>
         </div>
       </div>

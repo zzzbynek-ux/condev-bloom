@@ -3,7 +3,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { articleBySlug, articleHtml, IMPORTED, formatDate, rewriteImportedHtml, htmlHasImage } from "@/lib/articles";
-import { ARTICLE_HERO_SIZES, RELATED_SIZES } from "@/lib/img";
+import { ARTICLE_HERO_SIZES, RELATED_SIZES, cardSrcSet } from "@/lib/img";
 
 export const Route = createFileRoute("/clanky/$slug")({
   loader: async ({ params }) => {
@@ -76,13 +76,9 @@ function ArticlePage() {
                   Související
                 </h2>
                 <div className="related-grid mt-6">
-                  {related.map((r) => (
-                    <Link
-                      key={r.slug}
-                      to="/clanky/$slug"
-                      params={{ slug: r.slug }}
-                      className="related-card card-lift group flex flex-col overflow-hidden rounded-xl border border-border bg-card no-underline"
-                    >
+                  {related.map((r) => {
+                    const relatedWebp = cardSrcSet(r.image);
+                    const relatedImg = (
                       <img
                         src={r.image}
                         alt=""
@@ -93,6 +89,22 @@ function ArticlePage() {
                         sizes={RELATED_SIZES}
                         className="related-card-img w-full object-cover"
                       />
+                    );
+                    return (
+                    <Link
+                      key={r.slug}
+                      to="/clanky/$slug"
+                      params={{ slug: r.slug }}
+                      className="related-card card-lift group flex flex-col overflow-hidden rounded-xl border border-border bg-card no-underline"
+                    >
+                      {relatedWebp ? (
+                        <picture className="contents">
+                          <source type="image/webp" srcSet={relatedWebp} sizes={RELATED_SIZES} />
+                          {relatedImg}
+                        </picture>
+                      ) : (
+                        relatedImg
+                      )}
                       <div className="related-card-body flex min-h-0 flex-1 flex-col">
                         <div className="flex items-center justify-between gap-3">
                           <span className="article-tag rounded-full px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em]">
@@ -112,7 +124,8 @@ function ArticlePage() {
                         ) : null}
                       </div>
                     </Link>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             </div>
