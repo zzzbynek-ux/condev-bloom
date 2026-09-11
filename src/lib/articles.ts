@@ -1,11 +1,10 @@
-import imported from "@/data/articles.json";
+import imported from "@/data/articles.meta.json";
 
 export type ImportedArticle = {
   id: number;
   slug: string;
   title: string;
   perex: string;
-  html: string;
   date: string;
   iso: string;
   tags: string[];
@@ -30,6 +29,16 @@ export function articlesIn(section: string) {
 
 export function articleBySlug(slug: string) {
   return IMPORTED.find((a) => a.slug === slug);
+}
+
+let bodyCache: Record<string, string> | null = null;
+
+export async function articleHtml(slug: string): Promise<string> {
+  if (!bodyCache) {
+    const mod = await import("@/data/articles.body.json");
+    bodyCache = (mod.default ?? mod) as Record<string, string>;
+  }
+  return bodyCache[slug] ?? "";
 }
 
 const WP_UPLOAD = /https?:\/\/(?:www\.)?jednimhlasem\.cz\/wp-content\/uploads\/[^"'\s]+/gi;
@@ -68,7 +77,7 @@ export function shuffle<T>(items: T[], seed = 20260903): T[] {
   for (let i = arr.length - 1; i > 0; i--) {
     s = (s * 16807 + 7) % 2147483647;
     const j = s % (i + 1);
-    [arr[i], arr[j]] = [arr[j]!, arr[i]!];
+    [arr[i], arr[j]!] = [arr[j]!, arr[i]!];
   }
   return arr;
 }

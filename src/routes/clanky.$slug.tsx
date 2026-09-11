@@ -2,14 +2,15 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { articleBySlug, IMPORTED, formatDate, rewriteImportedHtml, htmlHasImage } from "@/lib/articles";
+import { articleBySlug, articleHtml, IMPORTED, formatDate, rewriteImportedHtml, htmlHasImage } from "@/lib/articles";
 import { ARTICLE_HERO_SIZES, RELATED_SIZES } from "@/lib/img";
 
 export const Route = createFileRoute("/clanky/$slug")({
-  loader: ({ params }) => {
+  loader: async ({ params }) => {
     const article = articleBySlug(params.slug);
     if (!article) throw notFound();
-    return { article };
+    const html = await articleHtml(params.slug);
+    return { article, html };
   },
   head: ({ loaderData }) => ({
     meta: [
@@ -28,10 +29,10 @@ function relatedArticles(slug: string, tag: string) {
 }
 
 function ArticlePage() {
-  const { article } = Route.useLoaderData();
+  const { article, html } = Route.useLoaderData();
   const related = relatedArticles(article.slug, article.tag);
-  const body = rewriteImportedHtml(article.html, article.image);
-  const showLeadImage = Boolean(article.image) && !article.image.includes("fallback") && !htmlHasImage(article.html);
+  const body = rewriteImportedHtml(html, article.image);
+  const showLeadImage = Boolean(article.image) && !article.image.includes("fallback") && !htmlHasImage(html);
 
   return (
     <div className="min-h-screen bg-paper">
