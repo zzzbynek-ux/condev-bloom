@@ -5,7 +5,6 @@ import { Check } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { SectionHeader } from "@/components/section-header";
-import heroBlindfold from "@/assets/hero-blindfold.jpg";
 
 type AmountKey = "301" | "901" | "2501";
 
@@ -96,9 +95,9 @@ function PodporteNas() {
               </div>
               <div className="mt-8 overflow-hidden rounded-xl border border-border">
                 <img
-                  src={heroBlindfold}
-                  alt="Ilustrační foto k podpoře iniciativy JednímHlasem"
-                  className="h-48 w-full object-cover md:h-64 lg:h-72"
+                  src="/images/o-nas-vlajka.jpg"
+                  alt="Žena zahalená izraelskou vlajkou hledí do krajiny"
+                  className="h-48 w-full object-cover object-[20%_50%] md:h-64 lg:h-72"
                   loading="eager"
                 />
               </div>
