@@ -44,3 +44,13 @@ export const TOPICS: Topic[] = [
       "Konflikt není jen o dvou stranách. Arabské státy a mezinárodní instituce ho nejen sledují — udržují ho při životě.",
   },
 ];
+
+/** Rubriky ve druhém navigačním pruhu */
+export const SECTIONS = [
+  "Izrael a Židé",
+  "Antisemitismus",
+  "Média a instituce",
+  "Bezpečnost a ideologie",
+  "Hlasy a příběhy",
+  "Reporty",
+] as const;
