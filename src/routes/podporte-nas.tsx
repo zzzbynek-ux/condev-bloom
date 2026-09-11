@@ -97,7 +97,7 @@ function PodporteNas() {
                 <img
                   src="/images/o-nas-vlajka.jpg"
                   alt="Žena zahalená izraelskou vlajkou hledí do krajiny"
-                  className="h-48 w-full object-cover object-[20%_50%] md:h-64 lg:h-72"
+                  className="h-56 w-full object-cover object-[78%_42%] md:h-80 lg:h-[26rem]"
                   loading="eager"
                 />
               </div>
