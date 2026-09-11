@@ -4,7 +4,7 @@ const LINKS = [
   { to: "/clanky", label: "Články" },
   { to: "/o-nas", label: "O nás" },
   { to: "/eshop", label: "E-shop" },
-  { to: "/galerie-incidentu", label: "Galerie incidentů" },
+  { to: "/galerie-incidentu", label: "Archiv incidentů" },
   { to: "/nahlasit-incident", label: "Nahlásit incident" },
   { to: "/podporte-nas", label: "Podpořte nás" },
 ] as const;

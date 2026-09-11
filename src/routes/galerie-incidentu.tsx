@@ -1,4 +1,4 @@
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -6,13 +6,13 @@ import { SiteFooter } from "@/components/site-footer";
 export const Route = createFileRoute("/galerie-incidentu")({
   head: () => ({
     meta: [
-      { title: "Galerie incidentů — JednímHlasem" },
+      { title: "Archiv incidentů — JednímHlasem" },
       {
         name: "description",
         content:
           "Antisemitismus není uzavřená kapitola dějin. Dokumentujeme jeho současné podoby — ve veřejném prostoru, na sítích i v soukromých výhrůžkách.",
       },
-      { property: "og:title", content: "Galerie incidentů — JednímHlasem" },
+      { property: "og:title", content: "Archiv incidentů — JednímHlasem" },
       {
         property: "og:description",
         content:
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/galerie-incidentu")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: GalerieIncidentu,
+  component: ArchivIncidentu,
 });
 
 const INCIDENTS = [
@@ -70,7 +70,7 @@ const INCIDENTS = [
   },
 ] as const;
 
-function GalerieIncidentu() {
+function ArchivIncidentu() {
   return (
     <div className="min-h-screen bg-paper">
       <SiteHeader />
@@ -79,7 +79,7 @@ function GalerieIncidentu() {
           <div className="mx-auto max-w-[88rem] px-5 md:px-6">
             <p className="kicker text-primary">Klíčové téma</p>
             <h1 className="mt-1 font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">
-              Galerie incidentů
+              Archiv incidentů
             </h1>
             <p className="mt-3 max-w-xl text-[0.95rem] leading-[1.55] text-muted-foreground">
               Antisemitismus není uzavřená kapitola dějin. Dokumentujeme jeho
@@ -126,9 +126,6 @@ function GalerieIncidentu() {
                   Vas nachystani.“
                 </p>
               </div>
-              <Link to="/nahlasit-incident" className="galerie-report">
-                Nahlásit incident
-              </Link>
             </div>
           </div>
         </section>
