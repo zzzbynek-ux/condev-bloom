@@ -29,11 +29,11 @@ function XIcon({ className }: { className?: string }) {
 const DESKTOP_LINKS = [
   { label: "Články", to: "/clanky" as const },
   { label: "O nás", to: "/o-nas" as const },
+  { label: "E-shop", to: "/eshop" as const },
 ];
 
 const MENU_LINKS = [
   ...DESKTOP_LINKS,
-  { label: "E-shop", to: "/eshop" as const },
   { label: "Ptejte se AI", to: "/ptejte-se-ai" as const },
   { label: "Nahlásit incident", to: "/nahlasit-incident" as const },
   { label: "Podpořte nás", to: "/podporte-nas" as const },
@@ -115,12 +115,6 @@ export function SiteHeader() {
             ))}
           </nav>
           <div className="flex min-w-0 items-center gap-3 lg:gap-4">
-            <Link
-              to="/eshop"
-              className="text-[15px] font-semibold leading-none tracking-normal text-foreground transition-colors hover:text-primary"
-            >
-              E-shop
-            </Link>
             <form
               role="search"
               onSubmit={(e) => {
