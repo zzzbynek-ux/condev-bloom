@@ -144,7 +144,7 @@ export const LATEST: NewsItem[] = [
     slug: "propustte-rukojmi",
     tag: "Analýza",
     tagTone: "primary",
-    title: "Propusťte rukojmí!",
+    title: "Propustěte rukojmí!",
     perex: "Informace o zadržovaných izraelských rukojmích v Gaze.",
     date: "5. 7. 2026",
     image: "flags",
@@ -225,6 +225,49 @@ export const HERO_BANNER = [
   { kicker: "Blízký východ", title: "Mír začíná s pravdou", text: "Konflikt není jen o dvou stranách. Arabské státy a mezinárodní instituce ho nejen sledují — udržují ho při životě.", image: "/images/hero/mir.jpg", focus: "78% 52%", slug: "mir-zacina-pravdou", overlay: "default" },
   { kicker: "Dezinformace", title: "Wiki jako nástroj vlivu", text: "Záměrná manipulace a systematické zkreslování faktů proměňují otevřenou encyklopedii ve vlivový nástroj.", image: "/images/hero/wiki.jpg", focus: "76% 46%", slug: "wiki-jako-nastroj-vlivu", overlay: "default" },
   { kicker: "Hlasy", title: "Odlišní vírou, spojeni svědomím", text: "Křesťané i muslimové otevřeně vystupují proti nenávisti. Jejich hlasy v debatě o Izraeli chybí nejvíc.", image: "/images/hero/svedomi.jpg", focus: "78% 46%", slug: "odlisni-virou-spojeni-svedomim", overlay: "strong" },
+] as const;
+
+export const KAMPAN_SLIDES = [
+  {
+    title: "Lidské štíty Hamásu",
+    text: "Hamás schoval válku pod nemocnice, školy a ložnice.",
+    href: "https://gazagenolie.com/hamass-human-shields-strategy/",
+  },
+  {
+    title: "Hoax o válce proti novinářům",
+    text: "Mezi „zabitými novináři“ jsou bojovníci Hamásu a PIJ.",
+    href: "https://gazagenolie.com/the-war-on-journalists-hoax/",
+  },
+  {
+    title: "Nemocné děti a falešný hladomor",
+    text: "Snímky hladovějících dětí měly dokázat genocidu dřív, než fakta.",
+    href: "https://gazagenolie.com/using-sick-kids-to-fabricate-famine/",
+  },
+  {
+    title: "Obvinění začalo 8. října",
+    text: "Slovo genocida padlo dřív, než Izrael vstoupil do Gazy.",
+    href: "https://gazagenolie.com/genocide-claims-began-on-oct-8-2023/",
+  },
+  {
+    title: "Válka proti Hamásu, ne Palestincům",
+    text: "Cíle války jsou rukojmí a Hamás — ne palestinský národ.",
+    href: "https://gazagenolie.com/war-against-hamas-not-palestinians/",
+  },
+  {
+    title: "Nové obvinění, stará kampaň",
+    text: "Stejná nálepka genocidy padá, kdykoliv se Izrael brání.",
+    href: "https://gazagenolie.com/new-accusation-old-campaign/",
+  },
+  {
+    title: "Zkreslení pojmu genocida",
+    text: "Genocida není synonymum pro válku s civilními oběťmi.",
+    href: "https://gazagenolie.com/distorting-the-legal-framework-of-genocide/",
+  },
+  {
+    title: "Krevní pomluva proti Židům",
+    text: "Obvinění z genocidy míří na Židy všude, nejen na Izrael.",
+    href: "https://gazagenolie.com/blood-libel-targeting-all-jews/",
+  },
 ] as const;
 
 function toItem(a: { slug: string; tag: string; iso: string; title: string; perex: string; image: string }) {
