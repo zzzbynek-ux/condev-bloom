@@ -63,8 +63,7 @@ function Kontakt() {
           Napište nám
         </h1>
         <p className="mt-4 max-w-2xl text-[0.95rem] leading-[1.55] text-muted-foreground">
-          Formulář jde přímo k nám. Adresu neschováváme na webu — ozveme se na e-mail, který
-          uvedete.
+          Napište nám. Ozveme se.
         </p>
 
         {status === "ok" ? (
@@ -113,11 +112,6 @@ function Kontakt() {
             >
               {status === "sending" ? "Odesílám…" : "Odeslat"}
             </button>
-            {!configured ? (
-              <p className="text-sm text-muted-foreground">
-                Odesílání se dopojí po nastavení schránky.
-              </p>
-            ) : null}
             {status === "err" ? (
               <p className="text-sm text-destructive">Teď to nešlo odeslat. Zkuste to znovu.</p>
             ) : null}
