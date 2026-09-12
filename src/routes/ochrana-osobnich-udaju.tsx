@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -42,7 +42,11 @@ function Page() {
             nutnou k vyřízení vašeho podnětu.
           </p>
           <p>
-            Máte právo na přístup k údajům, jejich opravu i výmaz. Napište nám a ozveme se.
+            Máte právo na přístup k údajům, jejich opravu i výmaz.{" "}
+            <Link to="/kontakt" className="font-semibold text-primary hover:underline">
+              Napište nám
+            </Link>{" "}
+            a ozveme se.
           </p>
         </div>
       </main>
