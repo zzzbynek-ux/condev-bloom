@@ -241,13 +241,13 @@ function ArticleTabs() {
     <section>
       <div className="mx-auto max-w-[88rem] px-5 section-y md:px-6">
         <div className="border-t-2 border-primary pt-5">
-          <h2 className="font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">
-            Články
+          <h2 className="home-section-title">
+            Články a analýzy
           </h2>
 
         <nav
           aria-label="Rubriky článků"
-          className="clanky-tabs mt-2 flex flex-nowrap items-center overflow-x-auto lg:flex-wrap lg:overflow-visible"
+          className="clanky-tabs mt-4 flex flex-nowrap items-center overflow-x-auto lg:flex-wrap lg:overflow-visible"
         >
           {SECTION_LINKS.map((link) => (
             <button
@@ -302,7 +302,7 @@ function KampanStrip() {
 
   return (
     <section className="kampan-strip" aria-label="Kampaň Gaza GenoLIE">
-      <div className="mx-auto max-w-[88rem] px-5 py-3 md:px-6 md:py-3.5">
+      <div className="mx-auto max-w-[88rem] px-5 md:px-6">
         <div className="kampan-card">
           <a
             href={slide.href}
@@ -406,9 +406,8 @@ function Index() {
         {/* Výběr redakce */}
         <section className="vyber-section">
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
-            <div className="border-t-2 border-primary pt-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2 className="font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">Výběr redakce</h2>
+              <h2 className="home-section-title">Výběr redakce</h2>
               <Link
                 to="/clanky"
                 className="cta-link inline-flex items-center gap-1.5 text-primary hover:underline"
@@ -429,7 +428,6 @@ function Index() {
                 />
               ))}
             </div>
-            </div>
           </div>
         </section>
 
@@ -440,7 +438,7 @@ function Index() {
               <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2 lg:gap-6">
                 {/* Tydýt */}
                 <div className="flex h-full min-h-0 flex-col">
-                  <h2 className="font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">Tydýt týdne</h2>
+                  <h2 className="home-section-title home-section-title--split">Tydýt týdne</h2>
                   <article className="tydyt-card card-lift group mt-3 flex h-full min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card md:flex-row">
                     <img
                       src="/images/tydyt-konrad.jpg"
@@ -496,7 +494,7 @@ function Index() {
 
                 {/* Dokumentujeme */}
                 <div className="flex h-full min-h-0 flex-col">
-                  <h2 className="font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">Dokumentujeme</h2>
+                  <h2 className="home-section-title home-section-title--split">Dokumentujeme</h2>
                   <article className="documentujeme-card mt-3 flex h-full flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card">
                     <div className="documentujeme-inner flex h-full flex-1 flex-col justify-start p-4">
                       <div className="documentujeme-entries flex flex-col gap-3">

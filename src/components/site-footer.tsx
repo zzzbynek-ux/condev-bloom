@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
 const LINKS = [
-  { to: "/clanky", label: "Články" },
+  { to: "/clanky", label: "Články a analýzy" },
   { to: "/o-nas", label: "O nás" },
   { to: "/eshop", label: "E-shop" },
   { to: "/galerie-incidentu", label: "Archiv incidentů" },
@@ -69,9 +69,12 @@ export function SiteFooter() {
               Gaza GenoLIE
             </a>
           </span>
-          <Link to="/podporte-nas" className="donate-pill donate-pill--sm">
-            Podpořte nás
-          </Link>
+          <span className="flex items-center gap-4">
+            <span className="h-4 w-px bg-primary-foreground/35" />
+            <Link to="/podporte-nas" className="text-primary-foreground/85 hover:text-white">
+              Podpořte nás
+            </Link>
+          </span>
         </nav>
 
         <div className="flex items-center justify-center gap-2 lg:justify-end">

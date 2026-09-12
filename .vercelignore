@@ -1,0 +1,11 @@
+# QA / agent junk — not the website. Publish timed out uploading these.
+screenshots
+artifacts
+attachments
+.vercel
+.output
+dist
+node_modules
+.git
+*.log
+.tanstack
