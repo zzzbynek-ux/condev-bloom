@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -82,11 +82,12 @@ function ONas() {
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
             <SectionHeader kicker="Co nás definuje" title="Naše hodnoty" />
             <ul className="mt-8 grid items-stretch gap-4 md:grid-cols-3">
-              {VALUES.map((value) => (
+              {VALUES.map((value, i) => (
                 <li
                   key={value}
-                  className="card-lift flex h-full rounded-xl border border-border bg-card p-6 text-[0.95rem] leading-[1.55] text-foreground"
+                  className="onas-value card-lift flex h-full flex-col rounded-xl border border-border bg-card p-6 text-[0.95rem] leading-[1.55] text-foreground"
                 >
+                  <span className="onas-value-n">0{i + 1}</span>
                   {value}
                 </li>
               ))}
@@ -94,7 +95,7 @@ function ONas() {
           </div>
         </section>
 
-        <section id="osy" className="scroll-mt-32">
+        <section id="osy" className="onas-band scroll-mt-32">
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
             <SectionHeader kicker="Naše témata" title="O čem mluvíme" />
             <div className="mt-8 grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -150,7 +151,7 @@ function ONas() {
           </div>
         </section>
 
-        <section id="mise" className="scroll-mt-32">
+        <section id="mise" className="onas-band scroll-mt-32">
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
             <SectionHeader kicker="Proč to děláme" title={MISSION.title} />
             <div className="mt-8 max-w-3xl space-y-4 text-left text-[0.95rem] leading-[1.55] text-foreground">
@@ -161,6 +162,12 @@ function ONas() {
           </div>
         </section>
       </main>
+      <aside className="onas-close">
+        <p>Nezávislý hlas drží jen čtenáři.</p>
+        <Link to="/podporte-nas" className="donate-pill">
+          Podpořte nás
+        </Link>
+      </aside>
       <SiteFooter />
     </div>
   );
