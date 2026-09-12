@@ -1,44 +1,66 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { Check } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import QRCode from "qrcode";
+import { Check, Copy, Flag, PenLine, Target } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { SectionHeader } from "@/components/section-header";
 
 type AmountKey = "301" | "901" | "2501";
+type Cadence = "monthly" | "once";
+
+const IBAN = "CZ65 2010 0000 0023 0198 7654";
+const IBAN_COMPACT = "CZ6520100000002301987654";
+const ACCOUNT = "2301987654 / 2010";
+const MSG = "Dar JednímHlasem";
 
 const AMOUNTS: {
   key: AmountKey;
   name: string;
-  oneTime: string;
-  monthly: string;
+  oneTimeKc: number;
+  monthlyKc: number;
   vs: string;
+  hold: string;
   recommended?: boolean;
 }[] = [
   {
     key: "301",
     name: "Hlas",
-    oneTime: "300 Kč jednorázově",
-    monthly: "150 Kč měsíčně trvalým příkazem",
+    oneTimeKc: 300,
+    monthlyKc: 150,
     vs: "301",
+    hold: "jedna analýza",
   },
   {
     key: "901",
     name: "Podporovatel",
-    oneTime: "900 Kč jednorázově",
-    monthly: "300 Kč měsíčně trvalým příkazem",
+    oneTimeKc: 900,
+    monthlyKc: 300,
     vs: "901",
+    hold: "doporučeno",
     recommended: true,
   },
   {
     key: "2501",
     name: "Patron",
-    oneTime: "2 500 Kč jednorázově",
-    monthly: "800 Kč měsíčně trvalým příkazem",
+    oneTimeKc: 2500,
+    monthlyKc: 800,
     vs: "2501",
+    hold: "měsíc provozu",
   },
 ];
+
+function formatKc(n: number) {
+  return `${n.toLocaleString("cs-CZ")} Kč`;
+}
+
+function spdPayload(kc: number, vs: string) {
+  return `SPD*1.0*ACC:${IBAN_COMPACT}*AM:${kc.toFixed(2)}*CC:CZK*X-VS:${vs}*MSG:Dar JednimHlasem`;
+}
+
+function scrollToQr() {
+  document.getElementById("dar-qr")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
 
 export const Route = createFileRoute("/podporte-nas")({
   head: () => ({
@@ -62,186 +84,311 @@ export const Route = createFileRoute("/podporte-nas")({
   component: PodporteNas,
 });
 
+function DonateQr({ payload }: { payload: string }) {
+  const [src, setSrc] = useState<string | null>(null);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    let live = true;
+    setSrc(null);
+    setFailed(false);
+    QRCode.toDataURL(payload, {
+      width: 360,
+      margin: 1,
+      color: { dark: "#0b1a3a", light: "#ffffff" },
+      errorCorrectionLevel: "M",
+    })
+      .then((url) => {
+        if (live) setSrc(url);
+      })
+      .catch(() => {
+        if (live) setFailed(true);
+      });
+    return () => {
+      live = false;
+    };
+  }, [payload]);
+
+  if (failed) {
+    return (
+      <div className="donate-qr-ph">
+        <span>QR se nepodařilo vygenerovat. Použijte číslo účtu.</span>
+      </div>
+    );
+  }
+  if (!src) {
+    return <div className="donate-qr-ph" aria-hidden="true" />;
+  }
+  return (
+    <img
+      src={src}
+      alt="QR platba SPD"
+      width={180}
+      height={180}
+      className="donate-qr-img"
+      data-spd={payload}
+    />
+  );
+}
+
 function PodporteNas() {
   const [selected, setSelected] = useState<AmountKey>("901");
-  const selectedAmount = AMOUNTS.find((a) => a.key === selected)!;
+  const [cadence, setCadence] = useState<Cadence>("monthly");
+  const [copied, setCopied] = useState(false);
+  const amount = AMOUNTS.find((a) => a.key === selected)!;
+  const kc = cadence === "monthly" ? amount.monthlyKc : amount.oneTimeKc;
+  const payload = useMemo(() => spdPayload(kc, amount.vs), [kc, amount.vs]);
+
+  async function copyAccount() {
+    try {
+      await navigator.clipboard.writeText(ACCOUNT);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2200);
+    } catch {
+      setCopied(false);
+    }
+  }
+
+  const widget = (
+    <aside className="donate-widget" aria-label="Vyberte dar">
+      <h2 className="font-display text-[1.15rem] font-bold text-foreground">Vyberte dar</h2>
+      <div className="donate-toggle" role="tablist" aria-label="Frekvence daru">
+        <button
+          type="button"
+          role="tab"
+          aria-selected={cadence === "once"}
+          className={cadence === "once" ? "on" : undefined}
+          onClick={() => setCadence("once")}
+        >
+          Jednorázově
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={cadence === "monthly"}
+          className={cadence === "monthly" ? "on" : undefined}
+          onClick={() => setCadence("monthly")}
+        >
+          Měsíčně
+        </button>
+      </div>
+      <div className="donate-tiers">
+        {AMOUNTS.map((row) => {
+          const active = selected === row.key;
+          const value = cadence === "monthly" ? row.monthlyKc : row.oneTimeKc;
+          return (
+            <button
+              key={row.key}
+              type="button"
+              className={`donate-tier${active ? " rec" : ""}`}
+              aria-pressed={active}
+              onClick={() => setSelected(row.key)}
+            >
+              <span>
+                <b>{formatKc(value)}</b>
+                <small>
+                  {row.name} · VS {row.vs}
+                </small>
+              </span>
+              <span className="donate-pill">{row.hold}</span>
+            </button>
+          );
+        })}
+      </div>
+      <button type="button" className="donate-gold donate-gold-wide" onClick={scrollToQr}>
+        Poslat {formatKc(kc)} {cadence === "monthly" ? "měsíčně" : "jednorázově"}
+      </button>
+      <p className="donate-micro">
+        {cadence === "monthly" ? "Trvalý příkaz. Zrušíte kdykoliv. " : ""}
+        Žádná veřejná sbírka.
+      </p>
+    </aside>
+  );
 
   return (
     <div className="min-h-screen bg-paper">
       <SiteHeader />
-      <main>
-        <section>
-          <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
-            <div className="border-t-2 border-primary pt-5 text-left">
-              <img
-                src="/images/logo-bublina-modra.png"
-                alt="JednímHlasem"
-                width={280}
-                height={218}
-                decoding="async"
-                className="h-24 w-auto md:h-32"
-              />
-              <p className="kicker mt-6 text-primary">Podpořte nás</p>
-              <h1 className="mt-3 max-w-3xl text-balance font-display text-[1.65rem] font-bold leading-[1.15] text-foreground md:text-[1.85rem] lg:text-[2.1rem]">
-                Jedním hlasem neznamená všichni stejně, ale společně za to, co nás spojuje.
+      <main className="donate-main">
+        <section className="donate-hero">
+          <img
+            className="donate-hero-bg"
+            src="/images/o-nas-vlajka.jpg"
+            alt=""
+            width={1600}
+            height={900}
+            decoding="async"
+          />
+          <div className="donate-hero-veil" />
+          <div className="donate-hero-inner">
+            <div className="donate-hero-copy">
+              <p className="donate-kicker">Nezávislá iniciativa · bez reklam · bez grantů</p>
+              <h1 className="font-display">
+                Pravda nemá sponzora.
+                <br />
+                Má jen vás.
               </h1>
-              <div className="mt-4 max-w-3xl space-y-3 text-[0.95rem] leading-[1.55] text-foreground">
-                <p>
-                  JednímHlasem je nezávislá občanská iniciativa a otevřená platforma, která vznikla jako reakce na rostoucí dezinformace, selektivní empatii a zkreslený obraz Izraele ve veřejném prostoru.
-                </p>
-                <p>
-                  Naším cílem je vracet fakta, kontext a důstojnost do debaty – v době, kdy se realita ohýbá podle ideologie a pravda přizpůsobuje algoritmům.
-                </p>
-              </div>
-              <div className="mt-8 overflow-hidden rounded-xl border border-border">
-                <img
-                  src="/images/o-nas-vlajka.jpg"
-                  alt="Žena zahalená izraelskou vlajkou hledí do krajiny"
-                  className="h-56 w-full object-cover object-[78%_42%] md:h-80 lg:h-[26rem]"
-                  loading="eager"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
-            <SectionHeader
-              kicker="Vaše podpora"
-              title="Vyberte částku"
-              subtitle="Nebo pošlete libovolnou částku na účet níž."
-            />
-            <div className="mt-8 grid items-stretch gap-4 md:grid-cols-3">
-              {AMOUNTS.map((amount) => {
-                const active = selected === amount.key;
-                return (
-                  <button
-                    key={amount.key}
-                    type="button"
-                    onClick={() => setSelected(amount.key)}
-                    className={`card-lift relative flex h-full flex-col rounded-xl border bg-card p-6 text-left ${
-                      active ? "border-primary" : "border-border"
-                    }`}
-                  >
-                    {amount.recommended ? (
-                      <span className="article-tag absolute right-4 top-4 rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em]">
-                        Doporučeno
-                      </span>
-                    ) : null}
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`flex size-5 items-center justify-center rounded-full border ${
-                          active
-                            ? "border-primary bg-primary text-primary-foreground"
-                            : "border-border"
-                        }`}
-                      >
-                        {active ? <Check className="size-3" /> : null}
-                      </span>
-                      <h3 className="font-display text-lg font-bold text-primary">
-                        {amount.name}
-                      </h3>
-                    </div>
-                    <p className="mt-4 font-display text-2xl font-bold text-foreground">
-                      {amount.oneTime.split(" ")[0]}{" "}
-                      <span className="font-sans text-base font-normal text-muted-foreground">
-                        {amount.oneTime.split(" ").slice(1).join(" ")}
-                      </span>
-                    </p>
-                    <p className="mt-1 text-[0.95rem] leading-[1.55] text-muted-foreground">
-                      {amount.monthly}
-                    </p>
-                    <p className="cta-link mt-4 text-primary">VS {amount.vs}</p>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
-            <SectionHeader kicker="Jak poslat dar" title="Bankovní spojení" />
-            <div className="mt-8 grid gap-4 md:grid-cols-[220px_1fr] md:items-stretch">
-              <div className="card-lift flex flex-col items-center justify-center gap-3 rounded-xl border border-border bg-card p-6">
-                <div className="flex size-[180px] items-center justify-center rounded-xl border border-border bg-paper md:size-[200px]">
-                  <span className="text-sm text-muted-foreground">QR kód</span>
-                </div>
-                <p className="text-center text-[0.95rem] leading-[1.55] text-muted-foreground">
-                  QR platba — naskenujte v bankovní aplikaci
-                </p>
-              </div>
-
-              <div className="card-lift rounded-xl border border-border bg-card p-6">
-                <dl className="grid gap-x-6 gap-y-4 text-[0.95rem] leading-[1.55] md:grid-cols-[auto_1fr]">
-                  <dt className="kicker text-primary/70">Příjemce</dt>
-                  <dd className="font-semibold text-foreground">JednímHlasem z. s.</dd>
-
-                  <dt className="kicker text-primary/70">Číslo účtu</dt>
-                  <dd className="font-semibold text-foreground">2301987654 / 2010</dd>
-
-                  <dt className="kicker text-primary/70">IBAN</dt>
-                  <dd className="font-semibold text-foreground">CZ65 2010 0000 0023 0198 7654</dd>
-
-                  <dt className="kicker text-primary/70">BIC</dt>
-                  <dd className="font-semibold text-foreground">FIOBCZPPXXX</dd>
-
-                  <dt className="kicker text-primary/70">Zpráva pro příjemce</dt>
-                  <dd className="font-semibold text-foreground">Dar JednímHlasem</dd>
-
-                  <dt className="kicker text-primary/70">Variabilní symbol</dt>
-                  <dd className="font-semibold text-primary">{selectedAmount.vs}</dd>
-                </dl>
-                <p className="mt-6 text-[0.95rem] leading-[1.55] text-muted-foreground">
-                  Údaje jsou ukázkové a před spuštěním se nahradí skutečným účtem. Nejsme veřejná sbírka. Jde o dar na činnost iniciativy. Při platbě na transparentní účet může být jméno a částka vidět ve výpisu.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
-            <SectionHeader kicker="Kam dar směřuje" title="Co podpora drží" />
-            <ul className="mt-8 grid items-stretch gap-4 md:grid-cols-3">
-              {[
-                "Publikujeme analýzy, komentáře a investigativní články, které vyvracejí dezinformace a doplňují kontext.",
-                "Budujeme komunitu lidí, kterým není lhostejné, když se realita mění v propagandu.",
-                "Věříme, že pravda potřebuje obhájce.",
-              ].map((text) => (
-                <li
-                  key={text}
-                  className="card-lift flex h-full rounded-xl border border-border bg-card p-6 text-[0.95rem] leading-[1.55] text-foreground"
-                >
-                  {text}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        <section>
-          <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
-            <div className="border-t-2 border-primary pt-5">
-              <p className="kicker text-primary">Kontakt</p>
-              <h2 className="mt-2 font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">
-                Potřebujete potvrzení daru?
-              </h2>
-              <p className="mt-4 max-w-3xl text-[0.95rem] leading-[1.55] text-foreground">
-                Napište nám na{" "}
-                <a
-                  href="mailto:info@jednimhlasem.cz"
-                  className="font-semibold text-primary hover:text-[var(--accent-blue)] hover:underline"
-                >
-                  info@jednimhlasem.cz
-                </a>
-                .
+              <p className="donate-lead">
+                Dezinformace se šíří zadarmo. Fakta, analýzy a kontext stojí čas, lidi a provoz.
               </p>
+              <p className="donate-lead">Jedním darem držíte hlas, který se nenechá koupit.</p>
+              <div className="donate-hero-actions">
+                <button type="button" className="donate-gold" onClick={scrollToQr}>
+                  Přispět teď
+                </button>
+                <button type="button" className="donate-ghost" onClick={scrollToQr}>
+                  Zobrazit účet a QR
+                </button>
+              </div>
             </div>
+            {widget}
+          </div>
+        </section>
+
+        <section className="donate-stats" aria-label="Proč dát">
+          <div>
+            <b className="font-display">1 hlas</b>
+            <span>stačí, aby se v diskusi objevilo chybějící fakta</span>
+          </div>
+          <div>
+            <b className="font-display">300 Kč / měs.</b>
+            <span>udrží jednu investigaci a její dosah</span>
+          </div>
+          <div>
+            <b className="font-display">0 Kč</b>
+            <span>z grantů, státních peněz a inzerce. Jen vy.</span>
+          </div>
+        </section>
+
+        <section className="donate-why">
+          <div className="donate-wrap">
+            <p className="donate-sec-k">Kam dar směřuje</p>
+            <h2 className="donate-sec-h font-display">Tři věci, které vaše peníze drží</h2>
+            <div className="donate-why-grid">
+              <article>
+                <div className="donate-ico" aria-hidden="true">
+                  <PenLine className="size-5" />
+                </div>
+                <h3 className="font-display">Analýzy, ne slogany</h3>
+                <p>Texty, které vyvracejí lži dřív, než se stanou „obecně známou pravdou“.</p>
+              </article>
+              <article>
+                <div className="donate-ico" aria-hidden="true">
+                  <Target className="size-5" />
+                </div>
+                <h3 className="font-display">Dosah faktů</h3>
+                <p>Aby pravda nevisela jen na webu — ale dostala se tam, kde se láme názor.</p>
+              </article>
+              <article>
+                <div className="donate-ico" aria-hidden="true">
+                  <Flag className="size-5" />
+                </div>
+                <h3 className="font-display">Nezávislost</h3>
+                <p>Žádný sponzor nám nediktuje tón. Proto musí platit komunita.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="dar-qr" className="donate-bank">
+          <div className="donate-wrap">
+            <p className="donate-sec-k">Jak poslat dar</p>
+            <h2 className="donate-sec-h font-display">Naskenujte. Nebo zkopírujte účet.</h2>
+            <div className="donate-bank-grid">
+              <div className="donate-qr-card">
+                <DonateQr payload={payload} />
+                <p>
+                  QR platba SPD · {formatKc(kc)}
+                  {cadence === "monthly" ? " / měs." : ""}
+                  <br />
+                  VS {amount.vs}
+                </p>
+                <button type="button" className="donate-gold donate-gold-wide" onClick={scrollToQr}>
+                  Otevřít v bance
+                </button>
+              </div>
+              <dl className="donate-details">
+                <div className="donate-row">
+                  <dt>Příjemce</dt>
+                  <dd>JednímHlasem z. s.</dd>
+                </div>
+                <div className="donate-row">
+                  <dt>Účet</dt>
+                  <dd>
+                    {ACCOUNT}{" "}
+                    <button type="button" className="donate-copy" onClick={copyAccount}>
+                      {copied ? (
+                        <>
+                          <Check className="size-3.5" /> Zkopírováno
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="size-3.5" /> Kopírovat
+                        </>
+                      )}
+                    </button>
+                  </dd>
+                </div>
+                <div className="donate-row">
+                  <dt>IBAN</dt>
+                  <dd>{IBAN}</dd>
+                </div>
+                <div className="donate-row">
+                  <dt>BIC</dt>
+                  <dd>FIOBCZPPXXX</dd>
+                </div>
+                <div className="donate-row">
+                  <dt>Zpráva</dt>
+                  <dd>{MSG}</dd>
+                </div>
+                <div className="donate-row">
+                  <dt>Variabilní symbol</dt>
+                  <dd className="donate-vs">{amount.vs}</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <section className="donate-mobile-flag">
+          <img
+            src="/images/o-nas-vlajka.jpg"
+            alt="Žena zahalená izraelskou vlajkou hledí do krajiny"
+            className="donate-mobile-flag-img"
+          />
+        </section>
+
+        <section className="donate-note">
+          <div className="donate-wrap">
+            <p>
+              Nejsme veřejná sbírka. Jde o dar na činnost iniciativy. Údaje jsou ukázkové a před
+              spuštěním se nahradí skutečným účtem. Při platbě na transparentní účet může být jméno
+              a částka vidět ve výpisu.
+            </p>
+          </div>
+        </section>
+
+        <section className="donate-contact">
+          <div className="donate-wrap">
+            <p className="donate-sec-k">Kontakt</p>
+            <h2 className="donate-sec-h font-display">Potřebujete potvrzení daru?</h2>
+            <p className="mt-3 max-w-3xl text-[0.95rem] leading-[1.55] text-foreground">
+              Napište nám na{" "}
+              <a
+                href="mailto:info@jednimhlasem.cz"
+                className="font-semibold text-primary hover:text-[var(--accent-blue)] hover:underline"
+              >
+                info@jednimhlasem.cz
+              </a>
+              .
+            </p>
           </div>
         </section>
       </main>
+      {copied ? (
+        <div className="donate-toast" role="status" aria-live="polite">
+          Zkopírováno
+        </div>
+      ) : null}
       <SiteFooter />
     </div>
   );
