@@ -1,4 +1,4 @@
-/* Sprint M — homepage title rhythm. Overrides .home-section-title from styles.css */
+/* Sprint M — homepage title rhythm */
 h2.home-section-title {
   position: relative;
   margin: 0;
@@ -24,9 +24,17 @@ h2.home-section-title::before {
 @media (min-width: 768px) {
   h2.home-section-title { font-size: 2.125rem; }
 }
+.home-section-title--split {
+  font-size: inherit;
+}
 .home-flow {
   padding-top: 1.75rem;
   padding-bottom: 0;
 }
 .home-flow--first { padding-top: 0; }
 .home-flow--last { padding-bottom: 2.25rem; }
+.section-band .border-t-2.border-primary,
+.section-y .border-t-2.border-primary.pt-5 {
+  border-top: none !important;
+  padding-top: 0 !important;
+}
