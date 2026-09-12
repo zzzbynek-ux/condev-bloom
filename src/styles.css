@@ -138,6 +138,8 @@
   --radius: 0.75rem;
   --navy-900: #0b1a3a;
   --blue-700: #0038B8;
+  --donate-gold: #e8c547;
+  --donate-ink: #0b1a3a;
   --paper: #f7f8fb;
   --ink: #1a2332;
   --accent-blue: #6BA3F5;
@@ -311,6 +313,45 @@
 .pill-solid:hover {
   background-color: #002a8a;
   color: #fff;
+}
+
+.donate-pill {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.25rem;
+  padding: 0 0.9rem;
+  border-radius: 9999px;
+  background: var(--donate-gold, #e8c547);
+  color: var(--donate-ink, #0b1a3a);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.donate-pill:visited {
+  color: var(--donate-ink, #0b1a3a);
+}
+.donate-pill:hover {
+  background: #f0d15c;
+  color: var(--donate-ink, #0b1a3a);
+}
+@media (max-width: 767px) {
+  .donate-pill--sm {
+    height: 2rem;
+    padding: 0 0.7rem;
+    font-size: 12px;
+  }
+}
+@media (min-width: 1024px) {
+  .site-header-sticky .donate-pill {
+    height: 2.5rem;
+    padding: 0 1.5rem;
+    font-size: 0.875rem;
+  }
 }
 
 .clanky-tabs a,
@@ -1126,10 +1167,30 @@
   }
   .onas-hero-grid {
     height: auto;
-    padding: 1rem 0 1.35rem;
+    padding: 1rem 1.25rem 1.35rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
   }
   .onas-hero-card {
     max-width: none;
+    width: 100%;
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .onas-hero-copy,
+  .onas-hero-copy p,
+  .onas-hero h1 {
+    text-align: left;
+  }
+  .onas-hero-nav {
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  .onas-hero-pill {
+    width: 100%;
   }
   .onas-hero-copy {
     display: block;
@@ -1642,13 +1703,23 @@ a.kampan-card {
 }
 .donate-tier b { display: block; font-size: 1.15rem; }
 .donate-tier small { display: block; color: #4b5870; font-size: 12px; margin-top: 2px; }
-.donate-pill {
+.donate-tier .donate-pill {
+  display: inline;
+  height: auto;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #0038B8;
   flex-shrink: 0;
+}
+.donate-tier .donate-pill:hover,
+.donate-tier .donate-pill:visited {
+  background: transparent;
+  color: #0038B8;
 }
 .donate-micro {
   margin: 0.55rem 0 0;

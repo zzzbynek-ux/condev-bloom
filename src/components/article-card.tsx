@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { CARD_SIZES, cardSrcSet } from "@/lib/img";
+import { clipPerex } from "@/lib/articles";
 
 export function ArticleCard({
   image,
@@ -68,7 +69,7 @@ export function ArticleCard({
             </Link>
           )}
         </h3>
-        <p className="mt-3 text-[0.95rem] leading-[1.55] text-muted-foreground">{perex}</p>
+        <p className="mt-3 text-[0.95rem] leading-[1.55] text-muted-foreground">{clipPerex(perex)}</p>
         {slug ? (
           <Link
             to="/clanky/$slug"

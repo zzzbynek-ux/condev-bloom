@@ -77,7 +77,7 @@ export function SiteHeader() {
           <div className="ml-auto flex items-center gap-3">
             <Link
               to="/podporte-nas"
-              className="hidden h-9 items-center justify-center rounded-full bg-white px-4 text-[13px] font-semibold text-primary transition-opacity hover:opacity-90 md:inline-flex lg:h-10 lg:px-6 lg:text-sm"
+              className="donate-pill donate-pill--sm"
             >
               Podpořte nás
             </Link>

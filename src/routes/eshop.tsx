@@ -34,7 +34,7 @@ function Eshop() {
               </p>
               <Link
                 to="/podporte-nas"
-                className="pill-solid mt-8 inline-flex h-10 items-center rounded-full px-5 text-[13px] font-semibold"
+                className="donate-pill mt-8"
               >
                 Podpořte nás
               </Link>

@@ -6,7 +6,6 @@ const LINKS = [
   { to: "/eshop", label: "E-shop" },
   { to: "/galerie-incidentu", label: "Archiv incidentů" },
   { to: "/nahlasit-incident", label: "Nahlásit incident" },
-  { to: "/podporte-nas", label: "Podpořte nás" },
 ] as const;
 
 function FacebookIcon({ className }: { className?: string }) {
@@ -70,6 +69,9 @@ export function SiteFooter() {
               Gaza GenoLIE
             </a>
           </span>
+          <Link to="/podporte-nas" className="donate-pill donate-pill--sm">
+            Podpořte nás
+          </Link>
         </nav>
 
         <div className="flex items-center justify-center gap-2 lg:justify-end">

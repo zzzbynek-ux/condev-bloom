@@ -6,7 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { MoreButton } from "@/components/more-button";
 import { ARTICLE_SECTIONS, allArticles, KONRAD } from "@/lib/content";
-import { articlesIn, articlesByTag, formatDate, shuffle } from "@/lib/articles";
+import { articlesIn, articlesByTag, formatDate, shuffle, clipPerex } from "@/lib/articles";
 import { CARD_SIZES } from "@/lib/img";
 
 const searchSchema = z.object({
@@ -220,7 +220,7 @@ function Clanky() {
                     {a.title}
                   </Link>
                 </h2>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{a.perex}</p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{clipPerex(a.perex)}</p>
               </div>
             </article>
           ))}

@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { articleBySlug, articleHtml, IMPORTED, formatDate, rewriteImportedHtml, htmlHasImage } from "@/lib/articles";
+import { articleBySlug, articleHtml, IMPORTED, formatDate, rewriteImportedHtml, htmlHasImage, clipPerex } from "@/lib/articles";
 import { ARTICLE_HERO_SIZES, RELATED_SIZES, cardSrcSet } from "@/lib/img";
 
 export const Route = createFileRoute("/clanky/$slug")({
@@ -119,7 +119,7 @@ function ArticlePage() {
                         </h3>
                         {r.perex ? (
                           <p className="related-card-perex text-[0.95rem] leading-[1.55] text-muted-foreground">
-                            {r.perex}
+                            {clipPerex(r.perex)}
                           </p>
                         ) : null}
                       </div>
