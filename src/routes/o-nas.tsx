@@ -12,6 +12,8 @@ import {
   MISSION,
 } from "@/lib/about-content";
 
+import "@/onas.css";
+
 export const Route = createFileRoute("/o-nas")({
   head: () => ({
     meta: [

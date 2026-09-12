@@ -1,0 +1,65 @@
+/* Sprint I — O nás: sklo, hodnoty, pásy, závěr */
+
+.onas-hero .onas-hero-pill {
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  color: #fff;
+}
+.onas-hero .onas-hero-pill:hover {
+  background: rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .onas-hero .onas-hero-pill {
+    background: #0038B8;
+    border-color: #0038B8;
+    color: #fff;
+  }
+  .onas-hero .onas-hero-pill:hover {
+    background: #002a8a;
+    border-color: #002a8a;
+    color: #fff;
+  }
+}
+
+.onas-value {
+  border-left: 3px solid #0038B8;
+  background: #fff;
+}
+.onas-value-n {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: #0038B8;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.onas-band {
+  background: #E8F1FF;
+}
+
+.onas-close {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: #0b1a3a;
+  color: #fff;
+}
+.onas-close p {
+  margin: 0;
+  font-weight: 700;
+}
+@media (max-width: 767px) {
+  .onas-close {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .onas-close .donate-pill {
+    width: 100%;
+  }
+}
