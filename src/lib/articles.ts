@@ -24,8 +24,8 @@ export function clipPerex(text: string): string {
     .trim();
   if (!t) return "";
 
-  const parts = t.split(/(?<=[.!?…][„“”"»]?)\s+/).filter(Boolean);
-  const complete = parts.filter((p, i) => i < parts.length - 1 || /[.!?…][„“”"»]?$/.test(p));
+  const parts = t.split(/(?<=[.!?\u2026][„“”"»]?)\s+/).filter(Boolean);
+  const complete = parts.filter((p, i) => i < parts.length - 1 || /[.!?\u2026][„“”"»]?$/.test(p));
   if (complete.length) return complete.slice(0, 2).join(" ");
 
   const lastSpace = t.lastIndexOf(" ");
@@ -45,16 +45,6 @@ export function articlesIn(section: string) {
 
 export function articleBySlug(slug: string) {
   return IMPORTED.find((a) => a.slug === slug);
-}
-
-let bodyCache: Record<string, string> | null = null;
-
-export async function articleHtml(slug: string): Promise<string> {
-  if (!bodyCache) {
-    const mod = await import("@/data/articles.body.json");
-    bodyCache = (mod.default ?? mod) as Record<string, string>;
-  }
-  return bodyCache[slug] ?? "";
 }
 
 const WP_UPLOAD = /https?:\/\/(?:www\.)?jednimhlasem\.cz\/wp-content\/uploads\/[^"'\s]+/gi;

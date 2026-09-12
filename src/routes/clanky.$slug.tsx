@@ -2,16 +2,18 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { articleBySlug, articleHtml, IMPORTED, formatDate, rewriteImportedHtml, htmlHasImage, clipPerex } from "@/lib/articles";
+import { articleBySlug, IMPORTED, formatDate, rewriteImportedHtml, htmlHasImage, clipPerex } from "@/lib/articles";
+import { getArticleHtml } from "@/lib/get-article-html";
 import { ARTICLE_HERO_SIZES, RELATED_SIZES, cardSrcSet } from "@/lib/img";
 
 export const Route = createFileRoute("/clanky/$slug")({
   loader: async ({ params }) => {
     const article = articleBySlug(params.slug);
     if (!article) throw notFound();
-    const html = await articleHtml(params.slug);
+    const html = await getArticleHtml({ data: params.slug });
     return { article, html };
   },
+  pendingComponent: ArticlePending,
   head: ({ loaderData }) => ({
     meta: [
       { title: `${loaderData?.article.title ?? "Článek"} — JednímHlasem` },
@@ -20,6 +22,23 @@ export const Route = createFileRoute("/clanky/$slug")({
   }),
   component: ArticlePage,
 });
+
+function ArticlePending() {
+  return (
+    <div className="min-h-screen bg-paper">
+      <SiteHeader />
+      <main>
+        <article className="mx-auto max-w-3xl px-5 py-12 md:px-6">
+          <p className="kicker text-primary">Článek</p>
+          <h1 className="mt-3 font-display text-3xl font-bold text-primary md:text-4xl">
+            Načítám článek…
+          </h1>
+        </article>
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}
 
 function relatedArticles(slug: string, tag: string) {
   const rest = IMPORTED.filter((a) => a.slug !== slug);
