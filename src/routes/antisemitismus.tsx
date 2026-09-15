@@ -300,23 +300,6 @@ const SECTIONS: { id: string; title: string; blocks: Block[] }[] = [
   },
 ];
 
-function StarOfDavid({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.75}
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M12 2.5 21 18H3L12 2.5Z" />
-      <path d="M12 21.5 3 6h18l-9 15.5Z" />
-    </svg>
-  );
-}
-
 function Blocks({ blocks }: { blocks: Block[] }) {
   return (
     <div className="space-y-4">
@@ -346,26 +329,15 @@ function Antisemitismus() {
     <div className="min-h-screen bg-background">
       <SiteHeader />
       <main>
-        <section className="bg-primary text-primary-foreground">
-          <div className="mx-auto max-w-[88rem] px-5 py-12 md:px-6 md:py-16">
-            <div className="flex items-start gap-4">
-              <span className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary-foreground/10 ring-1 ring-primary-foreground/25 sm:flex">
-                <StarOfDavid className="h-6 w-6" />
-              </span>
-              <div className="min-w-0 max-w-3xl">
-                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-foreground/70">
-                  Klíčové téma
-                </p>
-                <h1 className="mt-2 font-display text-3xl font-extrabold leading-tight tracking-tight md:text-5xl">
-                  Antisemitismus
-                </h1>
-                <p className="mt-4 text-[15px] leading-relaxed text-primary-foreground/85 md:text-[17px]">
-                  nelze chápat jako historickou epizodu ani jako uzavřený fenomén dvacátého století.
-                  Jde o dlouhodobý a strukturálně specifický jev, který se v průběhu dějin opakovaně
-                  proměňuje a přizpůsobuje aktuálním společenským, politickým a ideologickým podmínkám.
-                </p>
-              </div>
-            </div>
+        <section>
+          <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
+            <p className="kicker text-primary">Klíčové téma</p>
+            <h1 className="home-section-title mt-1">Antisemitismus</h1>
+            <p className="mt-3 max-w-2xl text-[0.95rem] leading-[1.55] text-muted-foreground">
+              nelze chápat jako historickou epizodu ani jako uzavřený fenomén dvacátého století.
+              Jde o dlouhodobý a strukturálně specifický jev, který se v průběhu dějin opakovaně
+              proměňuje a přizpůsobuje aktuálním společenským, politickým a ideologickým podmínkám.
+            </p>
           </div>
         </section>
 
@@ -388,11 +360,9 @@ function Antisemitismus() {
             </p>
           </div>
 
-          <div className="mt-10 border-t-2 border-primary pt-4">
-            <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">
-              Rozcestník tématu
-            </h2>
-            <p className="mt-1 text-sm text-muted-foreground">
+          <div className="mt-10">
+            <h2 className="home-section-title">Rozcestník tématu</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
               Rozklikněte jednotlivé okruhy.
             </p>
           </div>

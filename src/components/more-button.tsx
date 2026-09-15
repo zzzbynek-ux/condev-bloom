@@ -1,12 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 
-/**
- * Centrované pill tlačítko pod mřížkou článků.
- * Vede na další články stejné rubriky / tagu.
- */
 const buttonClass =
-  "pill-solid inline-flex items-center gap-2 rounded-full px-7 py-2.5 text-sm font-bold transition-colors";
+  "cta-link inline-flex items-center gap-1.5 text-primary hover:underline";
 
 export function MoreButton({
   label,
@@ -21,14 +17,14 @@ export function MoreButton({
   onClick?: () => void;
 }) {
   return (
-    <div className="mt-8 flex justify-center">
+    <div className="mt-8 flex justify-start">
       {onClick ? (
         <button type="button" onClick={onClick} className={buttonClass}>
-          {label} <ArrowRight className="size-4" />
+          {label} <ArrowRight className="size-4" aria-hidden />
         </button>
       ) : (
         <Link to={to} search={search} className={buttonClass}>
-          {label} <ArrowRight className="size-4" />
+          {label} <ArrowRight className="size-4" aria-hidden />
         </Link>
       )}
     </div>

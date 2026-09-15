@@ -427,10 +427,10 @@ function Index() {
           <div className="home-flow mx-auto max-w-[88rem] px-5 md:px-6">
               <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2 lg:gap-6">
                 {/* Tydýt */}
-                <div className="flex flex-col">
+                <div className="flex h-full min-h-0 flex-col">
                   <p className="kicker text-primary">Rubrika</p>
                   <h2 className="home-section-title">Tydýt týdne</h2>
-                  <article className="tydyt-card card-lift group mt-4 flex flex-col overflow-hidden rounded-2xl border border-border bg-card md:flex-row">
+                  <article className="tydyt-card card-lift group mt-4 flex h-full min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card md:flex-row">
                     <img
                       src="/images/tydyt-konrad.jpg"
                       alt="Tydýt týdne — Konrad Stavridis"
@@ -493,13 +493,13 @@ function Index() {
                         {[
                           {
                             tag: "Incident",
-                            date: "28/08/26",
+                            date: "28. 8. 2026",
                             text: "Poškozená výloha židovské restaurace v Praze — případ dokumentován a předán k ověření.",
                             destructive: true,
                           },
                           {
                             tag: "Výkřik",
-                            date: "21/08/26",
+                            date: "21. 8. 2026",
                             text: "Poslanec v debatě zopakoval vyvrácené tvrzení o „genocidě“ bez jakéhokoliv kontextu.",
                             destructive: false,
                           },

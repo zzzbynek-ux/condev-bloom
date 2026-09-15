@@ -74,7 +74,7 @@ function Kontakt() {
             </p>
 
             {status === "ok" ? (
-              <div className="mt-8 max-w-xl rounded-xl border border-border bg-card p-8">
+              <div className="mt-8 w-full max-w-[35rem] rounded-xl border border-border bg-card p-8">
                 <h2 className="font-display text-2xl font-bold text-primary">
                   Zpráva odešla. Ozveme se.
                 </h2>
@@ -88,7 +88,7 @@ function Kontakt() {
               </div>
             ) : (
               <form
-                className="relative mt-8 grid max-w-xl gap-5 rounded-xl border border-border bg-card p-6 md:p-8"
+                className="relative mt-8 grid w-full max-w-[35rem] gap-5 rounded-xl border border-border bg-card p-6 md:p-8"
                 onSubmit={onSubmit}
               >
                 <label className="grid gap-2">

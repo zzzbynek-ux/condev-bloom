@@ -806,6 +806,11 @@
 }
 
 @media (min-width: 1024px) {
+  .tydyt-card {
+    height: 100%;
+    flex: 1 1 auto;
+    align-items: stretch;
+  }
   .tydyt-photo {
     width: 8.5rem;
     height: 8.5rem;
