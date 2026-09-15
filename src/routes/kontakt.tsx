@@ -66,7 +66,7 @@ function Kontakt() {
         <section>
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
             <p className="kicker text-primary">Kontakt</p>
-            <h1 className="mt-2 font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">
+            <h1 className="home-section-title mt-2">
               Napište nám
             </h1>
             <p className="mt-4 max-w-2xl text-[0.95rem] leading-[1.55] text-foreground">

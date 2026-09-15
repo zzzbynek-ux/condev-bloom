@@ -300,7 +300,8 @@ function KampanStrip() {
 
   return (
     <section className="kampan-strip" aria-label="Kampaň Gaza GenoLIE">
-      <div className="mx-auto max-w-[88rem] px-5 md:px-6">
+      <div className="home-flow mx-auto max-w-[88rem] px-5 md:px-6">
+        <p className="kicker text-primary">Partnerství</p>
         <h2 className="home-section-title">Kampaň</h2>
         <div className="kampan-card mt-4">
           <a
@@ -435,6 +436,7 @@ function Index() {
               <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2 lg:gap-6">
                 {/* Tydýt */}
                 <div className="flex h-full min-h-0 flex-col">
+                  <p className="kicker text-primary">Rubrika</p>
                   <h2 className="home-section-title">Tydýt týdne</h2>
                   <article className="tydyt-card card-lift group mt-4 flex h-full min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card md:flex-row">
                     <img
@@ -491,7 +493,8 @@ function Index() {
 
                 {/* Dokumentujeme */}
                 <div className="flex h-full min-h-0 flex-col">
-                  <h2 className="home-section-title">Dokumentujeme</h2>
+                  <p className="kicker text-primary">Dokumentujeme</p>
+                  <h2 className="home-section-title">Incidenty</h2>
                   <article className="documentujeme-card mt-4 flex h-full flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card">
                     <div className="documentujeme-inner flex h-full flex-1 flex-col justify-start p-4">
                       <div className="documentujeme-entries flex flex-col gap-3">

@@ -29,7 +29,7 @@ function Temata() {
       <SiteHeader />
       <main className="mx-auto max-w-6xl px-5 py-14">
         <p className="text-xs uppercase tracking-[0.18em] text-primary">Rubriky</p>
-        <h1 className="mt-2 text-4xl font-semibold md:text-5xl">Témata</h1>
+        <h1 className="home-section-title mt-2">Témata</h1>
         <p className="mt-4 max-w-2xl text-muted-foreground">
           Šest oblastí, kterým se věnujeme dlouhodobě a do hloubky.
         </p>

@@ -50,7 +50,7 @@ function NahlasitIncident() {
         <section>
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
             <p className="kicker text-primary">Nahlásit incident</p>
-            <h1 className="mt-3 max-w-3xl font-display text-[1.65rem] font-bold leading-[1.15] text-primary md:text-[1.85rem] lg:text-[2.1rem]">
+            <h1 className="home-section-title mt-3 max-w-3xl">
               Nahlaš nenávist, než zdomácní
             </h1>
             <p className="mt-4 max-w-3xl text-[0.95rem] leading-[1.55] text-foreground">

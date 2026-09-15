@@ -127,7 +127,7 @@ function Clanky() {
       <SiteHeader />
       <main className="mx-auto max-w-6xl px-5 py-14">
         <p className="text-xs uppercase tracking-[0.18em] text-primary">Texty</p>
-        <h1 className="mt-2 font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">Články a analýzy</h1>
+        <h1 className="home-section-title mt-2">Články a analýzy</h1>
         <p className="mt-4 max-w-2xl text-muted-foreground">
           Vše na jednom místě — od krátkých faktických vysvětlení po dlouhé studie.
         </p>

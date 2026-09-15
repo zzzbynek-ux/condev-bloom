@@ -24,8 +24,8 @@ export function clipPerex(text: string): string {
     .trim();
   if (!t) return "";
 
-  const parts = t.split(/(?<=[.!?\u2026][„“”"»]?)\s+/).filter(Boolean);
-  const complete = parts.filter((p, i) => i < parts.length - 1 || /[.!?\u2026][„“”"»]?$/.test(p));
+  const parts = t.split(/(?<=[.!?…][„“”"»]?)\s+/).filter(Boolean);
+  const complete = parts.filter((p, i) => i < parts.length - 1 || /[.!?…][„“”"»]?$/.test(p));
   if (complete.length) return complete.slice(0, 2).join(" ");
 
   const lastSpace = t.lastIndexOf(" ");

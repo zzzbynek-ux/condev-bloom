@@ -15,11 +15,11 @@ export function SectionHeader({
   linkLabel?: string;
 }) {
   return (
-    <div className="border-t-2 border-primary pt-5">
+    <div>
       {kicker ? <p className="kicker text-primary/70">{kicker}</p> : null}
       <div className="mt-2 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h2 className="font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">
+          <h2 className="home-section-title">
             {title}
           </h2>
           {subtitle ? (

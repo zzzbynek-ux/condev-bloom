@@ -89,9 +89,8 @@ function ArticlePage() {
         {related.length ? (
           <section className="related-section bg-paper">
             <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
-              <div className="border-t-2 border-primary pt-5">
                 <p className="kicker text-primary">Čtěte dál</p>
-                <h2 className="mt-2 font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">
+                <h2 className="home-section-title mt-2">
                   Související
                 </h2>
                 <div className="related-grid mt-6">
@@ -146,7 +145,6 @@ function ArticlePage() {
                     );
                   })}
                 </div>
-              </div>
             </div>
           </section>
         ) : null}

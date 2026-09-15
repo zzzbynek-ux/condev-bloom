@@ -295,11 +295,13 @@
   color: #fff;
 }
 
-/* Homepage section names: ink, not link-blue */
+/* Homepage section names: short underline, not a left tick */
 .home-section-title {
+  position: relative;
   margin: 0;
-  padding-left: 0.75rem;
-  border-left: 3px solid #0038B8;
+  padding-left: 0;
+  padding-bottom: 0.35rem;
+  border-left: none;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.75rem;
@@ -307,15 +309,20 @@
   letter-spacing: -0.03em;
   color: #0b1a3a;
 }
-.home-section-title--split {
-  font-size: 1.5rem;
+.home-section-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: auto;
+  width: 2.25rem;
+  height: 3px;
+  border-radius: 999px;
+  background: #0038B8;
 }
 @media (min-width: 768px) {
   .home-section-title {
     font-size: 2.125rem;
-  }
-  .home-section-title--split {
-    font-size: 1.75rem;
   }
 }
 
@@ -755,10 +762,6 @@
 }
 
 /* Tydýt: čtvercový medailon na všech šířkách */
-.tydyt-card,
-.documentujeme-card {
-  border-left: 3px solid #0038B8;
-}
 .tydyt-card {
   flex-direction: row;
   align-items: flex-start;
@@ -1458,7 +1461,7 @@
 
 .kampan-strip {
   background: var(--paper, #f7f8fb);
-  padding: 1.75rem 0;
+  padding: 0;
 }
 .kampan-card {
   display: flex;
@@ -1471,6 +1474,9 @@
   border-left: 3px solid #0038B8;
   color: inherit;
   transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.kampan-strip .kampan-card {
+  border-left: 1px solid rgba(0, 56, 184, 0.12);
 }
 .kampan-card:hover {
   transform: translateY(-2px);
@@ -1535,7 +1541,22 @@ a.kampan-card {
   border-top: none !important;
 }
 .vyber-section .section-y {
-  padding-top: 0 !important;
+  padding-top: 0;
+}
+.home-flow {
+  padding-top: 1.75rem;
+  padding-bottom: 0;
+}
+.home-flow--first {
+  padding-top: 0;
+}
+.home-flow--last {
+  padding-bottom: 2.25rem;
+}
+@media (min-width: 768px) {
+  .home-flow--last {
+    padding-bottom: 2.5rem;
+  }
 }
 @keyframes kampan-fade {
   from { opacity: 0; }

@@ -78,7 +78,7 @@ function ArchivIncidentu() {
         <section className="section-y">
           <div className="mx-auto max-w-[88rem] px-5 md:px-6">
             <p className="kicker text-primary">Klíčové téma</p>
-            <h1 className="mt-1 font-display text-[1.5rem] font-bold text-primary md:text-[1.875rem]">
+            <h1 className="home-section-title mt-1">
               Archiv incidentů
             </h1>
             <p className="mt-3 max-w-xl text-[0.95rem] leading-[1.55] text-muted-foreground">

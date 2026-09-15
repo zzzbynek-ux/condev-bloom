@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import QRCode from "qrcode";
 import { Check, Copy, Flag, PenLine, Target } from "lucide-react";
@@ -372,13 +372,13 @@ function PodporteNas() {
             <p className="donate-sec-k">Kontakt</p>
             <h2 className="donate-sec-h font-display">Potřebujete potvrzení daru?</h2>
             <p className="mt-3 max-w-3xl text-[0.95rem] leading-[1.55] text-foreground">
-              Napište nám na{" "}
-              <a
-                href="mailto:info@jednimhlasem.cz"
+              Napište nám přes{" "}
+              <Link
+                to="/kontakt"
                 className="font-semibold text-primary hover:text-[var(--accent-blue)] hover:underline"
               >
-                info@jednimhlasem.cz
-              </a>
+                kontaktní formulář
+              </Link>
               .
             </p>
           </div>
