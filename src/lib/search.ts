@@ -1,10 +1,22 @@
-import { FEATURED, FEED, LATEST, SECTIONS, SLIDES, TOPICS } from "@/lib/content";
+import imported from "@/data/search-index.json";
+import { AXES } from "@/lib/about-content";
 
 export type SearchResult = {
   title: string;
   text: string;
   kind: string;
   to: string;
+};
+
+type Indexed = SearchResult & { hay: string };
+
+type Meta = {
+  slug: string;
+  title: string;
+  perex: string;
+  tag: string;
+  tags?: string[];
+  iso?: string;
 };
 
 function norm(s: string) {
@@ -14,54 +26,69 @@ function norm(s: string) {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
-const INDEX: SearchResult[] = [
-  ...TOPICS.map((t) => ({
-    title: t.title,
-    text: `${t.kicker} — ${t.perex}`,
-    kind: "Téma",
-    to: "/temata",
-  })),
-  ...SECTIONS.map((s) => ({ title: s, text: "Rubrika", kind: "Rubrika", to: "/temata" })),
-  ...SLIDES.map((s) => ({
-    title: s.title,
-    text: `${s.kicker} — ${s.text}`,
-    kind: "Úvod",
-    to: "/",
-  })),
-  ...FEATURED.map((f) => ({
-    title: f.title.replace(/\n/g, " "),
-    text: f.text,
-    kind: "Doporučujeme",
-    to: "/clanky",
-  })),
-  ...LATEST.map((n) => ({
-    title: n.title,
-    text: `${n.tag} · ${n.date} — ${n.perex}`,
-    kind: "Článek",
-    to: "/clanky",
-  })),
-  ...FEED.flatMap((g) =>
-    g.items.map((i) => ({
-      title: i.title,
-      text: `${i.tag} · ${i.date} — ${i.perex}`,
-      kind: g.label,
+const RUBRICS = [
+  "Izrael a Židé",
+  "Antisemitismus",
+  "Média a instituce",
+  "Bezpečnost a ideologie",
+  "Hlasy a příběhy",
+  "Reporty",
+] as const;
+
+const INDEX: Indexed[] = (() => {
+  const out: Indexed[] = [];
+  const seenTo = new Set<string>();
+
+  const push = (item: SearchResult, hay: string) => {
+    if (seenTo.has(item.to)) return;
+    seenTo.add(item.to);
+    out.push({ ...item, hay });
+  };
+
+  const articles = (imported as Meta[]).slice().sort((a, b) => (b.iso || "").localeCompare(a.iso || ""));
+
+  for (const a of articles) {
+    if (!a.slug) continue;
+    push(
+      {
+        title: a.title,
+        text: `${a.tag} — ${a.perex}`,
+        kind: "Článek",
+        to: `/clanky/${a.slug}`,
+      },
+      norm(`${a.title} ${a.perex} ${a.tag} ${(a.tags ?? []).join(" ")}`),
+    );
+  }
+
+  for (const axis of AXES) {
+    push(
+      {
+        title: axis.title,
+        text: `${axis.kicker} — ${axis.text}`,
+        kind: "Téma",
+        to: axis.href,
+      },
+      norm(`${axis.title} ${axis.kicker} ${axis.text}`),
+    );
+  }
+
+  for (const s of RUBRICS) {
+    out.push({
+      title: s,
+      text: "Rubrika",
+      kind: "Rubrika",
       to: "/clanky",
-    })),
-  ),
-];
+      hay: norm(`${s} rubrika`),
+    });
+  }
+
+  return out;
+})();
 
 export function searchSite(query: string): SearchResult[] {
   const q = norm(query.trim());
   if (q.length < 2) return [];
-  const terms = q.split(/\s+/);
-  const seen = new Set<string>();
+  const terms = q.split(/\s+/).filter(Boolean);
 
-  return INDEX.filter((item) => {
-    const hay = norm(`${item.title} ${item.text} ${item.kind}`);
-    if (!terms.every((t) => hay.includes(t))) return false;
-    const key = `${item.kind}|${item.title}`;
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
+  return INDEX.filter((item) => terms.every((t) => item.hay.includes(t))).map(({ hay: _hay, ...item }) => item);
 }

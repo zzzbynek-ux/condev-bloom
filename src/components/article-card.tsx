@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { CARD_SIZES, cardSrcSet } from "@/lib/img";
-import { clipPerex } from "@/lib/articles";
 
 export function ArticleCard({
   image,
@@ -10,6 +9,7 @@ export function ArticleCard({
   title,
   perex,
   slug,
+  priority = false,
 }: {
   image: string;
   tag: string;
@@ -17,23 +17,37 @@ export function ArticleCard({
   title: string;
   perex: string;
   slug?: string;
+  priority?: boolean;
 }) {
-  const href = slug ? `/clanky/${slug}` : "/clanky";
   const webp = cardSrcSet(image);
   const photo = (
-      <img
-        src={image}
-        alt={title}
-        loading="lazy"
-        decoding="async"
-        width={1280}
-        height={720}
-        sizes={CARD_SIZES}
-        className="aspect-video w-full object-cover"
-      />
+    <img
+      src={image}
+      alt=""
+      loading={priority ? "eager" : "lazy"}
+      decoding="async"
+      width={1280}
+      height={720}
+      sizes={CARD_SIZES}
+      className="aspect-video w-full object-cover"
+      {...(priority ? { fetchPriority: "high" as const } : {})}
+    />
   );
+
+  const body = (
+    <>
+      <h3 className="font-display text-xl font-bold leading-snug text-primary group-hover:underline">
+        {title}
+      </h3>
+      <p className="mt-3 text-[0.95rem] leading-[1.55] text-muted-foreground">{perex}</p>
+      <span className="cta-link mt-auto inline-flex items-center gap-2 pt-4 text-primary">
+        Číst článek <ArrowRight className="size-4" aria-hidden />
+      </span>
+    </>
+  );
+
   return (
-    <article className="card-lift group flex flex-col overflow-hidden rounded-xl border border-border bg-card">
+    <article className="card-lift group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card">
       {webp ? (
         <picture className="contents">
           <source type="image/webp" srcSet={webp} sizes={CARD_SIZES} />
@@ -57,33 +71,13 @@ export function ArticleCard({
             </span>
           ) : null}
         </div>
-
-        <h3 className="mt-3 font-display text-xl font-bold leading-snug text-primary">
-          {slug ? (
-            <Link to="/clanky/$slug" params={{ slug }} className="group-hover:underline">
-              {title}
-            </Link>
-          ) : (
-            <Link to="/clanky" className="group-hover:underline">
-              {title}
-            </Link>
-          )}
-        </h3>
-        <p className="mt-3 text-[0.95rem] leading-[1.55] text-muted-foreground">{clipPerex(perex)}</p>
         {slug ? (
-          <Link
-            to="/clanky/$slug"
-            params={{ slug }}
-            className="cta-link mt-4 inline-flex items-center gap-2 text-primary hover:underline"
-          >
-            Číst článek <ArrowRight className="size-4" />
+          <Link to="/clanky/$slug" params={{ slug }} className="mt-3 flex flex-1 flex-col no-underline">
+            {body}
           </Link>
         ) : (
-          <Link
-            to="/clanky"
-            className="cta-link mt-4 inline-flex items-center gap-2 text-primary hover:underline"
-          >
-            Číst článek <ArrowRight className="size-4" />
+          <Link to="/clanky" className="mt-3 flex flex-1 flex-col no-underline">
+            {body}
           </Link>
         )}
       </div>

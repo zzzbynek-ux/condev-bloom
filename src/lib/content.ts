@@ -1,4 +1,5 @@
 import { articlesIn, formatDate, shuffle, IMPORTED } from "./articles";
+import { clipPerex } from "./excerpt";
 
 export type Topic = {
   slug: string;
@@ -110,21 +111,21 @@ export const FEATURED = [
     text: "Diskuze a komentáře na sociálních sítích ovlivňují naši realitu.",
     tone: "sand",
     tag: "Výběr redakce",
-    date: "05/07/25",
+    date: "5. 7. 2025",
   },
   {
     title: "Malý stát.\nGlobální přínos.",
     text: "Naše podpora a aktivity mají globální dosah.",
     tone: "flag",
     tag: "Výběr redakce",
-    date: "05/07/25",
+    date: "5. 7. 2025",
   },
   {
     title: "Slogany živí\nemoce, ne mír",
     text: "Přestaňme podléhat prázdným heslům a hledejme skutečné řešení.",
     tone: "red",
     tag: "Výběr redakce",
-    date: "05/07/25",
+    date: "5. 7. 2025",
   },
 ] as const;
 
@@ -271,7 +272,7 @@ export const KAMPAN_SLIDES = [
 ] as const;
 
 function toItem(a: { slug: string; tag: string; iso: string; title: string; perex: string; image: string }) {
-  return { slug: a.slug, tag: a.tag, date: formatDate(a.iso), title: a.title, perex: a.perex, image: a.image };
+  return { slug: a.slug, tag: a.tag, date: formatDate(a.iso), title: a.title, perex: clipPerex(a.perex), image: a.image };
 }
 
 export const VYBER_REDAKCE = [
@@ -289,6 +290,15 @@ export const KONRAD = {
   image: "/images/tydyt-konrad.jpg",
 };
 
+export const CLANKY_FILTERS = [
+  { id: "nove", label: "Nové" },
+  { id: "doporucujeme", label: "Doporučujeme" },
+  { id: "cesi-a-izrael", label: "Češi a Izrael" },
+  { id: "studie", label: "Studie a analýzy" },
+  { id: "tydyt", label: "Tydýt týdne" },
+  { id: "vse", label: "Všechny texty" },
+] as const;
+
 export const ARTICLE_SECTIONS: FeedGroup[] = [
   { id: "nove", label: "Nové", showAll: true, items: articlesIn("nove").slice(0, 12).map(toItem) },
   { id: "doporucujeme", label: "Doporučujeme", showAll: true, items: shuffle(articlesIn("doporucujeme")).slice(0, 12).map(toItem) },
@@ -301,7 +311,7 @@ export const ARTICLE_SECTIONS: FeedGroup[] = [
 export const FEED: FeedGroup[] = ARTICLE_SECTIONS.filter((g) => g.id === "nove" || g.id === "cesi-a-izrael");
 
 export const TYDYT_RECENT = [
-  { slug: "tydyt-konrad-stavridis", title: "Konrad Stavridis", date: "02/09/26" },
+  { slug: "tydyt-konrad-stavridis", title: "Konrad Stavridis", date: "2. 9. 2026" },
 ] as const;
 
 export function allArticles() {

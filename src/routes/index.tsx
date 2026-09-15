@@ -7,7 +7,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
 import { MoreButton } from "@/components/more-button";
-import { ARTICLE_SECTIONS, HERO_BANNER, KAMPAN_SLIDES, VYBER_REDAKCE } from "@/lib/content";
+import { ARTICLE_SECTIONS, CLANKY_FILTERS, HERO_BANNER, KAMPAN_SLIDES, KONRAD, VYBER_REDAKCE } from "@/lib/content";
 import { heroSrcSet, heroWebpSrcSet, HERO_SIZES, webpExists } from "@/lib/img";
 
 export const Route = createFileRoute("/")({
@@ -223,18 +223,9 @@ function SectionHeader({
   );
 }
 
-const SECTION_LINKS = [
-  { id: "nove", label: "Nové" },
-  { id: "doporucujeme", label: "Doporučujeme" },
-  { id: "cesi-a-izrael", label: "Češi a Izrael" },
-  { id: "studie", label: "Studie a analýzy" },
-  { id: "vse", label: "Všechny texty" },
-] as const;
-
 function ArticleTabs() {
-  const [active, setActive] = useState<(typeof SECTION_LINKS)[number]["id"]>("nove");
-  const sections = ARTICLE_SECTIONS.filter((g) => g.id !== "tydyt");
-  const group = sections.find((g) => g.id === active) ?? sections[0]!;
+  const [active, setActive] = useState<(typeof CLANKY_FILTERS)[number]["id"]>("nove");
+  const group = ARTICLE_SECTIONS.find((g) => g.id === active) ?? ARTICLE_SECTIONS[0]!;
   const items = group.items.slice(0, 6);
 
   return (
@@ -248,7 +239,7 @@ function ArticleTabs() {
           aria-label="Rubriky článků"
           className="clanky-tabs mt-4 flex flex-nowrap items-center overflow-x-auto lg:flex-wrap lg:overflow-visible"
         >
-          {SECTION_LINKS.map((link) => (
+          {CLANKY_FILTERS.map((link) => (
             <button
               key={link.id}
               type="button"
@@ -413,7 +404,7 @@ function Index() {
               </Link>
             </div>
             <div className="vyber-grid mt-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {VYBER_REDAKCE.map((item) => (
+              {VYBER_REDAKCE.map((item, i) => (
                 <ArticleCard
                   key={item.slug}
                   image={item.image}
@@ -422,6 +413,7 @@ function Index() {
                   title={item.title}
                   perex={item.perex}
                   slug={item.slug}
+                  priority={i < 3}
                 />
               ))}
             </div>
@@ -435,17 +427,17 @@ function Index() {
           <div className="home-flow mx-auto max-w-[88rem] px-5 md:px-6">
               <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2 lg:gap-6">
                 {/* Tydýt */}
-                <div className="flex h-full min-h-0 flex-col">
+                <div className="flex flex-col">
                   <p className="kicker text-primary">Rubrika</p>
                   <h2 className="home-section-title">Tydýt týdne</h2>
-                  <article className="tydyt-card card-lift group mt-4 flex h-full min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card md:flex-row">
+                  <article className="tydyt-card card-lift group mt-4 flex flex-col overflow-hidden rounded-2xl border border-border bg-card md:flex-row">
                     <img
                       src="/images/tydyt-konrad.jpg"
                       alt="Tydýt týdne — Konrad Stavridis"
                       loading="lazy"
                       className="tydyt-photo shrink-0 object-cover object-[50%_18%]"
                       width={363}
-                      height={387}
+                      height={363}
                       decoding="async"
                     />
                     <div className="tydyt-body flex min-w-0 flex-1 flex-col justify-between gap-3">
@@ -459,7 +451,7 @@ function Index() {
                             Tydýt
                           </Link>
                           <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
-                            02/09/26
+                            {KONRAD.date}
                           </span>
                         </div>
                         <h3 className="mt-2 font-display text-lg font-bold leading-snug text-primary">

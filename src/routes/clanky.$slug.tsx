@@ -2,9 +2,10 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { ArticleCard } from "@/components/article-card";
 import { articleBySlug, IMPORTED, formatDate, rewriteImportedHtml, htmlHasImage, clipPerex } from "@/lib/articles";
 import { getArticleHtml } from "@/lib/get-article-html";
-import { ARTICLE_HERO_SIZES, RELATED_SIZES, cardSrcSet } from "@/lib/img";
+import { ARTICLE_HERO_SIZES } from "@/lib/img";
 
 export const Route = createFileRoute("/clanky/$slug")({
   loader: async ({ params }) => {
@@ -70,7 +71,7 @@ function ArticlePage() {
                 height={720}
                 sizes={ARTICLE_HERO_SIZES}
                 decoding="async"
-                className="mt-8 w-full rounded-xl object-cover"
+                className="mt-8 aspect-video w-full rounded-xl object-cover"
               />
             ) : null}
             <div className="article-body mt-8 text-[17px] leading-relaxed text-foreground" dangerouslySetInnerHTML={{ __html: body }} />
@@ -93,57 +94,18 @@ function ArticlePage() {
                 <h2 className="home-section-title mt-2">
                   Související
                 </h2>
-                <div className="related-grid mt-6">
-                  {related.map((r) => {
-                    const relatedWebp = cardSrcSet(r.image);
-                    const relatedImg = (
-                      <img
-                        src={r.image}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        width={1280}
-                        height={720}
-                        sizes={RELATED_SIZES}
-                        className="related-card-img w-full object-cover"
-                      />
-                    );
-                    return (
-                    <Link
+                <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  {related.map((r) => (
+                    <ArticleCard
                       key={r.slug}
-                      to="/clanky/$slug"
-                      params={{ slug: r.slug }}
-                      className="related-card card-lift group flex flex-col overflow-hidden rounded-xl border border-border bg-card no-underline"
-                    >
-                      {relatedWebp ? (
-                        <picture className="contents">
-                          <source type="image/webp" srcSet={relatedWebp} sizes={RELATED_SIZES} />
-                          {relatedImg}
-                        </picture>
-                      ) : (
-                        relatedImg
-                      )}
-                      <div className="related-card-body flex min-h-0 flex-1 flex-col">
-                        <div className="flex items-center justify-between gap-3">
-                          <span className="article-tag rounded-full px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em]">
-                            {r.tag}
-                          </span>
-                          <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
-                            {formatDate(r.iso)}
-                          </span>
-                        </div>
-                        <h3 className="related-card-title font-display font-bold leading-snug text-primary">
-                          {r.title}
-                        </h3>
-                        {r.perex ? (
-                          <p className="related-card-perex text-[0.95rem] leading-[1.55] text-muted-foreground">
-                            {clipPerex(r.perex)}
-                          </p>
-                        ) : null}
-                      </div>
-                    </Link>
-                    );
-                  })}
+                      image={r.image}
+                      tag={r.tag}
+                      date={formatDate(r.iso)}
+                      title={r.title}
+                      perex={clipPerex(r.perex)}
+                      slug={r.slug}
+                    />
+                  ))}
                 </div>
             </div>
           </section>

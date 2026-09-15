@@ -4,10 +4,10 @@ import { z } from "zod";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { ArticleCard } from "@/components/article-card";
 import { MoreButton } from "@/components/more-button";
-import { ARTICLE_SECTIONS, allArticles, KONRAD } from "@/lib/content";
+import { ARTICLE_SECTIONS, CLANKY_FILTERS, allArticles, KONRAD } from "@/lib/content";
 import { articlesIn, articlesByTag, formatDate, shuffle, clipPerex } from "@/lib/articles";
-import { CARD_SIZES } from "@/lib/img";
 
 const searchSchema = z.object({
   tag: z.string().optional(),
@@ -52,16 +52,6 @@ const ALL_ARTICLES: Article[] = allArticles().map((item) => ({
 
 const DOPORUCUJEME = shuffle(articlesIn("doporucujeme"));
 
-const FILTER_IDS = [
-  { id: "nove", label: "Nové" },
-  { id: "doporucujeme", label: "Doporučujeme" },
-  { id: "cesi-a-izrael", label: "Češi a Izrael" },
-  { id: "studie", label: "Studie a analýzy" },
-  { id: "tydyt", label: "Tydýt týdne" },
-] as const;
-
-const FILTERS = [...FILTER_IDS.map((f) => f.label), "Všechny texty"];
-
 function toCard(a: {
   slug: string;
   tag: string;
@@ -76,7 +66,7 @@ function toCard(a: {
     tag: a.tag,
     date: a.iso ? formatDate(a.iso) : a.date,
     title: a.title,
-    perex: a.perex,
+    perex: clipPerex(a.perex),
     image: a.image,
     section,
   };
@@ -90,12 +80,10 @@ function Clanky() {
   const navigate = Route.useNavigate();
   const [visible, setVisible] = useState(12);
 
-  const isTagFilter = Boolean(tag) && !FILTERS.includes(tag!);
+  const isTagFilter = Boolean(tag) && !CLANKY_FILTERS.some((f) => f.label === tag);
   const active = isTagFilter
     ? "Všechny texty"
-    : filtr === "vse"
-      ? "Všechny texty"
-      : (FILTER_IDS.find((f) => f.id === filtr)?.label ?? "Nové");
+    : (CLANKY_FILTERS.find((f) => f.id === (filtr ?? "nove"))?.label ?? "Nové");
 
   useEffect(() => setVisible(12), [active, tag, filtr]);
 
@@ -137,24 +125,13 @@ function Clanky() {
           aria-label="Filtrovat články"
           className="clanky-tabs mt-8 flex flex-nowrap overflow-x-auto border-b border-border pb-0 lg:flex-wrap lg:overflow-visible"
         >
-          {FILTERS.map((f) => {
-            const filterId = FILTER_IDS.find((x) => x.label === f)?.id;
-            const isActive = active === f;
-            const search =
-              f === "Všechny texty"
-                ? { filtr: "vse" }
-                : f === "Nové"
-                  ? {}
-                  : { filtr: filterId };
-            const href =
-              f === "Všechny texty"
-                ? "/clanky?filtr=vse"
-                : f === "Nové"
-                  ? "/clanky"
-                  : `/clanky?filtr=${filterId}`;
+          {CLANKY_FILTERS.map((f) => {
+            const isActive = active === f.label;
+            const search = f.id === "nove" ? {} : { filtr: f.id };
+            const href = f.id === "nove" ? "/clanky" : `/clanky?filtr=${f.id}`;
             return (
               <a
-                key={f}
+                key={f.id}
                 href={href}
                 aria-current={isActive ? "true" : undefined}
                 onClick={(e) => {
@@ -168,7 +145,7 @@ function Clanky() {
                 }}
                 className="whitespace-nowrap text-base font-semibold leading-none no-underline"
               >
-                {f}
+                {f.label}
               </a>
             );
           })}
@@ -186,43 +163,15 @@ function Clanky() {
         {/* Mřížka článků */}
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {articles.slice(0, visible).map((a, idx) => (
-            <article
+            <ArticleCard
               key={`${a.slug}-${idx}`}
-              className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md"
-            >
-              <img
-                src={a.image}
-                alt={a.title}
-                loading="lazy"
-                decoding="async"
-                width={1280}
-                height={720}
-                sizes={CARD_SIZES}
-                className="aspect-video w-full object-cover"
-              />
-              <div className="flex flex-1 flex-col p-6">
-                <div className="flex items-center justify-between gap-3">
-                  <Link
-                    to="/clanky"
-                    search={{ tag: a.tag }}
-                    className="article-tag rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] hover:opacity-85"
-                  >
-                    {a.tag}
-                  </Link>
-                  {a.date ? (
-                    <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
-                      {a.date}
-                    </span>
-                  ) : null}
-                </div>
-                <h2 className="mt-3 font-display text-xl font-bold leading-snug text-primary">
-                  <Link to="/clanky/$slug" params={{ slug: a.slug }} className="group-hover:underline">
-                    {a.title}
-                  </Link>
-                </h2>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{clipPerex(a.perex)}</p>
-              </div>
-            </article>
+              image={a.image}
+              tag={a.tag}
+              date={a.date}
+              title={a.title}
+              perex={a.perex}
+              slug={a.slug}
+            />
           ))}
         </div>
 

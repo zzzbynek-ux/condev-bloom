@@ -1,6 +1,12 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Menu, Search, X } from "lucide-react";
+
+import type { SearchResult } from "@/lib/search";
+
+function loadSearch() {
+  return import("@/lib/search");
+}
 
 function FacebookIcon({ className }: { className?: string }) {
   return (
@@ -39,15 +45,92 @@ const MENU_LINKS = [
   { label: "Podpořte nás", to: "/podporte-nas" as const },
 ];
 
+function SearchHits({
+  results,
+  query,
+  onPick,
+  className,
+}: {
+  results: SearchResult[];
+  query: string;
+  onPick: (to: string) => void;
+  className?: string;
+}) {
+  if (query.trim().length < 2) return null;
+  const shown = results.slice(0, 8);
+  return (
+    <ul role="listbox" className={className}>
+      {shown.length === 0 ? (
+        <li className="px-3 py-2.5 text-sm text-muted-foreground">Nic se nenašlo.</li>
+      ) : (
+        shown.map((r, i) => (
+          <li key={`${r.kind}-${r.title}-${i}`}>
+            <button
+              type="button"
+              role="option"
+              onMouseDown={(e) => e.preventDefault()}
+              onClick={() => onPick(r.to)}
+              className="block w-full px-3 py-2 text-left hover:bg-accent-soft"
+            >
+              <span className="block text-sm font-semibold leading-snug text-foreground">{r.title}</span>
+              <span className="mt-0.5 block text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
+                {r.kind}
+              </span>
+            </button>
+          </li>
+        ))
+      )}
+    </ul>
+  );
+}
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState("");
+  const [panel, setPanel] = useState(false);
+  const [results, setResults] = useState<SearchResult[]>([]);
   const navigate = useNavigate();
   const searchRef = useRef<HTMLInputElement>(null);
+  const desktopBox = useRef<HTMLDivElement>(null);
+  const mobileBox = useRef<HTMLDivElement>(null);
+
+  const showPanel = panel && q.trim().length >= 2;
 
   useEffect(() => {
     if (open) searchRef.current?.focus();
   }, [open]);
+
+  useEffect(() => {
+    const query = q.trim();
+    if (query.length < 2) {
+      setResults([]);
+      return;
+    }
+    let alive = true;
+    void loadSearch().then(({ searchSite }) => {
+      if (alive) setResults(searchSite(query));
+    });
+    return () => {
+      alive = false;
+    };
+  }, [q]);
+
+  useEffect(() => {
+    const onDoc = (e: MouseEvent) => {
+      const t = e.target as Node;
+      if (desktopBox.current?.contains(t) || mobileBox.current?.contains(t)) return;
+      setPanel(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setPanel(false);
+    };
+    document.addEventListener("mousedown", onDoc);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDoc);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, []);
 
   const openSearch = () => {
     if (open) {
@@ -55,6 +138,39 @@ export function SiteHeader() {
       return;
     }
     setOpen(true);
+  };
+
+  const goTo = (to: string) => {
+    setQ("");
+    setPanel(false);
+    setOpen(false);
+    const hashIndex = to.indexOf("#");
+    const hash = hashIndex >= 0 ? to.slice(hashIndex + 1) : undefined;
+    const path = hashIndex >= 0 ? to.slice(0, hashIndex) : to;
+    const article = path.match(/^\/clanky\/([^/?#]+)$/);
+    if (article) {
+      void navigate({ to: "/clanky/$slug", params: { slug: article[1] } });
+      return;
+    }
+    void navigate({ to: path as "/", hash });
+  };
+
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (q.trim().length < 2) return;
+    if (results[0]) {
+      goTo(results[0].to);
+      return;
+    }
+    void loadSearch().then(({ searchSite }) => {
+      const first = searchSite(q)[0];
+      if (first) goTo(first.to);
+    });
+  };
+
+  const onSearchFocus = () => {
+    setPanel(true);
+    void loadSearch();
   };
 
   return (
@@ -115,24 +231,35 @@ export function SiteHeader() {
             ))}
           </nav>
           <div className="flex min-w-0 items-center gap-3 lg:gap-4">
-            <form
-              role="search"
-              onSubmit={(e) => {
-                e.preventDefault();
-                if (!q.trim()) return;
-                void navigate({ to: "/hledat", search: { q } });
-              }}
-              className="flex h-9 w-40 items-center gap-2 rounded-full border border-border bg-card px-3 sm:w-44 lg:w-56"
-            >
-              <Search className="size-4 shrink-0 text-muted-foreground" />
-              <input
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-                placeholder="Hledat články"
-                aria-label="Hledat články"
-                className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-              />
-            </form>
+            <div ref={desktopBox} className="relative">
+              <form
+                role="search"
+                onSubmit={onSubmit}
+                className="flex h-9 w-40 items-center gap-2 rounded-full border border-border bg-card px-3 sm:w-44 lg:w-56"
+              >
+                <Search className="size-4 shrink-0 text-muted-foreground" />
+                <input
+                  value={q}
+                  onChange={(e) => {
+                    setQ(e.target.value);
+                    setPanel(true);
+                  }}
+                  onFocus={onSearchFocus}
+                  placeholder="Hledat články"
+                  aria-label="Hledat články"
+                  autoComplete="off"
+                  className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+                />
+              </form>
+              {showPanel ? (
+                <SearchHits
+                  results={results}
+                  query={q}
+                  onPick={goTo}
+                  className="absolute right-0 top-[calc(100%+0.4rem)] z-[60] max-h-80 w-[min(22rem,calc(100vw-2rem))] overflow-auto rounded-xl border border-border bg-card py-1 shadow-lg"
+                />
+              ) : null}
+            </div>
             <a
               href="https://www.facebook.com/JednimHlasem"
               target="_blank"
@@ -166,26 +293,36 @@ export function SiteHeader() {
 
       {open ? (
         <div className="border-b border-border bg-background px-5 py-3 lg:hidden">
-          <form
-            role="search"
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (!q.trim()) return;
-              setOpen(false);
-              void navigate({ to: "/hledat", search: { q } });
-            }}
-            className="mb-3 flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 md:hidden"
-          >
-            <Search className="size-4 text-muted-foreground" />
-            <input
-              ref={searchRef}
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Hledat články"
-              aria-label="Hledat články"
-              className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-            />
-          </form>
+          <div ref={mobileBox} className="md:hidden">
+            <form
+              role="search"
+              onSubmit={onSubmit}
+              className="mb-3 flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2"
+            >
+              <Search className="size-4 text-muted-foreground" />
+              <input
+                ref={searchRef}
+                value={q}
+                onChange={(e) => {
+                  setQ(e.target.value);
+                  setPanel(true);
+                }}
+                onFocus={() => setPanel(true)}
+                placeholder="Hledat články"
+                aria-label="Hledat články"
+                autoComplete="off"
+                className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+              />
+            </form>
+            {showPanel ? (
+              <SearchHits
+                results={results}
+                query={q}
+                onPick={goTo}
+                className="mb-3 overflow-hidden rounded-xl border border-border bg-card py-1"
+              />
+            ) : null}
+          </div>
           <nav className="flex flex-col" aria-label="Mobilní menu">
             {MENU_LINKS.map((item) => (
               <Link
