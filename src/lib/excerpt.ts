@@ -9,7 +9,7 @@ const WEAK =
 function decodeEntities(s: string): string {
   return s
     .replace(/&nbsp;/gi, " ")
-    .replace(/&/g, "&")
+    .replace(/&amp;/g, "&")
     .replace(/"/g, '"')
     .replace(/&#39;|'/g, "'")
     .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))

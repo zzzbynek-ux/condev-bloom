@@ -287,7 +287,7 @@ function KampanStrip() {
   useEffect(() => {
     const t = setInterval(() => setI((v) => (v + 1) % total), 8000);
     return () => clearInterval(t);
-  }, [total, i]);
+  }, [total]);
 
   return (
     <section className="kampan-strip" aria-label="Kampaň Gaza GenoLIE">
