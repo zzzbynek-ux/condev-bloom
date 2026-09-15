@@ -24,6 +24,7 @@ import { Route as PtejteSeAiRouteImport } from './routes/ptejte-se-ai'
 import { Route as TemataRouteImport } from './routes/temata'
 import { Route as VykrikyRouteImport } from './routes/vykriky'
 import { Route as ZapojteSeRouteImport } from './routes/zapojte-se'
+import { Route as ClankyIndexRouteImport } from './routes/clanky.index'
 import { Route as ClankySlugRouteImport } from './routes/clanky.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -101,6 +102,11 @@ const ZapojteSeRoute = ZapojteSeRouteImport.update({
   path: '/zapojte-se',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ClankyIndexRoute = ClankyIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ClankyRoute,
+} as any)
 const ClankySlugRoute = ClankySlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -124,11 +130,11 @@ export interface FileRoutesByFullPath {
   '/vykriky': typeof VykrikyRoute
   '/zapojte-se': typeof ZapojteSeRoute
   '/clanky/$slug': typeof ClankySlugRoute
+  '/clanky/': typeof ClankyIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/antisemitismus': typeof AntisemitismusRoute
-  '/clanky': typeof ClankyRouteWithChildren
   '/eshop': typeof EshopRoute
   '/galerie-incidentu': typeof GalerieIncidentuRoute
   '/hledat': typeof HledatRoute
@@ -142,6 +148,7 @@ export interface FileRoutesByTo {
   '/vykriky': typeof VykrikyRoute
   '/zapojte-se': typeof ZapojteSeRoute
   '/clanky/$slug': typeof ClankySlugRoute
+  '/clanky': typeof ClankyIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -161,6 +168,7 @@ export interface FileRoutesById {
   '/vykriky': typeof VykrikyRoute
   '/zapojte-se': typeof ZapojteSeRoute
   '/clanky/$slug': typeof ClankySlugRoute
+  '/clanky/': typeof ClankyIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -181,11 +189,11 @@ export interface FileRouteTypes {
     | '/vykriky'
     | '/zapojte-se'
     | '/clanky/$slug'
+    | '/clanky/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/antisemitismus'
-    | '/clanky'
     | '/eshop'
     | '/galerie-incidentu'
     | '/hledat'
@@ -199,6 +207,7 @@ export interface FileRouteTypes {
     | '/vykriky'
     | '/zapojte-se'
     | '/clanky/$slug'
+    | '/clanky'
   id:
     | '__root__'
     | '/'
@@ -217,6 +226,7 @@ export interface FileRouteTypes {
     | '/vykriky'
     | '/zapojte-se'
     | '/clanky/$slug'
+    | '/clanky/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -344,6 +354,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ZapojteSeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/clanky/': {
+      id: '/clanky/'
+      path: '/'
+      fullPath: '/clanky/'
+      preLoaderRoute: typeof ClankyIndexRouteImport
+      parentRoute: typeof ClankyRoute
+    }
     '/clanky/$slug': {
       id: '/clanky/$slug'
       path: '/$slug'
@@ -356,10 +373,12 @@ declare module '@tanstack/react-router' {
 
 interface ClankyRouteChildren {
   ClankySlugRoute: typeof ClankySlugRoute
+  ClankyIndexRoute: typeof ClankyIndexRoute
 }
 
 const ClankyRouteChildren: ClankyRouteChildren = {
   ClankySlugRoute: ClankySlugRoute,
+  ClankyIndexRoute: ClankyIndexRoute,
 }
 
 const ClankyRouteWithChildren =
