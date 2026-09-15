@@ -26,7 +26,7 @@ export function TopicCard({
 
   return (
     <article
-      className={`card-lift flex h-full flex-col rounded-xl border border-border bg-card p-6 ${className ?? ""}`}
+      className={`card-lift flex h-full flex-col rounded-2xl border border-border bg-card p-6 ${className ?? ""}`}
     >
       {kicker ? <p className="kicker text-primary/70">{kicker}</p> : null}
       <h3 className="mt-2 font-display text-xl font-bold leading-snug text-primary">

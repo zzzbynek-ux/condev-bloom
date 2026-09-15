@@ -47,7 +47,7 @@ export function ArticleCard({
   );
 
   return (
-    <article className="card-lift group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card">
+    <article className="card-lift group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card">
       {webp ? (
         <picture className="contents">
           <source type="image/webp" srcSet={webp} sizes={CARD_SIZES} />

@@ -85,7 +85,7 @@ function ONas() {
               {VALUES.map((value, i) => (
                 <li
                   key={value}
-                  className="onas-value card-lift flex h-full flex-col rounded-xl border border-border bg-card p-6 text-[0.95rem] leading-[1.55] text-foreground"
+                  className="onas-value card-lift flex h-full flex-col rounded-2xl border border-border bg-card p-6 text-[0.95rem] leading-[1.55] text-foreground"
                 >
                   <span className="onas-value-n">0{i + 1}</span>
                   {value}
@@ -124,14 +124,15 @@ function ONas() {
                 </li>
               ))}
             </ul>
+            <p className="kicker text-primary mt-8">Partnerství</p>
+            <h2 className="home-section-title">Kampaň</h2>
             <a
               href="https://gazagenolie.com/hamass-human-shields-strategy/"
               target="_blank"
               rel="noreferrer"
-              className="kampan-card mt-8"
+              className="kampan-card mt-4"
             >
               <div className="kampan-copy">
-                <p className="kicker text-primary">Kampaň</p>
                 <h2 className="mt-1 font-display text-[1.35rem] font-bold text-navy-900 md:text-[1.5rem]">
                   Lidské štíty Hamásu
                 </h2>

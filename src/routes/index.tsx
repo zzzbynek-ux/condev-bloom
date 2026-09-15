@@ -420,8 +420,6 @@ function Index() {
           </div>
         </section>
 
-        <KampanStrip />
-
         {/* Tydýt týdne + Dokumentujeme */}
         <section className="section-band">
           <div className="home-flow mx-auto max-w-[88rem] px-5 md:px-6">
@@ -454,7 +452,7 @@ function Index() {
                             {KONRAD.date}
                           </span>
                         </div>
-                        <h3 className="mt-2 font-display text-lg font-bold leading-snug text-primary">
+                        <h3 className="mt-2 font-display text-lg font-bold leading-snug text-navy-900">
                           <Link to="/clanky" search={{ filtr: "tydyt" }} className="group-hover:underline">
                             Konrad Stavridis
                           </Link>
@@ -544,6 +542,8 @@ function Index() {
               </div>
           </div>
         </section>
+
+        <KampanStrip />
 
         {/* Sekce článků — záložky ve stylu Visegrad24 */}
         <ArticleTabs />
