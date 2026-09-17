@@ -335,7 +335,7 @@ function Antisemitismus() {
             <p className="kicker text-primary">Klíčové téma</p>
             <h1 className="home-section-title mt-1">Antisemitismus</h1>
             <p className="mt-3 max-w-2xl text-[0.95rem] leading-[1.55] text-foreground">
-              nelze chápat jako historickou epizodu ani jako uzavřený fenomén dvacátého století.
+              Antisemitismus nelze chápat jako historickou epizodu ani jako uzavřený fenomén dvacátého století.
               Jde o dlouhodobý a strukturálně specifický jev, který se v průběhu dějin opakovaně
               proměňuje a přizpůsobuje aktuálním společenským, politickým a ideologickým podmínkám.
             </p>
