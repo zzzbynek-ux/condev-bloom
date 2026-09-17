@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { CARD_SIZES, cardSrcSet } from "@/lib/img";
+import { articleBySlug } from "@/lib/articles";
 
 export function ArticleCard({
   image,
@@ -20,6 +21,7 @@ export function ArticleCard({
   priority?: boolean;
 }) {
   const webp = cardSrcSet(image);
+  const isColumn = Boolean(slug && articleBySlug(slug)?.author?.kind === "column");
   const photo = (
     <img
       src={image}
@@ -61,7 +63,7 @@ export function ArticleCard({
           <Link
             to="/clanky"
             search={{ tag }}
-            className="article-tag rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] hover:opacity-85"
+            className={`article-tag rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] hover:opacity-85${isColumn ? " article-tag--column" : ""}`}
           >
             {tag}
           </Link>

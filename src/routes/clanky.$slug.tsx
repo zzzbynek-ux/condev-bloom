@@ -83,7 +83,13 @@ function ArticlePage() {
       <main>
         <article className="mx-auto max-w-3xl px-5 py-12 md:px-6">
           <div className="article-folio md:rounded-2xl md:border md:border-border md:bg-card md:px-10 md:py-10 md:shadow-sm">
-            <p className="kicker text-primary">{article.tag}</p>
+            {author.kind === "column" ? (
+              <p className="article-tag article-tag--column rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em]">
+                {article.tag}
+              </p>
+            ) : (
+              <p className="kicker text-primary">{article.tag}</p>
+            )}
             <h1 className="mt-3 font-display text-3xl font-bold text-primary md:text-4xl">{article.title}</h1>
             <p className="article-byline mt-3">
               {formatDate(article.iso)}
