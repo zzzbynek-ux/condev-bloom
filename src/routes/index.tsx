@@ -239,7 +239,7 @@ function ArticleTabs() {
           aria-label="Rubriky článků"
           className="clanky-tabs mt-4 flex flex-nowrap items-center overflow-x-auto lg:flex-wrap lg:overflow-visible"
         >
-          {CLANKY_FILTERS.map((link) => (
+          {CLANKY_FILTERS.filter((link) => link.id !== "sloupky").map((link) => (
             <button
               key={link.id}
               type="button"

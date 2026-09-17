@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
 import { MoreButton } from "@/components/more-button";
 import { ARTICLE_SECTIONS, CLANKY_FILTERS, allArticles, KONRAD } from "@/lib/content";
-import { articlesIn, articlesByTag, formatDate, shuffle, clipPerex } from "@/lib/articles";
+import { articlesIn, articlesByTag, formatDate, shuffle, clipPerex, IMPORTED } from "@/lib/articles";
 
 export const Route = createFileRoute("/clanky/")({
   head: () => ({
@@ -89,6 +89,9 @@ function Clanky() {
     }
     if (filtr === "doporucujeme") {
       return DOPORUCUJEME.map((a) => toCard(a, active));
+    }
+    if (filtr === "sloupky") {
+      return IMPORTED.filter((a) => a.author?.kind === "column").map((a) => toCard(a, active));
     }
     if (filtr === "tydyt") {
       const fromData = articlesIn("tydyt").map((a) => toCard(a, active));
