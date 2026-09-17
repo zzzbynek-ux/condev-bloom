@@ -256,7 +256,7 @@ function ArticleTabs() {
           ))}
         </nav>
 
-        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
           {items.map((item, idx) => (
             <ArticleCard
               key={`${group.id}-${item.slug}-${idx}`}
@@ -403,7 +403,7 @@ function Index() {
                 Všechny texty <ArrowRight className="size-4" />
               </Link>
             </div>
-            <div className="vyber-grid mt-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="vyber-grid mt-4 grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
               {VYBER_REDAKCE.map((item, i) => (
                 <ArticleCard
                   key={item.slug}

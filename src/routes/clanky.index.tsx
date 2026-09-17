@@ -151,7 +151,7 @@ function Clanky() {
         ) : null}
 
         {/* Mřížka článků */}
-        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
           {articles.slice(0, visible).map((a, idx) => (
             <ArticleCard
               key={`${a.slug}-${idx}`}

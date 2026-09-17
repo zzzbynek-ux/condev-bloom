@@ -1156,6 +1156,20 @@
 .article-source p {
   margin: 0 0 0.2rem;
 }
+.card-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  min-height: calc(1.25rem * 1.375 * 2);
+}
+.card-perex {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  min-height: calc(0.95rem * 1.55 * 3);
+}
 
 /* O nás — hero jako homepage (text vlevo, motiv vpravo) */
 .onas-hero {
