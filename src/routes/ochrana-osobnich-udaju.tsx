@@ -32,7 +32,7 @@ function Page() {
         <h1 className="font-display text-3xl font-bold text-primary md:text-4xl">
           Ochrana osobních údajů
         </h1>
-        <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground">
+        <div className="mt-6 space-y-4 text-sm leading-relaxed text-foreground">
           <p>
             Osobní údaje zpracováváme jen v nezbytném rozsahu — typicky když nám sami napíšete,
             nahlásíte incident nebo se přihlásíte k odběru.

@@ -81,7 +81,7 @@ function ArchivIncidentu() {
             <h1 className="home-section-title mt-1">
               Archiv incidentů
             </h1>
-            <p className="mt-3 max-w-xl text-[0.95rem] leading-[1.55] text-muted-foreground">
+            <p className="mt-3 max-w-xl text-[0.95rem] leading-[1.55] text-foreground">
               Antisemitismus není uzavřená kapitola dějin. Dokumentujeme jeho
               současné podoby — ve veřejném prostoru, na sítích i v soukromých
               výhrůžkách.

@@ -310,13 +310,13 @@ function Blocks({ blocks }: { blocks: Block[] }) {
             {b.h}
           </h3>
         ) : "list" in b ? (
-          <ul key={i} className="ml-5 list-disc space-y-1.5 text-[15px] leading-relaxed text-muted-foreground">
+          <ul key={i} className="ml-5 list-disc space-y-1.5 text-[15px] leading-relaxed text-foreground">
             {b.list.map((li) => (
               <li key={li}>{li}</li>
             ))}
           </ul>
         ) : (
-          <p key={i} className="text-[15px] leading-relaxed text-muted-foreground">
+          <p key={i} className="text-[15px] leading-relaxed text-foreground">
             {b.p}
           </p>
         ),
@@ -334,7 +334,7 @@ function Antisemitismus() {
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
             <p className="kicker text-primary">Klíčové téma</p>
             <h1 className="home-section-title mt-1">Antisemitismus</h1>
-            <p className="mt-3 max-w-2xl text-[0.95rem] leading-[1.55] text-muted-foreground">
+            <p className="mt-3 max-w-2xl text-[0.95rem] leading-[1.55] text-foreground">
               nelze chápat jako historickou epizodu ani jako uzavřený fenomén dvacátého století.
               Jde o dlouhodobý a strukturálně specifický jev, který se v průběhu dějin opakovaně
               proměňuje a přizpůsobuje aktuálním společenským, politickým a ideologickým podmínkám.
@@ -350,14 +350,14 @@ function Antisemitismus() {
               </figcaption>
             </figure>
             <div className="max-w-3xl space-y-5">
-              <p className="text-[15px] leading-relaxed text-muted-foreground md:text-base">
+              <p className="text-[15px] leading-relaxed text-foreground md:text-base">
                 Antisemitismus funguje jako dlouhodobý psycho-sociální a kulturní vzorec, který se v čase
                 nepřerušuje, ale přepisuje. Neobjevuje se znovu jako nový jev, nýbrž jako aktualizovaná
                 verze téhož schématu. Přebírá existující stereotypy a převádí je do jazyka, obrazů a obav,
                 které jsou v dané době srozumitelné a společensky přijatelné. Nejde o minulost, která se
                 vrací, ale o přítomnost, která si z minulosti vybírá funkční nástroje.
               </p>
-              <p className="text-[15px] leading-relaxed text-muted-foreground md:text-base">
+              <p className="text-[15px] leading-relaxed text-foreground md:text-base">
                 Ačkoli je antisemitismus namířen proti jedné konkrétní skupině, nevypovídá o této skupině,
                 ale o společnosti a jejích institucích, které jej vytvářejí, tolerují nebo mu nejsou schopny
                 čelit. Funguje jako indikátor institucionální i kulturní odolnosti společnosti – její
