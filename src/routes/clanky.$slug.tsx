@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
 import { articleBySlug, IMPORTED, formatDate, rewriteImportedHtml, htmlHasImage, clipPerex } from "@/lib/articles";
+import { articleAuthor, articleJsonLd, bylineSuffix } from "@/lib/author";
 import { getArticleHtml } from "@/lib/get-article-html";
 import { ARTICLE_HERO_SIZES } from "@/lib/img";
 
@@ -15,12 +16,33 @@ export const Route = createFileRoute("/clanky/$slug")({
     return { article, html };
   },
   pendingComponent: ArticlePending,
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: `${loaderData?.article.title ?? "Článek"} — JednímHlasem` },
-      { name: "description", content: loaderData?.article.perex ?? "" },
-    ],
-  }),
+  head: ({ loaderData }) => {
+    const article = loaderData?.article;
+    const ld = article
+      ? articleJsonLd({
+          title: article.title,
+          perex: article.perex,
+          iso: article.iso,
+          image: article.image,
+          slug: article.slug,
+          author: article.author,
+        })
+      : null;
+    return {
+      meta: [
+        { title: `${article?.title ?? "Článek"} — JednímHlasem` },
+        { name: "description", content: article?.perex ?? "" },
+      ],
+      scripts: ld
+        ? [
+            {
+              type: "application/ld+json",
+              children: JSON.stringify(ld),
+            },
+          ]
+        : [],
+    };
+  },
   component: ArticlePage,
 });
 
@@ -53,6 +75,7 @@ function ArticlePage() {
   const related = relatedArticles(article.slug, article.tag);
   const body = rewriteImportedHtml(html, article.image);
   const showLeadImage = Boolean(article.image) && !article.image.includes("fallback") && !htmlHasImage(html);
+  const author = articleAuthor(article.author);
 
   return (
     <div className="min-h-screen bg-paper">
@@ -62,7 +85,11 @@ function ArticlePage() {
           <div className="article-folio md:rounded-2xl md:border md:border-border md:bg-card md:px-10 md:py-10 md:shadow-sm">
             <p className="kicker text-primary">{article.tag}</p>
             <h1 className="mt-3 font-display text-3xl font-bold text-primary md:text-4xl">{article.title}</h1>
-            <p className="mt-3 text-sm text-muted-foreground">{formatDate(article.iso)}</p>
+            <p className="article-byline mt-3">
+              {formatDate(article.iso)}
+              <span aria-hidden="true"> · </span>
+              {bylineSuffix(author)}
+            </p>
             {showLeadImage ? (
               <img
                 src={article.image}
@@ -75,6 +102,15 @@ function ArticlePage() {
               />
             ) : null}
             <div className="article-body mt-8 text-[17px] leading-relaxed text-foreground" dangerouslySetInnerHTML={{ __html: body }} />
+            {author.kind === "translation" && author.original?.name ? (
+              <div className="article-source">
+                <p>Původní text: {author.original.name}</p>
+                {author.original.medium || author.original.date ? (
+                  <p>{[author.original.medium, author.original.date].filter(Boolean).join(", ")}</p>
+                ) : null}
+                <p>Překlad: Redakce JednímHlasem</p>
+              </div>
+            ) : null}
             {article.tags.length ? (
               <div className="mt-10 flex flex-wrap gap-2">
                 {article.tags.map((t) => (
@@ -94,7 +130,7 @@ function ArticlePage() {
                 <h2 className="home-section-title mt-2">
                   Související
                 </h2>
-                <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <div className="mt-6 grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {related.map((r) => (
                     <ArticleCard
                       key={r.slug}

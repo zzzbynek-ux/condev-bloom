@@ -1140,6 +1140,22 @@
   color: var(--blue-700);
   text-decoration: underline;
 }
+.article-byline {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--muted-foreground, #667085);
+}
+.article-source {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border, #e4e7ec);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted-foreground, #667085);
+}
+.article-source p {
+  margin: 0 0 0.2rem;
+}
 
 /* O nás — hero jako homepage (text vlevo, motiv vpravo) */
 .onas-hero {

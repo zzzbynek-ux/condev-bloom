@@ -1,4 +1,5 @@
 import imported from "@/data/articles.meta.json";
+import type { ArticleAuthor } from "@/lib/author";
 
 export type ImportedArticle = {
   id: number;
@@ -12,6 +13,7 @@ export type ImportedArticle = {
   sections: string[];
   image: string;
   url?: string;
+  author?: ArticleAuthor;
 };
 
 export const IMPORTED = (imported as ImportedArticle[]).slice().sort((a, b) => (b.iso || "").localeCompare(a.iso || ""));
