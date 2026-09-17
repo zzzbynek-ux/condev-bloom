@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/accordion";
 import flagsImg from "@/assets/news-flags.jpg";
 import politicsImg from "@/assets/news-politics.jpg";
+import portalImg from "@/assets/synagoga-jeruzalemska-portal.jpg";
 
 export const Route = createFileRoute("/antisemitismus")({
   head: () => ({
@@ -338,29 +339,38 @@ function Antisemitismus() {
               Jde o dlouhodobý a strukturálně specifický jev, který se v průběhu dějin opakovaně
               proměňuje a přizpůsobuje aktuálním společenským, politickým a ideologickým podmínkám.
             </p>
+            <figure className="my-5 max-w-2xl">
+              <img
+                src={portalImg}
+                alt="Jeruzalémská synagoga v Praze, portál"
+                className="aspect-[3/1] w-full object-cover object-[center_55%]"
+              />
+              <figcaption className="mt-2 text-[12px] leading-snug text-muted-foreground md:text-[13px]">
+                Foto: Dietmar Rabich / Wikimedia Commons, CC BY-SA 4.0
+              </figcaption>
+            </figure>
+            <div className="max-w-3xl space-y-5">
+              <p className="text-[15px] leading-relaxed text-muted-foreground md:text-base">
+                Antisemitismus funguje jako dlouhodobý psycho-sociální a kulturní vzorec, který se v čase
+                nepřerušuje, ale přepisuje. Neobjevuje se znovu jako nový jev, nýbrž jako aktualizovaná
+                verze téhož schématu. Přebírá existující stereotypy a převádí je do jazyka, obrazů a obav,
+                které jsou v dané době srozumitelné a společensky přijatelné. Nejde o minulost, která se
+                vrací, ale o přítomnost, která si z minulosti vybírá funkční nástroje.
+              </p>
+              <p className="text-[15px] leading-relaxed text-muted-foreground md:text-base">
+                Ačkoli je antisemitismus namířen proti jedné konkrétní skupině, nevypovídá o této skupině,
+                ale o společnosti a jejích institucích, které jej vytvářejí, tolerují nebo mu nejsou schopny
+                čelit. Funguje jako indikátor institucionální i kulturní odolnosti společnosti – její
+                schopnosti zacházet s nejistotou, konfliktem a složitostí reality bez hledání zástupného
+                viníka. Proměnlivá není nenávist sama, ale schopnost ji rozpoznat a míra tolerance k jejím
+                projevům.
+              </p>
+            </div>
           </div>
         </section>
 
-        <section className="mx-auto max-w-[70rem] px-5 py-12 md:px-6 md:py-16">
-          <div className="max-w-3xl space-y-5">
-            <p className="text-[15px] leading-relaxed text-muted-foreground md:text-base">
-              Antisemitismus funguje jako dlouhodobý psycho-sociální a kulturní vzorec, který se v čase
-              nepřerušuje, ale přepisuje. Neobjevuje se znovu jako nový jev, nýbrž jako aktualizovaná
-              verze téhož schématu. Přebírá existující stereotypy a převádí je do jazyka, obrazů a obav,
-              které jsou v dané době srozumitelné a společensky přijatelné. Nejde o minulost, která se
-              vrací, ale o přítomnost, která si z minulosti vybírá funkční nástroje.
-            </p>
-            <p className="text-[15px] leading-relaxed text-muted-foreground md:text-base">
-              Ačkoli je antisemitismus namířen proti jedné konkrétní skupině, nevypovídá o této skupině,
-              ale o společnosti a jejích institucích, které jej vytvářejí, tolerují nebo mu nejsou schopny
-              čelit. Funguje jako indikátor institucionální i kulturní odolnosti společnosti – její
-              schopnosti zacházet s nejistotou, konfliktem a složitostí reality bez hledání zástupného
-              viníka. Proměnlivá není nenávist sama, ale schopnost ji rozpoznat a míra tolerance k jejím
-              projevům.
-            </p>
-          </div>
-
-          <div className="mt-10">
+        <section className="mx-auto max-w-[70rem] px-5 pb-12 md:px-6 md:pb-16">
+          <div>
             <h2 className="home-section-title">Rozcestník tématu</h2>
             <p className="mt-2 text-sm text-muted-foreground">
               Rozklikněte jednotlivé okruhy.
