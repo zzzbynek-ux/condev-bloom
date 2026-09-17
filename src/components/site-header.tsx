@@ -33,7 +33,7 @@ function XIcon({ className }: { className?: string }) {
 }
 
 const DESKTOP_LINKS = [
-  { label: "Články a analýzy", to: "/clanky" as const },
+  { label: "Články", to: "/clanky" as const },
   { label: "O nás", to: "/o-nas" as const },
   { label: "E-shop", to: "/eshop" as const },
 ];

@@ -232,7 +232,7 @@ function ArticleTabs() {
     <section>
       <div className="home-flow home-flow--last mx-auto max-w-[88rem] px-5 md:px-6">
           <h2 className="home-section-title">
-            Články a analýzy
+            Články
           </h2>
 
         <nav

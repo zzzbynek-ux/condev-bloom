@@ -11,13 +11,13 @@ import { articlesIn, articlesByTag, formatDate, shuffle, clipPerex } from "@/lib
 export const Route = createFileRoute("/clanky/")({
   head: () => ({
     meta: [
-      { title: "Články a analýzy — JednímHlasem" },
+      { title: "Články — JednímHlasem" },
       {
         name: "description",
         content:
           "Studie, analýzy a české příběhy o antisemitismu, médiích a dezinformacích kolem Izraele.",
       },
-      { property: "og:title", content: "Články a analýzy — JednímHlasem" },
+      { property: "og:title", content: "Články — JednímHlasem" },
       {
         property: "og:description",
         content: "Studie, analýzy a české příběhy o antisemitismu a dezinformacích.",
@@ -105,7 +105,7 @@ function Clanky() {
       <SiteHeader />
       <main className="mx-auto max-w-6xl px-5 py-14">
         <p className="text-xs uppercase tracking-[0.18em] text-primary">Texty</p>
-        <h1 className="home-section-title mt-2">Články a analýzy</h1>
+        <h1 className="home-section-title mt-2">Články</h1>
         <p className="mt-4 max-w-2xl text-muted-foreground">
           Vše na jednom místě — od krátkých faktických vysvětlení po dlouhé studie.
         </p>
