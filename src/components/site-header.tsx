@@ -177,17 +177,15 @@ export function SiteHeader() {
     <header className="site-header-sticky sticky top-0 z-50 shadow-sm">
       <div className="bg-primary text-primary-foreground">
         <div className="mx-auto flex h-12 max-w-[88rem] items-center gap-3 px-4 md:h-[4.25rem] md:gap-6 md:px-6">
-          <Link to="/" className="flex shrink-0 items-center" aria-label="JednímHlasem — domů">
-            <img
-              src="/images/logo-jednim-hlasem.png"
-              srcSet="/images/logo-jednim-hlasem-1x.png 264w, /images/logo-jednim-hlasem.png 528w"
-              sizes="(min-width: 768px) 176px, 141px"
-              alt="JednímHlasem"
-              width={528}
-              height={120}
-              decoding="async"
-              className="h-8 w-auto md:h-10"
-            />
+          <Link to="/" className="flex shrink-0 items-center" aria-label="Jedním hlasem — domů">
+            <span className="flex flex-col justify-center leading-none">
+              <span className="font-display text-[1.25rem] font-bold uppercase tracking-[-0.02em] md:text-[1.6rem]">
+                Jedním hlasem
+              </span>
+              <span className="mt-0.5 font-sans text-[9px] font-semibold uppercase tracking-[0.16em] text-primary-foreground/90 md:text-[10px]">
+                Fakta bez filtru
+              </span>
+            </span>
           </Link>
 
           <div className="ml-auto flex items-center gap-3">
@@ -264,7 +262,7 @@ export function SiteHeader() {
               href="https://www.facebook.com/JednimHlasem"
               target="_blank"
               rel="noreferrer"
-              aria-label="JednímHlasem na Facebooku"
+              aria-label="Jedním hlasem na Facebooku"
               className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:text-primary"
             >
               <FacebookIcon className="size-4" />
@@ -273,7 +271,7 @@ export function SiteHeader() {
               href="https://www.instagram.com/JednimHlasem"
               target="_blank"
               rel="noreferrer"
-              aria-label="JednímHlasem na Instagramu"
+              aria-label="Jedním hlasem na Instagramu"
               className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:text-primary"
             >
               <InstagramIcon className="size-4" />
@@ -282,7 +280,7 @@ export function SiteHeader() {
               href="https://x.com/JednimHlasem"
               target="_blank"
               rel="noreferrer"
-              aria-label="JednímHlasem na X"
+              aria-label="Jedním hlasem na X"
               className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:text-primary"
             >
               <XIcon className="size-4" />
@@ -340,7 +338,7 @@ export function SiteHeader() {
               href="https://www.facebook.com/JednimHlasem"
               target="_blank"
               rel="noreferrer"
-              aria-label="JednímHlasem na Facebooku"
+              aria-label="Jedním hlasem na Facebooku"
               className="flex size-9 items-center justify-center rounded-full border border-border text-foreground"
             >
               <FacebookIcon className="size-4" />
@@ -349,7 +347,7 @@ export function SiteHeader() {
               href="https://www.instagram.com/JednimHlasem"
               target="_blank"
               rel="noreferrer"
-              aria-label="JednímHlasem na Instagramu"
+              aria-label="Jedním hlasem na Instagramu"
               className="flex size-9 items-center justify-center rounded-full border border-border text-foreground"
             >
               <InstagramIcon className="size-4" />
@@ -358,7 +356,7 @@ export function SiteHeader() {
               href="https://x.com/JednimHlasem"
               target="_blank"
               rel="noreferrer"
-              aria-label="JednímHlasem na X"
+              aria-label="Jedním hlasem na X"
               className="flex size-9 items-center justify-center rounded-full border border-border text-foreground"
             >
               <XIcon className="size-4" />
