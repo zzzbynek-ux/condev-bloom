@@ -30,7 +30,7 @@ export const Route = createFileRoute("/clanky/$slug")({
       : null;
     return {
       meta: [
-        { title: `${article?.title ?? "Článek"} — JednímHlasem` },
+        { title: `${article?.title ?? "Článek"} — Jedním hlasem` },
         { name: "description", content: article?.perex ?? "" },
       ],
       scripts: ld
@@ -114,7 +114,7 @@ function ArticlePage() {
                 {author.original.medium || author.original.date ? (
                   <p>{[author.original.medium, author.original.date].filter(Boolean).join(", ")}</p>
                 ) : null}
-                <p>Překlad: Redakce JednímHlasem</p>
+                <p>Překlad: Redakce Jedním hlasem</p>
               </div>
             ) : null}
             {article.tags.length ? (

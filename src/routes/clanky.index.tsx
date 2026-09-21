@@ -11,13 +11,13 @@ import { articlesIn, articlesByTag, formatDate, shuffle, clipPerex, IMPORTED } f
 export const Route = createFileRoute("/clanky/")({
   head: () => ({
     meta: [
-      { title: "Články — JednímHlasem" },
+      { title: "Články — Jedním hlasem" },
       {
         name: "description",
         content:
           "Studie, analýzy a české příběhy o antisemitismu, médiích a dezinformacích kolem Izraele.",
       },
-      { property: "og:title", content: "Články — JednímHlasem" },
+      { property: "og:title", content: "Články — Jedním hlasem" },
       {
         property: "og:description",
         content: "Studie, analýzy a české příběhy o antisemitismu a dezinformacích.",

@@ -37,10 +37,10 @@ export function SiteFooter() {
     <footer className="bg-primary text-primary-foreground">
       <div className="mx-auto flex max-w-[88rem] flex-col items-center gap-5 px-5 py-8 lg:grid lg:grid-cols-3 lg:items-center lg:gap-6 lg:px-6">
         <div className="lg:justify-self-start">
-          <Link to="/" className="inline-block" aria-label="JednímHlasem — domů">
+          <Link to="/" className="inline-block" aria-label="Jedním hlasem — domů">
             <img
               src="/images/logo-bublina.png"
-              alt="JednímHlasem"
+              alt="Jedním hlasem"
               width={280}
               height={218}
               decoding="async"
@@ -88,8 +88,8 @@ export function SiteFooter() {
             href="https://www.facebook.com/JednimHlasem"
             target="_blank"
             rel="noreferrer"
-            aria-label="JednímHlasem na Facebooku"
-            title="JednímHlasem na Facebooku"
+            aria-label="Jedním hlasem na Facebooku"
+            title="Jedním hlasem na Facebooku"
             className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10"
           >
             <FacebookIcon className="size-4" />
@@ -98,8 +98,8 @@ export function SiteFooter() {
             href="https://www.instagram.com/JednimHlasem"
             target="_blank"
             rel="noreferrer"
-            aria-label="JednímHlasem na Instagramu"
-            title="JednímHlasem na Instagramu"
+            aria-label="Jedním hlasem na Instagramu"
+            title="Jedním hlasem na Instagramu"
             className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10"
           >
             <InstagramIcon className="size-4" />
@@ -108,8 +108,8 @@ export function SiteFooter() {
             href="https://x.com/JednimHlasem"
             target="_blank"
             rel="noreferrer"
-            aria-label="JednímHlasem na X"
-            title="JednímHlasem na X"
+            aria-label="Jedním hlasem na X"
+            title="Jedním hlasem na X"
             className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10"
           >
             <XIcon className="size-4" />
@@ -119,7 +119,7 @@ export function SiteFooter() {
 
       <div className="border-t border-primary-foreground/20">
         <div className="mx-auto flex max-w-[88rem] flex-wrap items-center justify-center gap-x-4 gap-y-2 px-5 py-4 text-xs text-primary-foreground/85 md:px-6 lg:justify-between">
-          <span>© {new Date().getFullYear()} JednímHlasem</span>
+          <span>© {new Date().getFullYear()} Jedním hlasem</span>
           <Link to="/ochrana-osobnich-udaju" className="hover:text-white">
             Ochrana osobních údajů
           </Link>

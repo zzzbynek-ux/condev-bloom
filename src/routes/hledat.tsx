@@ -7,7 +7,7 @@ export const Route = createFileRoute("/hledat")({
     q: typeof search["q"] === "string" ? search["q"] : undefined,
   }),
   head: () => ({
-    meta: [{ title: "JednímHlasem" }],
+    meta: [{ title: "Jedním hlasem" }],
   }),
   beforeLoad: () => {
     throw redirect({ to: "/", replace: true });

@@ -39,7 +39,7 @@ export function articleJsonLd(input: {
   const a = articleAuthor(input.author);
   const org = {
     "@type": "Organization",
-    name: "JednímHlasem",
+    name: "Jedním hlasem",
     url: "https://www.jednimhlasem.cz/",
   };
   const originalPerson = a.original?.name

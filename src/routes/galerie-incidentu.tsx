@@ -6,13 +6,13 @@ import { SiteFooter } from "@/components/site-footer";
 export const Route = createFileRoute("/galerie-incidentu")({
   head: () => ({
     meta: [
-      { title: "Archiv incidentů — JednímHlasem" },
+      { title: "Archiv incidentů — Jedním hlasem" },
       {
         name: "description",
         content:
           "Antisemitismus není uzavřená kapitola dějin. Dokumentujeme jeho současné podoby — ve veřejném prostoru, na sítích i v soukromých výhrůžkách.",
       },
-      { property: "og:title", content: "Archiv incidentů — JednímHlasem" },
+      { property: "og:title", content: "Archiv incidentů — Jedním hlasem" },
       {
         property: "og:description",
         content:

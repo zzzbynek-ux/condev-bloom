@@ -2,8 +2,8 @@ export const INTRO = {
   eyebrow: "O NÁS",
   title: "Jedním hlasem neznamená všichni stejně, ale společně za to, co nás spojuje.",
   paragraphs: [
-    "JednímHlasem podporujeme Izrael a jeho právo na existenci a sebeobranu. Bojujeme proti antisemitismu ve všech jeho formách. Vyvracíme dezinformace, které zkreslují realitu. Posilujeme odvážné hlasy, které se nebojí promluvit. A budujeme komunitu, která se navzájem inspiruje a chrání hodnoty, na nichž stojí svobodná společnost.",
-    "JednímHlasem je nezávislá občanská iniciativa a otevřená platforma, která vznikla jako reakce na rostoucí dezinformace, selektivní empatii a zkreslený obraz Izraele ve veřejném prostoru. Naším cílem je vracet fakta, kontext a důstojnost do debaty – v době, kdy se realita ohýbá podle ideologie a pravda přizpůsobuje algoritmům.",
+    "Jedním hlasem podporujeme Izrael a jeho právo na existenci a sebeobranu. Bojujeme proti antisemitismu ve všech jeho formách. Vyvracíme dezinformace, které zkreslují realitu. Posilujeme odvážné hlasy, které se nebojí promluvit. A budujeme komunitu, která se navzájem inspiruje a chrání hodnoty, na nichž stojí svobodná společnost.",
+    "Jedním hlasem je nezávislá občanská iniciativa a otevřená platforma, která vznikla jako reakce na rostoucí dezinformace, selektivní empatii a zkreslený obraz Izraele ve veřejném prostoru. Naším cílem je vracet fakta, kontext a důstojnost do debaty – v době, kdy se realita ohýbá podle ideologie a pravda přizpůsobuje algoritmům.",
   ] as const,
   image: {
     src: "/images/o-nas-vlajka.jpg",
@@ -129,6 +129,6 @@ export const MISSION = {
   title: "Naše mise",
   paragraphs: [
     "Věříme, že pravda potřebuje obhájce. V čase, kdy jsou fakta zpochybňována a nenávist se maskuje jako humanismus, je potřeba mluvit jasně a přesvědčivě.",
-    "JednímHlasem propojuje odborníky, novináře, akademiky i aktivní občany, kteří sdílejí závazek k odpovědné debatě o Izraeli, antisemitismu a hodnotách svobodného světa.",
+    "Jedním hlasem propojuje odborníky, novináře, akademiky i aktivní občany, kteří sdílejí závazek k odpovědné debatě o Izraeli, antisemitismu a hodnotách svobodného světa.",
   ] as const,
 };

@@ -6,16 +6,16 @@ import { SiteFooter } from "@/components/site-footer";
 export const Route = createFileRoute("/ochrana-osobnich-udaju")({
   head: () => ({
     meta: [
-      { title: "Ochrana osobních údajů — Jedním Hlasem" },
+      { title: "Ochrana osobních údajů — Jedním hlasem" },
       {
         name: "description",
         content:
-          "Jak zpracováváme osobní údaje návštěvníků webu Jedním Hlasem: rozsah, účel a vaše práva.",
+          "Jak zpracováváme osobní údaje návštěvníků webu Jedním hlasem: rozsah, účel a vaše práva.",
       },
-      { property: "og:title", content: "Ochrana osobních údajů — Jedním Hlasem" },
+      { property: "og:title", content: "Ochrana osobních údajů — Jedním hlasem" },
       {
         property: "og:description",
-        content: "Zásady zpracování osobních údajů projektu Jedním Hlasem.",
+        content: "Zásady zpracování osobních údajů projektu Jedním hlasem.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

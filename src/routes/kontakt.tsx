@@ -8,12 +8,12 @@ import { SiteFooter } from "@/components/site-footer";
 export const Route = createFileRoute("/kontakt")({
   head: () => ({
     meta: [
-      { title: "Napište nám — JednímHlasem" },
+      { title: "Napište nám — Jedním hlasem" },
       {
         name: "description",
-        content: "Napište iniciativě JednímHlasem. Formulář, bez zveřejněné schránky.",
+        content: "Napište iniciativě Jedním hlasem. Formulář, bez zveřejněné schránky.",
       },
-      { property: "og:title", content: "Napište nám — JednímHlasem" },
+      { property: "og:title", content: "Napište nám — Jedním hlasem" },
       {
         property: "og:description",
         content: "Zpráva přes formulář. Ozveme se na e-mail, který uvedete.",
@@ -78,7 +78,7 @@ function KontaktSidebar() {
             href="https://www.facebook.com/JednimHlasem"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="JednímHlasem na Facebooku"
+            aria-label="Jedním hlasem na Facebooku"
             className="flex size-9 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:text-primary"
           >
             <FacebookIcon className="size-4" />
@@ -87,7 +87,7 @@ function KontaktSidebar() {
             href="https://www.instagram.com/JednimHlasem"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="JednímHlasem na Instagramu"
+            aria-label="Jedním hlasem na Instagramu"
             className="flex size-9 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:text-primary"
           >
             <InstagramIcon className="size-4" />
@@ -96,7 +96,7 @@ function KontaktSidebar() {
             href="https://x.com/JednimHlasem"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="JednímHlasem na X"
+            aria-label="Jedním hlasem na X"
             className="flex size-9 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:text-primary"
           >
             <XIcon className="size-4" />

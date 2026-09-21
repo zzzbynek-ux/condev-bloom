@@ -13,13 +13,13 @@ import { heroSrcSet, heroWebpSrcSet, HERO_SIZES, webpExists } from "@/lib/img";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "JednímHlasem — fakta a kontext do debaty o Izraeli" },
+      { title: "Jedním hlasem — fakta a kontext do debaty o Izraeli" },
       {
         name: "description",
         content:
           "Ověřená fakta, analýzy a české příběhy. Komunita, která do debaty o Izraeli a antisemitismu vrací kontext a klidný tón.",
       },
-      { property: "og:title", content: "JednímHlasem — fakta a kontext do debaty o Izraeli" },
+      { property: "og:title", content: "Jedním hlasem — fakta a kontext do debaty o Izraeli" },
       {
         property: "og:description",
         content: "Ověřená fakta, analýzy a české příběhy. Zapojte se jedním hlasem.",

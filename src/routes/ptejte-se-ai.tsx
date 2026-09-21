@@ -8,13 +8,13 @@ import { SiteFooter } from "@/components/site-footer";
 export const Route = createFileRoute("/ptejte-se-ai")({
   head: () => ({
     meta: [
-      { title: "Ptejte se AI — JednímHlasem" },
+      { title: "Ptejte se AI — Jedním hlasem" },
       {
         name: "description",
         content:
           "Zeptejte se na dezinformace o Izraeli a antisemitismu. Odpovědi stavíme na ověřených faktech a kontextu.",
       },
-      { property: "og:title", content: "Ptejte se AI — JednímHlasem" },
+      { property: "og:title", content: "Ptejte se AI — Jedním hlasem" },
       {
         property: "og:description",
         content: "AI asistent, který pomáhá věcně reagovat na dezinformace o Izraeli.",

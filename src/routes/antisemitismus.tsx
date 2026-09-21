@@ -17,7 +17,7 @@ import portalImg from "@/assets/synagoga-jeruzalemska-portal.jpg";
 export const Route = createFileRoute("/antisemitismus")({
   head: () => ({
     meta: [
-      { title: "Antisemitismus — co to je a jak se proměňuje | JednímHlasem" },
+      { title: "Antisemitismus — co to je a jak se proměňuje | Jedním hlasem" },
       {
         name: "description",
         content:

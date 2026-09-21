@@ -15,13 +15,13 @@ import {
 export const Route = createFileRoute("/o-nas")({
   head: () => ({
     meta: [
-      { title: "O nás — JednímHlasem" },
+      { title: "O nás — Jedním hlasem" },
       {
         name: "description",
         content:
-          "Kdo jsme, proč vznikla komunita JednímHlasem a jak pracujeme s fakty a zdroji.",
+          "Kdo jsme, proč vznikla komunita Jedním hlasem a jak pracujeme s fakty a zdroji.",
       },
-      { property: "og:title", content: "O nás — JednímHlasem" },
+      { property: "og:title", content: "O nás — Jedním hlasem" },
       {
         property: "og:description",
         content: "Kdo jsme, proč komunita vznikla a jak pracujeme se zdroji.",

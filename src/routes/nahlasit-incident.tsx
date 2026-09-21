@@ -8,13 +8,13 @@ import { SiteFooter } from "@/components/site-footer";
 export const Route = createFileRoute("/nahlasit-incident")({
   head: () => ({
     meta: [
-      { title: "Nahlaš nenávist, než zdomácní — JednímHlasem" },
+      { title: "Nahlaš nenávist, než zdomácní — Jedním hlasem" },
       {
         name: "description",
         content:
           "Pokud máte zkušenost s projevem antisemitismu, extremismu nebo nenávisti, nahlaste to. Formulář Federace židovských obcí i náš formulář.",
       },
-      { property: "og:title", content: "Nahlaš nenávist, než zdomácní — JednímHlasem" },
+      { property: "og:title", content: "Nahlaš nenávist, než zdomácní — Jedním hlasem" },
       {
         property: "og:description",
         content:
@@ -59,7 +59,7 @@ function NahlasitIncident() {
 
             <div id="formular" className="scroll-mt-32 mt-8">
               <p className="kicker text-primary">Nahlásit u nás</p>
-              <h2 className="home-section-title mt-2">Formulář JednímHlasem</h2>
+              <h2 className="home-section-title mt-2">Formulář Jedním hlasem</h2>
               <p className="mt-2 max-w-2xl text-[0.95rem] leading-[1.55] text-muted-foreground">
                 Popište, co se stalo. Hlášení můžete poslat i anonymně — kontakt vyplňte jen, pokud se máme doptat. Formulář nenahrazuje trestní oznámení.
               </p>

@@ -12,7 +12,7 @@ type Cadence = "monthly" | "once";
 const IBAN = "CZ65 2010 0000 0023 0198 7654";
 const IBAN_COMPACT = "CZ6520100000002301987654";
 const ACCOUNT = "2301987654 / 2010";
-const MSG = "Dar JednímHlasem";
+const MSG = "Dar Jedním hlasem";
 
 const AMOUNTS: {
   key: AmountKey;
@@ -65,17 +65,17 @@ function scrollToQr() {
 export const Route = createFileRoute("/podporte-nas")({
   head: () => ({
     meta: [
-      { title: "Podpořte nás — JednímHlasem" },
+      { title: "Podpořte nás — Jedním hlasem" },
       {
         name: "description",
         content:
-          "Podpořte komunitu JednímHlasem darem na provoz, analýzy a propagaci faktů o Izraeli.",
+          "Podpořte komunitu Jedním hlasem darem na provoz, analýzy a propagaci faktů o Izraeli.",
       },
-      { property: "og:title", content: "Podpořte nás — JednímHlasem" },
+      { property: "og:title", content: "Podpořte nás — Jedním hlasem" },
       {
         property: "og:description",
         content:
-          "Podpořte komunitu JednímHlasem darem na provoz, analýzy a propagaci faktů o Izraeli.",
+          "Podpořte komunitu Jedním hlasem darem na provoz, analýzy a propagaci faktů o Izraeli.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -309,7 +309,7 @@ function PodporteNas() {
               <dl className="donate-details">
                 <div className="donate-row">
                   <dt>Příjemce</dt>
-                  <dd>JednímHlasem z. s.</dd>
+                  <dd>Jedním hlasem z. s.</dd>
                 </div>
                 <div className="donate-row">
                   <dt>Účet</dt>

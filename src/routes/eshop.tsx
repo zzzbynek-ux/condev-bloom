@@ -6,12 +6,12 @@ import { SiteFooter } from "@/components/site-footer";
 export const Route = createFileRoute("/eshop")({
   head: () => ({
     meta: [
-      { title: "E-shop — JednímHlasem" },
+      { title: "E-shop — Jedním hlasem" },
       {
         name: "description",
-        content: "E-shop iniciativy JednímHlasem.",
+        content: "E-shop iniciativy Jedním hlasem.",
       },
-      { property: "og:title", content: "E-shop — JednímHlasem" },
+      { property: "og:title", content: "E-shop — Jedním hlasem" },
     ],
   }),
   component: Eshop,
