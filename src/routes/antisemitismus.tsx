@@ -440,31 +440,29 @@ function Antisemitismus() {
 
         <TopicGuide />
 
-        {/* Související texty k tématu */}
-        <section className={`${COL} pb-16`}>
-          <h2 className="home-section-title">Související texty</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Analýzy a české příběhy k tématu antisemitismu.
-          </p>
+        {/* Související k tématu */}
+        <section className={`${COL} pt-9 pb-16`}>
+          <p className="kicker text-primary">Čtěte dál</p>
+          <h2 className="home-section-title mt-2">Související</h2>
           <div className="mt-8 grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
             <ArticleCard
               image={flagsImg}
               tag="Antisemitismus"
-              date="07/08/26"
+              date="7. 8. 2026"
               title="Nový antisemitismus: o Palestinu tady vůbec nejde"
               perex="Mluví jazykem solidarity a historické křivdy. Pod pláštíkem vznešených slov ale jde o něco jiného."
             />
             <ArticleCard
               image={politicsImg}
               tag="Antisemitismus"
-              date="10/06/26"
+              date="10. 6. 2026"
               title="Co se děje na českých univerzitách"
               perex="Protesty, petice a tlak na studenty. Mapujeme situaci na vysokých školách v Česku."
             />
             <ArticleCard
               image={flagsImg}
               tag="Antisemitismus"
-              date="02/06/26"
+              date="2. 6. 2026"
               title="Židovské obce v Česku dnes"
               perex="Život, tradice i obavy. Rozhovory s lidmi, kteří tvoří českou židovskou komunitu."
             />
