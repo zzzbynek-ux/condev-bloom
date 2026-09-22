@@ -1,15 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
 import { MoreButton } from "@/components/more-button";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { cn } from "@/lib/utils";
 import flagsImg from "@/assets/news-flags.jpg";
 import politicsImg from "@/assets/news-politics.jpg";
 import portalImg from "@/assets/synagoga-jeruzalemska-portal.jpg";
@@ -301,6 +297,8 @@ const SECTIONS: { id: string; title: string; blocks: Block[] }[] = [
   },
 ];
 
+const COL = "mx-auto max-w-[70rem] px-5 md:px-6";
+
 function Blocks({ blocks }: { blocks: Block[] }) {
   return (
     <div className="space-y-4">
@@ -325,31 +323,102 @@ function Blocks({ blocks }: { blocks: Block[] }) {
   );
 }
 
+function TopicGuide() {
+  const [activeId, setActiveId] = useState(SECTIONS[0].id);
+  const active = SECTIONS.find((s) => s.id === activeId) ?? SECTIONS[0];
+
+  return (
+    <section className="bg-[#EEF3F8]">
+      <div className={`${COL} py-10 md:py-14`}>
+        <h2 className="home-section-title">Rozcestník tématu</h2>
+        <p className="mt-2 text-sm text-muted-foreground">Rozklikněte jednotlivé okruhy.</p>
+
+        <div className="mt-6 grid items-start gap-5 md:grid-cols-[0.42fr_0.58fr] md:gap-6">
+          <nav aria-label="Okruhy tématu" className="min-w-0">
+            <ul className="flex flex-col gap-1">
+              {SECTIONS.map((s, i) => {
+                const on = s.id === active.id;
+                return (
+                  <li key={s.id}>
+                    <button
+                      type="button"
+                      aria-current={on ? "true" : undefined}
+                      onClick={() => setActiveId(s.id)}
+                      className={cn(
+                        "flex w-full items-start gap-3 rounded-lg px-3 py-2.5 text-left transition-colors",
+                        on ? "bg-[#0038B8]" : "hover:bg-white/70",
+                      )}
+                    >
+                      <span
+                        className={cn(
+                          "w-7 shrink-0 pt-0.5 font-display text-[13px] font-bold tabular-nums",
+                          on ? "text-white" : "text-primary",
+                        )}
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span
+                        className={cn(
+                          "mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full",
+                          on ? "bg-[#E8C547]" : "bg-[#E8F1FF]",
+                        )}
+                        aria-hidden
+                      />
+                      <span
+                        className={cn(
+                          "min-w-0 font-display text-[15px] font-bold leading-snug",
+                          on ? "text-white" : "text-primary",
+                        )}
+                      >
+                        {s.title}
+                      </span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+
+          <article className="min-w-0 rounded-xl border border-black/5 bg-white px-5 py-5 shadow-sm md:px-6 md:py-6">
+            <h3 className="font-display text-lg font-bold leading-snug text-primary">{active.title}</h3>
+            <div className="mt-2 h-[3px] w-9 rounded-full bg-[#0038B8]" aria-hidden />
+            <div className="mt-5">
+              <Blocks blocks={active.blocks} />
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Antisemitismus() {
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
       <main>
         <section>
-          <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
+          <div className={`${COL} section-y`}>
             <p className="kicker text-primary">Klíčové téma</p>
             <h1 className="home-section-title mt-1">Antisemitismus</h1>
-            <p className="mt-3 max-w-2xl text-[0.95rem] leading-[1.55] text-foreground">
+            <p className="mt-3 text-[0.95rem] leading-[1.55] text-foreground">
               Antisemitismus nelze chápat jako historickou epizodu ani jako uzavřený fenomén dvacátého století.
               Jde o dlouhodobý a strukturálně specifický jev, který se v průběhu dějin opakovaně
               proměňuje a přizpůsobuje aktuálním společenským, politickým a ideologickým podmínkám.
             </p>
-            <figure className="my-5 max-w-2xl">
-              <img
-                src={portalImg}
-                alt="Jeruzalémská synagoga v Praze, portál"
-                className="aspect-[3/1] w-full object-cover object-[center_55%]"
-              />
+            <figure className="my-5">
+              <div className="overflow-hidden rounded-2xl">
+                <img
+                  src={portalImg}
+                  alt="Jeruzalémská synagoga v Praze, portál"
+                  className="aspect-[3/1] w-full rounded-2xl object-cover object-[center_55%]"
+                />
+              </div>
               <figcaption className="mt-2 text-[12px] leading-snug text-muted-foreground md:text-[13px]">
                 Foto: Dietmar Rabich / Wikimedia Commons, CC BY-SA 4.0
               </figcaption>
             </figure>
-            <div className="max-w-3xl space-y-5">
+            <div className="space-y-5">
               <p className="text-[15px] leading-relaxed text-foreground md:text-base">
                 Antisemitismus funguje jako dlouhodobý psycho-sociální a kulturní vzorec, který se v čase
                 nepřerušuje, ale přepisuje. Neobjevuje se znovu jako nový jev, nýbrž jako aktualizovaná
@@ -369,38 +438,14 @@ function Antisemitismus() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-[70rem] px-5 pb-12 md:px-6 md:pb-16">
-          <div>
-            <h2 className="home-section-title">Rozcestník tématu</h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Rozklikněte jednotlivé okruhy.
-            </p>
-          </div>
-
-          <Accordion type="single" collapsible className="mt-6 w-full">
-            {SECTIONS.map((s) => (
-              <AccordionItem key={s.id} value={s.id}>
-                <AccordionTrigger className="text-left font-display text-lg font-bold text-primary">
-                  {s.title}
-                </AccordionTrigger>
-                <AccordionContent>
-                  <Blocks blocks={s.blocks} />
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </section>
+        <TopicGuide />
 
         {/* Související texty k tématu */}
-        <section className="mx-auto max-w-[70rem] px-5 pb-16 md:px-6">
-          <div className="border-t-2 border-primary pt-4">
-            <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] text-primary md:text-3xl">
-              Související texty
-            </h2>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Analýzy a české příběhy k tématu antisemitismu.
-            </p>
-          </div>
+        <section className={`${COL} pb-16`}>
+          <h2 className="home-section-title">Související texty</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Analýzy a české příběhy k tématu antisemitismu.
+          </p>
           <div className="mt-8 grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
             <ArticleCard
               image={flagsImg}
