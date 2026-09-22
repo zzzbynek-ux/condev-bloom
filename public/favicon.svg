@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Jedním hlasem">
+  <rect width="32" height="32" fill="#0038B8"/>
+  <g fill="#FFFFFF" transform="translate(3 23.4) scale(0.022414 -0.022414)">
+    <path d="M22-7 15 141Q26 139 37.5 138Q49 137 56 137Q94 137 114.5 147.5Q135 158 143.5 181Q152 204 152 243V660H314V242Q314 158 289 102Q264 46 213 17.5Q162-11 83-11Q73-11 59-10Q45-9 22-7Z"/>
+    <path transform="translate(430 0)" d="M499 0V660H660V0ZM69 0V660H230V0ZM167 268V398H564V268Z"/>
+  </g>
+</svg>
