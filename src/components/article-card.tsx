@@ -63,7 +63,7 @@ export function ArticleCard({
           <Link
             to="/clanky"
             search={{ tag }}
-            className={`article-tag rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] hover:opacity-85${isColumn ? " article-tag--column" : ""}`}
+            className={`article-tag rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em]${isColumn ? " article-tag--column" : ""}`}
           >
             {tag}
           </Link>

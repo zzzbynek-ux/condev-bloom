@@ -368,21 +368,21 @@ function Index() {
             <div className="tema-buttons flex flex-wrap items-center gap-3">
               <Link
                 to="/antisemitismus"
-                className="inline-flex shrink-0 items-center gap-2 rounded-full bg-primary-foreground px-6 py-3 text-sm font-semibold text-primary transition hover:opacity-90"
+                className="tema-btn-ice inline-flex shrink-0 items-center gap-2 rounded-full bg-primary-foreground px-6 py-3 text-sm font-semibold text-primary transition"
               >
                 Číst k tématu
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 to="/ptejte-se-ai"
-                className="inline-flex shrink-0 items-center gap-2 rounded-full bg-primary-foreground px-6 py-3 text-sm font-semibold text-primary transition hover:opacity-90"
+                className="tema-btn-ice inline-flex shrink-0 items-center gap-2 rounded-full bg-primary-foreground px-6 py-3 text-sm font-semibold text-primary transition"
               >
                 Ptejte se AI
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 to="/nahlasit-incident"
-                className="inline-flex shrink-0 items-center gap-2 rounded-full bg-destructive px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
+                className="tema-btn-incident inline-flex shrink-0 items-center gap-2 rounded-full bg-destructive px-6 py-3 text-sm font-semibold text-white transition"
               >
                 Nahlásit incident
                 <ArrowRight className="h-4 w-4" />
@@ -444,7 +444,7 @@ function Index() {
                           <Link
                             to="/clanky"
                             search={{ filtr: "tydyt" }}
-                            className="article-tag rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] hover:opacity-85"
+                            className="article-tag rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em]"
                           >
                             Tydýt
                           </Link>

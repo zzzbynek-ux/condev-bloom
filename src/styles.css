@@ -140,6 +140,10 @@
   --blue-700: #0038B8;
   --donate-gold: #e8c547;
   --donate-ink: #0b1a3a;
+  --ice-hover: #D6E6FC;
+  --gold-hover: #D4B03A;
+  --column-hover-fill: #FFF8E6;
+  --incident-hover: #C41625;
   --paper: #f7f8fb;
   --ink: #1a2332;
   --accent-blue: #6BA3F5;
@@ -334,12 +338,22 @@
   display: inline-block;
   line-height: 1.2;
   max-width: 100%;
+  transition: background-color 150ms ease, box-shadow 150ms ease;
+}
+.article-tag:hover {
+  background-color: var(--ice-hover, #D6E6FC);
+  color: #0038B8;
 }
 
 .article-tag--column {
   background-color: #fff;
   color: #0038B8;
   box-shadow: inset 0 0 0 2px var(--donate-gold, #E8C547);
+}
+.article-tag--column:hover {
+  background-color: var(--column-hover-fill, #FFF8E6);
+  box-shadow: inset 0 0 0 2px var(--gold-hover, #D4B03A);
+  color: #0038B8;
 }
 
 
@@ -369,12 +383,13 @@
   line-height: 1;
   text-decoration: none;
   white-space: nowrap;
+  transition: background-color 150ms ease, color 150ms ease;
 }
 .donate-pill:visited {
   color: var(--donate-ink, #0b1a3a);
 }
 .donate-pill:hover {
-  background: #f0d15c;
+  background: var(--gold-hover, #D4B03A);
   color: var(--donate-ink, #0b1a3a);
 }
 @media (max-width: 767px) {
@@ -1127,6 +1142,79 @@
 .card-lift:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(11, 26, 58, 0.1);
+}
+.card-lift:hover .cta-link {
+  color: #0038B8;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.social-link {
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+.social-link:hover {
+  background-color: var(--accent-soft, #E8F1FF);
+  border-color: var(--accent-soft, #E8F1FF);
+  color: #0038B8;
+}
+
+.tema-btn-ice:hover {
+  background-color: var(--ice-hover, #D6E6FC);
+  color: #0038B8;
+  opacity: 1;
+}
+.tema-btn-incident:hover {
+  background-color: var(--incident-hover, #C41625);
+  color: #fff;
+  opacity: 1;
+}
+
+.clanky-tabs a,
+.clanky-tabs button {
+  transition: background-color 150ms ease, color 150ms ease;
+}
+.clanky-tabs a:not([aria-current="true"]):hover,
+.clanky-tabs button:not([aria-current="true"]):not([aria-selected="true"]):hover {
+  background: var(--ice-hover, #D6E6FC) !important;
+  color: #0038B8 !important;
+}
+
+/* Sprint BW — hover hamburger */
+.header-icon-btn {
+  transition: background-color 150ms ease, color 150ms ease;
+}
+.header-icon-btn:hover,
+.header-icon-btn:focus-visible {
+  background-color: #E8F1FF;
+  color: #0038B8;
+  outline: none;
+}
+.header-menu-link {
+  margin-left: -1.25rem;
+  margin-right: -1.25rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+.header-menu-link:not([aria-current="true"]):hover,
+.header-menu-link:not([aria-current="true"]):focus-visible {
+  background-color: #D6E6FC;
+  color: #0038B8;
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .article-tag,
+  .donate-pill,
+  .social-link,
+  .clanky-tabs a,
+  .clanky-tabs button,
+  .tema-btn-ice,
+  .tema-btn-incident,
+  .header-icon-btn,
+  .header-menu-link {
+    transition: none;
+  }
 }
 
 .header-nahlasit {

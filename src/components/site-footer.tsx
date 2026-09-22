@@ -90,7 +90,7 @@ export function SiteFooter() {
             rel="noreferrer"
             aria-label="Jedním hlasem na Facebooku"
             title="Jedním hlasem na Facebooku"
-            className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10"
+            className="social-link flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground"
           >
             <FacebookIcon className="size-4" />
           </a>
@@ -100,7 +100,7 @@ export function SiteFooter() {
             rel="noreferrer"
             aria-label="Jedním hlasem na Instagramu"
             title="Jedním hlasem na Instagramu"
-            className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10"
+            className="social-link flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground"
           >
             <InstagramIcon className="size-4" />
           </a>
@@ -110,7 +110,7 @@ export function SiteFooter() {
             rel="noreferrer"
             aria-label="Jedním hlasem na X"
             title="Jedním hlasem na X"
-            className="flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10"
+            className="social-link flex size-9 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground"
           >
             <XIcon className="size-4" />
           </a>

@@ -199,7 +199,7 @@ export function SiteHeader() {
               type="button"
               aria-label="Hledat"
               onClick={openSearch}
-              className="rounded-md p-1.5 md:hidden"
+              className="header-icon-btn rounded-md p-1.5 md:hidden"
             >
               <Search className="size-5" />
             </button>
@@ -207,7 +207,7 @@ export function SiteHeader() {
               type="button"
               aria-label={open ? "Zavřít menu" : "Otevřít menu"}
               onClick={() => setOpen((v) => !v)}
-              className="rounded-md border border-primary-foreground/30 p-1.5 lg:hidden"
+              className="header-icon-btn rounded-md border border-primary-foreground/30 p-1.5 lg:hidden"
             >
               {open ? <X className="size-5" /> : <Menu className="size-5" />}
             </button>
@@ -263,7 +263,7 @@ export function SiteHeader() {
               target="_blank"
               rel="noreferrer"
               aria-label="Jedním hlasem na Facebooku"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:text-primary"
+              className="social-link flex size-9 items-center justify-center rounded-full border border-border text-foreground"
             >
               <FacebookIcon className="size-4" />
             </a>
@@ -272,7 +272,7 @@ export function SiteHeader() {
               target="_blank"
               rel="noreferrer"
               aria-label="Jedním hlasem na Instagramu"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:text-primary"
+              className="social-link flex size-9 items-center justify-center rounded-full border border-border text-foreground"
             >
               <InstagramIcon className="size-4" />
             </a>
@@ -281,7 +281,7 @@ export function SiteHeader() {
               target="_blank"
               rel="noreferrer"
               aria-label="Jedním hlasem na X"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:text-primary"
+              className="social-link flex size-9 items-center justify-center rounded-full border border-border text-foreground"
             >
               <XIcon className="size-4" />
             </a>
@@ -327,7 +327,7 @@ export function SiteHeader() {
                 key={item.to}
                 to={item.to}
                 onClick={() => setOpen(false)}
-                className="border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground"
+                className="header-menu-link border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground"
               >
                 {item.label}
               </Link>
@@ -339,7 +339,7 @@ export function SiteHeader() {
               target="_blank"
               rel="noreferrer"
               aria-label="Jedním hlasem na Facebooku"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground"
+              className="social-link flex size-9 items-center justify-center rounded-full border border-border text-foreground"
             >
               <FacebookIcon className="size-4" />
             </a>
@@ -348,7 +348,7 @@ export function SiteHeader() {
               target="_blank"
               rel="noreferrer"
               aria-label="Jedním hlasem na Instagramu"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground"
+              className="social-link flex size-9 items-center justify-center rounded-full border border-border text-foreground"
             >
               <InstagramIcon className="size-4" />
             </a>
@@ -357,7 +357,7 @@ export function SiteHeader() {
               target="_blank"
               rel="noreferrer"
               aria-label="Jedním hlasem na X"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-foreground"
+              className="social-link flex size-9 items-center justify-center rounded-full border border-border text-foreground"
             >
               <XIcon className="size-4" />
             </a>
