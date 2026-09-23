@@ -1324,9 +1324,9 @@ article.card-lift > p:not(.kicker) {
   height: 2.5rem;
   padding: 0 0.7rem;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.16);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  color: #fff;
+  background: #fff;
+  border: 1px solid #fff;
+  color: #0038B8;
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 600;
@@ -1336,8 +1336,9 @@ article.card-lift > p:not(.kicker) {
   text-decoration: none;
 }
 .onas-hero-pill:hover {
-  background: rgba(255, 255, 255, 0.28);
-  color: #fff;
+  background: #C5D8F6;
+  border-color: #C5D8F6;
+  color: #0038B8;
 }
 
 @media (max-width: 767px) {
@@ -1381,14 +1382,14 @@ article.card-lift > p:not(.kicker) {
   }
   .onas-hero-pill {
     width: 100%;
-    background: #0038B8;
-    border-color: #0038B8;
-    color: #fff;
+    background: #fff;
+    border-color: #fff;
+    color: #0038B8;
   }
   .onas-hero-pill:hover {
-    background: #002a8a;
-    border-color: #002a8a;
-    color: #fff;
+    background: #C5D8F6;
+    border-color: #C5D8F6;
+    color: #0038B8;
   }
   .onas-hero-copy {
     display: block;
@@ -1407,9 +1408,9 @@ article.card-lift > p:not(.kicker) {
   }
   .onas-hero-grid {
     min-height: clamp(28rem, 46vw, 36rem);
-    padding-top: 2rem;
+    padding-top: 0;
     padding-bottom: 3.5rem;
-    align-items: flex-start;
+    align-items: center;
   }
   .onas-hero-card {
     max-width: min(26rem, 46vw);
@@ -1461,16 +1462,38 @@ article.card-lift > p:not(.kicker) {
 }
 
 .onas-value {
-  border-left: 3px solid #0038B8;
-  background: #fff;
+  position: relative;
+  padding-top: 2.75rem;
+  background: #0038B8;
+  color: #fff;
+  border-color: transparent;
 }
-.onas-value-n {
+.onas-value::before {
+  content: "“";
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.75rem;
+  line-height: 1;
+  font-weight: 700;
+}
+.onas-value::after {
+  content: "";
   display: block;
-  margin-bottom: 0.45rem;
-  color: #0038B8;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  width: 2.25rem;
+  height: 2px;
+  margin-top: 1rem;
+  background: #B7D4F8;
+}
+
+#osy article h3,
+#osy article p:not(.kicker) {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .onas-band {

@@ -2,7 +2,6 @@ export const INTRO = {
   eyebrow: "O NÁS",
   title: "Jedním hlasem neznamená všichni stejně, ale společně za to, co nás spojuje.",
   paragraphs: [
-    "Jedním hlasem podporujeme Izrael a jeho právo na existenci a sebeobranu. Bojujeme proti antisemitismu ve všech jeho formách. Vyvracíme dezinformace, které zkreslují realitu. Posilujeme odvážné hlasy, které se nebojí promluvit. A budujeme komunitu, která se navzájem inspiruje a chrání hodnoty, na nichž stojí svobodná společnost.",
     "Jedním hlasem je nezávislá občanská iniciativa a otevřená platforma, která vznikla jako reakce na rostoucí dezinformace, selektivní empatii a zkreslený obraz Izraele ve veřejném prostoru. Naším cílem je vracet fakta, kontext a důstojnost do debaty – v době, kdy se realita ohýbá podle ideologie a pravda přizpůsobuje algoritmům.",
   ] as const,
   image: {
@@ -19,7 +18,7 @@ export const INTRO = {
 
 export const VALUES = [
   "Podporujeme Izrael jako demokratický stát s právem na existenci a sebeobranu.",
-  "Odmítáme antisemitismus ve všech jeho podobách – ať už se skrývá za tzv. kritiku politiky, levicový aktivismus nebo konspirační teorie krajní pravice.",
+  "Odmítáme antisemitismus v každé podobě – od aktivismu zleva po konspirace zprava.",
   "Věříme, že obhajoba Izraele je zároveň obranou principů svobodného světa.",
 ] as const;
 
@@ -42,23 +41,7 @@ export const AXES: Axis[] = [
     cta: "Číst článek",
   },
   {
-    kicker: "Jeden klik",
-    title: "Jeden klik mění svět",
-    text:
-      "Pod příspěvkem s tisíci lajky se objeví jediný komentář — stručný, věcný, rezonující. Naruší sdílený obraz a připomene, co ostatní přehlédli. Tak dnes vypadá zápas o pravdu. Algoritmus je jednoduchý: čím víc reakcí, tím větší dosah.",
-    href: "/clanky/jeden-klik-meni-svet",
-    cta: "Číst článek",
-  },
-  {
-    kicker: "Co doplňujeme",
-    title: "Celý obraz. Bez ořezu.",
-    text:
-      "Když veřejný prostor ovládají silná slova a jednostranné příběhy, přinášíme témata, která zůstávají mimo pozornost. Spravedlnost není selektivní.",
-    href: "/clanky/udavame-ton",
-    cta: "Číst článek",
-  },
-  {
-    kicker: "KLÍČOVÉ TÉMA",
+    kicker: "Antisemitismus",
     title: "Antisemitismus 2.0",
     text:
       "Nový antisemitismus se tváří jako morální apel — mluví jazykem solidarity a historické křivdy. Ale pod pláštíkem vznešených slov jde o démonizaci a delegitimizaci židovského státu. Nacistickou pásku nahradila kefíja — ale posedlost Židy zůstala.",
@@ -90,19 +73,35 @@ export const AXES: Axis[] = [
     cta: "Číst článek",
   },
   {
-    kicker: "Blízký východ",
-    title: "Mír začíná s pravdou",
-    text:
-      "Konflikt není jen o dvou stranách. Arabské státy a mezinárodní instituce ho nejen sledují — udržují ho při životě.",
-    href: "/clanky/mir-zacina-pravdou",
-    cta: "Číst článek",
-  },
-  {
     kicker: "Dezinformace",
     title: "Wiki jako nástroj vlivu",
     text:
       "Záměrná manipulace a systematické zkreslování faktů proměňují otevřenou encyklopedii ve vlivový nástroj.",
     href: "/clanky/wiki-jako-nastroj-vlivu",
+    cta: "Číst článek",
+  },
+  {
+    kicker: "Jeden klik",
+    title: "Jeden klik mění svět",
+    text:
+      "Pod příspěvkem s tisíci lajky se objeví jediný komentář — stručný, věcný, rezonující. Naruší sdílený obraz a připomene, co ostatní přehlédli. Tak dnes vypadá zápas o pravdu. Algoritmus je jednoduchý: čím víc reakcí, tím větší dosah.",
+    href: "/clanky/jeden-klik-meni-svet",
+    cta: "Číst článek",
+  },
+  {
+    kicker: "Co doplňujeme",
+    title: "Celý obraz. Bez ořezu.",
+    text:
+      "Když veřejný prostor ovládají silná slova a jednostranné příběhy, přinášíme témata, která zůstávají mimo pozornost. Spravedlnost není selektivní.",
+    href: "/clanky/udavame-ton",
+    cta: "Číst článek",
+  },
+  {
+    kicker: "Blízký východ",
+    title: "Mír začíná s pravdou",
+    text:
+      "Konflikt není jen o dvou stranách. Arabské státy a mezinárodní instituce ho nejen sledují — udržují ho při životě.",
+    href: "/clanky/mir-zacina-pravdou",
     cta: "Číst článek",
   },
   {

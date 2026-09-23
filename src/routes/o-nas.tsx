@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -34,7 +36,11 @@ export const Route = createFileRoute("/o-nas")({
   component: ONas,
 });
 
+const DO_VERBS = ["Publikujeme", "Vytváříme", "Sledujeme", "Budujeme"] as const;
+
 function ONas() {
+  const [showAllAxes, setShowAllAxes] = useState(false);
+  const axes = showAllAxes ? AXES : AXES.slice(0, 6);
   return (
     <div className="min-h-screen bg-paper">
       <SiteHeader />
@@ -53,7 +59,7 @@ function ONas() {
             aria-hidden
             className="onas-hero-overlay pointer-events-none absolute inset-0 bg-linear-to-r from-[#0b1a3a]/92 via-[#0b1a3a]/58 via-[42%] to-transparent"
           />
-          <div className="onas-hero-grid relative z-10 mx-auto flex h-full w-full max-w-[88rem] items-start justify-start px-5 md:px-6">
+          <div className="onas-hero-grid relative z-10 mx-auto flex h-full w-full max-w-[88rem] items-start justify-start px-5 md:items-center md:px-6">
             <div className="onas-hero-card w-full text-left">
               <p className="kicker text-white/70">{INTRO.eyebrow}</p>
               <h1 className="mt-3 max-w-xl text-balance font-display text-[1.65rem] font-bold leading-[1.15] text-white md:text-[1.85rem] lg:text-[2.1rem]">
@@ -83,12 +89,11 @@ function ONas() {
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
             <SectionHeader kicker="Co nás definuje" title="Naše hodnoty" />
             <ul className="mt-8 grid items-stretch gap-4 md:grid-cols-3">
-              {VALUES.map((value, i) => (
+              {VALUES.map((value) => (
                 <li
                   key={value}
                   className="onas-value card-lift flex h-full flex-col rounded-2xl border border-border bg-card p-6 text-[0.95rem] leading-[1.55] text-foreground"
                 >
-                  <span className="onas-value-n">0{i + 1}</span>
                   {csNbsp(value)}
                 </li>
               ))}
@@ -100,7 +105,7 @@ function ONas() {
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
             <SectionHeader kicker="Naše témata" title="O čem mluvíme" />
             <div className="mt-8 grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {AXES.map((axis) => (
+              {axes.map((axis) => (
                 <TopicCard
                   key={axis.title}
                   kicker={axis.kicker}
@@ -111,56 +116,47 @@ function ONas() {
                 />
               ))}
             </div>
+            {showAllAxes ? null : (
+              <button
+                type="button"
+                className="cta-link mt-6 inline-flex items-center gap-2 text-primary"
+                onClick={() => setShowAllAxes(true)}
+              >
+                Číst další <ArrowRight className="size-4" aria-hidden />
+              </button>
+            )}
           </div>
         </section>
 
         <section id="aktivity" className="scroll-mt-32">
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
             <SectionHeader kicker="Aktivity" title={WHAT_WE_DO.title} />
-            <ul className="mt-8 max-w-3xl space-y-4">
-              {WHAT_WE_DO.paragraphs.map((paragraph) => (
-                <li key={paragraph} className="flex gap-3 text-foreground">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                  <span className="text-[0.95rem] leading-[1.55]">{csNbsp(paragraph)}</span>
+            <ul className="mt-8 grid gap-4 md:grid-cols-2">
+              {WHAT_WE_DO.paragraphs.map((paragraph, i) => (
+                <li key={paragraph} className="rounded-2xl border border-border bg-card p-5">
+                  <p className="kicker text-primary">{DO_VERBS[i]}</p>
+                  <p className="mt-2 text-[0.95rem] leading-[1.55] text-foreground">
+                    {csNbsp(paragraph)}
+                  </p>
                 </li>
               ))}
             </ul>
-            <p className="kicker text-primary mt-8">Partnerství</p>
-            <h2 className="home-section-title">Kampaň</h2>
-            <a
-              href="https://gazagenolie.com/hamass-human-shields-strategy/"
-              target="_blank"
-              rel="noreferrer"
-              className="kampan-card mt-4"
-            >
-              <div className="kampan-copy">
-                <h2 className="mt-1 font-display text-[1.35rem] font-bold text-navy-900 md:text-[1.5rem]">
-                  Lidské štíty Hamásu
-                </h2>
-                <p className="mt-1 text-[0.95rem] leading-[1.55] text-muted-foreground">
-                  Hamás schoval válku pod nemocnice, školy a ložnice.
-                </p>
-                <span className="kampan-cta">Gaza GenoLIE →</span>
-              </div>
-              <img
-                src="/images/kampan-gazagenolie.jpg"
-                alt="The Gaza GenoLIE"
-                className="kampan-photo"
-                width={720}
-                height={400}
-              />
-            </a>
           </div>
         </section>
 
         <section id="mise" className="onas-band scroll-mt-32">
           <div className="section-y mx-auto max-w-[88rem] px-5 md:px-6">
             <SectionHeader kicker="Proč to děláme" title={MISSION.title} />
-            <div className="mt-8 max-w-3xl space-y-4 text-left text-[0.95rem] leading-[1.55] text-foreground">
+            <ul className="mt-8 grid items-stretch gap-4 md:grid-cols-2">
               {MISSION.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{csNbsp(paragraph)}</p>
+                <li
+                  key={paragraph}
+                  className="onas-value card-lift flex h-full flex-col rounded-2xl border border-border bg-card p-6 text-[0.95rem] leading-[1.55]"
+                >
+                  {csNbsp(paragraph)}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </section>
       </main>
