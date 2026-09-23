@@ -9,6 +9,7 @@ import { ArticleCard } from "@/components/article-card";
 import { MoreButton } from "@/components/more-button";
 import { ARTICLE_SECTIONS, CLANKY_FILTERS, HERO_BANNER, KAMPAN_SLIDES, KONRAD, VYBER_REDAKCE } from "@/lib/content";
 import { heroSrcSet, heroWebpSrcSet, HERO_SIZES, webpExists } from "@/lib/img";
+import { csNbsp } from "@/lib/typo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -94,7 +95,7 @@ function Hero() {
               key={slide.text}
               className="hero-perex animate-rise hidden max-w-md text-pretty text-white/90 md:block lg:max-w-lg"
             >
-              {slide.text}
+              {csNbsp(slide.text)}
             </p>
           ) : null}
 
@@ -307,7 +308,7 @@ function KampanStrip() {
                   {slide.title}
                 </h2>
                 <p className="mt-1 line-clamp-2 text-[0.95rem] leading-[1.55] text-muted-foreground">
-                  {slide.text}
+                  {csNbsp(slide.text)}
                 </p>
               </div>
               <span className="kampan-cta gap-2">

@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { CARD_SIZES, cardSrcSet } from "@/lib/img";
 import { articleBySlug } from "@/lib/articles";
+import { csNbsp } from "@/lib/typo";
 
 export function ArticleCard({
   image,
@@ -41,7 +42,7 @@ export function ArticleCard({
       <h3 className="card-title font-display text-xl font-bold leading-snug text-primary group-hover:underline">
         {title}
       </h3>
-      <p className="card-perex mt-3 text-[0.95rem] leading-[1.55] text-muted-foreground">{perex}</p>
+      <p className="card-perex mt-3 text-[0.95rem] leading-[1.55] text-muted-foreground">{csNbsp(perex)}</p>
       <span className="cta-link mt-auto inline-flex items-center gap-2 pt-4 text-primary">
         Číst článek <ArrowRight className="size-4" aria-hidden />
       </span>

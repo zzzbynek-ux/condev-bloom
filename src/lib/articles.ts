@@ -1,5 +1,6 @@
 import imported from "@/data/articles.meta.json";
 import type { ArticleAuthor } from "@/lib/author";
+import { csNbspHtml } from "@/lib/typo";
 
 export type ImportedArticle = {
   id: number;
@@ -45,7 +46,7 @@ export function rewriteImportedHtml(html: string, localImage?: string) {
   }
   out = out.replace(/\s+srcset="[^"]*"/gi, "");
   out = out.replace(/\s+sizes="[^"]*"/gi, "");
-  return out;
+  return csNbspHtml(out);
 }
 
 export function htmlHasImage(html: string) {

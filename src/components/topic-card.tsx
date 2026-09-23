@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
+import { csNbsp } from "@/lib/typo";
 
 export type TopicCardProps = {
   kicker?: string;
@@ -32,7 +33,7 @@ export function TopicCard({
       <h3 className="mt-2 font-display text-xl font-bold leading-snug text-primary">
         {title}
       </h3>
-      <p className="mt-3 flex-1 text-[0.95rem] leading-[1.55] text-muted-foreground">{text}</p>
+      <p className="mt-3 flex-1 text-[0.95rem] leading-[1.55] text-muted-foreground">{csNbsp(text)}</p>
       <Wrapper
         {...wrapperProps}
         className="cta-link mt-4 inline-flex items-center gap-1.5 text-primary hover:underline"

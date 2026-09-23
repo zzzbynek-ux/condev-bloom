@@ -11,6 +11,7 @@ import {
   WHAT_WE_DO,
   MISSION,
 } from "@/lib/about-content";
+import { csNbsp } from "@/lib/typo";
 
 export const Route = createFileRoute("/o-nas")({
   head: () => ({
@@ -60,7 +61,7 @@ function ONas() {
               </h1>
               <div className="onas-hero-copy mt-4 max-w-lg space-y-3 text-[0.95rem] leading-[1.55] text-white/90">
                 {INTRO.paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+                  <p key={paragraph}>{csNbsp(paragraph)}</p>
                 ))}
               </div>
               <nav className="onas-hero-nav mt-5" aria-label="Sekce stránky O nás">
@@ -88,7 +89,7 @@ function ONas() {
                   className="onas-value card-lift flex h-full flex-col rounded-2xl border border-border bg-card p-6 text-[0.95rem] leading-[1.55] text-foreground"
                 >
                   <span className="onas-value-n">0{i + 1}</span>
-                  {value}
+                  {csNbsp(value)}
                 </li>
               ))}
             </ul>
@@ -120,7 +121,7 @@ function ONas() {
               {WHAT_WE_DO.paragraphs.map((paragraph) => (
                 <li key={paragraph} className="flex gap-3 text-foreground">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                  <span className="text-[0.95rem] leading-[1.55]">{paragraph}</span>
+                  <span className="text-[0.95rem] leading-[1.55]">{csNbsp(paragraph)}</span>
                 </li>
               ))}
             </ul>
@@ -157,7 +158,7 @@ function ONas() {
             <SectionHeader kicker="Proč to děláme" title={MISSION.title} />
             <div className="mt-8 max-w-3xl space-y-4 text-left text-[0.95rem] leading-[1.55] text-foreground">
               {MISSION.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+                <p key={paragraph}>{csNbsp(paragraph)}</p>
               ))}
             </div>
           </div>

@@ -5,6 +5,7 @@ import { Check, Copy, Flag, PenLine, Target } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { csNbsp } from "@/lib/typo";
 
 type AmountKey = "301" | "901" | "2501";
 type Cadence = "monthly" | "once";
@@ -58,8 +59,8 @@ function spdPayload(kc: number, vs: string) {
   return `SPD*1.0*ACC:${IBAN_COMPACT}*AM:${kc.toFixed(2)}*CC:CZK*X-VS:${vs}*MSG:Dar JednimHlasem`;
 }
 
-function scrollToQr() {
-  document.getElementById("dar-qr")?.scrollIntoView({ behavior: "smooth", block: "start" });
+function scrollToId(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 export const Route = createFileRoute("/podporte-nas")({
@@ -150,7 +151,7 @@ function PodporteNas() {
   }
 
   const widget = (
-    <aside className="donate-widget" aria-label="Vyberte dar">
+    <aside id="dar-vyber" className="donate-widget scroll-mt-[5.5rem]" aria-label="Vyberte dar">
       <h2 className="font-display text-[1.15rem] font-bold text-foreground">Vyberte dar</h2>
       <div className="donate-toggle" role="tablist" aria-label="Frekvence daru">
         <button
@@ -195,7 +196,7 @@ function PodporteNas() {
           );
         })}
       </div>
-      <button type="button" className="donate-gold donate-gold-wide" onClick={scrollToQr}>
+      <button type="button" className="donate-gold donate-gold-wide" onClick={() => scrollToId("dar-qr")}>
         Poslat {formatKc(kc)} {cadence === "monthly" ? "měsíčně" : "jednorázově"}
       </button>
       <p className="donate-micro">
@@ -228,14 +229,13 @@ function PodporteNas() {
                 Má jen vás.
               </h1>
               <p className="donate-lead">
-                Dezinformace se šíří zadarmo. Fakta, analýzy a kontext stojí čas, lidi a provoz.
+                {csNbsp(
+                  "Dezinformace se šíří zadarmo. Fakta, analýzy a kontext stojí čas, lidi a provoz.",
+                )}
               </p>
-              <p className="donate-lead">Jedním darem držíte hlas, který se nenechá koupit.</p>
+              <p className="donate-lead">{csNbsp("Jedním darem držíte hlas, který se nenechá koupit.")}</p>
               <div className="donate-hero-actions">
-                <button type="button" className="donate-gold" onClick={scrollToQr}>
-                  Přispět teď
-                </button>
-                <button type="button" className="donate-ghost" onClick={scrollToQr}>
+                <button type="button" className="donate-gold" onClick={() => scrollToId("dar-qr")}>
                   Zobrazit účet a QR
                 </button>
               </div>
@@ -302,9 +302,6 @@ function PodporteNas() {
                   <br />
                   VS {amount.vs}
                 </p>
-                <button type="button" className="donate-gold donate-gold-wide" onClick={scrollToQr}>
-                  Otevřít v bance
-                </button>
               </div>
               <dl className="donate-details">
                 <div className="donate-row">

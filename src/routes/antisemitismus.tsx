@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
 import { MoreButton } from "@/components/more-button";
 import { cn } from "@/lib/utils";
+import { csNbsp } from "@/lib/typo";
 import flagsImg from "@/assets/news-flags.jpg";
 import politicsImg from "@/assets/news-politics.jpg";
 import portalImg from "@/assets/synagoga-jeruzalemska-portal.jpg";
@@ -310,12 +311,12 @@ function Blocks({ blocks }: { blocks: Block[] }) {
         ) : "list" in b ? (
           <ul key={i} className="ml-5 list-disc space-y-1.5 text-[15px] leading-relaxed text-foreground">
             {b.list.map((li) => (
-              <li key={li}>{li}</li>
+              <li key={li}>{csNbsp(li)}</li>
             ))}
           </ul>
         ) : (
           <p key={i} className="text-[15px] leading-relaxed text-foreground">
-            {b.p}
+            {csNbsp(b.p)}
           </p>
         ),
       )}
@@ -402,9 +403,9 @@ function Antisemitismus() {
             <p className="kicker text-primary">Klíčové téma</p>
             <h1 className="home-section-title mt-1">Antisemitismus</h1>
             <p className="mt-3 text-[0.95rem] leading-[1.55] text-foreground">
-              Antisemitismus nelze chápat jako historickou epizodu ani jako uzavřený fenomén dvacátého století.
-              Jde o dlouhodobý a strukturálně specifický jev, který se v průběhu dějin opakovaně
-              proměňuje a přizpůsobuje aktuálním společenským, politickým a ideologickým podmínkám.
+              {csNbsp(
+                "Antisemitismus nelze chápat jako historickou epizodu ani jako uzavřený fenomén dvacátého století. Jde o dlouhodobý a strukturálně specifický jev, který se v průběhu dějin opakovaně proměňuje a přizpůsobuje aktuálním společenským, politickým a ideologickým podmínkám.",
+              )}
             </p>
             <figure className="my-5">
               <div className="overflow-hidden rounded-2xl">
@@ -420,19 +421,14 @@ function Antisemitismus() {
             </figure>
             <div className="space-y-5">
               <p className="text-[15px] leading-relaxed text-foreground md:text-base">
-                Antisemitismus funguje jako dlouhodobý psycho-sociální a kulturní vzorec, který se v čase
-                nepřerušuje, ale přepisuje. Neobjevuje se znovu jako nový jev, nýbrž jako aktualizovaná
-                verze téhož schématu. Přebírá existující stereotypy a převádí je do jazyka, obrazů a obav,
-                které jsou v dané době srozumitelné a společensky přijatelné. Nejde o minulost, která se
-                vrací, ale o přítomnost, která si z minulosti vybírá funkční nástroje.
+                {csNbsp(
+                  "Antisemitismus funguje jako dlouhodobý psycho-sociální a kulturní vzorec, který se v čase nepřerušuje, ale přepisuje. Neobjevuje se znovu jako nový jev, nýbrž jako aktualizovaná verze téhož schématu. Přebírá existující stereotypy a převádí je do jazyka, obrazů a obav, které jsou v dané době srozumitelné a společensky přijatelné. Nejde o minulost, která se vrací, ale o přítomnost, která si z minulosti vybírá funkční nástroje.",
+                )}
               </p>
               <p className="text-[15px] leading-relaxed text-foreground md:text-base">
-                Ačkoli je antisemitismus namířen proti jedné konkrétní skupině, nevypovídá o této skupině,
-                ale o společnosti a jejích institucích, které jej vytvářejí, tolerují nebo mu nejsou schopny
-                čelit. Funguje jako indikátor institucionální i kulturní odolnosti společnosti – její
-                schopnosti zacházet s nejistotou, konfliktem a složitostí reality bez hledání zástupného
-                viníka. Proměnlivá není nenávist sama, ale schopnost ji rozpoznat a míra tolerance k jejím
-                projevům.
+                {csNbsp(
+                  "Ačkoli je antisemitismus namířen proti jedné konkrétní skupině, nevypovídá o této skupině, ale o společnosti a jejích institucích, které jej vytvářejí, tolerují nebo mu nejsou schopny čelit. Funguje jako indikátor institucionální i kulturní odolnosti společnosti – její schopnosti zacházet s nejistotou, konfliktem a složitostí reality bez hledání zástupného viníka. Proměnlivá není nenávist sama, ale schopnost ji rozpoznat a míra tolerance k jejím projevům.",
+                )}
               </p>
             </div>
           </div>

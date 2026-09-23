@@ -1223,6 +1223,40 @@
 .article-body :where(p, ul, ol) {
   margin-bottom: 1rem;
 }
+.article-body p,
+.onas-hero-copy p,
+#mise .max-w-3xl > p,
+.max-w-3xl.space-y-4 > p,
+.donate-lead,
+.hero-perex,
+h1.home-section-title + p,
+article.rounded-xl .space-y-4 > p,
+.space-y-5 > p {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+}
+.card-perex,
+article.card-lift > p:not(.kicker) {
+  text-align: left;
+  hyphens: manual;
+}
+@media (max-width: 767px) {
+  .article-body p,
+  .onas-hero-copy p,
+  #mise .max-w-3xl > p,
+  .max-w-3xl.space-y-4 > p,
+  .donate-lead,
+  .hero-perex,
+  h1.home-section-title + p,
+  article.rounded-xl .space-y-4 > p,
+  .space-y-5 > p {
+    text-align: justify;
+    hyphens: manual;
+    -webkit-hyphens: manual;
+  }
+}
 .article-body img {
   max-width: 100%;
   height: auto;
@@ -1337,7 +1371,6 @@
     margin-right: 0;
   }
   .onas-hero-copy,
-  .onas-hero-copy p,
   .onas-hero h1 {
     text-align: left;
   }
@@ -2161,7 +2194,6 @@ a.kampan-card {
   }
   .donate-hero-copy .donate-kicker { color: #0038B8; }
   .donate-lead { color: #1a2332; font-size: 0.95rem; margin-top: 0.5rem; }
-  .donate-hero-actions { display: none; }
   .donate-widget {
     box-shadow: 0 8px 24px rgba(11, 26, 58, 0.08);
     border: 1px solid rgba(0, 56, 184, 0.14);
