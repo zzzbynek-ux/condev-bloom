@@ -290,10 +290,10 @@ function KampanStrip() {
   }, [total]);
 
   return (
-    <section className="kampan-strip" aria-label="Kampaň Gaza GenoLIE">
+    <section className="kampan-strip" aria-label="Skládačka lží">
       <div className="home-flow mx-auto max-w-[88rem] px-5 md:px-6">
         <p className="kicker text-primary">Partnerství</p>
-        <h2 className="home-section-title">Kampaň</h2>
+        <h2 className="home-section-title">Skládačka lží</h2>
         <div className="kampan-card mt-4">
           <a
             href={slide.href}
@@ -310,7 +310,9 @@ function KampanStrip() {
                   {slide.text}
                 </p>
               </div>
-              <span className="kampan-cta">Gaza GenoLIE →</span>
+              <span className="kampan-cta gap-2">
+                Gaza GenoLIE <ArrowRight className="size-4" aria-hidden />
+              </span>
             </div>
             {webpExists("/images/kampan-gazagenolie.webp") ? (
               <picture className="contents">

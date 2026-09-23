@@ -349,14 +349,6 @@ function PodporteNas() {
           </div>
         </section>
 
-        <section className="donate-mobile-flag">
-          <img
-            src="/images/o-nas-vlajka.jpg"
-            alt="Žena zahalená izraelskou vlajkou hledí do krajiny"
-            className="donate-mobile-flag-img"
-          />
-        </section>
-
         <section className="donate-note">
           <div className="donate-wrap">
             <p>
