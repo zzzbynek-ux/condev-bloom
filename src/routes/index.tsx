@@ -8,30 +8,93 @@ import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
 import { MoreButton } from "@/components/more-button";
 import { ARTICLE_SECTIONS, CLANKY_FILTERS, HERO_BANNER, KAMPAN_SLIDES, KONRAD, VYBER_REDAKCE } from "@/lib/content";
-import { heroSrcSet, heroWebpSrcSet, HERO_SIZES, webpExists } from "@/lib/img";
+import { heroSrcSet, heroWebpSrcSet, heroLcpPreload, prefetchHero, HERO_SIZES, webpExists } from "@/lib/img";
 import { csNbsp } from "@/lib/typo";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Jedním hlasem — fakta a kontext do debaty o Izraeli" },
-      {
-        name: "description",
-        content:
-          "Ověřená fakta, analýzy a české příběhy. Komunita, která do debaty o Izraeli a antisemitismu vrací kontext a klidný tón.",
-      },
-      { property: "og:title", content: "Jedním hlasem — fakta a kontext do debaty o Izraeli" },
-      {
-        property: "og:description",
-        content: "Ověřená fakta, analýzy a české příběhy. Zapojte se jedním hlasem.",
-      },
-    ],
-  }),
+  head: () => {
+    const first = HERO_BANNER[0]!.image;
+    const lcp = heroLcpPreload(first);
+    return {
+      meta: [
+        { title: "Jedním hlasem — fakta a kontext do debaty o Izraeli" },
+        {
+          name: "description",
+          content:
+            "Ověřená fakta, analýzy a české příběhy. Komunita, která do debaty o Izraeli a antisemitismu vrací kontext a klidný tón.",
+        },
+        { property: "og:title", content: "Jedním hlasem — fakta a kontext do debaty o Izraeli" },
+        {
+          property: "og:description",
+          content: "Ověřená fakta, analýzy a české příběhy. Zapojte se jedním hlasem.",
+        },
+      ],
+      links: [
+        {
+          rel: "preload",
+          as: "image",
+          href: lcp.href,
+          type: lcp.type,
+          imageSrcSet: lcp.imageSrcSet,
+          imageSizes: HERO_SIZES,
+        },
+      ],
+    };
+  },
   component: Index,
 });
 
+function HeroFrame({
+  slide,
+  visible,
+  fetchPriority,
+  onReady,
+}: {
+  slide: (typeof HERO_BANNER)[number];
+  visible: boolean;
+  fetchPriority: "high" | "low";
+  onReady?: () => void;
+}) {
+  const heroWebp = heroWebpSrcSet(slide.image);
+  const markReady = (el: HTMLImageElement | null) => {
+    if (!el || !onReady) return;
+    if (el.complete && el.naturalWidth > 0) onReady();
+  };
+  const img = (
+    <img
+      ref={markReady}
+      src={`${slide.image}?v=dr`}
+      srcSet={heroSrcSet(slide.image)}
+      sizes={HERO_SIZES}
+      alt=""
+      width={1235}
+      height={459}
+      loading={fetchPriority === "high" ? "eager" : "lazy"}
+      decoding="async"
+      fetchPriority={fetchPriority}
+      onLoad={onReady}
+      className={`hero-img pointer-events-none absolute inset-0 size-full object-cover transition-opacity duration-300 ${
+        visible ? "opacity-100" : "opacity-0"
+      }`}
+      style={{
+        ["--hero-focus" as string]: slide.focus,
+        ["--hero-focus-mobile" as string]: "focusMobile" in slide ? slide.focusMobile : slide.focus,
+      }}
+    />
+  );
+  return heroWebp ? (
+    <picture className="contents">
+      <source type="image/webp" srcSet={heroWebp} sizes={HERO_SIZES} />
+      {img}
+    </picture>
+  ) : (
+    img
+  );
+}
+
 function Hero() {
   const [i, setI] = useState(0);
+  const [painted, setPainted] = useState(0);
   const total = HERO_BANNER.length;
   const go = (d: number) => setI((v) => (v + d + total) % total);
 
@@ -40,33 +103,27 @@ function Hero() {
     return () => clearInterval(t);
   }, [total]);
 
+  useEffect(() => {
+    prefetchHero(HERO_BANNER[(painted + 1) % total]!.image);
+    prefetchHero(HERO_BANNER[(painted - 1 + total) % total]!.image);
+  }, [painted, total]);
+
   const slide = HERO_BANNER[i] ?? HERO_BANNER[0]!;
-  const heroWebp = heroWebpSrcSet(slide.image);
-  const heroImg = (
-      <img
-        src={slide.image}
-        srcSet={heroSrcSet(slide.image)}
-        sizes={HERO_SIZES}
-        alt=""
-        width={1235}
-        height={459}
-        decoding="async"
-        fetchPriority="high"
-        className="hero-img pointer-events-none absolute inset-0 size-full object-cover"
-        style={{ ["--hero-focus" as string]: slide.focus, objectPosition: slide.focus }}
-      />
-  );
+  const paintedSlide = HERO_BANNER[painted] ?? slide;
+  const incoming = i !== painted;
 
   return (
     <section className={`hero-section relative isolate overflow-hidden bg-navy-900${slide.overlay === "strong" ? " hero-overlay-strong" : ""}`}>
-      {heroWebp ? (
-        <picture className="contents">
-          <source type="image/webp" srcSet={heroWebp} sizes={HERO_SIZES} />
-          {heroImg}
-        </picture>
-      ) : (
-        heroImg
-      )}
+      <HeroFrame slide={paintedSlide} visible fetchPriority={incoming ? "low" : "high"} />
+      {incoming ? (
+        <HeroFrame
+          key={slide.image}
+          slide={slide}
+          visible={false}
+          fetchPriority="high"
+          onReady={() => setPainted(i)}
+        />
+      ) : null}
       <div
         aria-hidden
         className={
@@ -99,7 +156,7 @@ function Hero() {
             </p>
           ) : null}
 
-          {i === 0 ? (
+          {slide.slug === "o-nas" ? (
             <Link
               to="/o-nas"
               className="cta-link hero-cta inline-flex items-center gap-2 text-white hover:text-white"

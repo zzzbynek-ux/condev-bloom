@@ -489,8 +489,8 @@
   .hero-section {
     display: block;
     position: relative;
-    height: 17.5rem;
-    min-height: 17.5rem;
+    height: 22rem;
+    min-height: 22rem;
     overflow: hidden;
     background: #0b1a3a;
   }
@@ -501,7 +501,7 @@
     height: 100%;
     opacity: 1;
     object-fit: cover;
-    object-position: var(--hero-focus, 50% 50%);
+    object-position: var(--hero-focus-mobile, var(--hero-focus, 50% 50%));
   }
   .hero-section .hero-overlay {
     display: block;
@@ -516,9 +516,9 @@
       ),
       linear-gradient(
         to right,
-        rgba(11, 26, 58, 0.88) 0%,
-        rgba(11, 26, 58, 0.42) 48%,
-        rgba(11, 26, 58, 0.08) 100%
+        rgba(11, 26, 58, 0.55) 0%,
+        rgba(11, 26, 58, 0.18) 36%,
+        transparent 68%
       ) !important;
     pointer-events: none;
   }
@@ -527,10 +527,10 @@
     z-index: 10;
     height: 100%;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: flex-start;
     text-align: left;
-    padding: 0 1.15rem 3.6rem 1.15rem;
+    padding: 1.25rem 1.15rem 3.4rem;
     max-width: none;
   }
   .hero-section .hero-card {
@@ -554,13 +554,14 @@
   .hero-section .hero-card h1,
   .hero-section .hero-card p.animate-rise:not(.hero-perex),
   .hero-section .hero-title {
-    font-size: 1.35rem;
-    line-height: 1.18;
+    font-size: 1.2rem;
+    line-height: 1.2;
     margin-top: 0.35rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    display: block;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
+    overflow: visible;
+    text-wrap: balance;
   }
   .hero-section .hero-cta {
     margin-top: 0.45rem;

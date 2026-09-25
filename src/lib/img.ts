@@ -6,7 +6,7 @@ const WEBP = new Set(webpManifest as string[]);
 /** Retina srcset for hero JPEGs that have a matching @2x file. */
 export function heroSrcSet(src: string): string | undefined {
   if (!src.startsWith("/images/hero/") || !src.endsWith(".jpg") || src.includes("@2x")) return undefined;
-  return `${src} 1235w, ${src.replace(/\.jpg$/, "@2x.jpg")} 2470w`;
+  return `${src}?v=dr 1235w, ${src.replace(/\.jpg$/, "@2x.jpg")}?v=dr 2470w`;
 }
 
 export const HERO_SIZES = "100vw";
@@ -32,7 +32,28 @@ export function heroWebpSrcSet(src: string): string | undefined {
   if (!src.startsWith("/images/hero/") || !src.endsWith(".jpg") || src.includes("@2x")) return undefined;
   const w1 = src.replace(/\.jpg$/, ".webp");
   const w2 = src.replace(/\.jpg$/, "@2x.webp");
-  if (webpExists(w1) && webpExists(w2)) return `${w1} 1235w, ${w2} 2470w`;
-  if (webpExists(w1)) return w1;
+  if (webpExists(w1) && webpExists(w2)) return `${w1}?v=dr 1235w, ${w2}?v=dr 2470w`;
+  if (webpExists(w1)) return `${w1}?v=dr`;
   return undefined;
 }
+
+export function heroLcpPreload(src: string) {
+  const webp = heroWebpSrcSet(src);
+  if (webp) {
+    const href = `${src.replace(/\.jpg$/, ".webp")}?v=dr`;
+    return { href, type: "image/webp" as const, imageSrcSet: webp };
+  }
+  return { href: `${src}?v=dr`, type: "image/jpeg" as const, imageSrcSet: heroSrcSet(src) };
+}
+
+export function prefetchHero(src: string) {
+  if (typeof window === "undefined") return;
+  const href = webpExists(src.replace(/\.jpg$/, ".webp"))
+    ? `${src.replace(/\.jpg$/, ".webp")}?v=dr`
+    : `${src}?v=dr`;
+  const img = new Image();
+  img.decoding = "async";
+  img.src = href;
+}
+
+
