@@ -179,13 +179,28 @@ export function SiteHeader() {
       <div className="bg-primary text-primary-foreground">
         <div className="mx-auto flex h-12 max-w-[88rem] items-center gap-3 px-4 md:h-[4.25rem] md:gap-6 md:px-6">
           <Link to="/" className="flex shrink-0 items-center" aria-label="Jedním hlasem — domů">
-            <span className="flex flex-col justify-center leading-none">
-              <span className="font-display text-[1.25rem] font-bold uppercase tracking-[-0.02em] md:text-[1.6rem]">
-                Jedním hlasem
-              </span>
-              <span className="mt-0.5 font-sans text-[9px] font-semibold uppercase tracking-[0.16em] text-primary-foreground/90 md:text-[10px]">
-                Fakta bez filtru
-              </span>
+            <img
+              src="/images/logo-bublina.png"
+              alt=""
+              width={280}
+              height={218}
+              className="h-9 w-auto md:hidden"
+            />
+            <span className="hidden items-end gap-2 md:inline-flex">
+              <img
+                src="/images/logo-bublina-radek.png"
+                alt=""
+                width={4231}
+                height={1103}
+                className="h-12 w-auto lg:h-[3.25rem]"
+              />
+              <img
+                src="/images/logo-fakta.png"
+                alt=""
+                width={4230}
+                height={301}
+                className="mb-[calc(173/1103*3rem)] h-[calc(0.22*2.25rem)] w-auto lg:mb-[calc(173/1103*3.25rem)] lg:h-[calc(0.22*2.5rem)]"
+              />
             </span>
           </Link>
 
