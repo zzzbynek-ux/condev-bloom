@@ -247,7 +247,7 @@ function PodporteNas() {
         <section className="donate-stats" aria-label="Proč dát">
           <div>
             <b className="font-display">1 hlas</b>
-            <span>stačí, aby se v diskusi objevilo chybějící fakta</span>
+            <span>stačí, aby se v diskusi objevila chybějící fakta</span>
           </div>
           <div>
             <b className="font-display">300 Kč / měs.</b>
