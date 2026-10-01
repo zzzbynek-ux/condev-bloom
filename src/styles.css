@@ -1463,6 +1463,56 @@ article.card-lift > p:not(.kicker) {
   }
 }
 
+/* Zapojte se — stejná výška hero, výřez drží notes vpravo */
+.zapojte-hero .onas-hero-img {
+  object-position: 50% 50%;
+}
+.zapojte-hero .onas-hero-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  width: auto;
+}
+.zapojte-hero .onas-hero-pill {
+  width: auto;
+  flex: 0 0 auto;
+}
+.zapojte-block {
+  min-height: 100%;
+}
+.zapojte-block ul {
+  flex: 1;
+}
+@media (max-width: 767px) {
+  .zapojte-hero .onas-hero-img {
+    object-position: 28% 62%;
+  }
+  .zapojte-hero .onas-hero-nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .zapojte-hero .onas-hero-pill {
+    width: 100%;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .zapojte-hero .onas-hero-img {
+    object-position: 48% 50%;
+  }
+  .zapojte-hero .onas-hero-nav {
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+  .zapojte-hero .onas-hero-pill {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    padding: 0 0.35rem;
+    font-size: 11px;
+  }
+}
+
 .onas-value {
   position: relative;
   padding-top: 2.75rem;
