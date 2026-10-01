@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { csNbsp } from "@/lib/typo";
 
 export const Route = createFileRoute("/galerie-incidentu")({
   head: () => ({
@@ -30,22 +31,19 @@ const INCIDENTS = [
     src: "/images/galerie/dvere.jpg",
     chip: "Vandalismus",
     title: "Barva na dveřích židovské budovy",
-    perex:
-      "Červená barva rozlitá před vchodem. Útok na místo spojené s židovskou komunitou.",
+    perex: "Červená barva rozlitá před vchodem. Útok na místo spojené s židovskou komunitou.",
   },
   {
     src: "/images/galerie/rukojmi.jpg",
     chip: "Veřejný prostor",
     title: "Stržené plakáty rukojmích",
-    perex:
-      "Portréty unesených 7. října stržené ze zdi. Útok na paměť obětí, ne na „politiku“.",
+    perex: "Portréty unesených 7. října stržené ze zdi. Útok na paměť obětí, ne na „politiku“.",
   },
   {
     src: "/images/galerie/slogan.jpg",
     chip: "Praha",
     title: "„From the river to the sea“",
-    perex:
-      "Happenning Solidarity. Slogan, který popírá právo Izraele na existenci.",
+    perex: "Happening Solidarity. Slogan, který popírá právo Izraele na existenci.",
   },
   {
     src: "/images/galerie/protest.jpg",
@@ -58,15 +56,13 @@ const INCIDENTS = [
     src: "/images/galerie/pangea.jpg",
     chip: "Praha · 8. 3.",
     title: "Palestinian Feminist Bloc",
-    perex:
-      "Výzva na Náměstí Jana Palacha. Pangea Prague, Mezinárodní den žen.",
+    perex: "Výzva na náměstí Jana Palacha. Pangea Prague, Mezinárodní den žen.",
   },
   {
     src: "/images/galerie/nazionismo.jpg",
     chip: "Online propaganda",
     title: "Plakát „Nazionismo“",
-    perex:
-      "Izraelská vlajka překrytá hákovým křížem. Klasická rovnice Žid = nacista.",
+    perex: "Izraelská vlajka překrytá hákovým křížem. Klasická rovnice Žid = nacista.",
   },
 ] as const;
 
@@ -77,14 +73,12 @@ function ArchivIncidentu() {
       <main>
         <section className="section-y">
           <div className="mx-auto max-w-[88rem] px-5 md:px-6">
-            <p className="kicker text-primary">Klíčové téma</p>
-            <h1 className="home-section-title mt-1">
-              Archiv incidentů
-            </h1>
+            <p className="kicker text-primary">{csNbsp("Klíčové téma")}</p>
+            <h1 className="home-section-title mt-1">{csNbsp("Archiv incidentů")}</h1>
             <p className="mt-3 max-w-xl text-[0.95rem] leading-[1.55] text-foreground">
-              Antisemitismus není uzavřená kapitola dějin. Dokumentujeme jeho
-              současné podoby — ve veřejném prostoru, na sítích i v soukromých
-              výhrůžkách.
+              {csNbsp(
+                "Antisemitismus není uzavřená kapitola dějin. Dokumentujeme jeho současné podoby — ve veřejném prostoru, na sítích i v soukromých výhrůžkách.",
+              )}
             </p>
 
             <div className="galerie-grid mt-8">
@@ -104,10 +98,10 @@ function ArchivIncidentu() {
                       {item.chip}
                     </span>
                     <h2 className="mt-3 font-display text-[1.15rem] font-bold leading-snug text-primary">
-                      {item.title}
+                      {csNbsp(item.title)}
                     </h2>
                     <p className="mt-2 text-[0.95rem] leading-[1.55] text-muted-foreground">
-                      {item.perex}
+                      {csNbsp(item.perex)}
                     </p>
                   </div>
                 </article>
@@ -116,14 +110,14 @@ function ArchivIncidentu() {
 
             <div className="galerie-mail">
               <div className="min-w-0">
-                <p className="kicker text-primary">Květen</p>
+                <p className="kicker text-primary">{csNbsp("Květen")}</p>
                 <h2 className="font-display text-[1.15rem] font-bold text-primary">
-                  E-mail zaslaný zaměstnancům ŽOP
+                  {csNbsp("E-mail zaslaný zaměstnancům ŽOP")}
                 </h2>
                 <p className="mt-1 text-[0.95rem] leading-[1.55] text-muted-foreground">
-                  „Tak vy sluzebnici zla, brzy uvidite, co se s vami bude dit. Vas
-                  cas se nachyluje. Fakt se teste vy perfidni zidi. My uz jsme na
-                  Vas nachystani.“
+                  {csNbsp(
+                    "„Tak vy sluzebnici zla, brzy uvidite, co se s vami bude dit. Vas cas se nachyluje. Fakt se teste vy perfidni zidi. My uz jsme na Vas nachystani.“",
+                  )}
                 </p>
               </div>
             </div>

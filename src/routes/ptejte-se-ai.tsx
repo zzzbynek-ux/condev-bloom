@@ -4,6 +4,7 @@ import { Sparkles } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { csNbsp } from "@/lib/typo";
 
 export const Route = createFileRoute("/ptejte-se-ai")({
   head: () => ({
@@ -41,13 +42,14 @@ function PtejteSeAi() {
     <div className="min-h-screen bg-background">
       <SiteHeader />
       <main className="mx-auto max-w-3xl px-5 py-14">
-        <p className="text-xs uppercase tracking-[0.18em] text-primary">Ptejte se AI</p>
+        <p className="text-xs uppercase tracking-[0.18em] text-primary">{csNbsp("Ptejte se AI")}</p>
         <h1 className="mt-2 font-display text-4xl font-bold md:text-5xl">
-          Nevíte, jak reagovat? Zeptejte se.
+          {csNbsp("Nevíte, jak reagovat? Zeptejte se.")}
         </h1>
         <p className="mt-4 text-muted-foreground">
-          Napište otázku nebo vložte tvrzení, které jste někde četli. Připravíme vám věcnou
-          odpověď s kontextem a zdroji.
+          {csNbsp(
+            "Napište otázku nebo vložte tvrzení, které jste někde četli. Připravíme vám věcnou odpověď s kontextem a zdroji.",
+          )}
         </p>
 
         <form
@@ -77,15 +79,16 @@ function PtejteSeAi() {
             <p className="flex items-center gap-2 text-sm font-semibold text-primary">
               <Sparkles className="size-4" /> Vaše otázka
             </p>
-            <p className="mt-2 text-sm text-foreground">{asked}</p>
+            <p className="mt-2 text-sm text-foreground">{csNbsp(asked)}</p>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              Odpovědi zatím připravujeme ručně — otázku jsme zaznamenali a odpověď doplníme
-              do sekce Témata. AI asistent bude spuštěn brzy.
+              {csNbsp(
+                "Odpovědi zatím připravujeme ručně — otázku jsme zaznamenali a odpověď doplníme do sekce Témata. AI asistent bude spuštěn brzy.",
+              )}
             </p>
           </div>
         ) : null}
 
-        <h2 className="mt-12 font-display text-xl font-bold">Časté otázky</h2>
+        <h2 className="mt-12 font-display text-xl font-bold">{csNbsp("Časté otázky")}</h2>
         <div className="mt-4 flex flex-wrap gap-2">
           {EXAMPLES.map((e) => (
             <button
@@ -94,7 +97,7 @@ function PtejteSeAi() {
               onClick={() => setQ(e)}
               className="rounded-full border border-primary/30 px-4 py-2 text-sm text-primary transition-colors hover:bg-primary/10"
             >
-              {e}
+              {csNbsp(e)}
             </button>
           ))}
         </div>
