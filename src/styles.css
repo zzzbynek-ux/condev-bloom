@@ -250,6 +250,7 @@
   h3 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
+    text-wrap: balance;
   }
 }
 
@@ -1233,7 +1234,7 @@
 h1.home-section-title + p,
 article.rounded-xl .space-y-4 > p,
 .space-y-5 > p {
-  text-align: justify;
+  text-align: left;
   hyphens: auto;
   -webkit-hyphens: auto;
   hyphenate-limit-chars: 6 3 3;
@@ -1253,7 +1254,7 @@ article.card-lift > p:not(.kicker) {
   h1.home-section-title + p,
   article.rounded-xl .space-y-4 > p,
   .space-y-5 > p {
-    text-align: justify;
+    text-align: left;
     hyphens: manual;
     -webkit-hyphens: manual;
   }
