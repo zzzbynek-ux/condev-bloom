@@ -51,6 +51,10 @@ function after(full: string, prefix: string): string {
   return "";
 }
 
+function ellipsis(s: string): string {
+  return `${s.replace(/[\s.,;:!?…–—]+$/u, "")}…`;
+}
+
 function extend(head: string, rest: string): string {
   const t = rest.trim();
   if (!t) return head;
@@ -58,7 +62,7 @@ function extend(head: string, rest: string): string {
   if (room < 8) return head;
   const cut = cutWord(t, room);
   if (!cut) return head;
-  return `${head} ${cut}…`;
+  return `${head} ${ellipsis(cut)}`;
 }
 
 /** Card perex: ~160–190 chars, max 220, end on a sentence or a word + … */
@@ -77,7 +81,7 @@ export function clipPerex(text: string): string {
     else if (first.length <= SOFT) out = first;
     else {
       const body = first.replace(/\s*[.!?…][„“”"»']?$/, "");
-      return `${cutWord(body, SOFT)}…`;
+      return ellipsis(cutWord(body, SOFT));
     }
     if (out.length < MIN) {
       const rest = after(t, out);
@@ -87,7 +91,7 @@ export function clipPerex(text: string): string {
   }
 
   if (t.length <= SOFT) return dropWeak(t);
-  return `${cutWord(t, SOFT)}…`;
+  return ellipsis(cutWord(t, SOFT));
 }
 
 export function formatDate(iso?: string) {
