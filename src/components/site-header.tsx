@@ -36,12 +36,11 @@ const DESKTOP_LINKS = [
   { label: "Články", to: "/clanky" as const },
   { label: "Antisemitismus", to: "/antisemitismus" as const },
   { label: "O nás", to: "/o-nas" as const },
-  { label: "E-shop", to: "/eshop" as const },
+  { label: "Ptejte se AI", to: "/ptejte-se-ai" as const },
 ];
 
 const MENU_LINKS = [
   ...DESKTOP_LINKS,
-  { label: "Ptejte se AI", to: "/ptejte-se-ai" as const },
   { label: "Nahlásit incident", to: "/nahlasit-incident" as const },
   { label: "Podpořte nás", to: "/podporte-nas" as const },
 ];
