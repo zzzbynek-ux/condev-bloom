@@ -11,6 +11,10 @@ import { ARTICLE_SECTIONS, CLANKY_FILTERS, HERO_BANNER, KAMPAN_SLIDES, KONRAD, V
 import { heroSrcSet, heroWebpSrcSet, heroLcpPreload, prefetchHero, HERO_SIZES, webpExists } from "@/lib/img";
 import { csNbsp } from "@/lib/typo";
 
+// Přepínač sekcí „Tydýt týdne“ a „Incidenty“ vedle sebe na homepage.
+// Pro jejich návrat stačí nastavit true.
+const SHOW_TYDYT_A_INCIDENTY = false;
+
 export const Route = createFileRoute("/")({
   head: () => {
     const first = HERO_BANNER[0]!.image;
@@ -480,9 +484,10 @@ function Index() {
           </div>
         </section>
 
-        {/* Tydýt týdne + Dokumentujeme */}
-        <section className="section-band">
-          <div className="home-flow mx-auto max-w-[88rem] px-5 md:px-6">
+        {/* Tydýt týdne + Dokumentujeme (skryto přes SHOW_TYDYT_A_INCIDENTY) */}
+        {SHOW_TYDYT_A_INCIDENTY && (
+          <section className="section-band">
+            <div className="home-flow mx-auto max-w-[88rem] px-5 md:px-6">
               <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2 lg:gap-6">
                 {/* Tydýt */}
                 <div className="flex h-full min-h-0 flex-col">
@@ -513,12 +518,17 @@ function Index() {
                           </span>
                         </div>
                         <h3 className="mt-2 font-display text-lg font-bold leading-snug text-navy-900">
-                          <Link to="/clanky" search={{ filtr: "tydyt" }} className="group-hover:underline">
+                          <Link
+                            to="/clanky"
+                            search={{ filtr: "tydyt" }}
+                            className="group-hover:underline"
+                          >
                             Konrad Stavridis
                           </Link>
                         </h3>
                         <p className="mt-1.5 text-[0.95rem] leading-[1.55] text-muted-foreground">
-                          Tento týden vysvětluje, proč se o Izraeli mluví jinak než o jiných státech.
+                          Tento týden vysvětluje, proč se o Izraeli mluví jinak než o jiných
+                          státech.
                         </p>
                       </div>
                       <div className="tydyt-actions flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -578,7 +588,9 @@ function Index() {
                                 {d.date}
                               </span>
                             </div>
-                            <p className="text-[0.95rem] leading-[1.55] text-muted-foreground">{d.text}</p>
+                            <p className="text-[0.95rem] leading-[1.55] text-muted-foreground">
+                              {d.text}
+                            </p>
                           </div>
                         ))}
                       </div>
@@ -600,8 +612,9 @@ function Index() {
                   </article>
                 </div>
               </div>
-          </div>
-        </section>
+            </div>
+          </section>
+        )}
 
         <KampanStrip />
 
