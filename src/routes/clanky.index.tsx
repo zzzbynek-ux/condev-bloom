@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
 import { MoreButton } from "@/components/more-button";
-import { ARTICLE_SECTIONS, CLANKY_FILTERS, allArticles, KONRAD } from "@/lib/content";
+import { ARTICLE_SECTIONS, CLANKY_FILTERS, allArticles } from "@/lib/content";
 import { articlesIn, articlesByTag, formatDate, shuffle, clipPerex, IMPORTED } from "@/lib/articles";
 
 export const Route = createFileRoute("/clanky/")({
@@ -43,6 +43,9 @@ const ALL_ARTICLES: Article[] = allArticles().map((item) => ({
   section: ARTICLE_SECTIONS.find((g) => g.id !== "nove" && g.id !== "vse" && g.items.some((i) => i.slug === item.slug))?.label ?? "Nové",
 }));
 
+/** Záložky ve filtru; Tydýt týdne se v nich nezobrazuje (články zůstávají ve „Všechny texty“) */
+const TABS = CLANKY_FILTERS.filter((f) => f.id !== "tydyt");
+
 const DOPORUCUJEME = shuffle(articlesIn("doporucujeme"));
 
 function toCard(a: {
@@ -66,14 +69,16 @@ function toCard(a: {
 }
 
 function Clanky() {
-  const { tag, filtr } = Route.useSearch();
+  const { tag, filtr: filtrParam } = Route.useSearch();
+  // Starý odkaz ?filtr=tydyt otevře výchozí záložku „Nové“
+  const filtr = filtrParam === "tydyt" ? undefined : filtrParam;
   const navigate = Route.useNavigate();
   const [visible, setVisible] = useState(12);
 
-  const isTagFilter = Boolean(tag) && !CLANKY_FILTERS.some((f) => f.label === tag);
+  const isTagFilter = Boolean(tag) && !TABS.some((f) => f.label === tag);
   const active = isTagFilter
     ? "Všechny texty"
-    : (CLANKY_FILTERS.find((f) => f.id === (filtr ?? "nove"))?.label ?? "Nové");
+    : (TABS.find((f) => f.id === (filtr ?? "nove"))?.label ?? "Nové");
 
   useEffect(() => setVisible(12), [active, tag, filtr]);
 
@@ -92,11 +97,6 @@ function Clanky() {
     }
     if (filtr === "sloupky") {
       return IMPORTED.filter((a) => a.author?.kind === "column").map((a) => toCard(a, active));
-    }
-    if (filtr === "tydyt") {
-      const fromData = articlesIn("tydyt").map((a) => toCard(a, active));
-      if (fromData.length > 0) return fromData;
-      return [toCard(KONRAD, active)];
     }
     return articlesIn(filtr).map((a) => toCard(a, active));
   })();
@@ -118,7 +118,7 @@ function Clanky() {
           aria-label="Filtrovat články"
           className="clanky-tabs mt-8 flex flex-nowrap overflow-x-auto border-b border-border pb-0 lg:flex-wrap lg:overflow-visible"
         >
-          {CLANKY_FILTERS.map((f) => {
+          {TABS.map((f) => {
             const isActive = active === f.label;
             const search = f.id === "nove" ? {} : { filtr: f.id };
             const href = f.id === "nove" ? "/clanky" : `/clanky?filtr=${f.id}`;
