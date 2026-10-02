@@ -43,8 +43,8 @@ const ALL_ARTICLES: Article[] = allArticles().map((item) => ({
   section: ARTICLE_SECTIONS.find((g) => g.id !== "nove" && g.id !== "vse" && g.items.some((i) => i.slug === item.slug))?.label ?? "Nové",
 }));
 
-/** Záložky ve filtru; Tydýt týdne se v nich nezobrazuje (články zůstávají ve „Všechny texty“) */
-const TABS = CLANKY_FILTERS.filter((f) => f.id !== "tydyt");
+/** Záložky ve filtru; Tydýt týdne v nich není (články zůstávají ve „Všechny texty“) */
+const TABS = CLANKY_FILTERS;
 
 const DOPORUCUJEME = shuffle(articlesIn("doporucujeme"));
 
