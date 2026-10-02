@@ -36,3 +36,16 @@ src/lib/app-data
 startup.sh
 CLAUDE.md
 .lovable
+
+# Zastaralé a nepoužité soubory
+src/data/articles.json
+public/images/hero/manifest.jpg
+public/images/hero/manifest.webp
+public/images/hero/manifest@2x.jpg
+public/images/hero/manifest@2x.webp
+public/images/hero/slogany.jpg
+public/images/hero/slogany.webp
+public/images/hero/vlajka.svg
+public/images/logo-bublina-modra.png
+public/images/logo-jednim-hlasem.png
+public/images/logo-jednim-hlasem-1x.png
