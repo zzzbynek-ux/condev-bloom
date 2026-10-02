@@ -296,7 +296,6 @@ export const CLANKY_FILTERS = [
   { id: "cesi-a-izrael", label: "Češi a Izrael" },
   { id: "studie", label: "Studie a analýzy" },
   { id: "sloupky", label: "Sloupky" },
-  { id: "tydyt", label: "Tydýt týdne" },
   { id: "vse", label: "Všechny texty" },
 ] as const;
 
