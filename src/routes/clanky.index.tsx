@@ -1,10 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
-import { MoreButton } from "@/components/more-button";
+import { Pagination, clampPage } from "@/components/pagination";
 import { ARTICLE_SECTIONS, CLANKY_FILTERS, allArticles } from "@/lib/content";
 import { articlesIn, articlesByTag, formatDate, shuffle, clipPerex, IMPORTED } from "@/lib/articles";
 
@@ -46,6 +46,9 @@ const ALL_ARTICLES: Article[] = allArticles().map((item) => ({
 /** Záložky ve filtru; Tydýt týdne v nich není (články zůstávají ve „Všechny texty“) */
 const TABS = CLANKY_FILTERS;
 
+/** Počet článků na stránku (dřív prvních 12 a pak +9 po kliknutí) */
+const PAGE_SIZE = 12;
+
 const DOPORUCUJEME = shuffle(articlesIn("doporucujeme"));
 
 function toCard(a: {
@@ -69,18 +72,16 @@ function toCard(a: {
 }
 
 function Clanky() {
-  const { tag, filtr: filtrParam } = Route.useSearch();
+  const { tag, filtr: filtrParam, strana } = Route.useSearch();
   // Starý odkaz ?filtr=tydyt otevře výchozí záložku „Nové“
   const filtr = filtrParam === "tydyt" ? undefined : filtrParam;
   const navigate = Route.useNavigate();
-  const [visible, setVisible] = useState(12);
+  const listRef = useRef<HTMLDivElement>(null);
 
   const isTagFilter = Boolean(tag) && !TABS.some((f) => f.label === tag);
   const active = isTagFilter
     ? "Všechny texty"
     : (TABS.find((f) => f.id === (filtr ?? "nove"))?.label ?? "Nové");
-
-  useEffect(() => setVisible(12), [active, tag, filtr]);
 
   const articles: Article[] = (() => {
     if (isTagFilter) {
@@ -101,7 +102,17 @@ function Clanky() {
     return articlesIn(filtr).map((a) => toCard(a, active));
   })();
 
-  const remaining = articles.length - visible;
+  const totalPages = Math.max(1, Math.ceil(articles.length / PAGE_SIZE));
+  const page = clampPage(strana, totalPages);
+  const pageArticles = articles.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  // Změna stránky posune okno na začátek seznamu (první vykreslení se přeskočí)
+  const lastPage = useRef(page);
+  useEffect(() => {
+    if (lastPage.current === page) return;
+    lastPage.current = page;
+    listRef.current?.scrollIntoView({ block: "start" });
+  }, [page]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -154,8 +165,8 @@ function Clanky() {
         ) : null}
 
         {/* Mřížka článků */}
-        <div className="mt-10 grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {articles.slice(0, visible).map((a, idx) => (
+        <div ref={listRef} className="mt-10 grid scroll-mt-24 items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {pageArticles.map((a, idx) => (
             <ArticleCard
               key={`${a.slug}-${idx}`}
               image={a.image}
@@ -172,13 +183,7 @@ function Clanky() {
           <p className="mt-10 text-muted-foreground">Pro tento filtr zatím žádné texty nemáme.</p>
         ) : null}
 
-        {/* Tlačítko pod mřížkou — přibere další články stejného filtru / tagu */}
-        {remaining > 0 && (
-          <MoreButton
-            label="Další texty"
-            onClick={() => setVisible((v) => v + Math.min(9, remaining))}
-          />
-        )}
+        <Pagination page={page} totalPages={totalPages} totalItems={articles.length} pageSize={PAGE_SIZE} />
       </main>
       <SiteFooter />
     </div>

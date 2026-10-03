@@ -4,6 +4,7 @@ import { z } from "zod";
 const searchSchema = z.object({
   tag: z.string().optional(),
   filtr: z.string().optional(),
+  strana: z.coerce.number().optional().catch(undefined),
 });
 
 export const Route = createFileRoute("/clanky")({
