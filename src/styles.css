@@ -2350,13 +2350,6 @@ button.pager-btn {
 .pager-compact {
   display: none;
 }
-.pager-info {
-  margin: 0.9rem 0 0;
-  text-align: left;
-  font-size: 13px;
-  line-height: 1.4;
-  color: #5B6678;
-}
 @media (max-width: 767px) {
   .pager-row {
     flex-wrap: nowrap;

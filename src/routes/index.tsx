@@ -384,13 +384,11 @@ function ArticleTabs() {
         <Pagination
           page={current}
           totalPages={totalPages}
-          totalItems={total}
-          pageSize={ARTICLE_PAGE_SIZE}
           onPageChange={changePage}
         />
 
         {total > ARTICLE_PAGE_SIZE && (
-          <p className="mt-4 text-sm">
+          <p className="mt-6 text-sm">
             <Link
               to="/clanky"
               search={{ filtr: group.id }}

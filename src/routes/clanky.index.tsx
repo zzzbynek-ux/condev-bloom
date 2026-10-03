@@ -183,7 +183,7 @@ function Clanky() {
           <p className="mt-10 text-muted-foreground">Pro tento filtr zatím žádné texty nemáme.</p>
         ) : null}
 
-        <Pagination page={page} totalPages={totalPages} totalItems={articles.length} pageSize={PAGE_SIZE} />
+        <Pagination page={page} totalPages={totalPages} />
       </main>
       <SiteFooter />
     </div>
