@@ -920,20 +920,35 @@
 
 /* Mobil (do 767 px): tlačítka pod sebou na celou šířku */
 @media (max-width: 767px) {
+  .tema-strip.tema-strip {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
   .tema-buttons {
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: stretch;
-    gap: 12px;
+    gap: 10px;
     width: 100%;
   }
   .tema-buttons > a,
   .tema-buttons > button {
     box-sizing: border-box;
     width: 100%;
+    height: 48px;
     min-height: 48px;
+    padding-top: 0;
+    padding-bottom: 0;
+    gap: 6px;
     justify-content: center;
     text-align: center;
+    font-size: 0.9375rem;
+    line-height: 1.25;
+  }
+  .tema-buttons > a svg,
+  .tema-buttons > button svg {
+    width: 14px;
+    height: 14px;
   }
 }
 
