@@ -441,7 +441,7 @@ function Index() {
               {SHOW_PTEJTE_SE_AI ? (
                 <Link
                   to="/ptejte-se-ai"
-                  className="tema-btn-ice inline-flex shrink-0 items-center gap-2 rounded-full bg-primary-foreground px-6 py-3 text-sm font-semibold text-primary transition"
+                  className="tema-btn-outline inline-flex shrink-0 items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition"
                 >
                   Ptejte se AI
                   <ArrowRight className="h-4 w-4" />
