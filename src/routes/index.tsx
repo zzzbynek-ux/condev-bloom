@@ -7,9 +7,10 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
 import { MoreButton } from "@/components/more-button";
-import { ARTICLE_SECTIONS, CLANKY_FILTERS, HERO_BANNER, KAMPAN_SLIDES, KONRAD, VYBER_REDAKCE } from "@/lib/content";
+import { ARTICLE_SECTIONS, CLANKY_FILTERS, allArticles, HERO_BANNER, KAMPAN_SLIDES, KONRAD, VYBER_REDAKCE } from "@/lib/content";
 import { heroSrcSet, heroWebpSrcSet, heroLcpPreload, prefetchHero, HERO_SIZES, webpExists } from "@/lib/img";
-import { csNbsp } from "@/lib/typo";
+import { csNbsp, csTextCount } from "@/lib/typo";
+import { articlesIn } from "@/lib/articles";
 import { SHOW_PTEJTE_SE_AI } from "@/lib/feature-flags";
 
 // Přepínač sekcí „Tydýt týdne“ a „Incidenty“ vedle sebe na homepage.
@@ -290,6 +291,8 @@ function ArticleTabs() {
   const [active, setActive] = useState<(typeof CLANKY_FILTERS)[number]["id"]>("nove");
   const group = ARTICLE_SECTIONS.find((g) => g.id === active) ?? ARTICLE_SECTIONS[0]!;
   const items = group.items.slice(0, 6);
+  // Stejný počet, jaký čtenář uvidí na /clanky?filtr=<rubrika>
+  const total = group.id === "vse" ? allArticles().length : articlesIn(group.id).length;
 
   return (
     <section>
@@ -333,10 +336,12 @@ function ArticleTabs() {
           ))}
         </div>
 
-        <MoreButton
-          label="Další texty"
-          search={{ filtr: group.id }}
-        />
+        {total > 6 && (
+          <MoreButton
+            label={csNbsp(`Všech ${total}\u00A0${csTextCount(total)} v rubrice`)}
+            search={{ filtr: group.id }}
+          />
+        )}
       </div>
     </section>
   );
