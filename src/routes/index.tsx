@@ -293,7 +293,7 @@ function ArticleTabs() {
 
   return (
     <section>
-      <div className="home-flow home-flow--last mx-auto max-w-[88rem] px-5 md:px-6">
+      <div className="home-flow mx-auto max-w-[88rem] px-5 md:px-6">
           <h2 className="home-section-title">
             Články
           </h2>
@@ -354,7 +354,7 @@ function KampanStrip() {
 
   return (
     <section className="kampan-strip" aria-label="Skládačka lží">
-      <div className="home-flow mx-auto max-w-[88rem] px-5 md:px-6">
+      <div className="home-flow home-flow--last mx-auto max-w-[88rem] px-5 md:px-6">
         <p className="kicker text-primary">Partnerství</p>
         <h2 className="home-section-title">Skládačka lží</h2>
         <div className="kampan-card mt-4">
@@ -619,10 +619,11 @@ function Index() {
           </section>
         )}
 
-        <KampanStrip />
-
         {/* Sekce článků — záložky ve stylu Visegrad24 */}
         <ArticleTabs />
+
+        {/* Kampaň Gaza genolie: úplně dole, těsně nad patičkou */}
+        <KampanStrip />
 
 
 
