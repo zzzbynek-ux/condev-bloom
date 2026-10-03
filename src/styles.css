@@ -2314,6 +2314,29 @@ button.pager-btn {
   color: #5B6678;
   cursor: not-allowed;
 }
+/* Šipky Předchozí/Další: aktivní modrá výplň a bílá šipka, neaktivní světle modrá a šedomodrá */
+.pager-step {
+  gap: 0.4rem;
+  background: #0038B8;
+  color: #fff;
+}
+.pager-step[aria-disabled="true"] {
+  background: var(--accent-soft, #E8F1FF);
+  color: #5B6678;
+}
+.pager-icon {
+  display: block;
+  flex: none;
+  width: 22px;
+  height: 22px;
+}
+@media (hover: hover) {
+  a.pager-btn.pager-step:hover,
+  button.pager-btn.pager-step:hover {
+    background: #002d96;
+    color: #fff;
+  }
+}
 .pager-btn:focus-visible {
   outline: 2px solid var(--accent-blue, #0038B8);
   outline-offset: 2px;
@@ -2347,10 +2370,11 @@ button.pager-btn {
     display: none;
   }
   .pager-step {
+    width: 3rem;
+    height: 3rem;
     min-width: 3rem;
     min-height: 3rem;
     padding: 0;
-    font-size: 24px;
   }
   .pager-compact {
     display: block;
