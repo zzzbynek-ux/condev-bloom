@@ -2110,39 +2110,6 @@ a.kampan-card {
 .donate-stats b { display: block; font-size: 1.7rem; line-height: 1; }
 .donate-stats span { display: block; margin-top: 0.35rem; font-size: 13px; color: #d5e4ff; }
 
-.donate-why-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-  margin-top: 1.3rem;
-}
-.donate-why-grid article {
-  background: #fff;
-  border-radius: 0.9rem;
-  padding: 1.25rem 1.2rem 1.3rem;
-  border: 1px solid rgba(0, 56, 184, 0.14);
-}
-.donate-ico {
-  width: 2.4rem;
-  height: 2.4rem;
-  border-radius: 0.7rem;
-  display: grid;
-  place-items: center;
-  background: #E8F1FF;
-  color: #0038B8;
-}
-.donate-why-grid h3 {
-  margin: 0.8rem 0 0;
-  font-size: 1.1rem;
-  color: #0038B8;
-}
-.donate-why-grid p {
-  margin: 0.4rem 0 0;
-  color: #4b5870;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
 .donate-bank { scroll-margin-top: 5.5rem; }
 .donate-bank-grid {
   display: grid;
@@ -2285,8 +2252,6 @@ a.kampan-card {
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
   .donate-stats > div:last-child { border-bottom: 0; }
-  .donate-why { order: 4; }
-  .donate-why-grid { grid-template-columns: 1fr; }
   .donate-note { order: 6; }
   .donate-contact { order: 7; }
 

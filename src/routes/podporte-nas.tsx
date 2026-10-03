@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import QRCode from "qrcode";
-import { Check, Copy, Flag, PenLine, Target } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -256,36 +256,6 @@ function PodporteNas() {
           <div>
             <b className="font-display">0 Kč</b>
             <span>z grantů, státních peněz a inzerce. Jen vy.</span>
-          </div>
-        </section>
-
-        <section className="donate-why">
-          <div className="donate-wrap">
-            <p className="donate-sec-k">Kam dar směřuje</p>
-            <h2 className="donate-sec-h font-display">Tři věci, které vaše peníze drží</h2>
-            <div className="donate-why-grid">
-              <article>
-                <div className="donate-ico" aria-hidden="true">
-                  <PenLine className="size-5" />
-                </div>
-                <h3 className="font-display">Analýzy, ne slogany</h3>
-                <p>Texty, které vyvracejí lži dřív, než se stanou „obecně známou pravdou“.</p>
-              </article>
-              <article>
-                <div className="donate-ico" aria-hidden="true">
-                  <Target className="size-5" />
-                </div>
-                <h3 className="font-display">Dosah faktů</h3>
-                <p>Aby pravda nevisela jen na webu — ale dostala se tam, kde se láme názor.</p>
-              </article>
-              <article>
-                <div className="donate-ico" aria-hidden="true">
-                  <Flag className="size-5" />
-                </div>
-                <h3 className="font-display">Nezávislost</h3>
-                <p>Žádný sponzor nám nediktuje tón. Proto musí platit komunita.</p>
-              </article>
-            </div>
           </div>
         </section>
 
