@@ -2383,3 +2383,17 @@ button.pager-btn {
     transition: none;
   }
 }
+
+/* Cíl posunu po změně stránky: pod lepkavou hlavičkou (mobil 48 px, od md modrý pruh 68 px + menu 48 px + linka 1 px) a malá rezerva */
+:root {
+  --site-header-h: 3rem;
+  --scroll-gap: 1.25rem;
+}
+@media (min-width: 768px) {
+  :root {
+    --site-header-h: 7.3125rem;
+  }
+}
+.scroll-below-header {
+  scroll-margin-top: calc(var(--site-header-h) + var(--scroll-gap));
+}

@@ -319,9 +319,20 @@ function ArticleTabs() {
 
   const changePage = (n: number) => {
     setPage(n);
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    sectionRef.current?.scrollIntoView({ block: "start", behavior: reduce ? "auto" : "smooth" });
+    scrollAfterRender.current = true;
   };
+
+  // Posun na začátek sekce až po vykreslení nové stránky, ne při přepnutí rubriky
+  const scrollAfterRender = useRef(false);
+  useEffect(() => {
+    if (!scrollAfterRender.current) return;
+    scrollAfterRender.current = false;
+    const id = requestAnimationFrame(() => {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      sectionRef.current?.scrollIntoView({ block: "start", behavior: reduce ? "auto" : "smooth" });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [current]);
 
   // Když po klepnutí zmizí tlačítko, na kterém byl fokus (první/poslední stránka), přesune se na seznam karet
   const lastPage = useRef(current);
@@ -335,7 +346,7 @@ function ArticleTabs() {
   }, [current]);
 
   return (
-    <section ref={sectionRef} className="scroll-mt-24">
+    <section ref={sectionRef} className="scroll-below-header">
       <div className="home-flow mx-auto max-w-[88rem] px-5 md:px-6">
           <h2 className="home-section-title">
             Články
