@@ -2,6 +2,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Menu, Search, X } from "lucide-react";
 
+import { SHOW_PTEJTE_SE_AI } from "@/lib/feature-flags";
 import type { SearchResult } from "@/lib/search";
 
 function loadSearch() {
@@ -37,12 +38,13 @@ const DESKTOP_LINKS = [
   { label: "Antisemitismus", to: "/antisemitismus" as const },
   { label: "O nás", to: "/o-nas" as const },
   { label: "Zapojte se", to: "/zapojte-se" as const },
-  { label: "Ptejte se AI", to: "/ptejte-se-ai" as const },
+  ...(SHOW_PTEJTE_SE_AI ? [{ label: "Ptejte se AI", to: "/ptejte-se-ai" as const }] : []),
 ];
 
 const MENU_LINKS = [
-  ...DESKTOP_LINKS,
+  ...DESKTOP_LINKS.slice(0, 2),
   { label: "Nahlásit incident", to: "/nahlasit-incident" as const },
+  ...DESKTOP_LINKS.slice(2),
   { label: "Podpořte nás", to: "/podporte-nas" as const },
 ];
 

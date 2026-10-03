@@ -10,6 +10,7 @@ import { MoreButton } from "@/components/more-button";
 import { ARTICLE_SECTIONS, CLANKY_FILTERS, HERO_BANNER, KAMPAN_SLIDES, KONRAD, VYBER_REDAKCE } from "@/lib/content";
 import { heroSrcSet, heroWebpSrcSet, heroLcpPreload, prefetchHero, HERO_SIZES, webpExists } from "@/lib/img";
 import { csNbsp } from "@/lib/typo";
+import { SHOW_PTEJTE_SE_AI } from "@/lib/feature-flags";
 
 // Přepínač sekcí „Tydýt týdne“ a „Incidenty“ vedle sebe na homepage.
 // Pro jejich návrat stačí nastavit true.
@@ -437,13 +438,15 @@ function Index() {
                 Číst k tématu
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link
-                to="/ptejte-se-ai"
-                className="tema-btn-ice inline-flex shrink-0 items-center gap-2 rounded-full bg-primary-foreground px-6 py-3 text-sm font-semibold text-primary transition"
-              >
-                Ptejte se AI
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              {SHOW_PTEJTE_SE_AI ? (
+                <Link
+                  to="/ptejte-se-ai"
+                  className="tema-btn-ice inline-flex shrink-0 items-center gap-2 rounded-full bg-primary-foreground px-6 py-3 text-sm font-semibold text-primary transition"
+                >
+                  Ptejte se AI
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              ) : null}
               <Link
                 to="/nahlasit-incident"
                 className="tema-btn-incident inline-flex shrink-0 items-center gap-2 rounded-full bg-destructive px-6 py-3 text-sm font-semibold text-white transition"

@@ -4,6 +4,7 @@ import { ArrowRight, Clock, Mail } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { SHOW_PTEJTE_SE_AI } from "@/lib/feature-flags";
 
 export const Route = createFileRoute("/kontakt")({
   head: () => ({
@@ -104,16 +105,18 @@ function KontaktSidebar() {
         </div>
       </div>
 
-      <div className="rounded-xl bg-muted/40 px-4 py-4">
-        <p className="text-[13px] text-muted-foreground">Máte otázku k obsahu?</p>
-        <Link
-          to="/ptejte-se-ai"
-          className="mt-1 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
-        >
-          Zkuste Ptejte se AI
-          <ArrowRight className="size-3.5" aria-hidden />
-        </Link>
-      </div>
+      {SHOW_PTEJTE_SE_AI ? (
+        <div className="rounded-xl bg-muted/40 px-4 py-4">
+          <p className="text-[13px] text-muted-foreground">Máte otázku k obsahu?</p>
+          <Link
+            to="/ptejte-se-ai"
+            className="mt-1 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+          >
+            Zkuste Ptejte se AI
+            <ArrowRight className="size-3.5" aria-hidden />
+          </Link>
+        </div>
+      ) : null}
     </aside>
   );
 }
