@@ -703,6 +703,13 @@
   }
 }
 
+/* Výběr redakce: na mobilu (do 767 px) jen dva články, třetí se skryje */
+@media (max-width: 767px) {
+  .vyber-grid > :nth-child(n + 3) {
+    display: none;
+  }
+}
+
 /* ===== Mobil a tablet (do 1023 px) — desktop zůstává beze změny ===== */
 @media (max-width: 1023px) {
   /* 5) Sticky header: neprůhledný, nad obsahem */
