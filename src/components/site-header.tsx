@@ -194,13 +194,12 @@ export function SiteHeader() {
                 height={1103}
                 className="h-12 w-auto lg:h-[3.25rem]"
               />
-              <img
-                src="/images/logo-fakta.png"
-                alt=""
-                width={4230}
-                height={301}
-                className="mb-[calc(173/1103*3rem)] h-[calc(0.22*2.25rem)] w-auto lg:mb-[calc(173/1103*3.25rem)] lg:h-[calc(0.22*2.5rem)]"
-              />
+              <span
+                aria-hidden="true"
+                className="font-display mb-[calc(173/1103*3rem)] translate-y-[0.17em] whitespace-nowrap text-[0.75rem] font-bold uppercase leading-none tracking-[0.08em] text-white lg:mb-[calc(173/1103*3.25rem)] lg:text-[0.8333rem]"
+              >
+                Pro Izrael
+              </span>
             </span>
           </Link>
 
