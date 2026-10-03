@@ -111,7 +111,12 @@ function Clanky() {
   useEffect(() => {
     if (lastPage.current === page) return;
     lastPage.current = page;
-    listRef.current?.scrollIntoView({ block: "start" });
+    // Až po vykreslení nové stránky, aby se posun nespočítal ze starého rozložení
+    const id = requestAnimationFrame(() => {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      listRef.current?.scrollIntoView({ block: "start", behavior: reduce ? "auto" : "smooth" });
+    });
+    return () => cancelAnimationFrame(id);
   }, [page]);
 
   return (
@@ -165,7 +170,7 @@ function Clanky() {
         ) : null}
 
         {/* Mřížka článků */}
-        <div ref={listRef} className="mt-10 grid scroll-mt-24 items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div ref={listRef} className="mt-10 grid scroll-below-header items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
           {pageArticles.map((a, idx) => (
             <ArticleCard
               key={`${a.slug}-${idx}`}
