@@ -3,10 +3,16 @@ import webpManifest from "./webp-manifest.json";
 /** Public paths of WebP files that actually exist on disk (generated snapshot). */
 const WEBP = new Set(webpManifest as string[]);
 
+/** Šířky zdrojových souborů hero; výchozí je 1235 a 2470 px, v2 fotky mají 1920 a 3840 px. */
+function heroWidths(src: string): [number, number] {
+  return src.includes("-v2.") ? [1920, 3840] : [1235, 2470];
+}
+
 /** Retina srcset for hero JPEGs that have a matching @2x file. */
 export function heroSrcSet(src: string): string | undefined {
   if (!src.startsWith("/images/hero/") || !src.endsWith(".jpg") || src.includes("@2x")) return undefined;
-  return `${src}?v=dr 1235w, ${src.replace(/\.jpg$/, "@2x.jpg")}?v=dr 2470w`;
+  const [w1, w2] = heroWidths(src);
+  return `${src}?v=dr ${w1}w, ${src.replace(/\.jpg$/, "@2x.jpg")}?v=dr ${w2}w`;
 }
 
 export const HERO_SIZES = "100vw";
@@ -32,7 +38,8 @@ export function heroWebpSrcSet(src: string): string | undefined {
   if (!src.startsWith("/images/hero/") || !src.endsWith(".jpg") || src.includes("@2x")) return undefined;
   const w1 = src.replace(/\.jpg$/, ".webp");
   const w2 = src.replace(/\.jpg$/, "@2x.webp");
-  if (webpExists(w1) && webpExists(w2)) return `${w1}?v=dr 1235w, ${w2}?v=dr 2470w`;
+  const [d1, d2] = heroWidths(src);
+  if (webpExists(w1) && webpExists(w2)) return `${w1}?v=dr ${d1}w, ${w2}?v=dr ${d2}w`;
   if (webpExists(w1)) return `${w1}?v=dr`;
   return undefined;
 }

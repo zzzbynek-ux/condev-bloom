@@ -215,7 +215,7 @@ export type FeedGroup = {
 
 
 export const HERO_BANNER = [
-  { kicker: "Jedním hlasem", title: "Do debaty o Izraeli vracíme fakta, kontext a klidný tón.", text: "", image: "/images/hero/o-nas.jpg", focus: "64% 46%", focusMobile: "78% 48%", slug: "o-nas", overlay: "default" },
+  { kicker: "Jedním hlasem", title: "Do debaty o Izraeli vracíme fakta, kontext a klidný tón.", text: "", image: "/images/hero/o-nas-v2.jpg", focus: "64% 52%", focusMobile: "60% 50%", slug: "o-nas", overlay: "default" },
   { kicker: "Proč to děláme", title: "Malý stát. Globální přínos.", text: "Izrael není jen spojencem Západu, je jeho součástí. Přináší světu víc, než by odpovídalo jeho velikosti — od technologií přes medicínu až po humanitární pomoc.", image: "/images/hero/maly-stat.jpg", focus: "72% 46%", slug: "izrael-haji-vic-nez-jen-vlastni-hranice", overlay: "default" },
   { kicker: "Antisemitismus", title: "Antisemitismus 2.0", text: "Nový antisemitismus mluví jazykem solidarity a historické křivdy. Nacistickou pásku nahradila kefíja — ale posedlost Židy zůstala.", image: "/images/hero/antisemitismus.jpg", focus: "78% 48%", focusMobile: "88% 48%", slug: "novy-antisemitismus-o-palestinu-tady-vubec-nejde", overlay: "default" },
   { kicker: "Ideologie", title: "Rudo-zelená aliance", text: "Útoky na Židy rostou z ideologického spojenectví progresivní levice a islamismu, jež pod pláštíkem lidských práv legitimizuje násilí.", image: "/images/hero/rudo-zelena.jpg", focus: "70% 50%", slug: "rudo-zelena-aliance", overlay: "default" },
