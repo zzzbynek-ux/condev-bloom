@@ -6,8 +6,6 @@ type Props = {
   /** Aktuální stránka (už ošetřená na rozsah 1 až totalPages). */
   page: number;
   totalPages: number;
-  totalItems: number;
-  pageSize: number;
   /** Trasa, na které se stránkuje (zachová ostatní vyhledávací parametry). */
   to?: "/clanky";
   /** Když je zadaný, stránky jsou tlačítka bez odkazů a stav drží volající (nemění adresu). */
@@ -44,11 +42,9 @@ export function clampPage(raw: unknown, totalPages: number): number {
   return Math.min(n, Math.max(1, totalPages));
 }
 
-export function Pagination({ page, totalPages, totalItems, pageSize, to = "/clanky", onPageChange }: Props) {
+export function Pagination({ page, totalPages, to = "/clanky", onPageChange }: Props) {
   if (totalPages <= 1) return null;
 
-  const from = (page - 1) * pageSize + 1;
-  const toItem = Math.min(page * pageSize, totalItems);
   const searchFor = (n: number) => (prev: Record<string, unknown>) => ({
     ...prev,
     strana: n === 1 ? undefined : n,
@@ -142,9 +138,9 @@ export function Pagination({ page, totalPages, totalItems, pageSize, to = "/clan
           )}
         </li>
       </ul>
-      <p className="pager-info">
-        Články {from}–{toItem} z {totalItems} · stránka {page} z {totalPages}
-      </p>
+      <span className="sr-only" aria-live="polite">
+        Stránka {page} z {totalPages}
+      </span>
     </nav>
   );
 }
