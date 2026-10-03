@@ -26,3 +26,10 @@ export function csNbsp(text: string): string {
 export function csNbspHtml(html: string): string {
   return html.replace(/<[^>]*>|[^<]+/g, (chunk) => (chunk.startsWith("<") ? chunk : csNbsp(chunk)));
 }
+
+/** Tvar slova „text“ podle počtu: 1 text, 2–4 texty, 5+ textů */
+export function csTextCount(n: number): string {
+  if (n === 1) return "text";
+  if (n >= 2 && n <= 4) return "texty";
+  return "textů";
+}
