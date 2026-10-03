@@ -425,10 +425,10 @@ function KampanStrip() {
   }, [total]);
 
   return (
-    <section className="kampan-strip" aria-label="Skládačka lží">
+    <section className="kampan-strip" aria-label="Lež století">
       <div className="home-flow home-flow--last mx-auto max-w-[88rem] px-5 md:px-6">
         <p className="kicker text-primary">Partnerství</p>
-        <h2 className="home-section-title">Skládačka lží</h2>
+        <h2 className="home-section-title">Lež století</h2>
         <div className="kampan-card mt-4">
           <a
             href={slide.href}
