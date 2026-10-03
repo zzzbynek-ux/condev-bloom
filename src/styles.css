@@ -2292,9 +2292,17 @@ a.kampan-card {
   text-decoration: none;
   transition: background-color 150ms ease, color 150ms ease;
 }
-a.pager-btn:hover {
-  background: var(--ice-hover, #D6E6FC);
-  color: #0038B8;
+button.pager-btn {
+  border: 0;
+  cursor: pointer;
+}
+/* Hover jen u myši; na dotyku by po klepnutí zůstal „přilepený“ a šipky by se lišily */
+@media (hover: hover) {
+  a.pager-btn:hover,
+  button.pager-btn:hover {
+    background: var(--ice-hover, #D6E6FC);
+    color: #0038B8;
+  }
 }
 .pager-btn[aria-current="page"] {
   background: #0038B8;

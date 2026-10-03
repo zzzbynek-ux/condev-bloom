@@ -1,16 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import type * as React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
-import { MoreButton } from "@/components/more-button";
+import { Pagination } from "@/components/pagination";
 import { ARTICLE_SECTIONS, CLANKY_FILTERS, allArticles, HERO_BANNER, KAMPAN_SLIDES, KONRAD, VYBER_REDAKCE } from "@/lib/content";
 import { heroSrcSet, heroWebpSrcSet, heroLcpPreload, prefetchHero, HERO_SIZES, webpExists } from "@/lib/img";
-import { csNbsp, csTextCount } from "@/lib/typo";
-import { articlesIn } from "@/lib/articles";
+import { csNbsp } from "@/lib/typo";
+import { articlesIn, clipPerex, formatDate } from "@/lib/articles";
 import { SHOW_PTEJTE_SE_AI } from "@/lib/feature-flags";
 
 // Přepínač sekcí „Tydýt týdne“ a „Incidenty“ vedle sebe na homepage.
@@ -287,15 +287,55 @@ function SectionHeader({
   );
 }
 
+const ARTICLE_PAGE_SIZE = 6;
+
 function ArticleTabs() {
   const [active, setActive] = useState<(typeof CLANKY_FILTERS)[number]["id"]>("nove");
+  const [page, setPage] = useState(1);
+  const sectionRef = useRef<HTMLElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
   const group = ARTICLE_SECTIONS.find((g) => g.id === active) ?? ARTICLE_SECTIONS[0]!;
-  const items = group.items.slice(0, 6);
-  // Stejný počet, jaký čtenář uvidí na /clanky?filtr=<rubrika>
-  const total = group.id === "vse" ? allArticles().length : articlesIn(group.id).length;
+  // ARTICLE_SECTIONS drží jen prvních 12 textů rubriky; zbytek doplníme ve stejném pořadí,
+  // aby stránkování dosáhlo na všechny texty jako /clanky?filtr=<rubrika>
+  const all = useMemo(() => {
+    if (group.id === "vse") return allArticles();
+    const seen = new Set(group.items.map((i) => i.slug));
+    const rest = articlesIn(group.id)
+      .filter((a) => !seen.has(a.slug))
+      .map((a) => ({
+        slug: a.slug,
+        tag: a.tag,
+        date: formatDate(a.iso),
+        title: a.title,
+        perex: clipPerex(a.perex),
+        image: a.image,
+      }));
+    return [...group.items, ...rest];
+  }, [group]);
+  const total = all.length;
+  const totalPages = Math.max(1, Math.ceil(total / ARTICLE_PAGE_SIZE));
+  const current = Math.min(page, totalPages);
+  const items = all.slice((current - 1) * ARTICLE_PAGE_SIZE, current * ARTICLE_PAGE_SIZE);
+
+  const changePage = (n: number) => {
+    setPage(n);
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    sectionRef.current?.scrollIntoView({ block: "start", behavior: reduce ? "auto" : "smooth" });
+  };
+
+  // Když po klepnutí zmizí tlačítko, na kterém byl fokus (první/poslední stránka), přesune se na seznam karet
+  const lastPage = useRef(current);
+  useEffect(() => {
+    if (lastPage.current === current) return;
+    lastPage.current = current;
+    const el = document.activeElement;
+    if (!el || el === document.body || !document.contains(el)) {
+      listRef.current?.focus({ preventScroll: true });
+    }
+  }, [current]);
 
   return (
-    <section>
+    <section ref={sectionRef} className="scroll-mt-24">
       <div className="home-flow mx-auto max-w-[88rem] px-5 md:px-6">
           <h2 className="home-section-title">
             Články
@@ -311,6 +351,7 @@ function ArticleTabs() {
               type="button"
               onClick={(e) => {
                 setActive(link.id);
+                setPage(1);
                 e.currentTarget.scrollIntoView({ inline: "nearest", block: "nearest", behavior: "smooth" });
               }}
               aria-selected={active === link.id}
@@ -322,7 +363,11 @@ function ArticleTabs() {
           ))}
         </nav>
 
-        <div className="mt-8 grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div
+          ref={listRef}
+          tabIndex={-1}
+          className="mt-8 grid items-stretch gap-6 outline-none md:grid-cols-2 lg:grid-cols-3"
+        >
           {items.map((item, idx) => (
             <ArticleCard
               key={`${group.id}-${item.slug}-${idx}`}
@@ -336,11 +381,24 @@ function ArticleTabs() {
           ))}
         </div>
 
-        {total > 6 && (
-          <MoreButton
-            label={csNbsp(`Všech ${total}\u00A0${csTextCount(total)} v rubrice`)}
-            search={{ filtr: group.id }}
-          />
+        <Pagination
+          page={current}
+          totalPages={totalPages}
+          totalItems={total}
+          pageSize={ARTICLE_PAGE_SIZE}
+          onPageChange={changePage}
+        />
+
+        {total > ARTICLE_PAGE_SIZE && (
+          <p className="mt-4 text-sm">
+            <Link
+              to="/clanky"
+              search={{ filtr: group.id }}
+              className="cta-link text-primary hover:underline"
+            >
+              Všechny texty v rubrice <span aria-hidden="true">→</span>
+            </Link>
+          </p>
         )}
       </div>
     </section>

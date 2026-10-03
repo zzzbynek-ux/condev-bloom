@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 
 type Props = {
@@ -8,7 +9,13 @@ type Props = {
   pageSize: number;
   /** Trasa, na které se stránkuje (zachová ostatní vyhledávací parametry). */
   to?: "/clanky";
+  /** Když je zadaný, stránky jsou tlačítka bez odkazů a stav drží volající (nemění adresu). */
+  onPageChange?: (page: number) => void;
 };
+
+function omitRel<T extends { rel?: string }>({ rel: _rel, ...rest }: T) {
+  return rest;
+}
 
 /** Seznam položek řady: první, poslední, aktuální a jedna na každou stranu, mezery jako „…“. */
 export function pageItems(page: number, totalPages: number): (number | "gap")[] {
@@ -29,7 +36,7 @@ export function clampPage(raw: unknown, totalPages: number): number {
   return Math.min(n, Math.max(1, totalPages));
 }
 
-export function Pagination({ page, totalPages, totalItems, pageSize, to = "/clanky" }: Props) {
+export function Pagination({ page, totalPages, totalItems, pageSize, to = "/clanky", onPageChange }: Props) {
   if (totalPages <= 1) return null;
 
   const from = (page - 1) * pageSize + 1;
@@ -45,6 +52,22 @@ export function Pagination({ page, totalPages, totalItems, pageSize, to = "/clan
     resetScroll: false,
   });
 
+  /** Odkaz na /clanky nebo tlačítko s callbackem, podle režimu. */
+  const control = (
+    n: number,
+    props: { className: string; rel?: string; "aria-label": string; "aria-current"?: "page" | undefined },
+    children: ReactNode,
+  ) =>
+    onPageChange ? (
+      <button type="button" {...omitRel(props)} onClick={() => onPageChange(n)}>
+        {children}
+      </button>
+    ) : (
+      <Link {...link(n)} {...props}>
+        {children}
+      </Link>
+    );
+
   const prevDisabled = page <= 1;
   const nextDisabled = page >= totalPages;
 
@@ -58,10 +81,14 @@ export function Pagination({ page, totalPages, totalItems, pageSize, to = "/clan
               <span className="pager-step-label"> Předchozí</span>
             </span>
           ) : (
-            <Link {...link(page - 1)} rel="prev" className="pager-btn pager-step" aria-label="Předchozí stránka">
-              <span aria-hidden="true">‹</span>
-              <span className="pager-step-label" aria-hidden="true"> Předchozí</span>
-            </Link>
+            control(
+              page - 1,
+              { rel: "prev", className: "pager-btn pager-step", "aria-label": "Předchozí stránka" },
+              <>
+                <span aria-hidden="true">‹</span>
+                <span className="pager-step-label" aria-hidden="true"> Předchozí</span>
+              </>,
+            )
           )}
         </li>
 
@@ -72,14 +99,15 @@ export function Pagination({ page, totalPages, totalItems, pageSize, to = "/clan
             </li>
           ) : (
             <li key={it} className="pager-num">
-              <Link
-                {...link(it)}
-                className="pager-btn"
-                aria-current={it === page ? "page" : undefined}
-                aria-label={`Stránka ${it}`}
-              >
-                {it}
-              </Link>
+              {control(
+                it,
+                {
+                  className: "pager-btn",
+                  "aria-current": it === page ? "page" : undefined,
+                  "aria-label": `Stránka ${it}`,
+                },
+                it,
+              )}
             </li>
           ),
         )}
@@ -95,10 +123,14 @@ export function Pagination({ page, totalPages, totalItems, pageSize, to = "/clan
               <span aria-hidden="true">›</span>
             </span>
           ) : (
-            <Link {...link(page + 1)} rel="next" className="pager-btn pager-step" aria-label="Další stránka">
-              <span className="pager-step-label" aria-hidden="true">Další </span>
-              <span aria-hidden="true">›</span>
-            </Link>
+            control(
+              page + 1,
+              { rel: "next", className: "pager-btn pager-step", "aria-label": "Další stránka" },
+              <>
+                <span className="pager-step-label" aria-hidden="true">Další </span>
+                <span aria-hidden="true">›</span>
+              </>,
+            )
           )}
         </li>
       </ul>
