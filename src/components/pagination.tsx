@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 type Props = {
   /** Aktuální stránka (už ošetřená na rozsah 1 až totalPages). */
@@ -12,6 +13,13 @@ type Props = {
   /** Když je zadaný, stránky jsou tlačítka bez odkazů a stav drží volající (nemění adresu). */
   onPageChange?: (page: number) => void;
 };
+
+const ARROW_PROPS = {
+  className: "pager-icon",
+  size: 22,
+  strokeWidth: 2.5,
+  "aria-hidden": true,
+} as const;
 
 function omitRel<T extends { rel?: string }>({ rel: _rel, ...rest }: T) {
   return rest;
@@ -77,7 +85,7 @@ export function Pagination({ page, totalPages, totalItems, pageSize, to = "/clan
         <li>
           {prevDisabled ? (
             <span className="pager-btn pager-step" aria-disabled="true" role="link">
-              <span aria-hidden="true">‹</span>
+              <ArrowLeft {...ARROW_PROPS} />
               <span className="pager-step-label"> Předchozí</span>
             </span>
           ) : (
@@ -85,7 +93,7 @@ export function Pagination({ page, totalPages, totalItems, pageSize, to = "/clan
               page - 1,
               { rel: "prev", className: "pager-btn pager-step", "aria-label": "Předchozí stránka" },
               <>
-                <span aria-hidden="true">‹</span>
+                <ArrowLeft {...ARROW_PROPS} />
                 <span className="pager-step-label" aria-hidden="true"> Předchozí</span>
               </>,
             )
@@ -120,7 +128,7 @@ export function Pagination({ page, totalPages, totalItems, pageSize, to = "/clan
           {nextDisabled ? (
             <span className="pager-btn pager-step" aria-disabled="true" role="link">
               <span className="pager-step-label">Další </span>
-              <span aria-hidden="true">›</span>
+              <ArrowRight {...ARROW_PROPS} />
             </span>
           ) : (
             control(
@@ -128,7 +136,7 @@ export function Pagination({ page, totalPages, totalItems, pageSize, to = "/clan
               { rel: "next", className: "pager-btn pager-step", "aria-label": "Další stránka" },
               <>
                 <span className="pager-step-label" aria-hidden="true">Další </span>
-                <span aria-hidden="true">›</span>
+                <ArrowRight {...ARROW_PROPS} />
               </>,
             )
           )}
