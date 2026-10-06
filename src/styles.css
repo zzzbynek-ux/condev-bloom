@@ -2933,8 +2933,16 @@ button.pager-btn {
 .hero-frame .hero-section {
   border-radius: 0;
 }
+/* Boční okraj rámečku hero; stejnou hodnotu má horní pruh hlavičky na hlavní stránce, aby logo a tlačítka lícovaly s hranami hero panelu */
+:root {
+  --frame-x: 24px;
+}
 @media (min-width: 768px) {
   .hero-frame {
-    padding: 12px 24px;
+    padding: 12px var(--frame-x);
+  }
+  .hdr-inner--aligned {
+    max-width: none;
+    padding-inline: var(--frame-x);
   }
 }

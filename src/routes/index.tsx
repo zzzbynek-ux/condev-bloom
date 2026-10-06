@@ -534,7 +534,7 @@ function KampanStrip() {
 function Index() {
   return (
     <div className="min-h-screen bg-paper">
-      <SiteHeader />
+      <SiteHeader aligned />
       <main>
         <div className="hero-frame">
           <Hero />
