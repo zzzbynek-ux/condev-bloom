@@ -120,7 +120,13 @@ function Hero() {
   const incoming = i !== painted;
 
   return (
-    <section className={`hero-section relative isolate overflow-hidden bg-navy-900${slide.overlay === "strong" ? " hero-overlay-strong" : ""}`}>
+    <section
+      className={`hero-section relative isolate overflow-hidden bg-navy-900${slide.overlay === "strong" ? " hero-overlay-strong" : ""}`}
+      style={{
+        ["--hero-shade-top" as string]: "shadeMobile" in slide ? slide.shadeMobile : undefined,
+        ["--hero-shade-tablet" as string]: "shadeTablet" in slide ? slide.shadeTablet : undefined,
+      }}
+    >
       <HeroFrame slide={paintedSlide} visible fetchPriority={incoming ? "low" : "high"} />
       {incoming ? (
         <HeroFrame

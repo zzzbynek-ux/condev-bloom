@@ -539,6 +539,13 @@ a.tag--main:focus-visible {
     position: absolute;
     inset: 0;
     background:
+      /* Ztmavení od horní hrany dolů pod text (eyebrow, nadpis, odkaz); síla je per slide v --hero-shade-top (content.ts) */
+      linear-gradient(
+        to bottom,
+        rgba(11, 26, 58, var(--hero-shade-top, 0)) 0%,
+        rgba(11, 26, 58, var(--hero-shade-top, 0)) 34%,
+        transparent 64%
+      ),
       linear-gradient(
         to top,
         rgba(11, 26, 58, 0.78) 0%,
@@ -2851,6 +2858,22 @@ button.pager-btn {
   }
   .hdr-privacy:hover {
     text-decoration: underline;
+  }
+}
+
+/* Hero na tabletu (768 až 1279 px): doplňkové ztmavení zleva pod text, síla per slide v --hero-shade-tablet (content.ts).
+   Desktop (od 1280 px) a slidy bez hodnoty zůstávají beze změny. */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .hero-section .hero-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(11, 26, 58, var(--hero-shade-tablet, 0)) 0%,
+      rgba(11, 26, 58, var(--hero-shade-tablet, 0)) 56%,
+      transparent 88%
+    );
   }
 }
 
