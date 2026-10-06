@@ -367,12 +367,11 @@
   content: "";
   position: absolute;
   left: -1px;
-  top: calc(100% + 1px);
+  top: 100%;
   width: 10px;
   height: 8px;
   background: inherit;
   clip-path: polygon(0 0, 100% 0, 0 100%);
-  pointer-events: none;
 }
 .tag:visited {
   color: #0B1A3A;
@@ -1185,6 +1184,11 @@ a.tag:focus-visible {
 }
 .card-lift:hover .cta-link {
   color: #0038B8;
+}
+/* Dokud myš stojí na tagu (včetně ocásku), karta se nezvedá; mění se jen barva tagu */
+.card-lift:has(a.tag:hover) {
+  transform: none;
+  box-shadow: 0 1px 2px rgba(11, 26, 58, 0.06);
 }
 
 .social-link {
