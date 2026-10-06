@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 
+import { Tag } from "@/components/tag";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
@@ -82,13 +83,15 @@ function ArticlePage() {
       <SiteHeader />
       <main>
         <article className="mx-auto max-w-3xl px-5 py-12 md:px-6">
-          <div className="article-folio md:rounded-2xl md:border md:border-border md:bg-card md:px-10 md:py-10 md:shadow-sm">
+          <div className="article-folio md:rounded-tile md:border md:border-border md:bg-card md:px-10 md:py-10 md:shadow-sm">
             {author.kind === "column" ? (
-              <p className="article-tag article-tag--column rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em]">
+              <Tag variant="column" search={{ tag: article.tag }}>
                 {article.tag}
-              </p>
+              </Tag>
             ) : (
-              <p className="kicker text-primary">{article.tag}</p>
+              <Tag variant="main" search={{ tag: article.tag }}>
+                {article.tag}
+              </Tag>
             )}
             <h1 className="mt-3 font-display text-3xl font-bold text-primary md:text-4xl">{article.title}</h1>
             <p className="article-byline mt-3">
@@ -104,7 +107,7 @@ function ArticlePage() {
                 height={720}
                 sizes={ARTICLE_HERO_SIZES}
                 decoding="async"
-                className="mt-8 aspect-video w-full rounded-xl object-cover"
+                className="mt-8 aspect-video w-full rounded-tile object-cover"
               />
             ) : null}
             <div className="article-body mt-8 text-[17px] leading-relaxed text-foreground" dangerouslySetInnerHTML={{ __html: body }} />
@@ -120,9 +123,9 @@ function ArticlePage() {
             {article.tags.length ? (
               <div className="mt-10 flex flex-wrap gap-2">
                 {article.tags.map((t) => (
-                  <Link key={t} to="/clanky" search={{ tag: t }} className="article-tag rounded-sm px-2 py-1 text-[11px] font-semibold">
+                  <Tag key={t} search={{ tag: t }}>
                     {t}
-                  </Link>
+                  </Tag>
                 ))}
               </div>
             ) : null}

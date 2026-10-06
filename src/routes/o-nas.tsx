@@ -92,7 +92,7 @@ function ONas() {
               {VALUES.map((value) => (
                 <li
                   key={value}
-                  className="onas-value card-lift flex h-full flex-col rounded-2xl border border-border bg-card p-6 text-[0.95rem] leading-[1.55] text-foreground"
+                  className="onas-value card-lift flex h-full flex-col rounded-tile border border-border bg-card p-6 text-[0.95rem] leading-[1.55] text-foreground"
                 >
                   {csNbsp(value)}
                 </li>
@@ -133,7 +133,7 @@ function ONas() {
             <SectionHeader kicker="Aktivity" title={WHAT_WE_DO.title} />
             <ul className="mt-8 grid gap-4 md:grid-cols-2">
               {WHAT_WE_DO.paragraphs.map((paragraph, i) => (
-                <li key={paragraph} className="rounded-2xl border border-border bg-card p-5">
+                <li key={paragraph} className="rounded-tile border border-border bg-card p-5">
                   <p className="kicker text-primary">{DO_VERBS[i]}</p>
                   <p className="mt-2 text-[0.95rem] leading-[1.55] text-foreground">
                     {csNbsp(paragraph)}
@@ -151,7 +151,7 @@ function ONas() {
               {MISSION.paragraphs.map((paragraph) => (
                 <li
                   key={paragraph}
-                  className="onas-value card-lift flex h-full flex-col rounded-2xl border border-border bg-card p-6 text-[0.95rem] leading-[1.55]"
+                  className="onas-value card-lift flex h-full flex-col rounded-tile border border-border bg-card p-6 text-[0.95rem] leading-[1.55]"
                 >
                   {csNbsp(paragraph)}
                 </li>

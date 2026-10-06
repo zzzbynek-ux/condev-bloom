@@ -50,7 +50,7 @@ export function TopicCard({
 
   return (
     <article
-      className={`card-lift flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card ${className ?? ""}`}
+      className={`card-lift flex h-full flex-col overflow-hidden rounded-tile border border-border bg-card ${className ?? ""}`}
     >
       {photo ? (
         webp ? (

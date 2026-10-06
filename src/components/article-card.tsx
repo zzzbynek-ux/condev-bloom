@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { CARD_SIZES, cardSrcSet } from "@/lib/img";
 import { articleBySlug } from "@/lib/articles";
 import { csNbsp } from "@/lib/typo";
+import { Tag, TagDate } from "@/components/tag";
 
 export function ArticleCard({
   image,
@@ -50,7 +51,7 @@ export function ArticleCard({
   );
 
   return (
-    <article className="card-lift group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card">
+    <article className="card-lift group flex h-full flex-col overflow-hidden rounded-tile border border-border bg-card">
       {webp ? (
         <picture className="contents">
           <source type="image/webp" srcSet={webp} sizes={CARD_SIZES} />
@@ -61,18 +62,10 @@ export function ArticleCard({
       )}
       <div className="flex flex-1 flex-col p-6">
         <div className="flex items-center justify-between gap-3">
-          <Link
-            to="/clanky"
-            search={{ tag }}
-            className={`article-tag rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em]${isColumn ? " article-tag--column" : ""}`}
-          >
+          <Tag variant={isColumn ? "column" : "main"} search={{ tag }}>
             {tag}
-          </Link>
-          {date ? (
-            <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
-              {date}
-            </span>
-          ) : null}
+          </Tag>
+          <TagDate value={date} />
         </div>
         {slug ? (
           <Link to="/clanky/$slug" params={{ slug }} className="mt-3 flex flex-1 flex-col no-underline">

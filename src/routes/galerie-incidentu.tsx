@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import { Tag } from "@/components/tag";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { csNbsp } from "@/lib/typo";
@@ -94,9 +95,7 @@ function ArchivIncidentu() {
                     height={520}
                   />
                   <div className="galerie-card-body">
-                    <span className="article-tag px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em]">
-                      {item.chip}
-                    </span>
+                    <Tag>{item.chip}</Tag>
                     <h2 className="mt-3 font-display text-[1.15rem] font-bold leading-snug text-primary">
                       {csNbsp(item.title)}
                     </h2>

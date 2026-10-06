@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ArticleCard } from "@/components/article-card";
 import { Pagination } from "@/components/pagination";
+import { Tag, TagDate } from "@/components/tag";
 import { ARTICLE_SECTIONS, CLANKY_FILTERS, allArticles, HERO_BANNER, KAMPAN_SLIDES, KONRAD, VYBER_REDAKCE } from "@/lib/content";
 import { heroSrcSet, heroWebpSrcSet, heroLcpPreload, prefetchHero, HERO_SIZES, webpExists } from "@/lib/img";
 import { csNbsp } from "@/lib/typo";
@@ -568,7 +569,7 @@ function Index() {
                 <div className="flex h-full min-h-0 flex-col">
                   <p className="kicker text-primary">Rubrika</p>
                   <h2 className="home-section-title">Tydýt týdne</h2>
-                  <article className="tydyt-card card-lift group mt-4 flex h-full min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card md:flex-row">
+                  <article className="tydyt-card card-lift group mt-4 flex h-full min-h-0 flex-1 flex-col overflow-hidden rounded-tile border border-border bg-card md:flex-row">
                     <img
                       src="/images/tydyt-konrad.jpg"
                       alt="Tydýt týdne — Konrad Stavridis"
@@ -581,16 +582,10 @@ function Index() {
                     <div className="tydyt-body flex min-w-0 flex-1 flex-col justify-between gap-3">
                       <div>
                         <div className="flex items-center gap-3">
-                          <Link
-                            to="/clanky"
-                            search={{ filtr: "tydyt" }}
-                            className="article-tag rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em]"
-                          >
+                          <Tag variant="main" search={{ filtr: "tydyt" }}>
                             Tydýt
-                          </Link>
-                          <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
-                            {KONRAD.date}
-                          </span>
+                          </Tag>
+                          <TagDate value={KONRAD.date} />
                         </div>
                         <h3 className="mt-2 font-display text-lg font-bold leading-snug text-navy-900">
                           <Link
@@ -630,7 +625,7 @@ function Index() {
                 <div className="flex h-full min-h-0 flex-col">
                   <p className="kicker text-primary">Dokumentujeme</p>
                   <h2 className="home-section-title">Incidenty</h2>
-                  <article className="documentujeme-card mt-4 flex h-full flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card">
+                  <article className="documentujeme-card mt-4 flex h-full flex-1 flex-col overflow-hidden rounded-tile border border-border bg-card">
                     <div className="documentujeme-inner flex h-full flex-1 flex-col justify-start p-4">
                       <div className="documentujeme-entries flex flex-col gap-3">
                         {[
@@ -652,16 +647,8 @@ function Index() {
                             className="documentujeme-entry flex flex-col gap-1 border-b border-border pb-3 last:border-0 last:pb-0"
                           >
                             <div className="flex items-center justify-between gap-3">
-                              <span
-                                className={`rounded-sm px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-white ${
-                                  d.destructive ? "bg-destructive" : "bg-primary"
-                                }`}
-                              >
-                                {d.tag}
-                              </span>
-                              <span className="text-[11px] font-semibold tracking-wide text-muted-foreground">
-                                {d.date}
-                              </span>
+                              <Tag variant={d.destructive ? "danger" : "solid"}>{d.tag}</Tag>
+                              <TagDate value={d.date} />
                             </div>
                             <p className="text-[0.95rem] leading-[1.55] text-muted-foreground">
                               {d.text}

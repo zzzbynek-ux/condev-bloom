@@ -75,7 +75,7 @@ function PtejteSeAi() {
         </form>
 
         {asked ? (
-          <div className="mt-8 rounded-2xl border border-border bg-card p-6">
+          <div className="mt-8 rounded-tile border border-border bg-card p-6">
             <p className="flex items-center gap-2 text-sm font-semibold text-primary">
               <Sparkles className="size-4" /> Vaše otázka
             </p>
