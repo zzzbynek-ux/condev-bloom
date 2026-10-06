@@ -65,7 +65,8 @@ type HeroAction =
  * shown = slide, který je vidět (fotka, overlay i text). pending = slide, jehož fotka se načítá; ready = fotka
  * je načtená a prolíná se. Text a overlay nového slidu se berou ze stejného slidu jako fotka, takže se nic
  * nepřepne dřív než obrázek. Další klik se počítá od naposledy vyžádaného slidu; starý požadavek se zahodí.
- * under = vrstvy, které zůstávají pod právě se prolínající fotkou, aby při kliknutí během prolnutí neprosvitlo pozadí.
+ * under = jen přímo předchozí zobrazená fotka, která zůstává pod právě se prolínající fotkou, aby při kliknutí
+ * během prolnutí neprosvitlo pozadí. Po prolnutí se odstraní.
  */
 function heroReducer(state: HeroState, action: HeroAction): HeroState {
   switch (action.type) {
@@ -75,7 +76,7 @@ function heroReducer(state: HeroState, action: HeroAction): HeroState {
       // rozpracované prolnutí se uzná hned (slid se vyžádá od něj), stará vrstva zůstane pod ním do konce prolnutí
       const fading = state.ready && state.pending !== null;
       const shown = fading ? state.pending! : state.shown;
-      const under = fading ? [...state.under, state.shown] : state.under;
+      const under = fading ? [state.shown] : state.under;
       return { shown, pending: target === shown ? null : target, ready: false, under };
     }
     case "loaded":
@@ -204,7 +205,9 @@ function Hero() {
 
   const content = ready && pending !== null ? pending : shown;
   const slide = HERO_BANNER[content] ?? HERO_BANNER[0]!;
-  const layers = [...under, shown, ...(pending !== null ? [pending] : [])];
+  // Každý slide je nejvýš jednou (stejný klíč dvakrát by nechal v DOM nepoužitou vrstvu); čekající fotka je nahoře
+  const layers = [...new Set([...under, shown])].filter((idx) => idx !== pending);
+  if (pending !== null) layers.push(pending);
 
   return (
     <section
