@@ -110,7 +110,7 @@ function ZapojteSe() {
                 <li
                   key={block.id}
                   id={block.id}
-                  className="zapojte-block card-lift flex h-full scroll-mt-32 flex-col rounded-2xl border border-border bg-card p-6"
+                  className="zapojte-block card-lift flex h-full scroll-mt-32 flex-col rounded-tile border border-border bg-card p-6"
                 >
                   <h2 className="font-display text-[1.35rem] font-bold leading-tight text-[#0b1a3a]">
                     {csNbsp(block.title)}

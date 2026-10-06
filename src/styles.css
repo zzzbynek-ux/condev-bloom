@@ -136,6 +136,8 @@
 
 :root {
   --radius: 0.75rem;
+  /* Zaoblení „dlaždic“ (karty, panely, boxy, obrázky); ovládací prvky mají vlastní zaoblení. Změna na jednom místě. */
+  --radius-tile: 0;
   --navy-900: #0b1a3a;
   --blue-700: #0038B8;
   --donate-gold: #e8c547;
@@ -254,6 +256,10 @@
   }
 }
 
+@utility rounded-tile {
+  border-radius: var(--radius-tile);
+}
+
 @utility font-display {
   font-family: var(--font-display);
 }
@@ -331,32 +337,68 @@
   }
 }
 
-.article-tag {
-  background-color: var(--accent-soft, #E8F1FF);
-  color: #0038B8;
-  border-radius: 9999px;
-  white-space: nowrap;
+/* Štítky (tagy a rubriky) – komponenta Tag v src/components/tag.tsx */
+.tag {
   display: inline-block;
-  line-height: 1.2;
   max-width: 100%;
-  transition: background-color 150ms ease, box-shadow 150ms ease;
+  padding: 4px 8px;
+  border-radius: 0;
+  background-color: #0038B8;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: none;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background-color 150ms ease, color 150ms ease;
 }
-.article-tag:hover {
-  background-color: var(--ice-hover, #D6E6FC);
-  color: #0038B8;
+.tag:visited {
+  color: #fff;
 }
-
-.article-tag--column {
+a.tag:hover,
+a.tag:focus-visible {
+  background-color: #0B1A3A;
+  color: #fff;
+}
+/* Hlavní rubrika: světlý podklad, modrý text a linka nahoře */
+.tag--main {
+  padding-top: 2px;
+  border-top: 2px solid #0038B8;
   background-color: #fff;
   color: #0038B8;
-  box-shadow: inset 0 0 0 2px var(--donate-gold, #E8C547);
 }
-.article-tag--column:hover {
-  background-color: var(--column-hover-fill, #FFF8E6);
-  box-shadow: inset 0 0 0 2px var(--gold-hover, #D4B03A);
+.tag--main:visited {
   color: #0038B8;
 }
-
+.dark .tag--main {
+  background-color: transparent;
+}
+/* Sloupek: stejný štítek, linka nahoře ve zlaté */
+.tag--column {
+  border-top-color: var(--donate-gold, #E8C547);
+}
+.tag--danger {
+  background-color: var(--destructive, #E11D2E);
+}
+a.tag--main:hover,
+a.tag--main:focus-visible {
+  border-top-color: #0B1A3A;
+}
+.tag-date {
+  flex: none;
+  color: #0038B8;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
 
 .pill-solid {
   background-color: #0038B8;
@@ -414,7 +456,7 @@
   color: #0038B8 !important;
   border: none !important;
   box-shadow: none !important;
-  border-radius: 9999px;
+  border-radius: 0;
   font-weight: 600;
 }
 .clanky-tabs a[aria-current="true"],
@@ -426,7 +468,7 @@
 }
 
 .cta-link:focus-visible,
-.article-tag:focus-visible,
+.tag:focus-visible,
 .clanky-tabs a:focus-visible,
 .clanky-tabs button:focus-visible {
   outline: 2px solid var(--accent-blue);
@@ -761,7 +803,7 @@
     color: #0038B8 !important;
     background: var(--accent-soft, #E8F1FF) !important;
     border: none !important;
-    border-radius: 9999px;
+    border-radius: 0;
     box-shadow: none !important;
     padding: 0.7rem 1.1rem !important;
   }
@@ -804,7 +846,7 @@
   width: 5.75rem;
   height: 5.75rem;
   aspect-ratio: 1 / 1;
-  border-radius: 0.75rem;
+  border-radius: var(--radius-tile);
   align-self: flex-start;
   object-fit: cover;
   object-position: 50% 18%;
@@ -1102,7 +1144,7 @@
     color: #0038B8 !important;
     background: var(--accent-soft, #E8F1FF) !important;
     border: none !important;
-    border-radius: 9999px;
+    border-radius: 0;
     box-shadow: none !important;
     padding: 0.7rem 1.15rem !important;
     text-transform: none;
@@ -1204,7 +1246,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .article-tag,
+  .tag,
   .donate-pill,
   .social-link,
   .clanky-tabs a,
@@ -1233,7 +1275,7 @@
 .donate-lead,
 .hero-perex,
 h1.home-section-title + p,
-article.rounded-xl .space-y-4 > p,
+article.rounded-tile .space-y-4 > p,
 .space-y-5 > p {
   text-align: left;
   hyphens: auto;
@@ -1253,7 +1295,7 @@ article.card-lift > p:not(.kicker) {
   .donate-lead,
   .hero-perex,
   h1.home-section-title + p,
-  article.rounded-xl .space-y-4 > p,
+  article.rounded-tile .space-y-4 > p,
   .space-y-5 > p {
     text-align: left;
     hyphens: manual;
@@ -1263,7 +1305,7 @@ article.card-lift > p:not(.kicker) {
 .article-body img {
   max-width: 100%;
   height: auto;
-  border-radius: 0.75rem;
+  border-radius: var(--radius-tile);
   margin: 1rem 0;
 }
 .article-body a {
@@ -1609,7 +1651,7 @@ article.card-lift > p:not(.kicker) {
   aspect-ratio: 16 / 9;
   height: auto;
   object-fit: cover;
-  border-radius: 0.75rem 0.75rem 0 0;
+  border-radius: var(--radius-tile);
 }
 .related-card-body {
   padding: 0.85rem 0.95rem 1rem;
@@ -1622,7 +1664,7 @@ article.card-lift > p:not(.kicker) {
   justify-content: space-between;
   gap: 0.35rem 0.75rem;
 }
-.related-card-meta .article-tag {
+.related-card-meta .tag {
   flex: 0 1 auto;
 }
 .related-card-title {
@@ -1707,7 +1749,7 @@ article.card-lift > p:not(.kicker) {
   position: relative;
   overflow: hidden;
   background: #fff;
-  border-radius: var(--radius-2xl);
+  border-radius: var(--radius-tile);
   border: 1px solid rgba(0, 56, 184, 0.12);
   color: inherit;
   transition: transform 180ms ease, box-shadow 180ms ease;
@@ -1857,7 +1899,7 @@ a.kampan-card {
 }
 .galerie-card {
   background: #fff;
-  border-radius: 0.75rem;
+  border-radius: var(--radius-tile);
   overflow: hidden;
   border: 1px solid rgba(0, 56, 184, 0.12);
 }
@@ -1876,7 +1918,7 @@ a.kampan-card {
   gap: 0.35rem;
   padding: 1.1rem 1.2rem 1.2rem;
   background: #fff;
-  border-radius: 0.75rem;
+  border-radius: var(--radius-tile);
   border: 1px solid rgba(0, 56, 184, 0.12);
   border-left: 3px solid #0038B8;
 }
@@ -2027,7 +2069,7 @@ a.kampan-card {
 .donate-widget {
   background: #fff;
   color: #0b1a3a;
-  border-radius: 1rem;
+  border-radius: var(--radius-tile);
   padding: 1.25rem 1.3rem 1.35rem;
   box-shadow: 0 24px 50px rgba(0, 20, 70, 0.28);
 }
@@ -2060,7 +2102,7 @@ a.kampan-card {
   justify-content: space-between;
   gap: 0.75rem;
   border: 1.5px solid rgba(0, 56, 184, 0.14);
-  border-radius: 0.8rem;
+  border-radius: var(--radius-tile);
   padding: 0.7rem 0.85rem;
   background: #fff;
   text-align: left;
@@ -2122,7 +2164,7 @@ a.kampan-card {
 .donate-details {
   background: #fff;
   border: 1px solid rgba(0, 56, 184, 0.14);
-  border-radius: 0.95rem;
+  border-radius: var(--radius-tile);
 }
 .donate-qr-card {
   padding: 1.2rem;
@@ -2140,7 +2182,7 @@ a.kampan-card {
 .donate-qr-ph {
   width: 180px;
   height: 180px;
-  border-radius: 0.6rem;
+  border-radius: var(--radius-tile);
   background: #f7f8fb;
   border: 1px dashed rgba(0, 56, 184, 0.25);
   display: grid;
@@ -2213,7 +2255,7 @@ a.kampan-card {
   margin: 0;
   background: #f7efd4;
   border-left: 4px solid #c9a227;
-  border-radius: 0.6rem;
+  border-radius: var(--radius-tile);
   padding: 0.9rem 1rem;
   font-size: 0.92rem;
   color: #3d320c;

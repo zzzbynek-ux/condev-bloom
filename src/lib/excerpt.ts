@@ -100,3 +100,11 @@ export function formatDate(iso?: string) {
   if (Number.isNaN(d.getTime())) return iso;
   return `${d.getDate()}. ${d.getMonth() + 1}. ${d.getFullYear()}`;
 }
+
+/** Datum ve tvaru „17. 9. 2026“ převede na „17/09/26“ (štítek u karet); jiný zápis vrátí beze změny. */
+export function formatCardDate(text?: string) {
+  if (!text) return "";
+  const m = /^(\d{1,2})\.\s*(\d{1,2})\.\s*(\d{4})$/.exec(text.trim());
+  if (!m) return text;
+  return `${m[1]!.padStart(2, "0")}/${m[2]!.padStart(2, "0")}/${m[3]!.slice(-2)}`;
+}

@@ -49,7 +49,7 @@ function NahlasitIncident() {
               <p className="kicker text-primary">{csNbsp("Kam nahlásit")}</p>
               <h2 className="home-section-title mt-2">{csNbsp("Oficiální kanály")}</h2>
               <ul className="mt-8 grid items-stretch gap-4 md:grid-cols-3">
-                <li className="card-lift flex h-full flex-col rounded-xl border border-border bg-card p-6">
+                <li className="card-lift flex h-full flex-col rounded-tile border border-border bg-card p-6">
                   <ExternalLink className="size-5 text-primary" aria-hidden />
                   <h2 className="mt-3 font-display text-lg font-bold text-primary">
                     {csNbsp("Formulář Federace židovských obcí v ČR")}
@@ -66,7 +66,7 @@ function NahlasitIncident() {
                     Otevřít formulář FŽO
                   </a>
                 </li>
-                <li className="card-lift flex h-full flex-col rounded-xl border border-border bg-card p-6">
+                <li className="card-lift flex h-full flex-col rounded-tile border border-border bg-card p-6">
                   <Mail className="size-5 text-primary" aria-hidden />
                   <h2 className="mt-3 font-display text-lg font-bold text-primary">
                     {csNbsp("E-mail")}
@@ -81,7 +81,7 @@ function NahlasitIncident() {
                     antisemitismus@fzo.cz
                   </a>
                 </li>
-                <li className="card-lift flex h-full flex-col rounded-xl border border-border bg-card p-6">
+                <li className="card-lift flex h-full flex-col rounded-tile border border-border bg-card p-6">
                   <Phone className="size-5 text-primary" aria-hidden />
                   <h2 className="mt-3 font-display text-lg font-bold text-primary">
                     {csNbsp("Tísňová linka")}
@@ -110,7 +110,7 @@ function NahlasitIncident() {
               height={367}
               decoding="async"
               loading="lazy"
-              className="h-48 w-full rounded-xl object-cover md:h-64 lg:h-72"
+              className="h-48 w-full rounded-tile object-cover md:h-64 lg:h-72"
             />
 
             <div className="mt-8 max-w-3xl space-y-4 text-[0.95rem] leading-[1.55] text-foreground">

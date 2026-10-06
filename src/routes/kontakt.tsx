@@ -57,7 +57,7 @@ function XIcon({ className }: { className?: string }) {
 function KontaktSidebar() {
   return (
     <aside className="flex flex-col gap-3">
-      <div className="rounded-xl bg-muted/40 px-4 py-4">
+      <div className="rounded-tile bg-muted/40 px-4 py-4">
         <p className="text-[13px] text-muted-foreground">Přímý kontakt</p>
         <a
           href="mailto:redakce@jednimhlasem.cz"
@@ -72,7 +72,7 @@ function KontaktSidebar() {
         </p>
       </div>
 
-      <div className="rounded-xl bg-muted/40 px-4 py-4">
+      <div className="rounded-tile bg-muted/40 px-4 py-4">
         <p className="text-[13px] text-muted-foreground">Sledujte nás</p>
         <div className="mt-2 flex gap-2.5">
           <a
@@ -106,7 +106,7 @@ function KontaktSidebar() {
       </div>
 
       {SHOW_PTEJTE_SE_AI ? (
-        <div className="rounded-xl bg-muted/40 px-4 py-4">
+        <div className="rounded-tile bg-muted/40 px-4 py-4">
           <p className="text-[13px] text-muted-foreground">Máte otázku k obsahu?</p>
           <Link
             to="/ptejte-se-ai"
@@ -168,7 +168,7 @@ function Kontakt() {
 
             {status === "ok" ? (
               <div className="mt-8 grid w-full max-w-[70rem] items-start gap-6 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-                <div className="w-full rounded-xl border border-border bg-card p-8">
+                <div className="w-full rounded-tile border border-border bg-card p-8">
                   <h2 className="font-display text-2xl font-bold text-primary">
                     Zpráva odešla. Ozveme se.
                   </h2>
@@ -185,7 +185,7 @@ function Kontakt() {
             ) : (
               <div className="mt-8 grid w-full max-w-[70rem] items-start gap-6 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
                 <form
-                  className="relative grid w-full gap-5 rounded-xl border border-border bg-card p-6 md:p-8"
+                  className="relative grid w-full gap-5 rounded-tile border border-border bg-card p-6 md:p-8"
                   onSubmit={onSubmit}
                 >
                   <label className="grid gap-2">

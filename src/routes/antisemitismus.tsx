@@ -380,7 +380,7 @@ function TopicGuide() {
             </ul>
           </nav>
 
-          <article className="min-w-0 rounded-xl border border-black/5 bg-white px-5 py-5 shadow-sm md:px-6 md:py-6">
+          <article className="min-w-0 rounded-tile border border-black/5 bg-white px-5 py-5 shadow-sm md:px-6 md:py-6">
             <h3 className="font-display text-lg font-bold leading-snug text-primary">{active.title}</h3>
             <div className="mt-2 h-[3px] w-9 rounded-full bg-[#0038B8]" aria-hidden />
             <div className="mt-5">
@@ -408,11 +408,11 @@ function Antisemitismus() {
               )}
             </p>
             <figure className="my-5">
-              <div className="overflow-hidden rounded-2xl">
+              <div className="overflow-hidden rounded-tile">
                 <img
                   src={portalImg}
                   alt="Jeruzalémská synagoga v Praze, portál"
-                  className="aspect-[3/1] w-full rounded-2xl object-cover object-[center_55%]"
+                  className="aspect-[3/1] w-full rounded-tile object-cover object-[center_55%]"
                 />
               </div>
               <figcaption className="mt-2 text-[12px] leading-snug text-muted-foreground md:text-[13px]">
