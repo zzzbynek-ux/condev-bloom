@@ -134,9 +134,11 @@ function Hero() {
       <div
         aria-hidden
         className={
-          slide.overlay === "strong"
-            ? "hero-overlay pointer-events-none absolute inset-0 bg-linear-to-r from-[#0b1a3a]/96 via-[#0b1a3a]/78 via-[40%] to-transparent"
-            : "hero-overlay pointer-events-none absolute inset-0 bg-linear-to-r from-[#0b1a3a]/92 via-[#0b1a3a]/62 via-[42%] to-transparent"
+          slide.overlay === "stronger"
+            ? "hero-overlay pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(11,26,58,0.96)_0%,rgba(11,26,58,0.88)_45%,rgba(11,26,58,0.5)_70%,transparent_100%)]"
+            : slide.overlay === "strong"
+              ? "hero-overlay pointer-events-none absolute inset-0 bg-linear-to-r from-[#0b1a3a]/96 via-[#0b1a3a]/78 via-[40%] to-transparent"
+              : "hero-overlay pointer-events-none absolute inset-0 bg-linear-to-r from-[#0b1a3a]/92 via-[#0b1a3a]/62 via-[42%] to-transparent"
         }
       />
 
