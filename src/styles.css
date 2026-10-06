@@ -1170,11 +1170,6 @@ a.tag--main:focus-visible {
   color: #0038B8;
 }
 
-.tema-btn-ice:hover {
-  background-color: #C5D8F6 !important;
-  color: #0038B8 !important;
-  opacity: 1;
-}
 .tema-btn-incident:hover {
   background-color: var(--incident-hover, #C41625);
   color: #fff;
@@ -1191,14 +1186,26 @@ a.tag--main:focus-visible {
   color: #0038B8 !important;
 }
 
+/* Pás Antisemitismus (světlý): pilulka s modrým okrajem; okraj je uvnitř původních rozměrů tlačítka */
+.tema-band {
+  background-color: #E8EEFB;
+  border-bottom: 1px solid #C9D3E6;
+  color: var(--navy-900);
+}
 .tema-btn-outline {
-  border: 2px solid var(--color-primary-foreground);
+  border: 2px solid #0038B8;
+  padding: calc(0.75rem - 2px) calc(1.5rem - 2px);
   background-color: transparent;
-  color: var(--color-primary-foreground);
+  color: #0038B8;
 }
 .tema-btn-outline:hover {
-  background-color: rgba(255, 255, 255, 0.14);
+  background-color: rgba(0, 56, 184, 0.08);
+  color: #0038B8;
   opacity: 1;
+}
+.tema-buttons > a:focus-visible {
+  outline: 2px solid var(--navy-900);
+  outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1207,7 +1214,6 @@ a.tag--main:focus-visible {
   .social-link,
   .clanky-tabs a,
   .clanky-tabs button,
-  .tema-btn-ice,
   .tema-btn-incident,
   .tema-btn-outline {
     transition: none;
@@ -2380,8 +2386,10 @@ button.pager-btn {
   }
 }
 
-/* Cíl posunu po změně stránky: pod lepkavou hlavičkou (jeden modrý pruh: mobil 60 px, od md 64 px) a malá rezerva */
+/* Cíl posunu po změně stránky: pod lepkavou hlavičkou (jeden modrý pruh: mobil 60 px, od md 64 px) a malá rezerva.
+   Bílý proužek nad hlavičkou (--hdr-topline-h) se nezapočítává: není přilepený a při rolování odjede. */
 :root {
+  --hdr-topline-h: 10px;
   --site-header-h: 3.75rem;
   --scroll-gap: 1.25rem;
 }
@@ -2398,6 +2406,10 @@ button.pager-btn {
 .tag--sm {
   padding: 1px 6px;
   font-size: 11px;
+}
+.hdr-topline {
+  height: var(--hdr-topline-h);
+  background: #ffffff;
 }
 .hdr-bar {
   height: var(--site-header-h);
@@ -2664,7 +2676,7 @@ button.pager-btn {
   left: 0;
   right: 0;
   top: 100%;
-  max-height: calc(100dvh - var(--site-header-h));
+  max-height: calc(100dvh - var(--site-header-h) - var(--hdr-topline-h));
   overflow-y: auto;
   background: #fff;
   color: var(--navy-900);
@@ -2742,7 +2754,7 @@ button.pager-btn {
   left: 0;
   right: 0;
   top: 100%;
-  max-height: calc(100dvh - var(--site-header-h));
+  max-height: calc(100dvh - var(--site-header-h) - var(--hdr-topline-h));
   overflow-y: auto;
   overscroll-behavior: contain;
   background: #fff;

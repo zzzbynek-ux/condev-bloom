@@ -487,20 +487,20 @@ function Index() {
         <Hero />
 
         {/* Zvýrazněné téma: Antisemitismus */}
-        <section className="bg-primary text-primary-foreground">
+        <section className="tema-band">
           <div className="tema-strip mx-auto flex max-w-[88rem] w-full flex-col items-stretch gap-6 px-4 py-8 md:px-6">
             <div className="flex w-full items-center justify-start gap-4">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary-foreground/10 ring-1 ring-primary-foreground/25">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-[1.5px] border-primary text-primary">
                 <StarOfDavid className="h-6 w-6" />
               </span>
               <div className="max-w-2xl">
-                <p className="kicker text-primary-foreground/70">
+                <p className="kicker text-primary">
                   Klíčové téma
                 </p>
-                <h2 className="mt-1 font-display text-[1.5rem] font-bold tracking-tight md:text-[1.875rem]">
+                <h2 className="mt-1 font-display text-[1.5rem] font-bold tracking-tight text-navy-900 md:text-[1.875rem]">
                   Antisemitismus
                 </h2>
-                <p className="tema-perex mt-1 max-w-xl text-[13px] leading-snug text-primary-foreground/85">
+                <p className="tema-perex mt-1 max-w-xl text-[13px] leading-snug text-navy-900">
                   Nová podoba starých předsudků — jak ji poznat, pojmenovat a věcně vyvracet.
                 </p>
               </div>
@@ -508,7 +508,7 @@ function Index() {
             <div className="tema-buttons flex flex-wrap items-center gap-3">
               <Link
                 to="/antisemitismus"
-                className="tema-btn-ice inline-flex shrink-0 items-center gap-2 rounded-full bg-primary-foreground px-6 py-3 text-sm font-semibold text-primary transition"
+                className="tema-btn-outline inline-flex shrink-0 items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition"
               >
                 Číst k tématu
                 <ArrowRight className="h-4 w-4" />
