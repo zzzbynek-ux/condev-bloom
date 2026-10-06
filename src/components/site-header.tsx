@@ -370,7 +370,8 @@ function BigMenu({ onNavigate }: { onNavigate: () => void }) {
   );
 }
 
-export function SiteHeader() {
+/** aligned: horní pruh se od md zarovná na hrany hero panelu (hlavní stránka), jinak drží šířku obsahu stránky. */
+export function SiteHeader({ aligned = false }: { aligned?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [acc, setAcc] = useState<Record<string, boolean>>({});
@@ -496,7 +497,9 @@ export function SiteHeader() {
       <div aria-hidden="true" className="hdr-topline" />
       <header ref={headerRef} className="site-header-sticky sticky top-0 z-[60]">
         <div className="hdr-bar">
-          <div className="mx-auto flex h-full max-w-[88rem] items-center gap-3 px-4 md:gap-4 md:px-6">
+          <div
+            className={`mx-auto flex h-full max-w-[88rem] items-center gap-3 px-4 md:gap-4 md:px-6${aligned ? " hdr-inner--aligned" : ""}`}
+          >
             <Link to="/" className="hdr-brand" aria-label="Jedním hlasem — domů" onClick={closeAll}>
               <img
                 src="/images/logo-bublina.png"
