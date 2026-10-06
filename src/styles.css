@@ -2667,7 +2667,7 @@ button.pager-btn {
 }
 @media (min-width: 1024px) {
   .hdr-big-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 1.35fr);
+    grid-template-columns: repeat(var(--hdr-cols, 4), minmax(0, 1fr)) minmax(0, 1.35fr);
   }
 }
 .hdr-big-heading {

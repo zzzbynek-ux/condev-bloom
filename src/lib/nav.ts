@@ -32,8 +32,11 @@ export type NavGroup = {
   all?: NavItem;
 };
 
-// PROVIZORNÍ: Gaza GenoLIE vede na úvod kampaně; Anticena, Výstavy a „Všechny projekty“ zatím nemají stránku,
-// proto jsou zakomentované (odkomentujte, až stránky vzniknou).
+// Anticena, Výstavy a „Všechny projekty“ zatím nemají stránku, proto jsou zakomentované.
+// Skupina Projekty se v navigaci zobrazí, až bude mít aspoň MIN_PROJEKTY_ITEMS položek
+// (odkomentujte položky, až stránky vzniknou; skupina se objeví sama).
+// PROVIZORNÍ: adresa Gaza GenoLIE (úvod webu) nebyla z vývojového prostředí ověřena.
+const MIN_PROJEKTY_ITEMS = 2;
 const PROJEKTY_ITEMS: NavItem[] = [
   { label: "Gaza GenoLIE", href: "https://gazagenolie.com/" },
   // { label: "Anticena", to: "/anticena" },
@@ -71,8 +74,15 @@ export const PROJEKTY_GROUP: NavGroup = {
   // all: { label: "Všechny projekty", to: "/projekty" },
 };
 
+/** Projekty se zobrazí, až jich je aspoň MIN_PROJEKTY_ITEMS (jedna položka by nabídku nepotřebovala). */
+const SHOW_PROJEKTY = PROJEKTY_ITEMS.length >= MIN_PROJEKTY_ITEMS;
+
 /** Odkazy s rozbalovací nabídkou v hlavičce (desktop) a akordeon v mobilním menu. */
-export const NAV_GROUPS: NavGroup[] = [ARTICLES_GROUP, ANTISEMITISMUS_GROUP, PROJEKTY_GROUP];
+export const NAV_GROUPS: NavGroup[] = [
+  ARTICLES_GROUP,
+  ANTISEMITISMUS_GROUP,
+  ...(SHOW_PROJEKTY ? [PROJEKTY_GROUP] : []),
+];
 
 /** Odkaz v hlavičce bez nabídky. */
 export const NAV_PLAIN: NavItem[] = [{ label: "O nás", to: "/o-nas" }];
@@ -96,7 +106,7 @@ export const BIG_MENU_COLUMNS: { heading: string; items: NavItem[] }[] = [
     items: [{ label: "Články", to: "/clanky" }, ...ARTICLES_GROUP.items.slice(1)],
   },
   { heading: "Antisemitismus", items: ANTISEMITISMUS_GROUP.items },
-  { heading: "Projekty JH", items: PROJEKTY_ITEMS },
+  ...(SHOW_PROJEKTY ? [{ heading: "Projekty JH", items: PROJEKTY_ITEMS }] : []),
   { heading: "Jedním hlasem", items: ORG_ITEMS },
 ];
 
@@ -108,8 +118,8 @@ export const AKTUALNE: {
   link: NavItem;
 } = {
   kicker: "Aktuálně",
-  title: "Skládačka lží",
-  text: "Partnerská kampaň Gaza GenoLIE: nejčastější tvrzení o válce v Gaze a jejich vyvrácení.",
+  title: "Lež století",
+  text: "Partnerská kampaň Gaza GenoLIE: tvrzení o válce v Gaze a jejich vyvrácení.",
   link: { label: "Gaza GenoLIE", href: "https://gazagenolie.com/" },
 };
 

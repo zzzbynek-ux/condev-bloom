@@ -318,7 +318,11 @@ function BigMenu({ onNavigate }: { onNavigate: () => void }) {
   return (
     <div id="hdr-bigmenu" className="hdr-big hidden md:block">
       <div className="mx-auto max-w-[88rem] px-6 pb-6 pt-8">
-        <nav aria-label="Menu" className="hdr-big-grid">
+        <nav
+          aria-label="Menu"
+          className="hdr-big-grid"
+          style={{ ["--hdr-cols" as string]: BIG_MENU_COLUMNS.length }}
+        >
           {BIG_MENU_COLUMNS.map((col) => (
             <div key={col.heading}>
               <p className="hdr-big-heading">{col.heading}</p>
