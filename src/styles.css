@@ -1222,10 +1222,21 @@ a.tag--main:focus-visible {
   padding: calc(0.75rem - 2px) calc(1.5rem - 2px);
   background-color: transparent;
   color: var(--navy-900);
+  transition: background-color 150ms ease;
 }
-.tema-btn-outline:hover {
-  background-color: var(--navy-900);
-  color: #fff;
+/* Hover jen u myši, aby po klepnutí na dotyku nezůstal přilepený */
+@media (hover: hover) {
+  .tema-btn-outline:hover {
+    background-color: #E8EEFB;
+    border-color: var(--navy-900);
+    color: var(--navy-900);
+    opacity: 1;
+  }
+}
+.tema-btn-outline:active {
+  background-color: #D5DFF5;
+  border-color: var(--navy-900);
+  color: var(--navy-900);
   opacity: 1;
 }
 .tema-buttons > a:focus-visible {
