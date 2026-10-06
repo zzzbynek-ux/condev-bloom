@@ -226,34 +226,6 @@ function Hero() {
 
 
 
-function StarOfDavid({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.75}
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M12 2.5 21 18H3L12 2.5Z" />
-      <path d="M12 21.5 3 6h18l-9 15.5Z" />
-    </svg>
-  );
-}
-
-
-
-
-
-
-
-
-
-
-
-
 function SectionHeader({
   kicker,
   title,
@@ -490,11 +462,8 @@ function Index() {
         <section className="tema-band">
           <div className="tema-strip mx-auto flex max-w-[88rem] w-full flex-col items-stretch gap-6 px-4 py-8 md:px-6">
             <div className="flex w-full items-center justify-start gap-4">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-[1.5px] border-primary text-primary">
-                <StarOfDavid className="h-6 w-6" />
-              </span>
               <div className="max-w-2xl">
-                <p className="kicker text-primary">
+                <p className="kicker text-navy-900">
                   Klíčové téma
                 </p>
                 <h2 className="mt-1 font-display text-[1.5rem] font-bold tracking-tight text-navy-900 md:text-[1.875rem]">
@@ -524,7 +493,7 @@ function Index() {
               ) : null}
               <Link
                 to="/nahlasit-incident"
-                className="tema-btn-incident inline-flex shrink-0 items-center gap-2 rounded-full bg-destructive px-6 py-3 text-sm font-semibold text-white transition"
+                className="btn-incident inline-flex shrink-0 items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition"
               >
                 Nahlásit incident
                 <ArrowRight className="h-4 w-4" />
@@ -667,7 +636,7 @@ function Index() {
                         </Link>
                         <Link
                           to="/nahlasit-incident"
-                          className="inline-flex items-center gap-2 rounded-full bg-destructive px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
+                          className="btn-incident inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition"
                         >
                           Nahlásit incident
                         </Link>
