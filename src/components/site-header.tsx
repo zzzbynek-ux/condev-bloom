@@ -1,8 +1,26 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type FormEvent } from "react";
-import { Menu, Search, X } from "lucide-react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type FormEvent,
+  type KeyboardEvent,
+  type ReactNode,
+} from "react";
+import { ChevronDown, Menu, Search, X } from "lucide-react";
 
-import { SHOW_PTEJTE_SE_AI } from "@/lib/feature-flags";
+import { Tag } from "@/components/tag";
+import {
+  AKTUALNE,
+  BIG_MENU_COLUMNS,
+  MOBILE_ROWS,
+  NAV_GROUPS,
+  NAV_PLAIN,
+  PRIVACY_LINK,
+  SOCIAL_LINKS,
+  type NavGroup,
+  type NavItem,
+} from "@/lib/nav";
 import type { SearchResult } from "@/lib/search";
 
 function loadSearch() {
@@ -33,21 +51,6 @@ function XIcon({ className }: { className?: string }) {
   );
 }
 
-const DESKTOP_LINKS = [
-  { label: "Články", to: "/clanky" as const },
-  { label: "Antisemitismus", to: "/antisemitismus" as const },
-  { label: "O nás", to: "/o-nas" as const },
-  { label: "Zapojte se", to: "/zapojte-se" as const },
-  ...(SHOW_PTEJTE_SE_AI ? [{ label: "Ptejte se AI", to: "/ptejte-se-ai" as const }] : []),
-];
-
-const MENU_LINKS = [
-  ...DESKTOP_LINKS.slice(0, 2),
-  { label: "Nahlásit incident", to: "/nahlasit-incident" as const },
-  ...DESKTOP_LINKS.slice(2),
-  { label: "Podpořte nás", to: "/podporte-nas" as const },
-];
-
 function SearchHits({
   results,
   query,
@@ -75,7 +78,9 @@ function SearchHits({
               onClick={() => onPick(r.to)}
               className="block w-full px-3 py-2 text-left hover:bg-accent-soft"
             >
-              <span className="block text-sm font-semibold leading-snug text-foreground">{r.title}</span>
+              <span className="block text-sm font-semibold leading-snug text-foreground">
+                {r.title}
+              </span>
               <span className="mt-0.5 block text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
                 {r.kind}
               </span>
@@ -87,21 +92,294 @@ function SearchHits({
   );
 }
 
+const SOCIAL_ICONS = { facebook: FacebookIcon, instagram: InstagramIcon, x: XIcon } as const;
+
+/** Odkaz z datového souboru nav.ts: interní přes Link, externí jako <a> do nového okna. */
+function NavAnchor({
+  item,
+  className,
+  onNavigate,
+  children,
+  ...rest
+}: {
+  item: NavItem;
+  className: string;
+  onNavigate?: () => void;
+  children: ReactNode;
+  "data-nav-item"?: string;
+}) {
+  if ("href" in item) {
+    return (
+      <a
+        href={item.href}
+        target="_blank"
+        rel="noreferrer"
+        className={className}
+        onClick={onNavigate}
+        {...rest}
+      >
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link
+      to={item.to}
+      search={(item.search ?? {}) as never}
+      className={className}
+      onClick={onNavigate}
+      {...rest}
+    >
+      {children}
+    </Link>
+  );
+}
+
+function ItemLabel({ item }: { item: NavItem }) {
+  return (
+    <>
+      {item.label}
+      {item.badge ? <Tag className="tag--sm ml-2 align-middle">{item.badge}</Tag> : null}
+    </>
+  );
+}
+
+function SocialLinks({ className }: { className?: string }) {
+  return (
+    <div className={className}>
+      {SOCIAL_LINKS.map((l) => {
+        const Icon = SOCIAL_ICONS[l.id];
+        return (
+          <a
+            key={l.id}
+            href={l.href}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={l.label}
+            title={l.label}
+            className="hdr-social social-link"
+          >
+            <Icon className="size-[1.125rem]" />
+          </a>
+        );
+      })}
+    </div>
+  );
+}
+
+/** Desktop: odkazy s rozbalovací nabídkou (hover, klepnutí, klávesnice). */
+function DesktopNav({ onNavigate }: { onNavigate: () => void }) {
+  const [openId, setOpenId] = useState<string | null>(null);
+  const [pinned, setPinned] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+
+  const close = () => {
+    setOpenId(null);
+    setPinned(false);
+  };
+
+  useEffect(() => {
+    const onDoc = (e: MouseEvent) => {
+      if (!navRef.current?.contains(e.target as Node)) close();
+    };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, []);
+
+  const itemsOf = (li: HTMLElement) =>
+    Array.from(li.querySelectorAll<HTMLElement>("[data-nav-item]"));
+
+  const onKeyDown = (e: KeyboardEvent<HTMLLIElement>, g: NavGroup) => {
+    const li = e.currentTarget;
+    const isOpen = openId === g.id;
+    if (e.key === "Escape" && isOpen) {
+      e.preventDefault();
+      close();
+      li.querySelector<HTMLElement>("button")?.focus();
+      return;
+    }
+    if (e.key === "ArrowDown" && !isOpen) {
+      e.preventDefault();
+      setOpenId(g.id);
+      setPinned(true);
+      requestAnimationFrame(() => itemsOf(li)[0]?.focus());
+      return;
+    }
+    if (!isOpen) return;
+    const items = itemsOf(li);
+    const idx = items.indexOf(document.activeElement as HTMLElement);
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      items[idx + 1 < items.length ? idx + 1 : 0]?.focus();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      items[idx > 0 ? idx - 1 : items.length - 1]?.focus();
+    } else if (e.key === "Home" && idx >= 0) {
+      e.preventDefault();
+      items[0]?.focus();
+    } else if (e.key === "End" && idx >= 0) {
+      e.preventDefault();
+      items[items.length - 1]?.focus();
+    }
+  };
+
+  return (
+    <nav ref={navRef} aria-label="Hlavní navigace" className="hidden min-w-0 md:block">
+      <ul className="flex items-center gap-1">
+        {NAV_GROUPS.map((g) => {
+          const isOpen = openId === g.id;
+          const panelId = `hdr-dd-${g.id}`;
+          return (
+            <li
+              key={g.id}
+              className="relative"
+              onMouseEnter={() => {
+                setOpenId(g.id);
+                setPinned(false);
+              }}
+              onMouseLeave={() => {
+                if (!pinned) setOpenId(null);
+              }}
+              onBlur={(e) => {
+                if (!e.currentTarget.contains(e.relatedTarget as Node | null)) close();
+              }}
+              onKeyDown={(e) => onKeyDown(e, g)}
+            >
+              <button
+                type="button"
+                className="hdr-pill"
+                aria-expanded={isOpen}
+                aria-haspopup="true"
+                aria-controls={isOpen ? panelId : undefined}
+                onClick={() => {
+                  if (isOpen && pinned) close();
+                  else {
+                    setOpenId(g.id);
+                    setPinned(true);
+                  }
+                }}
+              >
+                {g.label}
+                <ChevronDown className="hdr-chevron size-4" aria-hidden />
+              </button>
+              {isOpen ? (
+                <div className="hdr-dd-wrap">
+                  <ul id={panelId} className="hdr-panel hdr-dd" aria-label={g.label}>
+                    {g.items.map((item) => (
+                      <li key={item.label}>
+                        <NavAnchor
+                          item={item}
+                          data-nav-item=""
+                          className="hdr-dd-link"
+                          onNavigate={() => {
+                            close();
+                            onNavigate();
+                          }}
+                        >
+                          <ItemLabel item={item} />
+                        </NavAnchor>
+                      </li>
+                    ))}
+                    {g.all ? (
+                      <li className="hdr-dd-all">
+                        <NavAnchor
+                          item={g.all}
+                          data-nav-item=""
+                          className="hdr-dd-link hdr-dd-link--all"
+                          onNavigate={() => {
+                            close();
+                            onNavigate();
+                          }}
+                        >
+                          {g.all.label} <span aria-hidden="true">→</span>
+                        </NavAnchor>
+                      </li>
+                    ) : null}
+                  </ul>
+                </div>
+              ) : null}
+            </li>
+          );
+        })}
+        {NAV_PLAIN.map((item) => (
+          <li key={item.label}>
+            <NavAnchor item={item} className="hdr-pill" onNavigate={onNavigate}>
+              {item.label}
+            </NavAnchor>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
+/** Velké menu pod pruhem (desktop). */
+function BigMenu({ onNavigate }: { onNavigate: () => void }) {
+  return (
+    <div id="hdr-bigmenu" className="hdr-big hidden md:block">
+      <div className="mx-auto max-w-[88rem] px-6 pb-6 pt-8">
+        <nav aria-label="Menu" className="hdr-big-grid">
+          {BIG_MENU_COLUMNS.map((col) => (
+            <div key={col.heading}>
+              <p className="hdr-big-heading">{col.heading}</p>
+              <ul className="mt-3 flex flex-col">
+                {col.items.map((item) => (
+                  <li key={item.label}>
+                    <NavAnchor item={item} className="hdr-big-link" onNavigate={onNavigate}>
+                      <ItemLabel item={item} />
+                    </NavAnchor>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+          <aside className="hdr-aktualne" aria-label={AKTUALNE.kicker}>
+            <p className="hdr-big-heading">{AKTUALNE.kicker}</p>
+            <p className="mt-3 font-display text-lg font-bold leading-snug text-navy-900">
+              {AKTUALNE.title}
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{AKTUALNE.text}</p>
+            <NavAnchor
+              item={AKTUALNE.link}
+              className="hdr-big-link hdr-big-link--cta"
+              onNavigate={onNavigate}
+            >
+              {AKTUALNE.link.label} <span aria-hidden="true">→</span>
+            </NavAnchor>
+          </aside>
+        </nav>
+        <div className="hdr-big-foot">
+          <SocialLinks className="flex items-center gap-2" />
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} Jedním hlasem <span aria-hidden="true">·</span>{" "}
+            <NavAnchor
+              item={PRIVACY_LINK}
+              className="underline-offset-2 hover:underline"
+              onNavigate={onNavigate}
+            >
+              {PRIVACY_LINK.label}
+            </NavAnchor>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function SiteHeader() {
-  const [open, setOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [acc, setAcc] = useState<Record<string, boolean>>({});
   const [q, setQ] = useState("");
   const [panel, setPanel] = useState(false);
   const [results, setResults] = useState<SearchResult[]>([]);
   const navigate = useNavigate();
-  const searchRef = useRef<HTMLInputElement>(null);
-  const desktopBox = useRef<HTMLDivElement>(null);
-  const mobileBox = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const menuBtnRef = useRef<HTMLButtonElement>(null);
+  const searchBtnRef = useRef<HTMLButtonElement>(null);
+  const deskInput = useRef<HTMLInputElement>(null);
 
   const showPanel = panel && q.trim().length >= 2;
-
-  useEffect(() => {
-    if (open) searchRef.current?.focus();
-  }, [open]);
 
   useEffect(() => {
     const query = q.trim();
@@ -119,13 +397,27 @@ export function SiteHeader() {
   }, [q]);
 
   useEffect(() => {
+    if (searchOpen) deskInput.current?.focus();
+  }, [searchOpen]);
+
+  useEffect(() => {
     const onDoc = (e: MouseEvent) => {
-      const t = e.target as Node;
-      if (desktopBox.current?.contains(t) || mobileBox.current?.contains(t)) return;
+      if (headerRef.current?.contains(e.target as Node)) return;
+      setMenuOpen(false);
+      setSearchOpen(false);
       setPanel(false);
     };
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setPanel(false);
+    const onKey = (e: globalThis.KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setPanel(false);
+      setSearchOpen((was) => {
+        if (was) searchBtnRef.current?.focus();
+        return false;
+      });
+      setMenuOpen((was) => {
+        if (was) menuBtnRef.current?.focus();
+        return false;
+      });
     };
     document.addEventListener("mousedown", onDoc);
     document.addEventListener("keydown", onKey);
@@ -135,18 +427,15 @@ export function SiteHeader() {
     };
   }, []);
 
-  const openSearch = () => {
-    if (open) {
-      searchRef.current?.focus();
-      return;
-    }
-    setOpen(true);
+  const closeAll = () => {
+    setMenuOpen(false);
+    setSearchOpen(false);
+    setPanel(false);
   };
 
   const goTo = (to: string) => {
     setQ("");
-    setPanel(false);
-    setOpen(false);
+    closeAll();
     const hashIndex = to.indexOf("#");
     const hash = hashIndex >= 0 ? to.slice(hashIndex + 1) : undefined;
     const path = hashIndex >= 0 ? to.slice(0, hashIndex) : to;
@@ -171,213 +460,173 @@ export function SiteHeader() {
     });
   };
 
-  const onSearchFocus = () => {
-    setPanel(true);
-    void loadSearch();
-  };
+  const searchField = (inputRef?: React.Ref<HTMLInputElement>) => (
+    <form role="search" onSubmit={onSubmit} className="hdr-search">
+      <Search className="size-4 shrink-0 text-muted-foreground" aria-hidden />
+      <input
+        ref={inputRef}
+        value={q}
+        onChange={(e) => {
+          setQ(e.target.value);
+          setPanel(true);
+        }}
+        onFocus={() => {
+          setPanel(true);
+          void loadSearch();
+        }}
+        placeholder="Hledat články"
+        aria-label="Hledat články"
+        autoComplete="off"
+        className="w-full bg-transparent text-base outline-none placeholder:text-muted-foreground md:text-sm"
+      />
+    </form>
+  );
+
+  const hits = showPanel ? (
+    <SearchHits results={results} query={q} onPick={goTo} className="hdr-hits" />
+  ) : null;
 
   return (
-    <header className="site-header-sticky sticky top-0 z-50 shadow-sm">
-      <div className="bg-primary text-primary-foreground">
-        <div className="mx-auto flex h-12 max-w-[88rem] items-center gap-3 px-4 md:h-[4.25rem] md:gap-6 md:px-6">
-          <Link to="/" className="flex shrink-0 items-center" aria-label="Jedním hlasem — domů">
+    <header ref={headerRef} className="site-header-sticky sticky top-0 z-[60]">
+      <div className="hdr-bar">
+        <div className="mx-auto flex h-full max-w-[88rem] items-center gap-3 px-4 md:gap-4 md:px-6">
+          <Link to="/" className="hdr-brand" aria-label="Jedním hlasem — domů" onClick={closeAll}>
             <img
               src="/images/logo-bublina.png"
               alt=""
               width={280}
               height={218}
-              className="h-9 w-auto md:hidden"
+              className="h-11 w-auto md:hidden"
             />
-            <span className="hidden items-end gap-2 md:inline-flex">
-              <img
-                src="/images/logo-bublina-radek.png"
-                alt=""
-                width={4231}
-                height={1103}
-                className="h-12 w-auto lg:h-[3.25rem]"
-              />
-              <span
-                aria-hidden="true"
-                className="font-display mb-[calc(173/1103*3rem)] translate-y-[0.17em] whitespace-nowrap text-[0.75rem] font-bold uppercase leading-none tracking-[0.08em] text-white lg:mb-[calc(173/1103*3.25rem)] lg:text-[0.8333rem]"
-              >
-                Pro Izrael
-              </span>
+            <img
+              src="/images/logo-bublina-radek.png"
+              alt=""
+              width={4231}
+              height={1103}
+              className="hidden h-10 w-auto md:block"
+            />
+            <span aria-hidden="true" className="hdr-brand-text hidden lg:inline">
+              Pro Izrael
             </span>
           </Link>
 
-          <div className="ml-auto flex items-center gap-3">
-            <Link
-              to="/podporte-nas"
-              className="donate-pill donate-pill--sm"
-            >
+          <div className="hidden flex-1 justify-center md:flex">
+            <DesktopNav onNavigate={closeAll} />
+          </div>
+
+          <div className="ml-auto flex items-center gap-2 md:ml-0 md:gap-2">
+            <div className="relative hidden md:block">
+              <button
+                ref={searchBtnRef}
+                type="button"
+                aria-label="Hledat"
+                aria-expanded={searchOpen}
+                aria-controls="hdr-search-panel"
+                onClick={() => {
+                  setMenuOpen(false);
+                  setSearchOpen((v) => !v);
+                }}
+                className="hdr-round"
+              >
+                <Search className="size-5" aria-hidden />
+              </button>
+              {searchOpen ? (
+                <div id="hdr-search-panel" className="hdr-panel hdr-search-pop">
+                  {searchField(deskInput)}
+                  {hits}
+                </div>
+              ) : null}
+            </div>
+            <Link to="/podporte-nas" className="hdr-donate" onClick={closeAll}>
               Podpořte nás
             </Link>
             <button
+              ref={menuBtnRef}
               type="button"
-              aria-label="Hledat"
-              onClick={openSearch}
-              className="header-icon-btn rounded-md p-1.5 md:hidden"
+              aria-expanded={menuOpen}
+              aria-controls={menuOpen ? "hdr-bigmenu hdr-mobilemenu" : undefined}
+              aria-label={menuOpen ? "Zavřít menu" : "Otevřít menu"}
+              onClick={() => {
+                setSearchOpen(false);
+                setMenuOpen((v) => !v);
+              }}
+              className="hdr-menu-btn"
             >
-              <Search className="size-5" />
-            </button>
-            <button
-              type="button"
-              aria-label={open ? "Zavřít menu" : "Otevřít menu"}
-              onClick={() => setOpen((v) => !v)}
-              className="header-icon-btn rounded-md border border-primary-foreground/30 p-1.5 lg:hidden"
-            >
-              {open ? <X className="size-5" /> : <Menu className="size-5" />}
+              {menuOpen ? (
+                <X className="size-5" aria-hidden />
+              ) : (
+                <Menu className="size-5" aria-hidden />
+              )}
+              <span className="hdr-menu-btn-label hidden lg:inline" aria-hidden="true">
+                {menuOpen ? "Zavřít" : "Menu"}
+              </span>
             </button>
           </div>
         </div>
       </div>
 
-      <div className="hidden border-b border-border bg-card md:block">
-        <div className="mx-auto flex h-12 max-w-[88rem] items-center justify-between gap-4 px-4 md:px-6 lg:gap-8">
-          <nav className="flex items-center gap-6 lg:gap-8" aria-label="Hlavní navigace">
-            {DESKTOP_LINKS.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className="text-[15px] font-semibold leading-none tracking-normal text-foreground transition-colors hover:text-primary"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-          <div className="flex min-w-0 items-center gap-3 lg:gap-4">
-            <div ref={desktopBox} className="relative">
-              <form
-                role="search"
-                onSubmit={onSubmit}
-                className="flex h-9 w-40 items-center gap-2 rounded-full border border-border bg-card px-3 sm:w-44 lg:w-56"
-              >
-                <Search className="size-4 shrink-0 text-muted-foreground" />
-                <input
-                  value={q}
-                  onChange={(e) => {
-                    setQ(e.target.value);
-                    setPanel(true);
-                  }}
-                  onFocus={onSearchFocus}
-                  placeholder="Hledat články"
-                  aria-label="Hledat články"
-                  autoComplete="off"
-                  className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-                />
-              </form>
-              {showPanel ? (
-                <SearchHits
-                  results={results}
-                  query={q}
-                  onPick={goTo}
-                  className="absolute right-0 top-[calc(100%+0.4rem)] z-[60] max-h-80 w-[min(22rem,calc(100vw-2rem))] overflow-auto rounded-xl border border-border bg-card py-1 shadow-lg"
-                />
-              ) : null}
-            </div>
-            <a
-              href="https://www.facebook.com/JednimHlasem"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Jedním hlasem na Facebooku"
-              className="social-link flex size-9 items-center justify-center rounded-full border border-border text-foreground"
-            >
-              <FacebookIcon className="size-4" />
-            </a>
-            <a
-              href="https://www.instagram.com/JednimHlasem"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Jedním hlasem na Instagramu"
-              className="social-link flex size-9 items-center justify-center rounded-full border border-border text-foreground"
-            >
-              <InstagramIcon className="size-4" />
-            </a>
-            <a
-              href="https://x.com/JednimHlasem"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Jedním hlasem na X"
-              className="social-link flex size-9 items-center justify-center rounded-full border border-border text-foreground"
-            >
-              <XIcon className="size-4" />
-            </a>
-          </div>
-        </div>
-      </div>
+      {menuOpen ? <BigMenu onNavigate={closeAll} /> : null}
 
-      {open ? (
-        <div className="border-b border-border bg-background px-5 py-3 lg:hidden">
-          <div ref={mobileBox} className="md:hidden">
-            <form
-              role="search"
-              onSubmit={onSubmit}
-              className="mb-3 flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2"
-            >
-              <Search className="size-4 text-muted-foreground" />
-              <input
-                ref={searchRef}
-                value={q}
-                onChange={(e) => {
-                  setQ(e.target.value);
-                  setPanel(true);
-                }}
-                onFocus={() => setPanel(true)}
-                placeholder="Hledat články"
-                aria-label="Hledat články"
-                autoComplete="off"
-                className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-              />
-            </form>
-            {showPanel ? (
-              <SearchHits
-                results={results}
-                query={q}
-                onPick={goTo}
-                className="mb-3 overflow-hidden rounded-xl border border-border bg-card py-1"
-              />
-            ) : null}
-          </div>
-          <nav className="flex flex-col" aria-label="Mobilní menu">
-            {MENU_LINKS.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                onClick={() => setOpen(false)}
-                className="header-menu-link border-b border-border py-3 text-base font-semibold uppercase tracking-wide text-foreground"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-          <div className="mt-4 flex items-center gap-3 border-t border-border pt-4 md:hidden">
-            <a
-              href="https://www.facebook.com/JednimHlasem"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Jedním hlasem na Facebooku"
-              className="social-link flex size-9 items-center justify-center rounded-full border border-border text-foreground"
-            >
-              <FacebookIcon className="size-4" />
-            </a>
-            <a
-              href="https://www.instagram.com/JednimHlasem"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Jedním hlasem na Instagramu"
-              className="social-link flex size-9 items-center justify-center rounded-full border border-border text-foreground"
-            >
-              <InstagramIcon className="size-4" />
-            </a>
-            <a
-              href="https://x.com/JednimHlasem"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Jedním hlasem na X"
-              className="social-link flex size-9 items-center justify-center rounded-full border border-border text-foreground"
-            >
-              <XIcon className="size-4" />
-            </a>
+      {menuOpen ? (
+        <div id="hdr-mobilemenu" className="hdr-mobile md:hidden">
+          <div className="px-5 pb-8 pt-4">
+            {searchField()}
+            {hits}
+            <nav aria-label="Mobilní menu" className="mt-2">
+              {NAV_GROUPS.filter((g) => g.items.length > 0).map((g) => {
+                const isOpen = Boolean(acc[g.id]);
+                const listId = `hdr-acc-${g.id}`;
+                return (
+                  <div key={g.id} className="hdr-acc">
+                    <button
+                      type="button"
+                      className="hdr-acc-btn"
+                      aria-expanded={isOpen}
+                      aria-controls={listId}
+                      onClick={() => setAcc((v) => ({ ...v, [g.id]: !v[g.id] }))}
+                    >
+                      {g.label}
+                      <ChevronDown className="hdr-chevron size-5" aria-hidden />
+                    </button>
+                    {isOpen ? (
+                      <ul id={listId} className="pb-2">
+                        {[
+                          ...g.items,
+                          ...(g.all ? [{ ...g.all, label: `${g.all.label} →` }] : []),
+                        ].map((item) => (
+                          <li key={item.label}>
+                            <NavAnchor
+                              item={item}
+                              className="hdr-m-link hdr-m-link--sub"
+                              onNavigate={closeAll}
+                            >
+                              <ItemLabel item={item} />
+                            </NavAnchor>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
+                );
+              })}
+              {MOBILE_ROWS.map((item) => (
+                <NavAnchor
+                  key={item.label}
+                  item={item}
+                  className="hdr-m-link hdr-m-link--row"
+                  onNavigate={closeAll}
+                >
+                  <ItemLabel item={item} />
+                </NavAnchor>
+              ))}
+            </nav>
+            <SocialLinks className="mt-5 flex items-center gap-3" />
+            <p className="mt-4 text-xs text-muted-foreground">
+              © {new Date().getFullYear()} Jedním hlasem <span aria-hidden="true">·</span>{" "}
+              <NavAnchor item={PRIVACY_LINK} className="hdr-privacy" onNavigate={closeAll}>
+                {PRIVACY_LINK.label}
+              </NavAnchor>
+            </p>
           </div>
         </div>
       ) : null}
