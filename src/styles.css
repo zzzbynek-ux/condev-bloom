@@ -2602,9 +2602,14 @@ button.pager-btn {
   left: 0;
   top: 100%;
   z-index: 70;
-  padding-top: 0.4rem;
+  /* Mezera mezi kulatou pilulkou a hranatým panelem (zároveň drží najetí myší) */
+  padding-top: 0.45rem;
 }
+/* Rozbalovací panel je plocha: hranatý, tenká linka a jemný stín */
 .hdr-dd {
+  border: 1px solid #C9D3E6;
+  border-radius: 0;
+  box-shadow: 0 8px 24px rgba(11, 26, 58, 0.12);
   min-width: 15rem;
   padding: 0.4rem;
   list-style: none;
@@ -2614,7 +2619,7 @@ button.pager-btn {
 .hdr-big-link {
   display: block;
   padding: 0.55rem 0.75rem;
-  border-radius: 0.5rem;
+  border-radius: 0;
   color: var(--navy-900);
   font-size: 15px;
   font-weight: 600;
@@ -2626,8 +2631,8 @@ button.pager-btn {
 .hdr-dd-link:focus-visible,
 .hdr-big-link:hover,
 .hdr-big-link:focus-visible {
-  background: var(--accent-soft);
-  color: var(--primary);
+  background: #E8EEFB;
+  color: #0038B8;
   outline: none;
 }
 .hdr-dd-link:focus-visible,
@@ -2717,7 +2722,7 @@ button.pager-btn {
 .hdr-aktualne {
   grid-column: 1 / -1;
   padding: 1.1rem 1.25rem;
-  border-radius: 0.75rem;
+  border-radius: 0;
   background: var(--accent-soft);
 }
 @media (min-width: 1024px) {
