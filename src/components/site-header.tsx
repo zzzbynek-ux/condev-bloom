@@ -507,7 +507,7 @@ export function SiteHeader() {
               alt=""
               width={4231}
               height={1103}
-              className="hidden h-10 w-auto md:block"
+              className="hdr-logo hidden md:block"
             />
             <span aria-hidden="true" className="hdr-brand-text hidden lg:inline">
               Pro Izrael

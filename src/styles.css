@@ -2405,6 +2405,10 @@ button.pager-btn {
   color: #fff;
 }
 .hdr-brand {
+  /* Jednořádkové logo: výška a podíl ocásku bubliny (pod spodní hranou vodorovného pruhu) z výšky obrázku.
+     Ocásek měří 173 z 1103 px (spodní hrana pruhu je v 84,3 % výšky). */
+  --hdr-logo-h: 2.5rem;
+  --hdr-logo-tail: calc(173 / 1103);
   display: flex;
   flex-shrink: 0;
   align-items: center;
@@ -2412,7 +2416,15 @@ button.pager-btn {
   color: #fff;
   text-decoration: none;
 }
+.hdr-logo {
+  height: var(--hdr-logo-h);
+  width: auto;
+}
 .hdr-brand-text {
+  /* Účaří textu leží na spodní hraně pruhu loga: text je u spodku obrázku, zvednutý o výšku ocásku. */
+  align-self: flex-end;
+  margin-bottom: calc(var(--hdr-logo-h) * var(--hdr-logo-tail));
+  transform: translateY(0.15em);
   font-family: var(--font-display);
   font-size: 12px;
   font-weight: 700;
