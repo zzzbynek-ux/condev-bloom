@@ -2853,3 +2853,16 @@ button.pager-btn {
     text-decoration: underline;
   }
 }
+
+/* Rámeček kolem hero: barva pozadí stránky, hranatý. Mobil jen 10 px nahoře a dole, od md 12 px nahoře a dole a 24 px po stranách */
+.hero-frame {
+  padding: 10px 0;
+}
+.hero-frame .hero-section {
+  border-radius: 0;
+}
+@media (min-width: 768px) {
+  .hero-frame {
+    padding: 12px 24px;
+  }
+}
