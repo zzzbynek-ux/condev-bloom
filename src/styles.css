@@ -435,20 +435,6 @@ a.tag--main:focus-visible {
   background: var(--gold-hover, #D4B03A);
   color: var(--donate-ink, #0b1a3a);
 }
-@media (max-width: 767px) {
-  .donate-pill--sm {
-    height: 2rem;
-    padding: 0 0.7rem;
-    font-size: 12px;
-  }
-}
-@media (min-width: 1024px) {
-  .site-header-sticky .donate-pill {
-    height: 2.5rem;
-    padding: 0 1.5rem;
-    font-size: 0.875rem;
-  }
-}
 
 .clanky-tabs a,
 .clanky-tabs button {
@@ -754,12 +740,6 @@ a.tag--main:focus-visible {
 
 /* ===== Mobil a tablet (do 1023 px) — desktop zůstává beze změny ===== */
 @media (max-width: 1023px) {
-  /* 5) Sticky header: neprůhledný, nad obsahem */
-  .site-header-sticky {
-    background-color: #ffffff;
-    z-index: 60;
-  }
-
   /* 3) Výběr redakce: jeden sloupec */
   .vyber-grid {
     grid-template-columns: 1fr;
@@ -1211,30 +1191,6 @@ a.tag--main:focus-visible {
   color: #0038B8 !important;
 }
 
-/* Sprint BW — hover hamburger */
-.header-icon-btn {
-  transition: background-color 150ms ease, color 150ms ease;
-}
-.header-icon-btn:hover,
-.header-icon-btn:focus-visible {
-  background-color: #E8F1FF;
-  color: #0038B8;
-  outline: none;
-}
-.header-menu-link {
-  margin-left: -1.25rem;
-  margin-right: -1.25rem;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  transition: background-color 150ms ease, color 150ms ease;
-}
-.header-menu-link:not([aria-current="true"]):hover,
-.header-menu-link:not([aria-current="true"]):focus-visible {
-  background-color: #D6E6FC;
-  color: #0038B8;
-  outline: none;
-}
-
 .tema-btn-outline {
   border: 2px solid var(--color-primary-foreground);
   background-color: transparent;
@@ -1253,9 +1209,7 @@ a.tag--main:focus-visible {
   .clanky-tabs button,
   .tema-btn-ice,
   .tema-btn-incident,
-  .tema-btn-outline,
-  .header-icon-btn,
-  .header-menu-link {
+  .tema-btn-outline {
     transition: none;
   }
 }
@@ -2426,16 +2380,429 @@ button.pager-btn {
   }
 }
 
-/* Cíl posunu po změně stránky: pod lepkavou hlavičkou (mobil 48 px, od md modrý pruh 68 px + menu 48 px + linka 1 px) a malá rezerva */
+/* Cíl posunu po změně stránky: pod lepkavou hlavičkou (jeden modrý pruh: mobil 60 px, od md 64 px) a malá rezerva */
 :root {
-  --site-header-h: 3rem;
+  --site-header-h: 3.75rem;
   --scroll-gap: 1.25rem;
 }
 @media (min-width: 768px) {
   :root {
-    --site-header-h: 7.3125rem;
+    --site-header-h: 4rem;
   }
 }
 .scroll-below-header {
   scroll-margin-top: calc(var(--site-header-h) + var(--scroll-gap));
+}
+
+/* ===== Hlavička a menu (hybridní menu) ===== */
+.tag--sm {
+  padding: 1px 6px;
+  font-size: 11px;
+}
+.hdr-bar {
+  height: var(--site-header-h);
+  background: var(--primary);
+  color: #fff;
+}
+.hdr-brand {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.75rem;
+  color: #fff;
+  text-decoration: none;
+}
+.hdr-brand-text {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.hdr-pill,
+.hdr-round,
+.hdr-menu-btn,
+.hdr-donate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+.hdr-pill {
+  gap: 0.25rem;
+  height: 2.25rem;
+  padding: 0 0.85rem;
+  border: 0;
+  border-radius: 9999px;
+  background: transparent;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+.hdr-pill:hover,
+.hdr-pill[aria-expanded="true"] {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+.hdr-pill[aria-expanded="true"] .hdr-chevron,
+.hdr-acc-btn[aria-expanded="true"] .hdr-chevron {
+  transform: rotate(180deg);
+}
+.hdr-chevron {
+  transition: transform 150ms ease;
+}
+.hdr-round {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  background: transparent;
+  color: #fff;
+}
+.hdr-round:hover,
+.hdr-round[aria-expanded="true"] {
+  background: rgba(255, 255, 255, 0.18);
+}
+.hdr-donate {
+  height: 2.375rem;
+  padding: 0 0.95rem;
+  border-radius: 9999px;
+  background: var(--donate-gold);
+  color: var(--navy-900);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+.hdr-donate:visited {
+  color: var(--navy-900);
+}
+.hdr-donate:hover {
+  background: var(--gold-hover, #D4B03A);
+  color: var(--navy-900);
+}
+.hdr-menu-btn {
+  gap: 0.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  border-radius: 9999px;
+  background: transparent;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+}
+.hdr-menu-btn:hover,
+.hdr-menu-btn[aria-expanded="true"] {
+  background: rgba(255, 255, 255, 0.18);
+}
+@media (min-width: 768px) {
+  .hdr-donate {
+    height: 2.5rem;
+    padding: 0 1.25rem;
+    font-size: 14px;
+  }
+  .hdr-menu-btn {
+    height: 2.5rem;
+  }
+}
+@media (min-width: 768px) {
+  .hdr-pill {
+    padding: 0 0.6rem;
+    font-size: 14px;
+  }
+  .hdr-pill .hdr-chevron {
+    display: none;
+  }
+}
+@media (min-width: 1024px) {
+  .hdr-pill {
+    padding: 0 0.75rem;
+    font-size: 15px;
+  }
+  .hdr-pill .hdr-chevron {
+    display: block;
+  }
+  .hdr-menu-btn {
+    width: auto;
+    padding: 0 1.1rem;
+  }
+}
+@media (min-width: 1280px) {
+  .hdr-pill {
+    padding: 0 1rem;
+  }
+}
+.hdr-pill:focus-visible,
+.hdr-round:focus-visible,
+.hdr-menu-btn:focus-visible,
+.hdr-donate:focus-visible,
+.hdr-brand:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Panely: bílé, zaoblení je tu v pořádku (je to menu) */
+.hdr-panel {
+  background: #fff;
+  color: var(--navy-900);
+  border: 1px solid rgba(0, 56, 184, 0.14);
+  border-radius: 0.75rem;
+  box-shadow: 0 16px 40px rgba(11, 26, 58, 0.18);
+  animation: hdr-pop 140ms ease-out;
+}
+@keyframes hdr-pop {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hdr-dd-wrap {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 70;
+  padding-top: 0.4rem;
+}
+.hdr-dd {
+  min-width: 15rem;
+  padding: 0.4rem;
+  list-style: none;
+  margin: 0;
+}
+.hdr-dd-link,
+.hdr-big-link {
+  display: block;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.5rem;
+  color: var(--navy-900);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+.hdr-dd-link:hover,
+.hdr-dd-link:focus-visible,
+.hdr-big-link:hover,
+.hdr-big-link:focus-visible {
+  background: var(--accent-soft);
+  color: var(--primary);
+  outline: none;
+}
+.hdr-dd-link:focus-visible,
+.hdr-big-link:focus-visible,
+.hdr-m-link:focus-visible,
+.hdr-acc-btn:focus-visible,
+.hdr-social:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+.hdr-dd-all {
+  margin-top: 0.25rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid rgba(0, 56, 184, 0.14);
+}
+.hdr-dd-link--all {
+  color: var(--primary);
+}
+
+/* Hledání */
+.hdr-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background: #fff;
+}
+.hdr-search-pop {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.5rem);
+  z-index: 70;
+  width: min(24rem, calc(100vw - 2rem));
+  padding: 0.6rem;
+}
+.hdr-hits {
+  max-height: 20rem;
+  margin-top: 0.4rem;
+  overflow: auto;
+  list-style: none;
+  padding: 0.25rem 0;
+}
+
+/* Velké menu (desktop) */
+.hdr-big {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  max-height: calc(100dvh - var(--site-header-h));
+  overflow-y: auto;
+  background: #fff;
+  color: var(--navy-900);
+  border-top: 1px solid rgba(0, 56, 184, 0.14);
+  box-shadow: 0 24px 40px rgba(11, 26, 58, 0.18);
+  animation: hdr-pop 140ms ease-out;
+}
+.hdr-big-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem 2rem;
+}
+@media (min-width: 1024px) {
+  .hdr-big-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 1.35fr);
+  }
+}
+.hdr-big-heading {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+.hdr-big-link {
+  margin-left: -0.75rem;
+}
+.hdr-big-link--cta {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: var(--primary);
+}
+.hdr-aktualne {
+  grid-column: 1 / -1;
+  padding: 1.1rem 1.25rem;
+  border-radius: 0.75rem;
+  background: var(--accent-soft);
+}
+@media (min-width: 1024px) {
+  .hdr-aktualne {
+    grid-column: auto;
+  }
+}
+.hdr-big-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.75rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(0, 56, 184, 0.14);
+}
+.hdr-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgba(0, 56, 184, 0.25);
+  border-radius: 9999px;
+  color: var(--navy-900);
+}
+@media (min-width: 768px) {
+  .hdr-social {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+/* Mobilní menu */
+.hdr-mobile {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  max-height: calc(100dvh - var(--site-header-h));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #fff;
+  color: var(--navy-900);
+  border-top: 1px solid rgba(0, 56, 184, 0.14);
+  box-shadow: 0 24px 40px rgba(11, 26, 58, 0.18);
+}
+.hdr-acc,
+.hdr-m-link--row {
+  border-bottom: 1px solid rgba(0, 56, 184, 0.14);
+}
+.hdr-acc-btn {
+  display: flex;
+  width: 100%;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: space-between;
+  border: 0;
+  background: transparent;
+  color: var(--navy-900);
+  font-size: 16px;
+  font-weight: 700;
+  text-align: left;
+}
+.hdr-m-link {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  color: var(--navy-900);
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.hdr-m-link--row {
+  min-height: 3rem;
+  font-weight: 700;
+}
+.hdr-m-link--sub {
+  padding-left: 0.75rem;
+  font-size: 15px;
+}
+.hdr-m-link:hover {
+  color: var(--primary);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hdr-panel,
+  .hdr-big {
+    animation: none;
+  }
+  .hdr-pill,
+  .hdr-round,
+  .hdr-menu-btn,
+  .hdr-donate,
+  .hdr-chevron,
+  .hdr-dd-link,
+  .hdr-big-link {
+    transition: none;
+  }
+}
+.hdr-privacy {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+@media (min-width: 768px) {
+  .hdr-privacy {
+    min-height: 0;
+    text-decoration: none;
+  }
+  .hdr-privacy:hover {
+    text-decoration: underline;
+  }
 }
