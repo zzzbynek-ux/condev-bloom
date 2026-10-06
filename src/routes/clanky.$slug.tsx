@@ -121,7 +121,7 @@ function ArticlePage() {
               </div>
             ) : null}
             {article.tags.length ? (
-              <div className="mt-10 flex flex-wrap gap-2">
+              <div className="mt-10 flex flex-wrap gap-x-2 gap-y-3.5 pb-2.5">
                 {article.tags.map((t) => (
                   <Tag key={t} search={{ tag: t }}>
                     {t}

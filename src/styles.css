@@ -339,57 +339,69 @@
   }
 }
 
-/* Štítky (tagy a rubriky) – komponenta Tag v src/components/tag.tsx */
+/* Štítky (tagy a rubriky) – komponenta Tag v src/components/tag.tsx. Jedno sdílené pravidlo pro všechny varianty:
+   hranatá „bublina“ s ocáskem vlevo dole, světlá výchozí barva, po najetí modrá. */
 .tag {
+  position: relative;
   display: inline-block;
   max-width: 100%;
   padding: 4px 8px;
+  border: 1px solid transparent;
   border-radius: 0;
-  background-color: #0038B8;
-  color: #fff;
+  box-shadow: none;
+  background-color: #E8EEFB;
+  color: #0B1A3A;
   font-family: var(--font-sans);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.2;
   letter-spacing: 0;
   text-transform: none;
   text-decoration: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
   transition: background-color 150ms ease, color 150ms ease;
 }
+/* Ocásek bubliny: bere barvu z tagu, nemění jeho rozměr */
+.tag::after {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: calc(100% + 1px);
+  width: 10px;
+  height: 8px;
+  background: inherit;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  pointer-events: none;
+}
 .tag:visited {
-  color: #fff;
+  color: #0B1A3A;
 }
-a.tag:hover,
+@media (hover: hover) {
+  a.tag:hover {
+    background-color: #0038B8;
+    color: #fff;
+  }
+}
 a.tag:focus-visible {
-  background-color: #0B1A3A;
-  color: #fff;
+  outline: 3px solid #6997F4;
+  outline-offset: 3px;
 }
-/* Hlavní rubrika: světlý podklad, modrý text a linka nahoře */
-.tag--main {
-  padding-top: 2px;
-  border-top: 2px solid #0038B8;
-  background-color: #fff;
-  color: #0038B8;
-}
-.tag--main:visited {
-  color: #0038B8;
-}
-.dark .tag--main {
-  background-color: transparent;
-}
-/* Sloupek: stejný štítek, linka nahoře ve zlaté */
-.tag--column {
-  border-top-color: var(--donate-gold, #E8C547);
-}
+/* Incident: červená zůstává, tvar a ocásek jsou stejné */
 .tag--danger {
   background-color: var(--destructive, #E11D2E);
+  color: #fff;
 }
-a.tag--main:hover,
-a.tag--main:focus-visible {
-  border-top-color: #0B1A3A;
+.tag--danger:visited {
+  color: #fff;
+}
+/* Tag na světlém podkladu (položka menu při najetí): bílý podklad a linka, aby nezmizel */
+.hdr-dd-link:hover .tag,
+.hdr-dd-link:focus-visible .tag,
+.hdr-big-link:hover .tag,
+.hdr-big-link:focus-visible .tag {
+  background-color: #fff;
+  border-color: #C9D3E6;
 }
 .tag-date {
   flex: none;
@@ -456,7 +468,6 @@ a.tag--main:focus-visible {
 }
 
 .cta-link:focus-visible,
-.tag:focus-visible,
 .clanky-tabs a:focus-visible,
 .clanky-tabs button:focus-visible {
   outline: 2px solid var(--accent-blue);
@@ -2442,6 +2453,10 @@ button.pager-btn {
 .tag--sm {
   padding: 1px 6px;
   font-size: 11px;
+}
+.tag--sm::after {
+  width: 7px;
+  height: 6px;
 }
 .hdr-topline {
   height: var(--hdr-topline-h);
