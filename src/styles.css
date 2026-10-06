@@ -442,7 +442,7 @@ a.tag--main:focus-visible {
   color: #0038B8 !important;
   border: none !important;
   box-shadow: none !important;
-  border-radius: 0;
+  border-radius: 9999px;
   font-weight: 600;
 }
 .clanky-tabs a[aria-current="true"],
@@ -783,7 +783,7 @@ a.tag--main:focus-visible {
     color: #0038B8 !important;
     background: var(--accent-soft, #E8F1FF) !important;
     border: none !important;
-    border-radius: 0;
+    border-radius: 9999px;
     box-shadow: none !important;
     padding: 0.7rem 1.1rem !important;
   }
@@ -1124,7 +1124,7 @@ a.tag--main:focus-visible {
     color: #0038B8 !important;
     background: var(--accent-soft, #E8F1FF) !important;
     border: none !important;
-    border-radius: 0;
+    border-radius: 9999px;
     box-shadow: none !important;
     padding: 0.7rem 1.15rem !important;
     text-transform: none;
