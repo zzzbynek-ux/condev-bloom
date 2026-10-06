@@ -2885,6 +2885,16 @@ button.pager-btn {
   }
 }
 
+/* Prolnutí vrstev hero (fotka + overlay) při přepnutí slidu; délka odpovídá HERO_FADE_MS v index.tsx, bez prolnutí při prefers-reduced-motion */
+.hero-layer {
+  transition-duration: 280ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-layer {
+    transition: none;
+  }
+}
+
 /* Hero na tabletu (768 až 1279 px): doplňkové ztmavení zleva pod text, síla per slide v --hero-shade-tablet (content.ts).
    Desktop (od 1280 px) a slidy bez hodnoty zůstávají beze změny. */
 @media (min-width: 768px) and (max-width: 1279px) {

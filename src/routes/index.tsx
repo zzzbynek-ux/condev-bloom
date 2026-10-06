@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import type * as React from "react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
@@ -9,7 +9,7 @@ import { ArticleCard } from "@/components/article-card";
 import { Pagination } from "@/components/pagination";
 import { Tag, TagDate } from "@/components/tag";
 import { ARTICLE_SECTIONS, CLANKY_FILTERS, allArticles, HERO_BANNER, KAMPAN_SLIDES, KONRAD, VYBER_REDAKCE } from "@/lib/content";
-import { heroSrcSet, heroWebpSrcSet, heroLcpPreload, prefetchHero, HERO_SIZES, webpExists } from "@/lib/img";
+import { heroSrcSet, heroWebpSrcSet, heroLcpPreload, prefetchHeroIdle, HERO_SIZES, webpExists } from "@/lib/img";
 import { csNbsp } from "@/lib/typo";
 import { articlesIn, clipPerex, formatDate } from "@/lib/articles";
 import { SHOW_PTEJTE_SE_AI } from "@/lib/feature-flags";
@@ -51,21 +51,62 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+/** Délka prolnutí fotek při přepnutí slidu; s prefers-reduced-motion se prolnutí vynechá. */
+const HERO_FADE_MS = 280;
+const HERO_AUTO_MS = 6000;
+
+type HeroState = { shown: number; pending: number | null; ready: boolean; under: number[] };
+type HeroAction =
+  | { type: "request"; delta: number; total: number }
+  | { type: "loaded"; idx: number }
+  | { type: "settle" };
+
+/**
+ * shown = slide, který je vidět (fotka, overlay i text). pending = slide, jehož fotka se načítá; ready = fotka
+ * je načtená a prolíná se. Text a overlay nového slidu se berou ze stejného slidu jako fotka, takže se nic
+ * nepřepne dřív než obrázek. Další klik se počítá od naposledy vyžádaného slidu; starý požadavek se zahodí.
+ * under = vrstvy, které zůstávají pod právě se prolínající fotkou, aby při kliknutí během prolnutí neprosvitlo pozadí.
+ */
+function heroReducer(state: HeroState, action: HeroAction): HeroState {
+  switch (action.type) {
+    case "request": {
+      const base = state.pending ?? state.shown;
+      const target = (base + action.delta + action.total) % action.total;
+      // rozpracované prolnutí se uzná hned (slid se vyžádá od něj), stará vrstva zůstane pod ním do konce prolnutí
+      const fading = state.ready && state.pending !== null;
+      const shown = fading ? state.pending! : state.shown;
+      const under = fading ? [...state.under, state.shown] : state.under;
+      return { shown, pending: target === shown ? null : target, ready: false, under };
+    }
+    case "loaded":
+      return state.pending === action.idx && !state.ready ? { ...state, ready: true } : state;
+    case "settle":
+      if (state.ready && state.pending !== null)
+        return { shown: state.pending, pending: null, ready: false, under: [] };
+      return state.under.length ? { ...state, under: [] } : state;
+  }
+}
+
+function overlayClass(overlay: string) {
+  if (overlay === "stronger")
+    return "hero-overlay pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(11,26,58,0.96)_0%,rgba(11,26,58,0.9)_50%,rgba(11,26,58,0.5)_75%,transparent_100%)]";
+  if (overlay === "strong")
+    return "hero-overlay pointer-events-none absolute inset-0 bg-linear-to-r from-[#0b1a3a]/96 via-[#0b1a3a]/78 via-[40%] to-transparent";
+  return "hero-overlay pointer-events-none absolute inset-0 bg-linear-to-r from-[#0b1a3a]/92 via-[#0b1a3a]/62 via-[42%] to-transparent";
+}
+
+/** Fotka hero (picture + img). Zdroj a sizes jsou stejné, jaké používá předběžné načítání (prefetchHero). */
 function HeroFrame({
   slide,
-  visible,
-  fetchPriority,
   onReady,
 }: {
   slide: (typeof HERO_BANNER)[number];
-  visible: boolean;
-  fetchPriority: "high" | "low";
-  onReady?: () => void;
+  onReady?: (el: HTMLImageElement) => void;
 }) {
   const heroWebp = heroWebpSrcSet(slide.image);
   const markReady = (el: HTMLImageElement | null) => {
     if (!el || !onReady) return;
-    if (el.complete && el.naturalWidth > 0) onReady();
+    if (el.complete && el.naturalWidth > 0) onReady(el);
   };
   const img = (
     <img
@@ -76,13 +117,11 @@ function HeroFrame({
       alt=""
       width={1235}
       height={459}
-      loading={fetchPriority === "high" ? "eager" : "lazy"}
+      loading="eager"
       decoding="async"
-      fetchPriority={fetchPriority}
-      onLoad={onReady}
-      className={`hero-img pointer-events-none absolute inset-0 size-full object-cover transition-opacity duration-300 ${
-        visible ? "opacity-100" : "opacity-0"
-      }`}
+      fetchPriority="high"
+      onLoad={(e) => onReady?.(e.currentTarget)}
+      className="hero-img pointer-events-none absolute inset-0 size-full object-cover"
       style={{
         ["--hero-focus" as string]: slide.focus,
         ["--hero-focus-mobile" as string]: "focusMobile" in slide ? slide.focusMobile : slide.focus,
@@ -99,61 +138,93 @@ function HeroFrame({
   );
 }
 
-function Hero() {
-  const [i, setI] = useState(0);
-  const [painted, setPainted] = useState(0);
-  const total = HERO_BANNER.length;
-  const go = (d: number) => setI((v) => (v + d + total) % total);
-
-  useEffect(() => {
-    const t = setInterval(() => setI((v) => (v + 1) % total), 6000);
-    return () => clearInterval(t);
-  }, [total]);
-
-  useEffect(() => {
-    prefetchHero(HERO_BANNER[(painted + 1) % total]!.image);
-    prefetchHero(HERO_BANNER[(painted - 1 + total) % total]!.image);
-  }, [painted, total]);
-
-  const slide = HERO_BANNER[i] ?? HERO_BANNER[0]!;
-  const paintedSlide = HERO_BANNER[painted] ?? slide;
-  const incoming = i !== painted;
-
+/** Vrstva slidu: fotka + overlay (s vlastní silou ztmavení), prolíná se jako celek. */
+function HeroLayer({
+  slide,
+  visible,
+  onReady,
+}: {
+  slide: (typeof HERO_BANNER)[number];
+  visible: boolean;
+  onReady?: (el: HTMLImageElement) => void;
+}) {
   return (
-    <section
-      className={`hero-section relative isolate overflow-hidden bg-navy-900${slide.overlay === "strong" ? " hero-overlay-strong" : ""}`}
+    <div
+      className={`hero-layer absolute inset-0 transition-opacity ${visible ? "opacity-100" : "opacity-0"}`}
       style={{
         ["--hero-shade-top" as string]: "shadeMobile" in slide ? slide.shadeMobile : undefined,
         ["--hero-shade-tablet" as string]: "shadeTablet" in slide ? slide.shadeTablet : undefined,
       }}
     >
-      <HeroFrame slide={paintedSlide} visible fetchPriority={incoming ? "low" : "high"} />
-      {incoming ? (
-        <HeroFrame
-          key={slide.image}
-          slide={slide}
-          visible={false}
-          fetchPriority="high"
-          onReady={() => setPainted(i)}
+      <HeroFrame slide={slide} {...(onReady ? { onReady } : {})} />
+      <div aria-hidden className={overlayClass(slide.overlay)} />
+    </div>
+  );
+}
+
+function Hero() {
+  const total = HERO_BANNER.length;
+  const [{ shown, pending, ready, under }, dispatch] = useReducer(heroReducer, {
+    shown: 0,
+    pending: null,
+    ready: false,
+    under: [],
+  });
+  const go = (d: number) => dispatch({ type: "request", delta: d, total });
+
+  // Fotka je načtená a dekódovaná: slide se (i s textem a overlayem) přepne najednou a fotka se prolne.
+  const onPendingReady = (idx: number) => (el: HTMLImageElement) => {
+    const done = () =>
+      requestAnimationFrame(() => requestAnimationFrame(() => dispatch({ type: "loaded", idx })));
+    if (el.decode) el.decode().then(done, done);
+    else done();
+  };
+
+  // Po prolnutí se vrstva stane základní a stará se odstraní.
+  const fading = ready || under.length > 0;
+  useEffect(() => {
+    if (!fading) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const t = setTimeout(() => dispatch({ type: "settle" }), reduce ? 0 : HERO_FADE_MS + 20);
+    return () => clearTimeout(t);
+  }, [fading, pending, shown, under.length]);
+
+  // Auto-přepínání: čas se počítá od posledního přepnutí, ruční klik ho vynuluje a při načítání nového slidu neběží.
+  useEffect(() => {
+    if (pending !== null) return;
+    const t = setTimeout(() => dispatch({ type: "request", delta: 1, total }), HERO_AUTO_MS);
+    return () => clearTimeout(t);
+  }, [shown, pending, total]);
+
+  // Předem se načítají dva slidy dopředu a jeden zpět, v klidové chvíli a stejnou variantou fotky jako v hero.
+  useEffect(() => {
+    const at = (d: number) => HERO_BANNER[(shown + d + total) % total]!.image;
+    return prefetchHeroIdle([at(1), at(2), at(-1)]);
+  }, [shown, total]);
+
+  const content = ready && pending !== null ? pending : shown;
+  const slide = HERO_BANNER[content] ?? HERO_BANNER[0]!;
+  const layers = [...under, shown, ...(pending !== null ? [pending] : [])];
+
+  return (
+    <section
+      className={`hero-section relative isolate overflow-hidden bg-navy-900${slide.overlay === "strong" ? " hero-overlay-strong" : ""}`}
+    >
+      {layers.map((idx) => (
+        <HeroLayer
+          key={idx}
+          slide={HERO_BANNER[idx]!}
+          visible={idx !== pending || ready}
+          {...(idx === pending ? { onReady: onPendingReady(idx) } : {})}
         />
-      ) : null}
-      <div
-        aria-hidden
-        className={
-          slide.overlay === "stronger"
-            ? "hero-overlay pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(11,26,58,0.96)_0%,rgba(11,26,58,0.9)_50%,rgba(11,26,58,0.5)_75%,transparent_100%)]"
-            : slide.overlay === "strong"
-              ? "hero-overlay pointer-events-none absolute inset-0 bg-linear-to-r from-[#0b1a3a]/96 via-[#0b1a3a]/78 via-[40%] to-transparent"
-              : "hero-overlay pointer-events-none absolute inset-0 bg-linear-to-r from-[#0b1a3a]/92 via-[#0b1a3a]/62 via-[42%] to-transparent"
-        }
-      />
+      ))}
 
       <div className="hero-grid pointer-events-none relative z-10 mx-auto flex h-full max-w-[88rem] items-center justify-start px-5 py-6 md:px-16">
         <div className="hero-card pointer-events-auto w-full max-w-md md:max-w-md lg:max-w-lg">
           <p className="kicker text-white/70">
             {slide.kicker}
           </p>
-          {i === 0 ? (
+          {content === 0 ? (
             <h1 key={slide.title} className="hero-title animate-rise text-balance font-display font-bold text-white">
               {slide.title}
             </h1>
@@ -209,7 +280,7 @@ function Hero() {
               className="hero-count"
               aria-live="polite"
             >
-              {i + 1} / {total}
+              {content + 1} / {total}
             </span>
             <button
               type="button"
