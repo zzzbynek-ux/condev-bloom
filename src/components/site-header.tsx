@@ -491,149 +491,153 @@ export function SiteHeader() {
   ) : null;
 
   return (
-    <header ref={headerRef} className="site-header-sticky sticky top-0 z-[60]">
-      <div className="hdr-bar">
-        <div className="mx-auto flex h-full max-w-[88rem] items-center gap-3 px-4 md:gap-4 md:px-6">
-          <Link to="/" className="hdr-brand" aria-label="Jedním hlasem — domů" onClick={closeAll}>
-            <img
-              src="/images/logo-bublina.png"
-              alt=""
-              width={280}
-              height={218}
-              className="h-11 w-auto md:hidden"
-            />
-            <img
-              src="/images/logo-bublina-radek.png"
-              alt=""
-              width={4231}
-              height={1103}
-              className="hdr-logo hidden md:block"
-            />
-            <span aria-hidden="true" className="hdr-brand-text hidden lg:inline">
-              Pro Izrael
-            </span>
-          </Link>
-
-          <div className="hidden flex-1 justify-center md:flex">
-            <DesktopNav onNavigate={closeAll} />
-          </div>
-
-          <div className="ml-auto flex items-center gap-2 md:ml-0 md:gap-2">
-            <div className="relative hidden md:block">
-              <button
-                ref={searchBtnRef}
-                type="button"
-                aria-label="Hledat"
-                aria-expanded={searchOpen}
-                aria-controls="hdr-search-panel"
-                onClick={() => {
-                  setMenuOpen(false);
-                  setSearchOpen((v) => !v);
-                }}
-                className="hdr-round"
-              >
-                <Search className="size-5" aria-hidden />
-              </button>
-              {searchOpen ? (
-                <div id="hdr-search-panel" className="hdr-panel hdr-search-pop">
-                  {searchField(deskInput)}
-                  {hits}
-                </div>
-              ) : null}
-            </div>
-            <Link to="/podporte-nas" className="hdr-donate" onClick={closeAll}>
-              Podpořte nás
-            </Link>
-            <button
-              ref={menuBtnRef}
-              type="button"
-              aria-expanded={menuOpen}
-              aria-controls={menuOpen ? "hdr-bigmenu hdr-mobilemenu" : undefined}
-              aria-label={menuOpen ? "Zavřít menu" : "Otevřít menu"}
-              onClick={() => {
-                setSearchOpen(false);
-                setMenuOpen((v) => !v);
-              }}
-              className="hdr-menu-btn"
-            >
-              {menuOpen ? (
-                <X className="size-5" aria-hidden />
-              ) : (
-                <Menu className="size-5" aria-hidden />
-              )}
-              <span className="hdr-menu-btn-label hidden lg:inline" aria-hidden="true">
-                {menuOpen ? "Zavřít" : "Menu"}
+    <>
+      {/* Bílý proužek není přilepený: odjede s obsahem, sticky zůstává jen modrý pruh (header je sourozenec, ne jeho rodič). */}
+      <div aria-hidden="true" className="hdr-topline" />
+      <header ref={headerRef} className="site-header-sticky sticky top-0 z-[60]">
+        <div className="hdr-bar">
+          <div className="mx-auto flex h-full max-w-[88rem] items-center gap-3 px-4 md:gap-4 md:px-6">
+            <Link to="/" className="hdr-brand" aria-label="Jedním hlasem — domů" onClick={closeAll}>
+              <img
+                src="/images/logo-bublina.png"
+                alt=""
+                width={280}
+                height={218}
+                className="h-11 w-auto md:hidden"
+              />
+              <img
+                src="/images/logo-bublina-radek.png"
+                alt=""
+                width={4231}
+                height={1103}
+                className="hdr-logo hidden md:block"
+              />
+              <span aria-hidden="true" className="hdr-brand-text hidden lg:inline">
+                Pro Izrael
               </span>
-            </button>
-          </div>
-        </div>
-      </div>
+            </Link>
 
-      {menuOpen ? <BigMenu onNavigate={closeAll} /> : null}
+            <div className="hidden flex-1 justify-center md:flex">
+              <DesktopNav onNavigate={closeAll} />
+            </div>
 
-      {menuOpen ? (
-        <div id="hdr-mobilemenu" className="hdr-mobile md:hidden">
-          <div className="px-5 pb-8 pt-4">
-            {searchField()}
-            {hits}
-            <nav aria-label="Mobilní menu" className="mt-2">
-              {NAV_GROUPS.filter((g) => g.items.length > 0).map((g) => {
-                const isOpen = Boolean(acc[g.id]);
-                const listId = `hdr-acc-${g.id}`;
-                return (
-                  <div key={g.id} className="hdr-acc">
-                    <button
-                      type="button"
-                      className="hdr-acc-btn"
-                      aria-expanded={isOpen}
-                      aria-controls={listId}
-                      onClick={() => setAcc((v) => ({ ...v, [g.id]: !v[g.id] }))}
-                    >
-                      {g.label}
-                      <ChevronDown className="hdr-chevron size-5" aria-hidden />
-                    </button>
-                    {isOpen ? (
-                      <ul id={listId} className="pb-2">
-                        {[
-                          ...g.items,
-                          ...(g.all ? [{ ...g.all, label: `${g.all.label} →` }] : []),
-                        ].map((item) => (
-                          <li key={item.label}>
-                            <NavAnchor
-                              item={item}
-                              className="hdr-m-link hdr-m-link--sub"
-                              onNavigate={closeAll}
-                            >
-                              <ItemLabel item={item} />
-                            </NavAnchor>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
-                  </div>
-                );
-              })}
-              {MOBILE_ROWS.map((item) => (
-                <NavAnchor
-                  key={item.label}
-                  item={item}
-                  className="hdr-m-link hdr-m-link--row"
-                  onNavigate={closeAll}
+            <div className="ml-auto flex items-center gap-2 md:ml-0 md:gap-2">
+              <div className="relative hidden md:block">
+                <button
+                  ref={searchBtnRef}
+                  type="button"
+                  aria-label="Hledat"
+                  aria-expanded={searchOpen}
+                  aria-controls="hdr-search-panel"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setSearchOpen((v) => !v);
+                  }}
+                  className="hdr-round"
                 >
-                  <ItemLabel item={item} />
-                </NavAnchor>
-              ))}
-            </nav>
-            <SocialLinks className="mt-5 flex items-center gap-3" />
-            <p className="mt-4 text-xs text-muted-foreground">
-              © {new Date().getFullYear()} Jedním hlasem <span aria-hidden="true">·</span>{" "}
-              <NavAnchor item={PRIVACY_LINK} className="hdr-privacy" onNavigate={closeAll}>
-                {PRIVACY_LINK.label}
-              </NavAnchor>
-            </p>
+                  <Search className="size-5" aria-hidden />
+                </button>
+                {searchOpen ? (
+                  <div id="hdr-search-panel" className="hdr-panel hdr-search-pop">
+                    {searchField(deskInput)}
+                    {hits}
+                  </div>
+                ) : null}
+              </div>
+              <Link to="/podporte-nas" className="hdr-donate" onClick={closeAll}>
+                Podpořte nás
+              </Link>
+              <button
+                ref={menuBtnRef}
+                type="button"
+                aria-expanded={menuOpen}
+                aria-controls={menuOpen ? "hdr-bigmenu hdr-mobilemenu" : undefined}
+                aria-label={menuOpen ? "Zavřít menu" : "Otevřít menu"}
+                onClick={() => {
+                  setSearchOpen(false);
+                  setMenuOpen((v) => !v);
+                }}
+                className="hdr-menu-btn"
+              >
+                {menuOpen ? (
+                  <X className="size-5" aria-hidden />
+                ) : (
+                  <Menu className="size-5" aria-hidden />
+                )}
+                <span className="hdr-menu-btn-label hidden lg:inline" aria-hidden="true">
+                  {menuOpen ? "Zavřít" : "Menu"}
+                </span>
+              </button>
+            </div>
           </div>
         </div>
-      ) : null}
-    </header>
+
+        {menuOpen ? <BigMenu onNavigate={closeAll} /> : null}
+
+        {menuOpen ? (
+          <div id="hdr-mobilemenu" className="hdr-mobile md:hidden">
+            <div className="px-5 pb-8 pt-4">
+              {searchField()}
+              {hits}
+              <nav aria-label="Mobilní menu" className="mt-2">
+                {NAV_GROUPS.filter((g) => g.items.length > 0).map((g) => {
+                  const isOpen = Boolean(acc[g.id]);
+                  const listId = `hdr-acc-${g.id}`;
+                  return (
+                    <div key={g.id} className="hdr-acc">
+                      <button
+                        type="button"
+                        className="hdr-acc-btn"
+                        aria-expanded={isOpen}
+                        aria-controls={listId}
+                        onClick={() => setAcc((v) => ({ ...v, [g.id]: !v[g.id] }))}
+                      >
+                        {g.label}
+                        <ChevronDown className="hdr-chevron size-5" aria-hidden />
+                      </button>
+                      {isOpen ? (
+                        <ul id={listId} className="pb-2">
+                          {[
+                            ...g.items,
+                            ...(g.all ? [{ ...g.all, label: `${g.all.label} →` }] : []),
+                          ].map((item) => (
+                            <li key={item.label}>
+                              <NavAnchor
+                                item={item}
+                                className="hdr-m-link hdr-m-link--sub"
+                                onNavigate={closeAll}
+                              >
+                                <ItemLabel item={item} />
+                              </NavAnchor>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </div>
+                  );
+                })}
+                {MOBILE_ROWS.map((item) => (
+                  <NavAnchor
+                    key={item.label}
+                    item={item}
+                    className="hdr-m-link hdr-m-link--row"
+                    onNavigate={closeAll}
+                  >
+                    <ItemLabel item={item} />
+                  </NavAnchor>
+                ))}
+              </nav>
+              <SocialLinks className="mt-5 flex items-center gap-3" />
+              <p className="mt-4 text-xs text-muted-foreground">
+                © {new Date().getFullYear()} Jedním hlasem <span aria-hidden="true">·</span>{" "}
+                <NavAnchor item={PRIVACY_LINK} className="hdr-privacy" onNavigate={closeAll}>
+                  {PRIVACY_LINK.label}
+                </NavAnchor>
+              </p>
+            </div>
+          </div>
+        ) : null}
+      </header>
+    </>
   );
 }
