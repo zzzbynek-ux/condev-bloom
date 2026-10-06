@@ -2610,13 +2610,13 @@ button.pager-btn {
   outline-offset: 2px;
 }
 
-/* Panely: bílé, zaoblení je tu v pořádku (je to menu) */
+/* Panely (rozbalovací menu i vyhledávání): plochy jsou hranaté, tenká linka a jemný stín */
 .hdr-panel {
   background: #fff;
   color: var(--navy-900);
-  border: 1px solid rgba(0, 56, 184, 0.14);
-  border-radius: 0.75rem;
-  box-shadow: 0 16px 40px rgba(11, 26, 58, 0.18);
+  border: 1px solid #C9D3E6;
+  border-radius: 0;
+  box-shadow: 0 8px 24px rgba(11, 26, 58, 0.12);
   animation: hdr-pop 140ms ease-out;
 }
 @keyframes hdr-pop {
@@ -2639,9 +2639,6 @@ button.pager-btn {
 }
 /* Rozbalovací panel je plocha: hranatý, tenká linka a jemný stín */
 .hdr-dd {
-  border: 1px solid #C9D3E6;
-  border-radius: 0;
-  box-shadow: 0 8px 24px rgba(11, 26, 58, 0.12);
   min-width: 15rem;
   padding: 0.4rem;
   list-style: none;
@@ -2698,7 +2695,7 @@ button.pager-btn {
 .hdr-search-pop {
   position: absolute;
   right: 0;
-  top: calc(100% + 0.5rem);
+  top: calc(100% + 0.45rem);
   z-index: 70;
   width: min(24rem, calc(100vw - 2rem));
   padding: 0.6rem;
@@ -2709,6 +2706,22 @@ button.pager-btn {
   overflow: auto;
   list-style: none;
   padding: 0.25rem 0;
+}
+/* Výsledky: hranatý hover a focus, stejně jako položky rozbalovacích menu */
+.hdr-hits button {
+  border-radius: 0;
+}
+.hdr-hits button:hover,
+.hdr-hits button:focus-visible {
+  background: #E8EEFB;
+}
+.hdr-hits button:hover span:first-child,
+.hdr-hits button:focus-visible span:first-child {
+  color: #0038B8;
+}
+.hdr-hits button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
 }
 
 /* Velké menu (desktop) */
